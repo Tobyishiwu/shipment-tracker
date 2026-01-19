@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<body>
+
+<input id="tracking" placeholder="Enter tracking number">
+<button id="trackBtn">Track Shipment</button>
+
+<div id="result">
+  Results will appear here
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const API =
+    "https://script.google.com/macros/s/AKfycby6S-1Oos1L_Xs8dgGd0yedvPp4FTrntGXd3FH6BbdQORbm3cJjbezyuid7QYQWJ5o5MQ/exec";
+
+  document.getElementById("trackBtn").onclick = function () {
+    const tracking = document.getElementById("tracking").value.trim();
+    const result = document.getElementById("result");
+
+    if (!tracking) {
+      result.innerHTML = "Please enter a tracking number";
+      return;
+    }
+
+    result.innerHTML = "Loading...";
+
+    fetch(API + "?tracking=" + encodeURIComponent(tracking))
+      .then(res => res.text())
+      .then(data => {
+        result.innerHTML = data;
+      })
+      .catch(() => {
+        result.innerHTML = "Error fetching data";
+      });
+  };
+
+});
+</script>
+
+</body>
+</html>
