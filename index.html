@@ -1,41 +1,85 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <title>Shipment Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 480px;
+      margin: auto;
+      padding: 20px;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
 <body>
 
-<input id="tracking" placeholder="Enter tracking number">
-<button id="trackBtn">Track Shipment</button>
+<h2>Track Your Shipment</h2>
 
-<div id="result">
-  Results will appear here
-</div>
+<input id="trackingInput" placeholder="Enter tracking number">
+<button id="trackBtn" type="button">Track Shipment</button>
+
+<div id="result"></div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+const API = "https://script.google.com/macros/s/AKfycbwnjpjznGdcMAU_b6LA71RsEj85nQvKEn1f6-6v5SW-WGRCU-9x1sgBu7TWerDkZK7H4g/exec";
 
-  const API =
-    "https://script.google.com/macros/s/AKfycby6S-1Oos1L_Xs8dgGd0yedvPp4FTrntGXd3FH6BbdQORbm3cJjbezyuid7QYQWJ5o5MQ/exec";
+document.getElementById("trackBtn").addEventListener("click", function () {
+  const tracking = document.getElementById("trackingInput").value.trim();
+  const result = document.getElementById("result");
 
-  document.getElementById("trackBtn").onclick = function () {
-    const tracking = document.getElementById("tracking").value.trim();
-    const result = document.getElementById("result");
+  if (!tracking) {
+    result.innerHTML = "Please enter a tracking number";
+    return;
+  }
 
-    if (!tracking) {
-      result.innerHTML = "Please enter a tracking number";
-      return;
-    }
+  const url = API + "?tracking=" + encodeURIComponent(tracking);
+  console.log("FETCH URL:", url);
 
-    result.innerHTML = "Loading...";
+  result.innerHTML = "Loading...";
 
-    fetch(API + "?tracking=" + encodeURIComponent(tracking))
-      .then(res => res.text())
-      .then(data => {
-        result.innerHTML = data;
-      })
-      .catch(() => {
-        result.innerHTML = "Error fetching data";
-      });
-  };
+  fetch(url)
+    .then(res => res.text())
+    .then(text => {
+      const data = JSON.parse(text);
 
+      if (data.error) {
+        result.innerHTML = data.error;
+        return;
+      }
+
+      result.innerHTML = `
+        <div class="card">
+          <strong>Status:</strong> ${data.status}<br>
+          <strong>Order ID:</strong> ${data.orderId}<br>
+          <strong>From:</strong> ${data.origin}<br>
+          <strong>To:</strong> ${data.destination}<br>
+          <strong>Current Location:</strong> ${data.currentLocation}<br>
+          <strong>Estimated Delivery:</strong> ${data.estimatedDelivery}<br>
+          <strong>Last Updated:</strong> ${data.lastUpdated}<br>
+          <hr>
+          <strong>History:</strong><br>${data.history}
+        </div>
+      `;
+    })
+    .catch(err => {
+      console.error(err);
+      result.innerHTML = "Error fetching data";
+    });
 });
 </script>
 
