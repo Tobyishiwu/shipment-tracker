@@ -1,49 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickTrack | Shipment Portal</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --success: #059669;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        
+        .container { width: 100%; max-width: 500px; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); margin-top: 50px; }
+        
+        h2 { text-align: center; margin-bottom: 24px; color: var(--primary); }
+
+        .search-box { display: flex; gap: 10px; margin-bottom: 30px; }
+        input { flex: 1; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; outline: none; transition: border 0.3s; }
+        input:focus { border-color: var(--primary); }
+        
+        button { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        button:hover { opacity: 0.9; }
+
+        /* Progress Stepper */
+        .stepper { display: flex; justify-content: space-between; margin-bottom: 30px; display: none; }
+        .step { flex: 1; text-align: center; position: relative; font-size: 0.75rem; color: #94a3b8; }
+        .step::before { content: ''; display: block; width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%; margin: 0 auto 8px; transition: 0.3s; }
+        .step:not(:last-child)::after { content: ''; position: absolute; top: 5px; left: 60%; width: 80%; height: 2px; background: #cbd5e1; z-index: -1; }
+        .step.active { color: var(--primary); font-weight: bold; }
+        .step.active::before { background: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2); }
+        .step.active::after { background: var(--primary); }
+
+        /* Result Card */
+        #result-card { display: none; border-top: 1px solid #e2e8f0; pt: 20px; animation: fadeIn 0.5s; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; }
+        .label { color: #64748b; }
+        .value { font-weight: 600; }
+        .status-pill { background: #dcfce7; color: var(--success); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Track Shipment</h2>
+    
+    <div class="search-box">
+        <input type="text" id="trackingInput" placeholder="Enter Tracking ID (e.g. TRK-NSK-0002)">
+        <button onclick="track()">Track</button>
+    </div>
+
+    <div id="stepper" class="stepper">
+        <div class="step" id="s1">Created</div>
+        <div class="step" id="s2">In Transit</div>
+        <div class="step" id="s3">Delivered</div>
+    </div>
+
+    <div id="result-card">
+        <div class="info-row">
+            <span class="label">Status</span>
+            <span id="res-status" class="status-pill"></span>
+        </div>
+        <div class="info-row">
+            <span class="label">Current Location</span>
+            <span id="res-location" class="value"></span>
+        </div>
+        <div class="info-row">
+            <span class="label">Last Updated</span>
+            <span id="res-updated" class="value"></span>
+        </div>
+    </div>
+</div>
+
 <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbxohtbQSeQxxyhqlyN6-5CSW7cr-201E53NVHaf-lGQDDaZLdaDH-DMM90i6DgJloKdwQ/exec";
+    // ⚠️ REPLACE THIS WITH YOUR DEPLOYED WEB APP URL
+    const WEB_APP_URL = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const input = document.getElementById("trackingInput");
-    const result = document.getElementById("result");
-    const params = new URLSearchParams(window.location.search);
-    const trackingParam = params.get("tracking");
+    function track() {
+        const trk = document.getElementById('trackingInput').value.trim();
+        if(!trk) return;
 
-    if (trackingParam) {
-      input.value = trackingParam;
-      track(trackingParam);
+        // Show loading state
+        document.querySelector('button').innerText = "Searching...";
+        
+        const script = document.createElement('script');
+        script.src = `${WEB_APP_URL}?tracking=${trk}&callback=showData`;
+        document.body.appendChild(script);
+        document.body.removeChild(script);
     }
 
-    document.querySelector("button").addEventListener("click", () => {
-      const tracking = input.value.trim();
-      if (!tracking) {
-        result.innerHTML = "<p class='error'>Enter a tracking number</p>";
-        return;
-      }
-      track(tracking);
-    });
-
-    function track(tracking) {
-      result.innerHTML = "Checking status...";
-
-      fetch(API_URL + "?tracking=" + encodeURIComponent(tracking))
-        .then(res => res.json())
-        .then(data => {
-          if (data.error) {
-            result.innerHTML = "<p class='error'>" + data.error + "</p>";
+    function showData(data) {
+        document.querySelector('button').innerText = "Track";
+        
+        if (data.error) {
+            alert("Shipment not found. Please check the ID.");
             return;
-          }
+        }
 
-          result.innerHTML = `
-            <div class="card">
-              <p><strong>Status:</strong> ${data.status}</p>
-              <p><strong>Current Location:</strong> ${data.currentLocation}</p>
-              <p><strong>Last Updated:</strong> ${new Date(data.lastUpdated).toLocaleString()}</p>
-            </div>
-          `;
-        })
-        .catch(err => {
-          console.error("Fetch error:", err);
-          result.innerHTML = "<p class='error'>Unable to fetch tracking info</p>";
-        });
+        // Display results
+        document.getElementById('stepper').style.display = 'flex';
+        document.getElementById('result-card').style.display = 'block';
+        
+        document.getElementById('res-status').innerText = data.status;
+        document.getElementById('res-location').innerText = data.currentLocation;
+        
+        const date = new Date(data.lastUpdated);
+        document.getElementById('res-updated').innerText = isNaN(date) ? "N/A" : date.toLocaleString();
+
+        // Update Stepper Visuals
+        const status = data.status.toLowerCase();
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        
+        document.getElementById('s1').classList.add('active'); // Always active if found
+        if (status.includes("transit") || status.includes("picked up") || status.includes("shipped")) {
+            document.getElementById('s2').classList.add('active');
+        }
+        if (status.includes("delivered")) {
+            document.getElementById('s2').classList.add('active');
+            document.getElementById('s3').classList.add('active');
+        }
     }
-  });
 </script>
+
+</body>
+</html>
