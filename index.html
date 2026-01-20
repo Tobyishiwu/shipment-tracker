@@ -1,97 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Track Shipment</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body {
-      font-family: system-ui, Arial, sans-serif;
-      background: #f5f7fa;
-      padding: 24px;
-      max-width: 420px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-    }
-    input, button {
-      width: 100%;
-      padding: 14px;
-      font-size: 16px;
-      margin-top: 12px;
-    }
-    button {
-      background: #0f62fe;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .card {
-      background: white;
-      margin-top: 20px;
-      padding: 16px;
-      border-radius: 8px;
-    }
-    .error {
-      color: #dc2626;
-      margin-top: 16px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <h2>Track Your Shipment</h2>
-
-  <input id="trackingInput" placeholder="Enter Tracking Number" />
-  <button onclick="track()">Track Shipment</button>
-
-  <div id="result"></div>
-
 <script>
   const API_URL = "https://script.google.com/macros/s/AKfycbxohtbQSeQxxyhqlyN6-5CSW7cr-201E53NVHaf-lGQDDaZLdaDH-DMM90i6DgJloKdwQ/exec";
 
-  // Read ?tracking=TRK-NSK-0001 from URL and auto-search
-  const params = new URLSearchParams(window.location.search);
-  const trackingParam = params.get("tracking");
-  if (trackingParam) {
-    document.getElementById("trackingInput").value = trackingParam;
-    window.onload = () => track();
-  }
-
-  function track() {
-    const tracking = document.getElementById("trackingInput").value.trim();
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("trackingInput");
     const result = document.getElementById("result");
+    const params = new URLSearchParams(window.location.search);
+    const trackingParam = params.get("tracking");
 
-    if (!tracking) {
-      result.innerHTML = "<p class='error'>Enter a tracking number</p>";
-      return;
+    if (trackingParam) {
+      input.value = trackingParam;
+      track(trackingParam);
     }
 
-    result.innerHTML = "Checking status...";
+    document.querySelector("button").addEventListener("click", () => {
+      const tracking = input.value.trim();
+      if (!tracking) {
+        result.innerHTML = "<p class='error'>Enter a tracking number</p>";
+        return;
+      }
+      track(tracking);
+    });
 
-    fetch(API_URL + "?tracking=" + encodeURIComponent(tracking))
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          result.innerHTML = "<p class='error'>" + data.error + "</p>";
-          return;
-        }
+    function track(tracking) {
+      result.innerHTML = "Checking status...";
 
-        result.innerHTML = `
-          <div class="card">
-            <p><strong>Status:</strong> ${data.status}</p>
-            <p><strong>Current Location:</strong> ${data.currentLocation}</p>
-            <p><strong>Last Updated:</strong> ${data.lastUpdated}</p>
-          </div>
-        `;
-      })
-      .catch(() => {
-        result.innerHTML = "<p class='error'>Unable to fetch tracking info</p>";
-      });
-  }
+      fetch(API_URL + "?tracking=" + encodeURIComponent(tracking))
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            result.innerHTML = "<p class='error'>" + data.error + "</p>";
+            return;
+          }
+
+          result.innerHTML = `
+            <div class="card">
+              <p><strong>Status:</strong> ${data.status}</p>
+              <p><strong>Current Location:</strong> ${data.currentLocation}</p>
+              <p><strong>Last Updated:</strong> ${new Date(data.lastUpdated).toLocaleString()}</p>
+            </div>
+          `;
+        })
+        .catch(err => {
+          console.error("Fetch error:", err);
+          result.innerHTML = "<p class='error'>Unable to fetch tracking info</p>";
+        });
+    }
+  });
 </script>
-
-</body>
-</html>
