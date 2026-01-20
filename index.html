@@ -5,62 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuickTrack | Shipment Portal</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --success: #059669;
-            --bg: #f1f5f9;
-            --text: #0f172a;
-            --muted: #64748b;
-        }
-
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 40px 20px; margin: 0; }
-        
-        .container { width: 100%; max-width: 480px; background: white; padding: 32px; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
-        
-        h2 { text-align: center; margin-top: 0; color: var(--text); font-size: 1.5rem; letter-spacing: -0.025em; }
-
-        .search-box { display: flex; gap: 10px; margin-bottom: 30px; }
-        input { flex: 1; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; outline: none; transition: all 0.2s; }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
-        
-        button { background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: background 0.2s; }
-        button:hover { background: var(--primary-dark); }
-        button:disabled { background: #94a3b8; cursor: not-allowed; }
-
-        /* Progress Stepper */
-        .stepper { display: flex; justify-content: space-between; margin: 40px 0; display: none; }
-        .step { flex: 1; text-align: center; position: relative; font-size: 0.75rem; color: #94a3b8; font-weight: 500; }
-        .step::before { content: ''; display: block; width: 14px; height: 14px; background: #e2e8f0; border: 3px solid white; border-radius: 50%; margin: 0 auto 10px; position: relative; z-index: 2; box-shadow: 0 0 0 1px #e2e8f0; transition: 0.3s; }
-        .step:not(:last-child)::after { content: ''; position: absolute; top: 10px; left: 50%; width: 100%; height: 2px; background: #e2e8f0; z-index: 1; }
-        
-        .step.active { color: var(--primary); }
-        .step.active::before { background: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
-        .step.active:not(:last-child)::after { background: var(--primary); }
-
-        /* Result Card */
-        #result-card { display: none; border-top: 1px solid #f1f5f9; padding-top: 24px; animation: slideUp 0.4s ease-out; }
-        .info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .label { color: var(--muted); font-size: 0.9rem; }
-        .value { font-weight: 600; font-size: 0.95rem; text-align: right; }
-        .status-pill { background: #dcfce7; color: var(--success); padding: 6px 14px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-
-        .reset-btn { width: 100%; background: #f1f5f9; color: var(--text); margin-top: 20px; }
-        .reset-btn:hover { background: #e2e8f0; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        :root { --primary: #2563eb; --bg: #f1f5f9; --text: #0f172a; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--text); display: flex; justify-content: center; padding: 40px 20px; }
+        .container { width: 100%; max-width: 450px; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .search-box { display: flex; gap: 8px; margin-bottom: 25px; }
+        input { flex: 1; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; outline: none; }
+        button { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .stepper { display: flex; justify-content: space-between; margin: 30px 0; display: none; }
+        .step { flex: 1; text-align: center; font-size: 0.7rem; color: #cbd5e1; position: relative; }
+        .step.active { color: var(--primary); font-weight: bold; }
+        .step::before { content: '●'; display: block; font-size: 1.2rem; }
+        #result-card { display: none; border-top: 1px solid #eee; padding-top: 20px; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
+        .label { color: #64748b; }
+        .val { font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Shipment Tracker</h2>
-    
-    <div id="input-section">
-        <div class="search-box">
-            <input type="text" id="trackingInput" placeholder="Enter Tracking ID (TRK-NSK-...)">
-            <button id="trackBtn" onclick="track()">Track</button>
-        </div>
+    <h2>Track Shipment</h2>
+    <div class="search-box">
+        <input type="text" id="trackingInput" placeholder="Enter ID (TRK-NSK-...)">
+        <button onclick="track()">Track</button>
     </div>
 
     <div id="stepper" class="stepper">
@@ -70,100 +37,47 @@
     </div>
 
     <div id="result-card">
-        <div class="info-row">
-            <span class="label">Current Status</span>
-            <span id="res-status" class="status-pill"></span>
-        </div>
-        <div class="info-row">
-            <span class="label">Location</span>
-            <span id="res-location" class="value"></span>
-        </div>
-        <div class="info-row">
-            <span class="label">Last Updated</span>
-            <span id="res-updated" class="value"></span>
-        </div>
-        <button class="reset-btn" onclick="resetForm()">Check Another ID</button>
+        <div class="row"><span class="label">Status:</span><span id="r-status" class="val"></span></div>
+        <div class="row"><span class="label">Location:</span><span id="r-location" class="val"></span></div>
+        <div class="row"><span class="label">Last Updated:</span><span id="r-updated" class="val"></span></div>
+        <button style="width:100%; margin-top:15px; background:#64748b" onclick="location.reload()">New Search</button>
     </div>
 </div>
 
 <script>
-    // ⚠️ REPLACE THIS WITH YOUR REAL DEPLOYMENT ID
+    // ⚠️ REPLACE THIS WITH YOUR DEPLOYMENT ID
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwm_mGcLk3i7pY1WeWUI4YWZq_IFQ0nxbvWdh6k8W5lDzobNLyBOgVP1KOaRTsBJEDFFw/exec";
 
     function track() {
-        const input = document.getElementById('trackingInput');
-        const btn = document.getElementById('trackBtn');
-        const trk = input.value.trim();
+        const id = document.getElementById('trackingInput').value.trim();
+        if(!id) return;
         
-        if(!trk) return alert("Please enter a tracking number.");
-
-        // UI Updates
-        btn.disabled = true;
-        btn.innerText = "Searching...";
-        
-        // JSONP Request
         const script = document.createElement('script');
-        script.src = `${WEB_APP_URL}?tracking=${encodeURIComponent(trk)}&callback=showData`;
+        script.src = `${WEB_APP_URL}?tracking=${encodeURIComponent(id)}&callback=showData`;
         document.body.appendChild(script);
-        
-        // Error handling if script fails to load
-        script.onerror = () => {
-            alert("Connection error. Please check your Script URL.");
-            resetForm();
-        };
-        
-        document.body.removeChild(script);
     }
 
     function showData(data) {
-        const btn = document.getElementById('trackBtn');
-        btn.disabled = false;
-        btn.innerText = "Track";
-        
-        if (data.error) {
-            alert("No shipment found with that ID.");
-            return;
-        }
+        if (data.error) return alert("Not found");
 
-        // Hide search, show results
-        document.getElementById('input-section').style.display = 'none';
         document.getElementById('stepper').style.display = 'flex';
         document.getElementById('result-card').style.display = 'block';
         
-        // Fill Data
-        document.getElementById('res-status').innerText = data.status;
-        document.getElementById('res-location').innerText = data.currentLocation || "Location Pending";
+        document.getElementById('r-status').innerText = data.status;
+        document.getElementById('r-location').innerText = data.currentLocation;
         
         const date = new Date(data.lastUpdated);
-        document.getElementById('res-updated').innerText = isNaN(date.getTime()) ? "Just Now" : date.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+        document.getElementById('r-updated').innerText = date.toLocaleString();
 
-        // Update Progress Bar
-        updateSteps(data.status.toLowerCase());
-    }
-
-    function updateSteps(status) {
-        const s1 = document.getElementById('s1');
-        const s2 = document.getElementById('s2');
-        const s3 = document.getElementById('s3');
-
-        s1.classList.add('active');
-        if (status.includes("transit") || status.includes("picked up") || status.includes("shipped")) {
-            s2.classList.add('active');
-        }
+        // Update Stepper
+        const status = data.status.toLowerCase();
+        document.getElementById('s1').classList.add('active');
+        if (status.includes("transit") || status.includes("picked up")) document.getElementById('s2').classList.add('active');
         if (status.includes("delivered")) {
-            s2.classList.add('active');
-            s3.classList.add('active');
+            document.getElementById('s2').classList.add('active');
+            document.getElementById('s3').classList.add('active');
         }
-    }
-
-    function resetForm() {
-        document.getElementById('input-section').style.display = 'block';
-        document.getElementById('stepper').style.display = 'none';
-        document.getElementById('result-card').style.display = 'none';
-        document.getElementById('trackingInput').value = "";
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
     }
 </script>
-
 </body>
 </html>
