@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tobycasual Logistics | Global Express Tracking</title>
+    <title>Tobycasual Logistics | Track Your Movement</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand: #1a1a1a; /* Modern Black */
-            --accent: #ff4d00; /* Energetic Orange Accent */
-            --bg: #f8fafc;
-            --card: #ffffff;
+            --brand: #0f172a;
+            --accent: #ff4d00;
+            --bg: #fdfdfe;
+            --surface: #ffffff;
+            --border: #e2e8f0;
             --text-main: #0f172a;
             --text-mute: #64748b;
-            --success: #059669;
         }
 
         body {
@@ -27,259 +27,257 @@
             min-height: 100vh;
         }
 
-        /* --- Header & Brand Identity --- */
-        header {
+        /* --- Navigation --- */
+        nav {
             width: 100%;
-            padding: 24px 0;
-            background: var(--card);
-            display: flex;
-            justify-content: center;
-            border-bottom: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
         }
 
-        .nav-container {
+        .nav-inner {
             width: 90%;
-            max-width: 1000px;
+            max-width: 1100px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .brand {
+        .brand-logo {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: var(--brand);
             font-weight: 800;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
+            color: var(--brand);
             letter-spacing: -0.5px;
         }
 
-        /* Minimalist Modern Logo SVG */
-        .logo-svg {
+        .brand-logo span { color: var(--text-mute); font-weight: 400; }
+
+        .logo-box {
             width: 32px;
             height: 32px;
             background: var(--brand);
-            border-radius: 6px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 18px;
-            font-weight: 900;
+            font-size: 1.1rem;
         }
 
-        /* --- Hero Section --- */
-        .hero {
-            padding: 60px 20px 40px;
+        /* --- Main Content --- */
+        .container {
+            width: 90%;
+            max-width: 540px;
+            margin: 60px auto;
             text-align: center;
-            max-width: 600px;
         }
 
-        .hero h1 { font-size: 2.8rem; font-weight: 800; margin: 0 0 12px; letter-spacing: -1.5px; }
-        .hero p { color: var(--text-mute); font-size: 1.1rem; margin: 0; }
+        h1 { font-size: 2.5rem; letter-spacing: -1.5px; margin-bottom: 12px; }
+        .subtitle { color: var(--text-mute); margin-bottom: 40px; font-size: 1.1rem; }
 
-        /* --- Tracking Interface --- */
-        .tracking-box {
-            width: 92%;
-            max-width: 520px;
-            background: var(--card);
-            border-radius: 28px;
-            padding: 32px;
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-            border: 1px solid #f1f5f9;
-        }
-
-        .search-field {
-            display: flex;
-            gap: 12px;
-            background: #f1f5f9;
-            padding: 8px;
+        /* --- Input Area --- */
+        .search-container {
+            background: var(--surface);
+            padding: 10px;
             border-radius: 20px;
-            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
         }
 
         input {
             flex: 1;
-            background: transparent;
             border: none;
-            padding: 12px 16px;
+            padding: 15px;
             font-size: 1rem;
             font-weight: 600;
             outline: none;
-            color: var(--brand);
+            background: transparent;
         }
 
         button#track-btn {
             background: var(--brand);
             color: white;
             border: none;
-            padding: 0 24px;
+            padding: 0 25px;
             border-radius: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.2s;
         }
 
-        button#track-btn:hover { background: #333; transform: scale(1.02); }
+        button#track-btn:hover { background: #334155; transform: scale(1.02); }
 
-        /* --- Result View --- */
-        #results {
+        /* --- Results Area --- */
+        #results-card {
             display: none;
-            animation: fadeIn 0.4s ease-out;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px;
+            text-align: left;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .status-hero {
-            text-align: center;
-            padding: 24px;
-            background: #f8fafc;
-            border-radius: 20px;
-            margin-bottom: 24px;
-        }
-
-        .status-label { font-size: 0.75rem; font-weight: 800; color: var(--text-mute); text-transform: uppercase; letter-spacing: 1px; }
-        .status-value { font-size: 1.75rem; font-weight: 800; color: var(--brand); margin: 8px 0; }
-
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .detail-card {
-            padding: 16px;
-            border: 1px solid #f1f5f9;
-            border-radius: 16px;
-        }
-
-        .detail-card .lbl { font-size: 0.7rem; font-weight: 700; color: var(--text-mute); text-transform: uppercase; margin-bottom: 4px; }
-        .detail-card .val { font-size: 0.9rem; font-weight: 600; }
-
-        /* --- Footer Actions --- */
-        .footer-links {
-            margin-top: 40px;
+        .status-header {
             display: flex;
-            gap: 12px;
-            width: 92%;
-            max-width: 520px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
         }
 
-        .tile {
-            flex: 1;
-            background: white;
-            padding: 16px;
-            border-radius: 18px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-decoration: none;
+        .status-pill {
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            background: #f1f5f9;
             color: var(--brand);
-            border: 1px solid #f1f5f9;
+            text-transform: uppercase;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Timeline UI */
+        .timeline {
+            position: relative;
+            margin: 20px 0;
+            padding-left: 30px;
+            border-left: 2px dashed var(--border);
+        }
 
+        .time-point {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .time-point::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 3px solid var(--brand);
+            border-radius: 50%;
+        }
+
+        .tp-label { font-size: 0.8rem; color: var(--text-mute); font-weight: 600; margin-bottom: 4px; }
+        .tp-val { font-size: 1rem; font-weight: 700; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
         @media (max-width: 480px) {
-            .hero h1 { font-size: 2.2rem; }
-            .detail-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            .search-container { flex-direction: column; padding: 10px; }
+            button#track-btn { padding: 15px; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="nav-container">
-        <a href="#" class="brand">
-            <div class="logo-svg">T</div>
-            Tobycasual Logistics
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="brand-logo">
+            <div class="logo-box">T</div>
+            Tobycasual <span>Logistics</span>
         </a>
-        <div style="font-size: 13px; font-weight: 600; color: var(--accent);">● Real-time Network</div>
+        <div style="font-size: 12px; color: var(--text-mute); font-weight: 700;">LIVE NETWORK</div>
     </div>
-</header>
+</nav>
 
-<div class="hero">
-    <h1>Move with purpose.</h1>
-    <p>Simplified global tracking for your most important shipments.</p>
-</div>
+<div class="container">
+    <h1>Track Shipment</h1>
+    <p class="subtitle">Real-time transparency for your global assets.</p>
 
-<div class="tracking-box">
-    <div class="search-field">
-        <input type="text" id="trkID" placeholder="Tracking ID (e.g. TRK-NSK-1002)" oninput="this.value=this.value.toUpperCase()">
-        <button id="track-btn" onclick="fetchTracking()">Track</button>
+    <div class="search-container">
+        <input type="text" id="trkInput" placeholder="Enter ID (e.g. TRK-NSK-1002)" oninput="this.value=this.value.toUpperCase()">
+        <button id="track-btn" onclick="fetchTracking()">Locate</button>
     </div>
 
-    <div id="results">
-        <div class="status-hero">
-            <div class="status-label">Shipment Status</div>
-            <div id="disp-status" class="status-value">Searching...</div>
-            <div id="status-pill" style="display:inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; background: #e2e8f0;">VERIFIED</div>
+    <div id="results-card">
+        <div class="status-header">
+            <div>
+                <div style="font-size: 0.8rem; color: var(--text-mute); font-weight: 700; text-transform: uppercase; margin-bottom: 5px;">Live Status</div>
+                <div id="res-status" style="font-size: 1.5rem; font-weight: 800; color: var(--brand);">Loading...</div>
+            </div>
+            <div id="res-pill" class="status-pill">Active</div>
         </div>
 
-        <div class="detail-grid">
-            <div class="detail-card">
-                <div class="lbl">Last Known Location</div>
-                <div id="disp-loc" class="val">--</div>
+        <div class="timeline">
+            <div class="time-point">
+                <div class="tp-label">CURRENT LOCATION</div>
+                <div id="res-loc" class="tp-val">Searching Network...</div>
             </div>
-            <div class="detail-card">
-                <div class="lbl">Timestamp</div>
-                <div id="disp-time" class="val">--</div>
+            <div class="time-point" style="margin-bottom: 0;">
+                <div class="tp-label">LAST SYSTEM UPDATE</div>
+                <div id="res-time" class="tp-val">Awaiting Data...</div>
             </div>
         </div>
 
-        <button onclick="location.reload()" style="width:100%; background:var(--brand); color:white; border:none; padding:16px; border-radius:16px; font-weight:700; margin-top:24px; cursor:pointer;">Track Another</button>
+        <button onclick="location.reload()" style="width:100%; background: #f8fafc; color: var(--text-mute); border: 1px solid var(--border); padding: 14px; border-radius: 12px; font-weight: 700; margin-top: 25px; cursor: pointer;">Clear Search</button>
     </div>
-</div>
-
-<div class="footer-links">
-    <a href="#" class="tile">Help Center</a>
-    <a href="#" class="tile">Contact Support</a>
 </div>
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwm_mGcLk3i7pY1WeWUI4YWZq_IFQ0nxbvWdh6k8W5lDzobNLyBOgVP1KOaRTsBJEDFFw/exec";
 
     function fetchTracking() {
-        const id = document.getElementById('trkID').value.trim();
-        if(!id) return;
+        const val = document.getElementById('trkInput').value.trim();
+        if(!val) return;
 
         const btn = document.getElementById('track-btn');
-        btn.innerText = "Searching";
+        btn.innerText = "Scanning...";
         btn.disabled = true;
 
         const script = document.createElement('script');
-        script.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=showData`;
+        script.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(val)}&callback=onSuccess`;
         document.body.appendChild(script);
     }
 
-    function showData(data) {
-        document.getElementById('track-btn').innerText = "Track";
+    function onSuccess(data) {
+        document.getElementById('track-btn').innerText = "Locate";
         document.getElementById('track-btn').disabled = false;
 
         if(data.error) {
-            alert("No shipment found. Please verify the ID.");
+            alert("No record found. Please verify the Tracking ID.");
             return;
         }
 
-        document.getElementById('results').style.display = 'block';
-        document.getElementById('disp-status').innerText = data.status;
-        document.getElementById('disp-loc').innerText = data.currentLocation;
-        document.getElementById('disp-time').innerText = new Date(data.lastUpdated).toLocaleString([], {dateStyle:'medium', timeStyle:'short'});
+        document.getElementById('results-card').style.display = 'block';
+        document.getElementById('res-status').innerText = data.status;
+        document.getElementById('res-loc').innerText = data.currentLocation;
+        document.getElementById('res-time').innerText = new Date(data.lastUpdated).toLocaleString([], {dateStyle:'medium', timeStyle:'short'});
 
-        // Visual Feedback for Success
-        const pill = document.getElementById('status-pill');
+        // Smart UI Feedback
+        const pill = document.getElementById('res-pill');
         if(data.status.toLowerCase().includes('delivered')) {
             pill.style.background = '#d1fae5';
-            pill.style.color = '#059669';
-            pill.innerText = "COMPLETED";
+            pill.style.color = '#065f46';
+            pill.innerText = 'Completed';
         } else {
             pill.style.background = '#ffedd5';
-            pill.style.color = '#ea580c';
-            pill.innerText = "ACTIVE SHIPMENT";
+            pill.style.color = '#9a3412';
+            pill.innerText = 'In Progress';
         }
+        
+        // Scroll to results on mobile
+        document.getElementById('results-card').scrollIntoView({ behavior: 'smooth' });
     }
 
     // Deep Linking Auto-Search
@@ -287,9 +285,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
         if (id) {
-            document.getElementById('trkID').value = id.toUpperCase();
+            document.getElementById('trkInput').value = id.toUpperCase();
             fetchTracking();
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         }
     };
 </script>
