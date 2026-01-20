@@ -3,97 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickTrack Pro</title>
+    <title>QuickTrack | Logistics Portal</title>
     <style>
-        :root { --primary: #2563eb; --success: #22c55e; --bg: #f8fafc; --text: #1e293b; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); display: flex; justify-content: center; padding: 40px 20px; margin: 0; }
-        .card { background: white; width: 100%; max-width: 450px; padding: 35px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
+        :root { --p: #2563eb; --bg: #f8fafc; --txt: #0f172a; --mute: #64748b; }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--txt); margin: 0; display: flex; justify-content: center; padding: 40px 20px; }
+        .card { background: white; width: 100%; max-width: 480px; padding: 40px; border-radius: 28px; box-shadow: 0 20px 50px -12px rgba(0,0,0,0.08); }
+        .h-stack { display: flex; gap: 10px; margin-bottom: 30px; }
+        input { flex: 1; padding: 16px; border: 2px solid #e2e8f0; border-radius: 14px; font-size: 16px; transition: 0.2s; }
+        input:focus { border-color: var(--p); outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+        button { background: var(--p); color: white; border: none; padding: 16px 24px; border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        button:disabled { opacity: 0.6; }
         
-        .search-box { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
-        input { padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; text-align: center; transition: 0.3s; }
-        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
-        
-        button { background: var(--primary); color: white; padding: 15px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-        button:hover { opacity: 0.9; transform: translateY(-1px); }
-        button:disabled { background: #94a3b8; cursor: not-allowed; }
-
-        /* Progress Stepper */
         .stepper { display: none; justify-content: space-between; margin: 40px 0; position: relative; }
-        .stepper::after { content: ''; position: absolute; top: 12px; left: 0; width: 100%; height: 3px; background: #e2e8f0; z-index: 1; }
-        .step { z-index: 2; font-size: 11px; color: #94a3b8; flex: 1; }
-        .step::before { content: ''; width: 24px; height: 24px; background: white; border: 3px solid #e2e8f0; border-radius: 50%; display: block; margin: 0 auto 8px; transition: 0.4s; }
-        .step.active { color: var(--primary); font-weight: bold; }
-        .step.active::before { border-color: var(--primary); background: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
-
-        .results { display: none; border-top: 1px solid #f1f5f9; padding-top: 25px; animation: fadeIn 0.4s ease; }
-        .data-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; }
-        .label { color: #64748b; }
-        .val { font-weight: 600; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .stepper::after { content: ''; position: absolute; top: 12px; left: 0; width: 100%; height: 4px; background: #e2e8f0; z-index: 1; border-radius: 10px; }
+        .step { z-index: 2; text-align: center; width: 33%; font-size: 12px; color: var(--mute); font-weight: 600; }
+        .step::before { content: ''; width: 24px; height: 24px; background: white; border: 4px solid #e2e8f0; border-radius: 50%; display: block; margin: 0 auto 10px; transition: 0.4s; }
+        .step.active { color: var(--p); }
+        .step.active::before { border-color: var(--p); background: var(--p); box-shadow: 0 0 0 6px rgba(37,99,235,0.1); }
+        
+        .res { display: none; border-top: 1px solid #f1f5f9; padding-top: 30px; animation: up 0.5s ease-out; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 18px; }
+        .lbl { color: var(--mute); font-size: 14px; }
+        .val { font-weight: 700; }
+        @keyframes up { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-
 <div class="card">
-    <h2 style="margin-top:0">Track Shipment</h2>
-    <div class="search-box">
-        <input type="text" id="trkInput" placeholder="Enter ID (TRK-NSK-1002)" oninput="this.value = this.value.toUpperCase()">
-        <button id="trackBtn" onclick="doTrack()">Track Order</button>
+    <h2 style="margin-top:0; font-size: 24px; letter-spacing: -0.5px;">Track Shipment</h2>
+    <div class="h-stack">
+        <input type="text" id="trkIn" placeholder="TRK-NSK-1002" oninput="this.value=this.value.toUpperCase()">
+        <button id="btn" onclick="track()">Track</button>
     </div>
 
-    <div id="stepper" class="stepper">
-        <div class="step" id="s1">Ordered</div>
-        <div class="step" id="s2">In Transit</div>
-        <div class="step" id="s3">Delivered</div>
+    <div id="stepBox" class="stepper">
+        <div class="step" id="step1">Ordered</div>
+        <div class="step" id="step2">In Transit</div>
+        <div class="step" id="step3">Delivered</div>
     </div>
 
-    <div id="results" class="results">
-        <div class="data-row"><span class="label">Status</span><span id="r-status" style="color:var(--primary)"></span></div>
-        <div class="data-row"><span class="label">Location</span><span id="r-location" class="val"></span></div>
-        <div class="data-row"><span class="label">Updated</span><span id="r-updated" class="val"></span></div>
-        <button style="width:100%; background:#f1f5f9; color:#64748b; margin-top:10px" onclick="location.reload()">Clear</button>
+    <div id="resBox" class="res">
+        <div class="row"><span class="lbl">Current Status</span><span id="r-status" style="color:var(--p)" class="val"></span></div>
+        <div class="row"><span class="lbl">Last Known Location</span><span id="r-loc" class="val"></span></div>
+        <div class="row"><span class="lbl">Last Update</span><span id="r-time" class="val"></span></div>
+        <button style="width:100%; background:#f1f5f9; color:var(--mute); margin-top:20px" onclick="location.reload()">Clear Search</button>
     </div>
 </div>
 
 <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwm_mGcLk3i7pY1WeWUI4YWZq_IFQ0nxbvWdh6k8W5lDzobNLyBOgVP1KOaRTsBJEDFFw/exec"; 
+    const API = "https://script.google.com/macros/s/AKfycbwm_mGcLk3i7pY1WeWUI4YWZq_IFQ0nxbvWdh6k8W5lDzobNLyBOgVP1KOaRTsBJEDFFw/exec";
 
-    function doTrack() {
-        const trk = document.getElementById('trkInput').value.trim();
-        if(!trk) return;
-
-        const btn = document.getElementById('trackBtn');
-        btn.disabled = true;
-        btn.innerText = "Searching...";
-
-        const script = document.createElement('script');
-        script.src = `${WEB_APP_URL}?tracking=${encodeURIComponent(trk)}&callback=onResult`;
-        document.body.appendChild(script);
-        document.body.removeChild(script);
+    function track() {
+        const val = document.getElementById('trkIn').value.trim();
+        if(!val) return;
+        document.getElementById('btn').disabled = true;
+        document.getElementById('btn').innerText = "...";
+        
+        const s = document.createElement('script');
+        s.src = `${API}?tracking=${encodeURIComponent(val)}&callback=onData`;
+        document.body.appendChild(s);
     }
 
-    function onResult(data) {
-        const btn = document.getElementById('trackBtn');
-        btn.disabled = false;
-        btn.innerText = "Track Order";
+    function onData(d) {
+        document.getElementById('btn').disabled = false;
+        document.getElementById('btn').innerText = "Track";
+        if(d.error) return alert("Shipment not found. Please check the ID.");
 
-        if(data.error) return alert("Shipment not found!");
+        document.getElementById('stepBox').style.display = 'flex';
+        document.getElementById('resBox').style.display = 'block';
+        document.getElementById('r-status').innerText = d.status;
+        document.getElementById('r-loc').innerText = d.currentLocation;
+        document.getElementById('r-time').innerText = new Date(d.lastUpdated).toLocaleString([], {dateStyle:'medium', timeStyle:'short'});
 
-        document.getElementById('stepper').style.display = 'flex';
-        document.getElementById('results').style.display = 'block';
-
-        document.getElementById('r-status').innerText = data.status;
-        document.getElementById('r-location').innerText = data.currentLocation;
-        document.getElementById('r-updated').innerText = new Date(data.lastUpdated).toLocaleString([], {dateStyle:'medium', timeStyle:'short'});
-
-        // Stepper Logic
-        const status = data.status.toLowerCase();
+        const st = d.status.toLowerCase();
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('s1').classList.add('active');
-        if(status.includes("transit") || status.includes("shipped") || status.includes("picked")) document.getElementById('s2').classList.add('active');
-        if(status.includes("delivered")) {
-            document.getElementById('s2').classList.add('active');
-            document.getElementById('s3').classList.add('active');
+        document.getElementById('step1').classList.add('active');
+        if(st.includes("transit") || st.includes("shipped") || st.includes("picked") || st.includes("delivery")) 
+            document.getElementById('step2').classList.add('active');
+        if(st.includes("delivered")) {
+            document.getElementById('step2').classList.add('active');
+            document.getElementById('step3').classList.add('active');
         }
     }
 </script>
