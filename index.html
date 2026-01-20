@@ -1,87 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Shipment Tracker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
+    :root {
+      --primary: #0f62fe;
+      --border: #e0e0e0;
+      --bg: #f9fafb;
+      --text: #111827;
+      --muted: #6b7280;
+      --error: #dc2626;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       max-width: 480px;
       margin: auto;
-      padding: 20px;
+      padding: 24px;
     }
-    input, button {
+
+    h2 {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    input,
+    button {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       font-size: 16px;
-      margin-top: 10px;
+      margin-top: 12px;
+      border-radius: 6px;
     }
+
+    input {
+      border: 1px solid var(--border);
+    }
+
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .message {
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .error {
+      color: var(--error);
+    }
+
+    .loading {
+      color: var(--muted);
+    }
+
     .card {
-      border: 1px solid #ddd;
-      padding: 15px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
       margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    .label {
+      font-weight: 600;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 12px 0;
     }
   </style>
 </head>
 
 <body>
 
-<h2>Track Your Shipment</h2>
+  <h2>Track Your Shipment</h2>
 
-<input id="trackingInput" placeholder="Enter tracking number">
-<button id="trackBtn" type="button">Track Shipment</button>
+  <input
+    id="trackingInput"
+    placeholder="Enter tracking number (e.g. TRK-NSK-0002)"
+    autocomplete="off"
+  />
 
-<div id="result"></div>
+  <button id="trackBtn">Track Shipment</button>
 
-<script>
-const API = "https://script.google.com/macros/s/AKfycbwnjpjznGdcMAU_b6LA71RsEj85nQvKEn1f6-6v5SW-WGRCU-9x1sgBu7TWerDkZK7H4g/exec";
+  <div id="result"></div>
 
-document.getElementById("trackBtn").addEventListener("click", function () {
-  const tracking = document.getElementById("trackingInput").value.trim();
-  const result = document.getElementById("result");
+  <script>
+    const API =
+      "https://script.google.com/macros/s/AKfycbwnjpjznGdcMAU_b6LA71RsEj85nQvKEn1f6-6v5SW-WGRCU-9x1sgBu7TWerDkZK7H4g/exec";
 
-  if (!tracking) {
-    result.innerHTML = "Please enter a tracking number";
-    return;
-  }
+    const input = document.getElementById("trackingInput");
+    const button = document.getElementById("trackBtn");
+    const result = document.getElementById("result");
 
-  const url = API + "?tracking=" + encodeURIComponent(tracking);
-  console.log("FETCH URL:", url);
+    button.addEventListener("click", trackShipment);
 
-  result.innerHTML = "Loading...";
+    function trackShipment() {
+      const tracking = input.value.trim();
 
-  fetch(url)
-    .then(res => res.text())
-    .then(text => {
-      const data = JSON.parse(text);
-
-      if (data.error) {
-        result.innerHTML = data.error;
+      if (!tracking) {
+        result.innerHTML =
+          "<p class='message error'>Please enter a tracking number.</p>";
         return;
       }
 
-      result.innerHTML = `
-        <div class="card">
-          <strong>Status:</strong> ${data.status}<br>
-          <strong>Order ID:</strong> ${data.orderId}<br>
-          <strong>From:</strong> ${data.origin}<br>
-          <strong>To:</strong> ${data.destination}<br>
-          <strong>Current Location:</strong> ${data.currentLocation}<br>
-          <strong>Estimated Delivery:</strong> ${data.estimatedDelivery}<br>
-          <strong>Last Updated:</strong> ${data.lastUpdated}<br>
-          <hr>
-          <strong>History:</strong><br>${data.history}
-        </div>
-      `;
-    })
-    .catch(err => {
-      console.error(err);
-      result.innerHTML = "Error fetching data";
-    });
-});
-</script>
+      button.disabled = true;
+      result.innerHTML =
+        "<p class='message loading'>Fetching shipment details…</p>";
+
+      fetch(API + "?tracking=" + encodeURIComponent(tracking))
+        .then((res) => {
+          if (!res.ok) throw new Error("Request failed");
+          return res.json();
+        })
+        .then((data) => {
+          if (data.error) {
+            result.innerHTML =
+              "<p class='message error'>" + data.error + "</p>";
+            return;
+          }
+
+          result.innerHTML = `
+            <div class="card">
+              <div><span class="label">Status:</span> ${data.status}</div>
+              <div><span class="label">Order ID:</span> ${data.orderId}</div>
+              <div><span class="label">From:</span> ${data.origin}</div>
+              <div><span class="label">To:</span> ${data.destination}</div>
+              <div><span class="label">Current Location:</span> ${data.currentLocation}</div>
+              <div><span class="label">Estimated Delivery:</span> ${data.estimatedDelivery}</div>
+              <div><span class="label">Last Updated:</span> ${data.lastUpdated}</div>
+              <hr />
+              <div><span class="label">History:</span><br>${data.history}</div>
+            </div>
+          `;
+        })
+        .catch(() => {
+          result.innerHTML =
+            "<p class='message error'>Unable to retrieve shipment data.</p>";
+        })
+        .finally(() => {
+          button.disabled = false;
+        });
+    }
+  </script>
 
 </body>
 </html>
