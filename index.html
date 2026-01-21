@@ -3,197 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Fast & Reliable Tracking</title>
+    <title>GID Logistics | Command Center</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href="https://via.placeholder.com/32/e31e24/ffffff?text=G">
+    <link rel="icon" href="https://via.placeholder.com/32/e31e24/ffffff?text=G">
+    
     <style>
         :root {
             --gid-red: #e31e24; 
-            --gid-black: #121212;
+            --gid-black: #0f172a;
             --white: #ffffff;
-            --light-gray: #f2f4f7;
-            --border-gray: #e4e7eb;
-            --text-muted: #667085;
+            --bg-soft: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.8);
+            --border: #e2e8f0;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
         }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--light-gray);
-            color: var(--gid-black);
+            background: radial-gradient(circle at top right, #fff5f5, var(--bg-soft));
+            color: var(--text-main);
             margin: 0;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- GID Header --- */
+        /* --- Modern Header --- */
         header {
-            background: var(--white);
-            border-bottom: 4px solid var(--gid-red);
-            padding: 1rem 0;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .nav-container {
             width: 90%;
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
         }
 
         .logo-wrap {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             text-decoration: none;
         }
 
         .logo-box {
             background: var(--gid-red);
             color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: 900;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 800;
             font-size: 1.4rem;
-            letter-spacing: -1px;
+            box-shadow: 0 4px 15px rgba(227, 30, 36, 0.3);
         }
 
         .logo-text {
             font-weight: 800;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--gid-black);
             letter-spacing: -1px;
         }
 
         /* --- Hero --- */
-        .hero {
-            padding: 50px 20px;
-            text-align: center;
-        }
+        .hero { padding: 60px 20px 30px; text-align: center; }
+        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 500px; margin: 0 auto; }
 
-        h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; }
-        .hero p { color: var(--text-muted); font-size: 1.1rem; }
-
-        /* --- GID Track Card --- */
+        /* --- Ultra Modern Track Card --- */
         .track-card {
             background: var(--white);
             width: 95%;
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto 50px;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--white);
         }
 
-        .input-wrap {
+        .input-group {
+            position: relative;
             display: flex;
-            border: 2px solid var(--border-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            transition: 0.2s;
+            background: var(--bg-soft);
+            padding: 8px;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            margin-bottom: 25px;
         }
 
-        .input-wrap:focus-within { border-color: var(--gid-red); }
+        .input-group:focus-within {
+            border-color: var(--gid-red);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(227, 30, 36, 0.1);
+        }
 
         input {
             flex: 1;
-            padding: 16px;
+            padding: 15px 20px;
             border: none;
+            background: transparent;
             outline: none;
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gid-black);
         }
 
         .track-btn {
-            background: var(--gid-red);
-            color: white;
-            border: none;
-            padding: 0 25px;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* --- Results & Journey --- */
-        #results { display: none; animation: slideUp 0.4s ease-out; }
-
-        .status-display {
             background: var(--gid-black);
             color: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
+            border: none;
+            padding: 0 30px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .track-btn:hover { background: var(--gid-red); transform: scale(1.02); }
+
+        /* --- Results UI --- */
+        #results { display: none; animation: fadeIn 0.5s ease-out; }
+
+        .status-hero {
+            background: var(--gid-black);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
             margin-bottom: 30px;
             position: relative;
+            overflow: hidden;
         }
 
-        .status-display::before {
-            content: "";
+        /* Pulse Indicator */
+        .live-pulse {
             position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 6px; background: var(--gid-red);
-            border-radius: 10px 0 0 10px;
+            top: 20px; right: 20px;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.7rem; font-weight: 800; color: #4ade80;
         }
+        .pulse-dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; animation: pulse 1.5s infinite; }
 
-        .status-header { font-size: 0.75rem; text-transform: uppercase; color: var(--gid-red); font-weight: 800; letter-spacing: 1.5px; }
-        .status-val { font-size: 1.8rem; font-weight: 800; margin: 8px 0; }
+        .status-header { font-size: 0.75rem; text-transform: uppercase; opacity: 0.6; letter-spacing: 2px; }
+        .status-val { font-size: 2rem; font-weight: 800; margin-top: 5px; }
 
+        /* --- Progress Stepper --- */
         .milestone-track {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin: 40px 0;
+            display: flex; justify-content: space-between;
+            position: relative; margin: 40px 0;
         }
 
-        .track-line {
-            position: absolute;
-            top: 14px; left: 0; right: 0;
-            height: 4px; background: #eee;
-            z-index: 1;
-        }
+        .track-line { position: absolute; top: 14px; left: 0; right: 0; height: 4px; background: #f1f5f9; z-index: 1; }
+        #progress-bar { position: absolute; top: 14px; left: 0; height: 4px; background: var(--gid-red); z-index: 2; transition: 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-        #progress-bar {
-            position: absolute;
-            top: 14px; left: 0;
-            height: 4px; background: var(--gid-red);
-            z-index: 2;
-            transition: 1.2s ease-in-out;
-        }
-
-        .node {
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 25%;
-        }
-
-        .dot {
-            width: 28px; height: 28px;
-            background: white;
-            border: 4px solid #eee;
-            border-radius: 50%;
-            transition: 0.4s;
-        }
-
-        .node.active .dot { border-color: var(--gid-red); background: var(--gid-red); }
-        .node-label { margin-top: 10px; font-size: 0.65rem; font-weight: 800; color: #999; text-transform: uppercase; }
+        .node { z-index: 3; display: flex; flex-direction: column; align-items: center; width: 25%; }
+        .dot { width: 32px; height: 32px; background: white; border: 4px solid #f1f5f9; border-radius: 50%; }
+        .node.active .dot { border-color: var(--gid-red); background: var(--gid-red); box-shadow: 0 0 15px rgba(227, 30, 36, 0.4); }
+        .node-label { margin-top: 12px; font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; }
         .node.active .node-label { color: var(--gid-black); }
 
-        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .detail-item { background: #f9fafb; padding: 15px; border: 1px solid var(--border-gray); border-radius: 8px; }
-        .detail-item label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--text-muted); margin-bottom: 4px; }
-        .detail-item span { font-weight: 700; font-size: 0.85rem; }
+        /* --- Details Grid --- */
+        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .detail-item { background: var(--bg-soft); padding: 18px; border-radius: 16px; border: 1px solid var(--border); }
+        .detail-item label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+        .detail-item span { font-weight: 800; font-size: 0.9rem; }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- Action Buttons --- */
+        #receipt-btn {
+            display: none;
+            width: 100%;
+            background: var(--gid-red);
+            color: white;
+            text-align: center;
+            padding: 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            box-shadow: 0 10px 20px rgba(227, 30, 36, 0.2);
+        }
+
+        .secondary-btns { display: flex; gap: 10px; }
+        .btn-ghost {
+            flex: 1; background: var(--bg-soft); border: 1px solid var(--border);
+            padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.8rem;
+            cursor: pointer; color: var(--text-main);
+        }
+
+        /* Animations */
+        @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .details-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -204,24 +216,24 @@
             <div class="logo-box">GID</div>
             <div class="logo-text">Logistics</div>
         </a>
-        <div style="font-size: 10px; font-weight: 900; color: var(--text-muted);">COMMAND CENTRE</div>
     </div>
 </header>
 
 <div class="hero">
-    <h1>Track Your Waybill</h1>
-    <p>Real-time visibility into your GID Logistics shipment.</p>
+    <h1>Smart Tracking</h1>
+    <p>Enter your waybill number to access real-time shipment analytics.</p>
 </div>
 
 <div class="track-card">
-    <div class="input-wrap">
-        <input type="text" id="waybillInput" placeholder="Enter Waybill No." oninput="this.value=this.value.toUpperCase()">
-        <button class="track-btn" onclick="fetchShipment()">Track</button>
+    <div class="input-group">
+        <input type="text" id="waybillInput" placeholder="WAYBILL NO." autocomplete="off">
+        <button class="track-btn" id="mainTrackBtn" onclick="fetchShipment()">TRACK</button>
     </div>
 
     <div id="results">
-        <div class="status-display">
-            <div class="status-header">Live Status</div>
+        <div class="status-hero">
+            <div class="live-pulse"><div class="pulse-dot"></div> LIVE SYSTEM</div>
+            <div class="status-header">Current Status</div>
             <div id="res-status" class="status-val">--</div>
         </div>
 
@@ -236,23 +248,41 @@
         </div>
 
         <div class="details-grid">
-            <div class="detail-item"><label>CURRENT LOCATION</label><span id="res-loc">--</span></div>
-            <div class="detail-item"><label>LAST UPDATED</label><span id="res-time">--</span></div>
+            <div class="detail-item">
+                <label>Current Location</label>
+                <span id="res-loc">--</span>
+            </div>
+            <div class="detail-item">
+                <label>Last Updated</label>
+                <span id="res-time">--</span>
+            </div>
         </div>
 
-        <button onclick="location.reload()" style="width:100%; margin-top:25px; border:none; background:none; color:var(--gid-red); font-weight:800; cursor:pointer; font-size: 0.8rem;">NEW SEARCH</button>
+        <a id="receipt-btn" href="#">DOWNLOAD DELIVERY RECEIPT</a>
+
+        <div class="secondary-btns">
+            <button class="btn-ghost" onclick="copyWaybill()">Copy ID</button>
+            <button class="btn-ghost" onclick="location.reload()">New Search</button>
+        </div>
     </div>
 </div>
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwm_mGcLk3i7pY1WeWUI4YWZq_IFQ0nxbvWdh6k8W5lDzobNLyBOgVP1KOaRTsBJEDFFw/exec";
 
+    // Handle "Enter" Key Press
+    document.getElementById('waybillInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            fetchShipment();
+        }
+    });
+
     function fetchShipment() {
-        const id = document.getElementById('waybillInput').value.trim();
+        const id = document.getElementById('waybillInput').value.trim().toUpperCase();
         if(!id) return;
 
-        const btn = document.querySelector('.track-btn');
-        btn.innerText = "WAIT...";
+        const btn = document.getElementById('mainTrackBtn');
+        btn.innerText = "SEARCHING...";
         btn.disabled = true;
 
         const script = document.createElement('script');
@@ -261,11 +291,12 @@
     }
 
     function onSuccess(data) {
-        document.querySelector('.track-btn').innerText = "TRACK";
-        document.querySelector('.track-btn').disabled = false;
+        const btn = document.getElementById('mainTrackBtn');
+        btn.innerText = "TRACK";
+        btn.disabled = false;
 
         if(data.error) {
-            alert("Waybill number not recognized in GID system.");
+            alert("Waybill not found in GID network.");
             return;
         }
 
@@ -274,6 +305,7 @@
         document.getElementById('res-loc').innerText = data.currentLocation || "GID Facility";
         document.getElementById('res-time').innerText = new Date(data.lastUpdated).toLocaleString([], {dateStyle:'medium', timeStyle:'short'});
 
+        // Progress Calculations
         const status = data.status.toLowerCase();
         let progress = 0; let steps = 0;
 
@@ -282,11 +314,27 @@
         else if (status.includes("transit") || status.includes("shipped")) { progress = 66; steps = 3; }
         else if (status.includes("delivered")) { progress = 100; steps = 4; }
 
+        // Animate progress bar
         document.getElementById('progress-bar').style.width = progress + "%";
         for (let i = 1; i <= 4; i++) {
             const el = document.getElementById('n' + i);
             i <= steps ? el.classList.add('active') : el.classList.remove('active');
         }
+
+        // Receipt Visibility
+        const receiptBtn = document.getElementById('receipt-btn');
+        if (status.includes("delivered")) {
+            receiptBtn.style.display = "block";
+            receiptBtn.href = `javascript:alert('Generating Receipt for ${data.tracking}...')`;
+        } else {
+            receiptBtn.style.display = "none";
+        }
+    }
+
+    function copyWaybill() {
+        const val = document.getElementById('waybillInput').value;
+        navigator.clipboard.writeText(val);
+        alert("Waybill ID copied to clipboard!");
     }
 </script>
 
