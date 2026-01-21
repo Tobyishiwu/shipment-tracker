@@ -1,160 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Live Tracking</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        :root { --gid-red: #e31e24; --gid-dark: #0f172a; }
-        body { background-color: #020617; font-family: 'Inter', sans-serif; color: white; }
-        .glass-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .step-active { color: var(--gid-red); }
-        .step-line { background: #1e293b; height: 3px; flex-grow: 1; margin: 0 10px; position: relative; top: 15px; }
-        .step-line-fill { background: var(--gid-red); height: 100%; width: 0%; transition: width 1s ease; }
-        .dot { height: 30px; width: 30px; background: #1e293b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 3px solid #0f172a; transition: all 0.5s ease; }
-        .dot.active { background: var(--gid-red); box-shadow: 0 0 15px var(--gid-red); border-color: white; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        .tracking-pulse { animation: pulse 2s infinite; color: var(--gid-red); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GID Logistics | Smart Tracking</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gid-red: #e31e24;
+      --gid-black: #0f172a;
+      --bg: #f8fafc;
+    }
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { margin: 0; background: var(--bg); color: #1e293b; transition: all 0.3s ease; }
+    header { background: #fff; padding: 1.2rem; text-align: center; border-bottom: 4px solid var(--gid-red); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -1px; }
+    .logo span { color: var(--gid-red); }
+    
+    .hero { text-align: center; padding: 50px 20px; }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 10px; color: var(--gid-black); }
+    
+    .card { background: #fff; max-width: 620px; margin: auto; padding: 35px; border-radius: 24px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); border: 1px solid rgba(0,0,0,0.02); }
+    
+    .input-box { display: flex; background: #f1f5f9; border-radius: 14px; padding: 8px; border: 2px solid transparent; transition: 0.3s; }
+    .input-box:focus-within { border-color: var(--gid-red); background: #fff; box-shadow: 0 0 0 4px rgba(227, 30, 36, 0.1); }
+    
+    input { flex: 1; border: none; background: transparent; padding: 14px; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; outline: none; color: var(--gid-black); }
+    
+    button { border: none; border-radius: 12px; padding: 0 28px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
+    .track-btn { background: var(--gid-black); color: #fff; }
+    .track-btn:hover { background: #1e293b; transform: translateY(-1px); }
+    .track-btn:active { transform: translateY(0); }
+
+    #results { display: none; margin-top: 35px; animation: fadeUp 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+    
+    .status-box { background: var(--gid-black); color: #fff; padding: 25px; border-radius: 18px; position: relative; overflow: hidden; }
+    .status-box::after { content: ""; position: absolute; top: -50%; right: -10%; width: 150px; height: 150px; background: var(--gid-red); opacity: 0.1; border-radius: 50%; }
+    .status-box small { opacity: .7; font-weight: 700; letter-spacing: 1.5px; font-size: 0.7rem; }
+    .status-box h2 { margin: 8px 0 0; font-size: 2rem; font-weight: 800; }
+
+    .milestones { position: relative; margin: 45px 0; padding: 0 10px; }
+    .line { position: absolute; top: 12px; left: 10px; right: 10px; height: 4px; background: #e5e7eb; border-radius: 2px; }
+    #bar { position: absolute; top: 12px; left: 10px; height: 4px; background: var(--gid-red); transition: 1.5s cubic-bezier(0.65, 0, 0.35, 1); border-radius: 2px; box-shadow: 0 0 10px rgba(227, 30, 36, 0.3); }
+    
+    .nodes { display: flex; justify-content: space-between; position: relative; }
+    .node { text-align: center; width: 20%; }
+    .dot { width: 24px; height: 24px; border-radius: 50%; border: 4px solid #e5e7eb; background: #fff; margin: auto; transition: 0.4s; z-index: 2; position: relative; }
+    .node.active .dot { background: var(--gid-red); border-color: var(--gid-red); transform: scale(1.1); }
+    .node label { display: block; margin-top: 10px; font-size: .65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; }
+    .node.active label { color: var(--gid-black); }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+    .item { background: #f8fafc; padding: 16px; border-radius: 12px; border: 1px solid #f1f5f9; transition: 0.3s; }
+    .item:hover { border-color: #e2e8f0; background: #fff; }
+    .item label { font-size: .65rem; font-weight: 800; color: #94a3b8; display: block; margin-bottom: 4px; }
+    .item div { font-weight: 700; color: var(--gid-black); font-size: 0.95rem; }
+
+    #receipt { display: none; margin-top: 20px; background: var(--gid-red); color: #fff; width: 100%; padding: 18px; border-radius: 12px; box-shadow: 0 10px 20px rgba(227, 30, 36, 0.15); }
+    #receipt:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(227, 30, 36, 0.25); }
+    
+    #reset { background: none; color: #64748b; margin-top: 20px; font-size: 0.85rem; width: 100%; border: 1px dashed #cbd5e1; padding: 12px; }
+    #reset:hover { color: var(--gid-red); border-color: var(--gid-red); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    #wa { position: fixed; bottom: 30px; right: 30px; z-index: 100; }
+    #wa a { width: 60px; height: 60px; border-radius: 50%; background: #25d366; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 28px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3); transition: 0.3s; }
+    #wa a:hover { transform: scale(1.1) rotate(10deg); }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .card { padding: 20px; }
+      .grid { grid-template-columns: 1fr; }
+      .status-box h2 { font-size: 1.5rem; }
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-6">
 
-    <header class="w-full max-w-2xl flex justify-between items-center mb-12">
-        <h1 class="text-2xl font-black tracking-tighter">GID <span class="text-[#e31e24]">LOGISTICS</span></h1>
-        <div class="text-xs text-slate-400 font-mono">COMMAND CENTRE v18.0</div>
-    </header>
+<body>
 
-    <div class="w-full max-w-2xl mb-8">
-        <div class="relative group">
-            <input type="text" id="trackInput" placeholder="ENTER WAYBILL (e.g. GID-WBL-1006)" 
-                class="w-full bg-slate-900 border-2 border-slate-800 p-5 rounded-xl focus:border-[#e31e24] outline-none transition-all text-lg font-bold tracking-widest uppercase">
-            <button onclick="trackShipment()" class="absolute right-3 top-3 bg-[#e31e24] px-6 py-2 rounded-lg font-bold hover:bg-red-700 transition-colors">
-                TRACK
-            </button>
-        </div>
+<header>
+  <div class="logo">GID <span>LOGISTICS</span></div>
+</header>
+
+<section class="hero">
+  <h1>Smart Shipment Tracking</h1>
+  <p>Real-time visibility for your global deliveries.</p>
+</section>
+
+<div class="card">
+  <div class="input-box">
+    <input id="trackInput" placeholder="Enter Waybill No" autocomplete="off">
+    <button class="track-btn" id="trackBtn">TRACK</button>
+  </div>
+
+  <div id="results">
+    <div class="status-box">
+      <small>CURRENT STATUS</small>
+      <h2 id="statusText">—</h2>
     </div>
 
-    <div id="resultArea" class="w-full max-w-2xl hidden animate-in fade-in duration-700">
-        
-        <div class="glass-card rounded-2xl p-8 mb-6">
-            <div class="flex justify-between items-start mb-10">
-                <div>
-                    <h2 id="displayID" class="text-3xl font-black mb-1">---</h2>
-                    <p id="displayStatus" class="text-[#e31e24] font-bold uppercase tracking-widest text-sm tracking-pulse">INITIALIZING...</p>
-                </div>
-                <div class="text-right text-slate-400">
-                    <p class="text-[10px] uppercase font-bold">Last Scanned</p>
-                    <p id="displayDate" class="text-sm font-mono">-- -- ----</p>
-                </div>
-            </div>
-
-            <div class="flex justify-between items-start mb-12 relative">
-                <div class="flex flex-col items-center z-10">
-                    <div id="dot1" class="dot active"><i class="fas fa-box"></i></div>
-                    <span class="text-[10px] mt-2 font-bold uppercase text-slate-400">Created</span>
-                </div>
-                <div class="step-line"><div id="line1" class="step-line-fill"></div></div>
-                <div class="flex flex-col items-center z-10">
-                    <div id="dot2" class="dot"><i class="fas fa-truck-loading"></i></div>
-                    <span class="text-[10px] mt-2 font-bold uppercase text-slate-400">In Transit</span>
-                </div>
-                <div class="step-line"><div id="line2" class="step-line-fill"></div></div>
-                <div class="flex flex-col items-center z-10">
-                    <div id="dot3" class="dot"><i class="fas fa-check-circle"></i></div>
-                    <span class="text-[10px] mt-2 font-bold uppercase text-slate-400">Delivered</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 border-t border-slate-800 pt-6">
-                <div>
-                    <p class="text-[10px] text-slate-500 uppercase font-bold">Current Location</p>
-                    <p id="displayLoc" class="font-bold">---</p>
-                </div>
-                <div class="text-right">
-                    <p class="text-[10px] text-slate-500 uppercase font-bold">Service Type</p>
-                    <p class="font-bold">Standard Express</p>
-                </div>
-            </div>
-        </div>
-
-        <a id="receiptBtn" href="#" target="_blank" class="hidden w-full bg-white text-black font-black p-5 rounded-xl text-center hover:bg-slate-200 transition-all flex items-center justify-center gap-3">
-            <i class="fas fa-file-invoice"></i> DOWNLOAD OFFICIAL RECEIPT
-        </a>
+    <div class="milestones">
+      <div class="line"></div>
+      <div id="bar"></div>
+      <div class="nodes">
+        <div class="node" id="n1"><div class="dot"></div><label>Created</label></div>
+        <div class="node" id="n2"><div class="dot"></div><label>Picked Up</label></div>
+        <div class="node" id="n3"><div class="dot"></div><label>In Transit</label></div>
+        <div class="node" id="n4"><div class="dot"></div><label>Out</label></div>
+        <div class="node" id="n5"><div class="dot"></div><label>Delivered</label></div>
+      </div>
     </div>
 
-    <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz2076OPCNES9Gf0S1r_zYw1nEWs5JGsjTAdKP-jlQSujZijJrTIMDpzHE-ljoSkOTV/exec";
+    <div class="grid">
+      <div class="item"><label>LOCATION</label><div id="locText">—</div></div>
+      <div class="item"><label>LAST UPDATE</label><div id="timeText">—</div></div>
+    </div>
 
-        function trackShipment() {
-            const id = document.getElementById('trackInput').value.trim();
-            if(!id) return alert("Please enter a waybill number");
+    <button id="receipt">DOWNLOAD OFFICIAL RECEIPT</button>
+    <button id="reset" onclick="location.reload()">START NEW SEARCH</button>
+  </div>
+</div>
 
-            // UI Feedback
-            document.getElementById('resultArea').classList.remove('hidden');
-            document.getElementById('displayStatus').innerText = "QUERYING SATELLITE...";
+<div id="wa">
+  <a id="waLink" target="_blank" href="https://wa.me/2347066958826">💬</a>
+</div>
 
-            fetch(`${SCRIPT_URL}?tracking=${id}&callback=handleResponse`)
-                .then(res => res.text())
-                .then(code => eval(code));
-        }
+<script>
+// REPLACE WITH YOUR RECENTLY DEPLOYED BACKEND V18.0 URL
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz2076OPCNES9Gf0S1r_zYw1nEWs5JGsjTAdKP-jlQSujZijJrTIMDpzHE-ljoSkOTV/exec";
+const btn = document.getElementById('trackBtn');
+const resultsDiv = document.getElementById('results');
+let fetching = false;
 
-        function handleResponse(data) {
-            if(data.error) {
-                alert(data.error);
-                return;
-            }
+btn.onclick = fetchShipment;
 
-            // Update Text
-            document.getElementById('displayID').innerText = data.tracking;
-            document.getElementById('displayStatus').innerText = data.status;
-            document.getElementById('displayLoc').innerText = data.currentLocation;
-            document.getElementById('displayDate').innerText = data.lastUpdated;
+function fetchShipment(){
+  if(fetching) return;
+  const id = trackInput.value.trim().toUpperCase();
+  if(!id) return alert("Please enter a valid tracking number");
 
-            // Update Progress Bar logic
-            updateProgress(data.status);
+  fetching = true;
+  btn.innerText = "SEARCHING...";
+  btn.disabled = true;
 
-            // Unlock Receipt
-            const rBtn = document.getElementById('receiptBtn');
-            if(data.status.toLowerCase() === "delivered") {
-                rBtn.classList.remove('hidden');
-                rBtn.href = `${SCRIPT_URL}?id=${data.tracking}&mode=receipt`;
-            } else {
-                rBtn.classList.add('hidden');
-            }
-        }
+  // Cleanup old JSONP script tags
+  const old = document.getElementById("jsonp");
+  if(old) old.remove();
 
-        function updateProgress(status) {
-            const s = status.toLowerCase();
-            const dot2 = document.getElementById('dot2');
-            const dot3 = document.getElementById('dot3');
-            const line1 = document.getElementById('line1');
-            const line2 = document.getElementById('line2');
+  const s = document.createElement("script");
+  s.id = "jsonp";
+  s.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=handleResponse`;
+  s.onerror = fail;
+  document.body.appendChild(s);
 
-            // Reset
-            [line1, line2].forEach(l => l.style.width = "0%");
-            [dot2, dot3].forEach(d => d.classList.remove('active'));
+  // Update WhatsApp link context
+  document.getElementById('waLink').href = `https://wa.me/2347066958826?text=Hello GID Support, I am tracking Waybill: ${id}`;
+}
 
-            if(s.includes("transit") || s.includes("shipped") || s.includes("picked")) {
-                line1.style.width = "100%";
-                dot2.classList.add('active');
-            }
-            if(s.includes("delivered")) {
-                line1.style.width = "100%";
-                line2.style.width = "100%";
-                dot2.classList.add('active');
-                dot3.classList.add('active');
-            }
-        }
+function handleResponse(data){
+  cleanup();
 
-        // Auto-run if URL has ?id=
-        const urlParams = new URLSearchParams(window.location.search);
-        const autoID = urlParams.get('id') || urlParams.get('tracking');
-        if(autoID) {
-            document.getElementById('trackInput').value = autoID;
-            trackShipment();
-        }
-    </script>
+  if(data.error){
+    alert("System Note: " + data.error);
+    return;
+  }
+
+  resultsDiv.style.display = "block";
+  document.getElementById('statusText').innerText = data.status;
+  document.getElementById('locText').innerText = data.currentLocation || "GID Facility";
+  document.getElementById('timeText').innerText = data.lastUpdated || "Just now";
+
+  const s = data.status.toLowerCase();
+  let p = 0, n = 0;
+
+  // Logical progress calculation
+  if(s.includes("delivered")){ p = 100; n = 5; }
+  else if(s.includes("delivery") || s.includes("out")){ p = 75; n = 4; }
+  else if(s.includes("transit")){ p = 50; n = 3; }
+  else if(s.includes("picked") || s.includes("received")){ p = 25; n = 2; }
+  else { p = 5; n = 1; }
+
+  document.getElementById('bar').style.width = p + "%";
+  for(let i = 1; i <= 5; i++){
+    document.getElementById("n" + i).classList.toggle("active", i <= n);
+  }
+
+  // Show receipt only if delivered
+  const receiptBtn = document.getElementById('receipt');
+  if(n === 5){
+    receiptBtn.style.display = "block";
+    receiptBtn.onclick = () => {
+      window.open(`${SCRIPT_URL}?tracking=${encodeURIComponent(trackInput.value)}&mode=receipt`, "_blank");
+    };
+  } else {
+    receiptBtn.style.display = "none";
+  }
+
+  // Focus the view on results
+  setTimeout(() => {
+    resultsDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, 100);
+}
+
+function cleanup(){
+  fetching = false;
+  btn.innerText = "TRACK";
+  btn.disabled = false;
+  const s = document.getElementById("jsonp");
+  if(s) s.remove();
+}
+
+function fail(){
+  cleanup();
+  alert("Connection Error: Unable to reach the GID Tracking Server. Please try again.");
+}
+
+// Support for auto-tracking via URL link
+window.onload = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get("id") || urlParams.get("tracking");
+  if(id){
+    trackInput.value = id;
+    fetchShipment();
+  }
+}
+</script>
+
 </body>
 </html>
