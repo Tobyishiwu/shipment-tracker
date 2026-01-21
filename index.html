@@ -1,175 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Command Centre</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --gid-red: #e31e24; --gid-black: #0f172a; --bg: #f8fafc; }
-        * { box-sizing: border-box; transition: 0.3s; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); margin: 0; color: #1e293b; overflow-x: hidden; }
-        header { background: white; border-bottom: 4px solid var(--gid-red); padding: 1rem; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .logo-box { background: var(--gid-red); color: white; padding: 5px 12px; border-radius: 6px; font-weight: 800; display: inline-block; }
-        .logo-text { font-weight: 800; font-size: 1.4rem; color: var(--gid-black); margin-left: 8px; vertical-align: middle; }
-        .hero { padding: 40px 20px; text-align: center; }
-        .track-card { background: white; max-width: 600px; margin: 0 auto 50px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-        .input-group { display: flex; background: #f1f5f9; padding: 5px; border-radius: 12px; margin-bottom: 25px; border: 2px solid transparent; }
-        .input-group:focus-within { border-color: var(--gid-red); background: white; }
-        input { flex: 1; padding: 12px; border: none; background: transparent; outline: none; font-size: 1rem; font-weight: 700; text-transform: uppercase; width: 100%; }
-        .track-btn { background: var(--gid-black); color: white; border: none; padding: 0 25px; border-radius: 10px; font-weight: 800; cursor: pointer; }
-        #results { display: none; animation: slideUp 0.5s ease forwards; }
-        .status-hero { background: var(--gid-black); color: white; padding: 25px; border-radius: 15px; position: relative; margin-bottom: 20px; text-align: left; }
-        
-        /* 5-Node Milestone Tracker */
-        .milestone-track { display: flex; justify-content: space-between; position: relative; margin: 40px 0; padding: 0 10px; }
-        .track-line { position: absolute; top: 12px; left: 0; right: 0; height: 4px; background: #eee; z-index: 1; }
-        #progress-bar { position: absolute; top: 12px; left: 0; height: 4px; background: var(--gid-red); z-index: 2; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .node { z-index: 3; display: flex; flex-direction: column; align-items: center; width: 20%; }
-        .dot { width: 24px; height: 24px; background: white; border: 4px solid #eee; border-radius: 50%; transition: 0.5s; }
-        .node.active .dot { border-color: var(--gid-red); background: var(--gid-red); transform: scale(1.1); }
-        .node-label { margin-top: 10px; font-size: 0.6rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; text-align: center; white-space: nowrap; }
-        .node.active .node-label { color: var(--gid-black); }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GID Logistics | Smart Tracking</title>
 
-        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .detail-item { background: #f8fafc; padding: 15px; border-radius: 10px; border: 1px solid #eee; text-align: left; }
-        .detail-item label { display: block; font-size: 0.6rem; font-weight: 800; color: #94a3b8; margin-bottom: 5px; }
-        #receipt-btn { display: none; width: 100%; background: var(--gid-red); color: white; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: 800; font-size: 0.85rem; margin-top: 15px; cursor: pointer; border: none; box-shadow: 0 4px 15px rgba(227, 30, 36, 0.2); }
-        
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        #whatsapp-chat { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
-        #wa-link { background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,0.2); text-decoration: none; }
-    </style>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gid-red:#e31e24;
+      --gid-black:#0f172a;
+      --bg:#f8fafc;
+    }
+    *{box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+    body{margin:0;background:var(--bg);color:#1e293b}
+    header{background:#fff;padding:1rem;text-align:center;border-bottom:4px solid var(--gid-red)}
+    .logo{font-weight:800;font-size:1.4rem}
+    .logo span{color:var(--gid-red)}
+    .hero{text-align:center;padding:40px 20px}
+    .card{background:#fff;max-width:620px;margin:auto;padding:30px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+    .input-box{display:flex;background:#f1f5f9;border-radius:12px;padding:6px}
+    input{flex:1;border:none;background:transparent;padding:14px;font-size:1rem;font-weight:700;text-transform:uppercase;outline:none}
+    button{border:none;border-radius:10px;padding:0 24px;font-weight:800;cursor:pointer}
+    .track-btn{background:var(--gid-black);color:#fff}
+    #results{display:none;margin-top:30px;animation:fadeUp .5s ease}
+    .status-box{background:var(--gid-black);color:#fff;padding:22px;border-radius:14px}
+    .status-box small{opacity:.7;font-weight:700;letter-spacing:1px}
+    .status-box h2{margin:6px 0 0;font-size:1.8rem}
+    .milestones{position:relative;margin:40px 0}
+    .line{position:absolute;top:12px;left:0;right:0;height:4px;background:#e5e7eb}
+    #bar{position:absolute;top:12px;left:0;height:4px;background:var(--gid-red);transition:1.2s}
+    .nodes{display:flex;justify-content:space-between;position:relative}
+    .node{text-align:center;width:20%}
+    .dot{width:22px;height:22px;border-radius:50%;border:4px solid #e5e7eb;background:#fff;margin:auto}
+    .node.active .dot{background:var(--gid-red);border-color:var(--gid-red)}
+    .node label{display:block;margin-top:8px;font-size:.6rem;font-weight:800;color:#94a3b8}
+    .node.active label{color:#0f172a}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .item{background:#f8fafc;padding:14px;border-radius:10px;border:1px solid #eee}
+    .item label{font-size:.6rem;font-weight:800;color:#94a3b8}
+    #receipt{display:none;margin-top:15px;background:var(--gid-red);color:#fff;width:100%;padding:16px}
+    #reset{background:none;color:var(--gid-red);margin-top:15px}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
+    #wa{position:fixed;bottom:25px;right:25px}
+    #wa a{width:60px;height:60px;border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center}
+  </style>
 </head>
+
 <body>
 
 <header>
-    <div class="logo-box">GID</div><span class="logo-text">Logistics</span>
+  <div class="logo">GID <span>LOGISTICS</span></div>
 </header>
 
-<div class="hero">
-    <h1>Smart Tracking</h1>
-    <p>Real-time visibility for your GID shipments.</p>
-</div>
+<section class="hero">
+  <h1>Smart Shipment Tracking</h1>
+  <p>Real-time visibility for your deliveries.</p>
+</section>
 
-<div class="track-card">
-    <div class="input-group">
-        <input type="text" id="waybillInput" placeholder="Enter Waybill No.">
-        <button class="track-btn" id="mainTrackBtn" onclick="fetchShipment()">TRACK</button>
+<div class="card">
+  <div class="input-box">
+    <input id="trackInput" placeholder="Enter Waybill No">
+    <button class="track-btn" id="trackBtn">TRACK</button>
+  </div>
+
+  <div id="results">
+    <div class="status-box">
+      <small>CURRENT STATUS</small>
+      <h2 id="statusText">—</h2>
     </div>
 
-    <div id="results">
-        <div class="status-hero">
-            <div style="font-size: 0.7rem; opacity: 0.8; letter-spacing: 1px;">CURRENT STATUS</div>
-            <div id="res-status" style="font-size: 1.8rem; font-weight: 800; margin-top: 5px; text-transform: uppercase;">--</div>
-        </div>
-
-        <div class="milestone-track">
-            <div class="track-line"></div>
-            <div id="progress-bar" style="width: 0%;"></div>
-            <div class="node" id="n1"><div class="dot"></div><div class="node-label">Created</div></div>
-            <div class="node" id="n2"><div class="dot"></div><div class="node-label">Picked Up</div></div>
-            <div class="node" id="n3"><div class="dot"></div><div class="node-label">In Transit</div></div>
-            <div class="node" id="n4"><div class="dot"></div><div class="node-label">Out for Delivery</div></div>
-            <div class="node" id="n5"><div class="dot"></div><div class="node-label">Delivered</div></div>
-        </div>
-
-        <div class="details-grid">
-            <div class="detail-item"><label>CURRENT LOCATION</label><span id="res-loc" style="font-weight: 700;">--</span></div>
-            <div class="detail-item"><label>LAST UPDATE</label><span id="res-time" style="font-weight: 700;">--</span></div>
-        </div>
-
-        <button id="receipt-btn">DOWNLOAD OFFICIAL RECEIPT</button>
-        <button onclick="location.reload()" style="width:100%; margin-top:20px; background:none; border:none; color:var(--gid-red); font-weight:800; cursor:pointer; font-size: 0.8rem;">START NEW SEARCH</button>
+    <div class="milestones">
+      <div class="line"></div>
+      <div id="bar"></div>
+      <div class="nodes">
+        <div class="node" id="n1"><div class="dot"></div><label>Created</label></div>
+        <div class="node" id="n2"><div class="dot"></div><label>Picked Up</label></div>
+        <div class="node" id="n3"><div class="dot"></div><label>In Transit</label></div>
+        <div class="node" id="n4"><div class="dot"></div><label>Out</label></div>
+        <div class="node" id="n5"><div class="dot"></div><label>Delivered</label></div>
+      </div>
     </div>
+
+    <div class="grid">
+      <div class="item"><label>LOCATION</label><div id="locText"></div></div>
+      <div class="item"><label>LAST UPDATE</label><div id="timeText"></div></div>
+    </div>
+
+    <button id="receipt">DOWNLOAD RECEIPT</button>
+    <button id="reset" onclick="location.reload()">START NEW SEARCH</button>
+  </div>
 </div>
 
-<div id="whatsapp-chat">
-    <a id="wa-link" href="#" target="_blank">
-        <svg width="30" height="30" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.06 3.973L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
-    </a>
+<div id="wa">
+  <a id="waLink" target="_blank">💬</a>
 </div>
 
 <script>
-// FIXED: Removed the double-pasted URL and the "exechttps" error
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwN0yYnfLmjffYVVcaNPwUum2LADUBp_j2GEUk21OJbvDUM-FT_XkhAu4Z5hffvqOKT/exec";
-    function updateWhatsApp(id) {
-        const phone = "2347066958826";
-        const msg = encodeURIComponent(`Hello GID Support, I am inquiring about Waybill: ${id || 'General'}`);
-        document.getElementById('wa-link').href = `https://wa.me/${phone}?text=${msg}`;
-    }
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz2076OPCNES9Gf0S1r_zYw1nEWs5JGsjTAdKP-jlQSujZijJrTIMDpzHE-ljoSkOTV/exec";
+const btn = document.getElementById('trackBtn');
+let fetching = false;
 
-    function fetchShipment() {
-        const id = document.getElementById('waybillInput').value.trim().toUpperCase();
-        if(!id) return;
-        
-        document.getElementById('mainTrackBtn').innerText = "WAIT...";
-        document.getElementById('mainTrackBtn').disabled = true;
+btn.onclick = fetchShipment;
 
-        const script = document.createElement('script');
-        script.id = "jsonp-request";
-        script.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=onSuccess`;
-        
-        // Remove old script if exists
-        const oldScript = document.getElementById('jsonp-request');
-        if(oldScript) oldScript.remove();
-        
-        document.body.appendChild(script);
-        updateWhatsApp(id);
-    }
+function fetchShipment(){
+  if(fetching) return;
+  const id = trackInput.value.trim().toUpperCase();
+  if(!id) return alert("Enter tracking number");
 
-    function onSuccess(data) {
-        document.getElementById('mainTrackBtn').innerText = "TRACK";
-        document.getElementById('mainTrackBtn').disabled = false;
+  fetching = true;
+  btn.innerText = "WAIT...";
+  btn.disabled = true;
 
-        if(data.error) { 
-            alert("Waybill ID not recognized. Please check and try again."); 
-            return; 
-        }
-        
-        document.getElementById('results').style.display = 'block';
-        document.getElementById('res-status').innerText = data.status;
-        document.getElementById('res-loc').innerText = data.currentLocation || "In Transit";
-        
-        const dateObj = new Date(data.lastUpdated);
-        document.getElementById('res-time').innerText = isNaN(dateObj) ? "Just now" : dateObj.toLocaleString([], {dateStyle:'medium', timeStyle:'short'});
+  const old = document.getElementById("jsonp");
+  if(old) old.remove();
 
-        // Progression Logic
-        const s = data.status.toLowerCase();
-        let p = 0, nodeIdx = 0;
+  const s = document.createElement("script");
+  s.id = "jsonp";
+  s.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=handleResponse`;
+  s.onerror = fail;
+  document.body.appendChild(s);
 
-        if (s.includes("created")) { p = 5; nodeIdx = 1; }
-        else if (s.includes("picked")) { p = 25; nodeIdx = 2; }
-        else if (s.includes("transit")) { p = 50; nodeIdx = 3; }
-        else if (s.includes("delivery")) { p = 75; nodeIdx = 4; }
-        else if (s.includes("delivered")) { p = 100; nodeIdx = 5; }
+  waLink.href = `https://wa.me/2347066958826?text=Hello GID Support, tracking ${id}`;
+}
 
-        document.getElementById('progress-bar').style.width = p + "%";
-        for (let i = 1; i <= 5; i++) {
-            document.getElementById('n' + i).classList[i <= nodeIdx ? 'add' : 'remove']('active');
-        }
+function handleResponse(data){
+  cleanup();
 
-        // Receipt Button
-        const rBtn = document.getElementById('receipt-btn');
-        if (nodeIdx === 5) {
-            rBtn.style.display = "block";
-            rBtn.onclick = () => window.open(`${SCRIPT_URL}?tracking=${encodeURIComponent(data.tracking)}&mode=receipt`, '_blank');
-        } else {
-            rBtn.style.display = "none";
-        }
-        
-        // Auto-scroll to results on mobile
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-    }
+  if(data.error){
+    alert(data.error);
+    return;
+  }
 
-    window.onload = () => {
-        const id = new URLSearchParams(window.location.search).get('id');
-        if(id) { 
-            document.getElementById('waybillInput').value = id; 
-            fetchShipment(); 
-        }
-        updateWhatsApp();
-    };
+  results.style.display = "block";
+  statusText.innerText = data.status;
+  locText.innerText = data.currentLocation || "—";
+  timeText.innerText = data.lastUpdated || "Just now";
+
+  const s = data.status.toLowerCase();
+  let p=0,n=0;
+
+  if(s.includes("delivered")){p=100;n=5}
+  else if(s.includes("delivery")){p=75;n=4}
+  else if(s.includes("transit")){p=50;n=3}
+  else if(s.includes("picked")){p=25;n=2}
+  else{p=5;n=1}
+
+  bar.style.width = p+"%";
+  for(let i=1;i<=5;i++){
+    document.getElementById("n"+i).classList.toggle("active",i<=n);
+  }
+
+  if(n===5){
+    receipt.style.display="block";
+    receipt.onclick=()=>window.open(`${SCRIPT_URL}?tracking=${encodeURIComponent(trackInput.value)}&mode=receipt`,"_blank");
+  }
+
+  results.scrollIntoView({behavior:"smooth"});
+}
+
+function cleanup(){
+  fetching=false;
+  btn.innerText="TRACK";
+  btn.disabled=false;
+  const s=document.getElementById("jsonp");
+  if(s) s.remove();
+}
+
+function fail(){
+  cleanup();
+  alert("Unable to connect to tracking server.");
+}
+
+window.onload=()=>{
+  const id=new URLSearchParams(location.search).get("id");
+  if(id){trackInput.value=id;fetchShipment();}
+}
 </script>
+
 </body>
 </html>
