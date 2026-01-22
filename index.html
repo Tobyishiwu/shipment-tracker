@@ -6,15 +6,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --red: #e31e24; --navy: #0f172a; }
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
-        header { background: white; border-bottom: 2px solid var(--red); padding: 20px; text-align: center; font-weight: 800; }
-        .hero { background: var(--navy); color: white; padding: 40px 20px; text-align: center; }
-        .card { max-width: 450px; margin: -30px auto 30px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; color: white; }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f4f7f9; color: var(--navy); }
+        header { background: white; border-bottom: 3px solid var(--red); padding: 15px; text-align: center; font-weight: 800; font-size: 1.4rem; }
+        .hero { background: var(--navy); color: white; padding: 50px 20px; text-align: center; }
+        .container { max-width: 500px; margin: -40px auto 40px; padding: 0 15px; }
+        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        input { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; color: white; transition: 0.3s; }
         .btn-red { background: var(--red); }
         .btn-navy { background: var(--navy); }
-        #res { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ccc; }
+        .btn:active { transform: scale(0.98); }
+        #res { display: none; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #eee; }
+        .status-text { font-size: 1.6rem; font-weight: 800; color: var(--red); display: block; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -22,63 +25,83 @@
 <header>GID LOGISTICS</header>
 
 <div class="hero">
-    <h2>Global Operations Hub</h2>
+    <h1>Global Track & Trace</h1>
+    <p style="opacity: 0.7;">Official Freight Management Portal</p>
 </div>
 
-<div class="card">
-    <h3 style="margin-top:0">Shipment Tracking</h3>
-    <input type="text" id="tID" placeholder="Enter Waybill (e.g. GID-101)">
-    <button class="btn btn-red" onclick="track()">TRACK NOW</button>
-    
-    <div id="res">
-        <label style="font-size: 10px; color: gray;">CURRENT STATUS</label>
-        <div id="resStatus" style="font-size: 1.4rem; font-weight: 800; color: var(--red);"></div>
-        <p style="font-size: 13px;"><b>To:</b> <span id="resDest"></span> | <b>Weight:</b> <span id="resWeight"></span>kg</p>
+<div class="container">
+    <div class="card">
+        <h3 style="margin-top:0">Instant Tracking</h3>
+        <input type="text" id="tID" placeholder="Enter Waybill ID (e.g. GID-1001)">
+        <button class="btn btn-red" onclick="track()">FIND SHIPMENT</button>
+        
+        <div id="res">
+            <span style="font-size: 11px; font-weight: 800; color: #888;">CURRENT STATUS</span>
+            <span id="resStatus" class="status-text">---</span>
+            <div style="font-size: 14px; line-height: 1.6;">
+                <b>To:</b> <span id="resDest">---</span><br>
+                <b>Weight:</b> <span id="resWeight">---</span> kg<br>
+                <b>Last Scanned:</b> <span id="resDate">---</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0">Request Freight Quote</h3>
+        <input type="text" id="qName" placeholder="Full Name">
+        <input type="text" id="qFrom" placeholder="Origin (City/Country)">
+        <input type="text" id="qTo" placeholder="Destination (City/Country)">
+        <button class="btn btn-navy" id="qBtn" onclick="quote()">SUBMIT TO SYSTEM</button>
     </div>
 </div>
 
-<div class="card">
-    <h3 style="margin-top:0">Request Quote</h3>
-    <input type="text" id="qName" placeholder="Your Name">
-    <input type="text" id="qFrom" placeholder="Origin City">
-    <input type="text" id="qTo" placeholder="Destination City">
-    <button class="btn btn-navy" id="qBtn" onclick="quote()">SUBMIT REQUEST</button>
-</div>
-
 <script>
-    const URL = "https://script.google.com/macros/s/AKfycbz2HobpPNk0wRVQnvcZHjlNeuqtKVc4ADXSvtWBRlDXihcxL5T9F9Mtjk70nq5qIxDB/exec";
+    const URL = "https://script.google.com/macros/s/AKfycbyHNapCPLKvlA1O-_puwmLJ54DvM8me9XPr-FEZNNPHIWHIaj1nWvwwnqETk_QE5aly/exec";
 
     function track() {
         const id = document.getElementById('tID').value.trim();
-        if(!id) return;
+        if(!id) return alert("Please enter an ID");
         const s = document.createElement('script');
         s.src = `${URL}?tracking=${id.toUpperCase()}&callback=handleTrack`;
         document.body.appendChild(s);
     }
 
     function handleTrack(r) {
-        if(r.error) return alert("Not Found");
+        if(r.error) return alert("Waybill ID not found in system.");
         document.getElementById('res').style.display = 'block';
         document.getElementById('resStatus').innerText = r.status;
         document.getElementById('resDest').innerText = r.destination;
         document.getElementById('resWeight').innerText = r.weight;
+        document.getElementById('resDate').innerText = r.updated;
     }
 
     async function quote() {
         const btn = document.getElementById('qBtn');
-        const name = document.getElementById('qName').value;
-        const from = document.getElementById('qFrom').value;
-        const to = document.getElementById('qTo').value;
+        const d = {
+            n: document.getElementById('qName').value,
+            f: document.getElementById('qFrom').value,
+            t: document.getElementById('qTo').value
+        };
         
-        if(!name || !from || !to) return alert("Fill all fields");
+        if(!d.n || !d.f || !d.t) return alert("Please complete the form");
         
-        btn.innerText = "Sending...";
-        // This direct URL call ensures the data reaches your sheet
-        const finalURL = `${URL}?action=saveQuote&name=${encodeURIComponent(name)}&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}`;
+        btn.innerText = "Synchronizing...";
+        btn.disabled = true;
         
-        await fetch(finalURL, { mode: 'no-cors' });
-        alert("Quote Logged! Check your Google Sheet.");
-        btn.innerText = "SUBMIT REQUEST";
+        const finalURL = `${URL}?action=saveQuote&name=${encodeURIComponent(d.n)}&origin=${encodeURIComponent(d.f)}&destination=${encodeURIComponent(d.t)}`;
+        
+        try {
+            await fetch(finalURL, { mode: 'no-cors' });
+            alert("Success! Quote logged. Check your Google Sheet.");
+            document.getElementById('qName').value = "";
+            document.getElementById('qFrom').value = "";
+            document.getElementById('qTo').value = "";
+        } catch(e) {
+            alert("Connection Error");
+        } finally {
+            btn.innerText = "SUBMIT TO SYSTEM";
+            btn.disabled = false;
+        }
     }
 </script>
 </body>
