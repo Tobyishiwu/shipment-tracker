@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Official Tracking</title>
+    <title>GID Logistics | Global Freight & Tracking</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --gid-red: #e31e24;
             --dark-navy: #0f172a;
             --slate-600: #475569;
-            --bg-body: #f1f5f9;
+            --bg-body: #f8fafc;
         }
 
         body {
@@ -19,120 +19,127 @@
             color: var(--dark-navy);
             font-family: 'Plus Jakarta Sans', sans-serif;
             line-height: 1.5;
+            padding-top: 80px; /* Space for sticky header */
         }
 
-        nav {
-            background: #fff;
-            padding: 1.2rem 5%;
-            text-align: center;
+        /* --- MODERN STICKY HEADER --- */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
             border-bottom: 2px solid var(--gid-red);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .logo { font-weight: 800; font-size: 1.4rem; text-transform: uppercase; }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--dark-navy); }
         .logo span { color: var(--gid-red); }
 
-        .container {
-            max-width: 580px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; }
+        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gid-red); }
+
+        .btn-cta { background: var(--dark-navy); color: white !important; padding: 8px 20px; border-radius: 6px; }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
         }
 
-        .hero { text-align: center; margin-bottom: 30px; }
-        .hero h1 { font-size: 2rem; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
-        .hero p { color: var(--slate-600); margin-top: 5px; font-size: 1rem; }
+        .hero-section h1 { font-size: 3rem; font-weight: 800; margin: 0; }
+        .hero-section p { color: #cbd5e1; font-size: 1.2rem; max-width: 600px; margin: 15px auto 40px; }
+
+        /* --- TRACKING CARD (Adjusted) --- */
+        .container { max-width: 580px; margin: -80px auto 40px; padding: 0 20px; position: relative; z-index: 10; }
 
         .search-card {
-            background: #fff;
-            padding: 10px;
-            border-radius: 12px;
-            display: flex;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            background: #fff; padding: 10px; border-radius: 12px;
+            display: flex; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
             margin-bottom: 30px;
         }
+
         .search-card input {
-            flex: 1;
-            border: none;
-            padding: 12px 15px;
-            font-size: 1rem;
-            outline: none;
-            font-weight: 600;
-            text-transform: uppercase;
+            flex: 1; border: none; padding: 15px; font-size: 1rem;
+            outline: none; font-weight: 600; text-transform: uppercase;
         }
+
         .search-card button {
-            background: var(--dark-navy);
-            color: #fff;
-            border: none;
-            padding: 0 25px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
+            background: var(--gid-red); color: #fff; border: none;
+            padding: 0 30px; border-radius: 8px; font-weight: 700; cursor: pointer;
         }
-        .search-card button:hover { background: #1e293b; }
 
         #results { display: none; animation: fadeIn 0.5s ease; }
 
         .status-header {
-            background: #fff;
-            padding: 25px;
-            border-radius: 16px;
-            border-top: 5px solid var(--gid-red);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
-            text-align: center;
+            background: #fff; padding: 25px; border-radius: 16px;
+            border-left: 8px solid var(--gid-red); box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 15px; text-align: left;
         }
-        .status-header small { color: var(--slate-600); font-weight: 700; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
-        .status-header h2 { font-size: 1.8rem; margin: 8px 0 0; font-weight: 800; color: var(--gid-red); }
 
-        .tracker-card {
-            background: #fff;
-            padding: 35px 15px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
-        }
-        .stepper {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
+        .status-header h2 { font-size: 1.8rem; margin: 5px 0; color: var(--dark-navy); }
+
+        .tracker-card { background: #fff; padding: 40px 20px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 15px; }
+
+        .stepper { display: flex; justify-content: space-between; position: relative; }
         .line-bg { position: absolute; top: 12px; left: 8%; right: 8%; height: 3px; background: #e2e8f0; z-index: 1; }
         .line-fill { position: absolute; top: 12px; left: 8%; width: 0%; height: 3px; background: var(--gid-red); z-index: 2; transition: width 1.2s ease; }
         
         .step { position: relative; z-index: 3; text-align: center; width: 20%; }
-        .dot { width: 20px; height: 20px; background: #fff; border: 3px solid #e2e8f0; border-radius: 50%; margin: 0 auto; transition: 0.3s; }
+        .dot { width: 18px; height: 18px; background: #fff; border: 3px solid #e2e8f0; border-radius: 50%; margin: 0 auto; transition: 0.3s; }
         .step.active .dot { border-color: var(--gid-red); background: var(--gid-red); }
-        .step label { display: block; margin-top: 10px; font-size: 0.6rem; font-weight: 800; color: var(--slate-600); text-transform: uppercase; }
-        .step.active label { color: var(--dark-navy); }
+        .step label { display: block; margin-top: 10px; font-size: 0.65rem; font-weight: 800; color: var(--slate-600); text-transform: uppercase; }
 
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .detail-box { background: #fff; padding: 18px; border-radius: 12px; border: 1px solid #e2e8f0; }
         .detail-box label { font-size: 0.65rem; font-weight: 800; color: var(--slate-600); text-transform: uppercase; display: block; }
-        .detail-box div { font-weight: 700; font-size: 0.9rem; margin-top: 4px; color: var(--dark-navy); }
+        .detail-box div { font-weight: 700; color: var(--dark-navy); margin-top: 4px; }
 
         .btn-receipt {
             display: none; width: 100%; background: var(--dark-navy); color: white;
             border: none; padding: 18px; border-radius: 12px; font-weight: 800;
-            font-size: 1rem; margin-top: 20px; cursor: pointer; text-transform: uppercase;
+            margin-top: 20px; cursor: pointer; text-transform: uppercase;
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 480px) {
-            .grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 768px) { .nav-links { display: none; } .hero-section h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
 
-<nav><div class="logo">GID <span>LOGISTICS</span></div></nav>
+<header>
+    <nav class="nav-container">
+        <a href="#" class="logo">GID <span>LOGISTICS</span></a>
+        <ul class="nav-links">
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Rates</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#" class="btn-cta">Request Quote</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="hero-section">
+    <h1>Global Logistics, <br> Simplified.</h1>
+    <p>Premium freight forwarding and real-time supply chain solutions for the modern world.</p>
+</div>
 
 <div class="container">
-    <div class="hero">
-        <h1>Track shipment</h1>
-        <p>Monitor your delivery status in real-time.</p>
-    </div>
-
     <div class="search-card">
         <input type="text" id="waybillInput" placeholder="Enter Waybill Number">
         <button id="searchBtn">TRACK</button>
@@ -140,7 +147,7 @@
 
     <div id="results">
         <div class="status-header">
-            <small>Live Status</small>
+            <small>Current Status</small>
             <h2 id="stText">Processing</h2>
         </div>
 
@@ -162,7 +169,7 @@
         </div>
 
         <button class="btn-receipt" id="receiptBtn">Download Official Receipt</button>
-        <p style="text-align:center; color:#64748b; font-size:12px; margin-top:20px; cursor:pointer;" onclick="location.reload()">Start New Search</p>
+        <p style="text-align:center; color:#64748b; font-size:12px; margin-top:20px; cursor:pointer;" onclick="location.reload()">New Search</p>
     </div>
 </div>
 
@@ -211,7 +218,6 @@ function handleTracking(data) {
     }
 }
 
-// Auto-run if ID is in the URL
 window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id') || urlParams.get('tracking');
