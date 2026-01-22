@@ -10,45 +10,36 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding-top: 80px; scroll-behavior: smooth; }
         
-        /* HEADER */
-        header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--dark-navy); }
         .logo span { color: var(--gid-red); }
-        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; }
-        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        .btn-cta { background: var(--dark-navy); color: white !important; padding: 10px 22px; border-radius: 8px; }
+        .btn-cta { background: var(--dark-navy); color: white !important; padding: 10px 22px; border-radius: 8px; text-decoration: none; font-weight: 600; }
 
-        /* HERO */
         .hero-section {
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
                         url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover; background-position: center; padding: 140px 20px; text-align: center; color: white;
+            background-size: cover; background-position: center; padding: 120px 20px; text-align: center; color: white;
         }
-        .hero-section h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin: 0; line-height: 1.1; }
 
-        /* TRACKING BAR */
         .search-container { max-width: 650px; margin: -60px auto 0; padding: 0 20px; position: relative; z-index: 10; }
-        .search-card { background: #fff; padding: 12px; border-radius: 16px; display: flex; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); }
+        .search-card { background: #fff; padding: 12px; border-radius: 16px; display: flex; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
         .search-card input { flex: 1; border: none; padding: 15px; font-size: 1.1rem; outline: none; font-weight: 600; text-transform: uppercase; }
         .search-card button { background: var(--gid-red); color: white; border: none; padding: 0 40px; border-radius: 10px; font-weight: 800; cursor: pointer; }
 
-        /* QUOTE FORM */
-        .quote-form-section { max-width: 1200px; margin: 100px auto; padding: 0 25px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
-        .main-form { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .quote-form-section { max-width: 1200px; margin: 80px auto; padding: 0 25px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+        .main-form { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .full-width { grid-column: span 2; }
         .form-group label { display: block; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; color: #94a3b8; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; }
         .submit-btn { width: 100%; background: var(--dark-navy); color: white; padding: 18px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .submit-btn:hover { background: var(--gid-red); transform: translateY(-2px); }
+        .submit-btn:hover { background: var(--gid-red); }
 
-        /* CHAT WIDGET */
         .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
 
         footer { background: #070b14; color: white; padding: 40px 25px; text-align: center; }
-        
-        @media (max-width: 768px) { .quote-form-section { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } .nav-links { display: none; } }
+        @media (max-width: 768px) { .quote-form-section { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
     </style>
 </head>
 <body>
@@ -56,16 +47,13 @@
 <header>
     <nav class="nav-container">
         <a href="#" class="logo">GID <span>LOGISTICS</span></a>
-        <ul class="nav-links">
-            <li><a href="#quote">Get Quote</a></li>
-            <li><a href="https://wa.me/2347066958826" class="btn-cta">WhatsApp</a></li>
-        </ul>
+        <a href="https://wa.me/2347066958826" class="btn-cta">Live Chat</a>
     </nav>
 </header>
 
 <div class="hero-section">
-    <h1>Global Freight. <br> Delivered Faster.</h1>
-    <p>Premium shipping and logistics solutions for modern businesses.</p>
+    <h1>Logistics Without <br> Boundaries.</h1>
+    <p>Premium shipping and global tracking solutions.</p>
 </div>
 
 <div class="search-container">
@@ -77,8 +65,8 @@
 
 <section class="quote-form-section" id="quote">
     <div class="form-info">
-        <h2 style="font-size: 2.5rem; color: var(--dark-navy);">Request a <br><span style="color: var(--gid-red);">Freight Quote</span></h2>
-        <p>Skip the paperwork. Fill this form to log your request and chat with an agent instantly.</p>
+        <h2 style="font-size: 2.5rem; color: var(--dark-navy);">Get a <span style="color: var(--gid-red);">Quote</span></h2>
+        <p>Log your shipment details here. We will save your request and connect you to an agent on WhatsApp.</p>
     </div>
 
     <form class="main-form" id="freightForm">
@@ -91,12 +79,12 @@
                     <option>Local Logistics</option>
                 </select>
             </div>
-            <div class="form-group"><label>From</label><input type="text" id="pickup" required></div>
-            <div class="form-group"><label>To</label><input type="text" id="dropoff" required></div>
+            <div class="form-group"><label>Origin</label><input type="text" id="pickup" required></div>
+            <div class="form-group"><label>Destination</label><input type="text" id="dropoff" required></div>
             <div class="form-group full-width"><label>Weight (kg)</label><input type="number" id="shipWeight" required></div>
             <div class="form-group full-width"><label>Description</label><textarea id="shipDesc" rows="2"></textarea></div>
         </div>
-        <button type="button" class="submit-btn" id="submitBtn" onclick="sendQuoteRequest()">Submit & Chat on WhatsApp</button>
+        <button type="button" class="submit-btn" id="submitBtn" onclick="sendQuoteRequest()">Submit & Chat</button>
     </form>
 </section>
 
@@ -104,13 +92,10 @@
     <svg viewBox="0 0 24 24" style="width:32px; height:32px; fill:white;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.006.332.013c.101.007.237-.038.371.29s.462 1.128.502 1.209c.039.081.066.174.011.282-.055.108-.083.174-.166.27-.083.097-.167.177-.247.273-.081.096-.164.2-.07.362.094.161.411.679.883 1.101.607.541 1.117.708 1.282.79s.259.061.356-.049c.098-.11.411-.479.522-.642.11-.164.221-.137.371-.083.15.054.95.448 1.113.53s.271.136.311.204c.04.068.04.394-.104.799z"></path></svg>
 </a>
 
-<footer>
-    <p>© 2026 GID Logistics Global. All Rights Reserved.</p>
-</footer>
+<footer><p>© 2026 GID Logistics Global. All Rights Reserved.</p></footer>
 
 <script>
-    // 1. YOUR GOOGLE APPS SCRIPT URL HERE
-    const BACKEND_URL = "https://script.google.com/macros/s/AKfycbxCSYD4qFpSqMYtHlZdPzCDveU2AVXhaiQUQ00lbibiVPw56nlb8j_383SEO0zMtqTR/exec";
+    const BACKEND_URL = "https://script.google.com/macros/s/AKfycbzVCjIT-kQ7xCHGV-Th2SIa3Z_9l0IpPxFOYFYJRUYK3ZwYHyokVr66LRtVH0SZAEqojg/exec";
 
     function initiateSearch() {
         const waybill = document.getElementById('waybillInput').value.trim();
@@ -120,31 +105,29 @@
 
     async function sendQuoteRequest() {
         const btn = document.getElementById('submitBtn');
-        const name = document.getElementById('custName').value;
-        const type = document.getElementById('shipType').value;
-        const from = document.getElementById('pickup').value;
-        const to = document.getElementById('dropoff').value;
-        const weight = document.getElementById('shipWeight').value;
-        const desc = document.getElementById('shipDesc').value;
+        const data = {
+            name: document.getElementById('custName').value,
+            type: document.getElementById('shipType').value,
+            origin: document.getElementById('pickup').value,
+            destination: document.getElementById('dropoff').value,
+            weight: document.getElementById('shipWeight').value,
+            desc: document.getElementById('shipDesc').value
+        };
 
-        if(!name || !from || !to || !weight) return alert("Please fill in all fields.");
+        if(!data.name || !data.origin || !data.destination || !data.weight) return alert("Please fill in all fields.");
 
-        btn.innerText = "Saving Request...";
-        btn.style.opacity = "0.7";
-
-        // Step 1: Save to Google Sheets
-        const sheetParams = `?action=saveQuote&name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}&weight=${weight}&desc=${encodeURIComponent(desc)}`;
+        btn.innerText = "Syncing Data...";
         
-        try {
-            await fetch(BACKEND_URL + sheetParams, { mode: 'no-cors' });
-        } catch (e) { console.log("Sheet update skipped or failed"); }
+        // Save to Google Sheets
+        const query = `?action=saveQuote&name=${encodeURIComponent(data.name)}&type=${encodeURIComponent(data.type)}&origin=${encodeURIComponent(data.origin)}&destination=${encodeURIComponent(data.destination)}&weight=${data.weight}&desc=${encodeURIComponent(data.desc)}`;
+        fetch(BACKEND_URL + query, { mode: 'no-cors' });
 
-        // Step 2: Open WhatsApp
-        const msg = `*NEW GID QUOTE REQUEST*%0A--------------------%0A*Name:* ${name}%0A*Service:* ${type}%0A*Route:* ${from} to ${to}%0A*Weight:* ${weight}kg%0A*Details:* ${desc}`;
+        // Open WhatsApp
+        const msg = `*GID QUOTE REQUEST*%0A------------------%0A*Name:* ${data.name}%0A*Route:* ${data.origin} to ${data.destination}%0A*Service:* ${data.type}%0A*Weight:* ${data.weight}kg`;
         window.open(`https://wa.me/2347066958826?text=${msg}`, '_blank');
         
-        btn.innerText = "Request Sent! Redirecting...";
-        setTimeout(() => { btn.innerText = "Submit & Chat on WhatsApp"; btn.style.opacity = "1"; }, 3000);
+        btn.innerText = "Success! Opening WhatsApp...";
+        setTimeout(() => { btn.innerText = "Submit & Chat"; }, 3000);
     }
 </script>
 </body>
