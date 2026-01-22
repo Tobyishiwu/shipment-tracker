@@ -1,72 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Global Freight</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GID Logistics | Global Tracking</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --red: #e31e24; --navy: #0f172a; --slate: #64748b; }
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding-top: 80px; }
-        header { position: fixed; top: 0; width: 100%; background: white; border-bottom: 2px solid var(--red); height: 80px; display: flex; align-items: center; z-index: 100; }
-        .nav { max-width: 1200px; margin: 0 auto; width: 100%; padding: 0 20px; display: flex; justify-content: space-between; }
-        .hero { background: var(--navy); color: white; padding: 80px 20px; text-align: center; }
-        .card { background: white; max-width: 900px; margin: -40px auto 40px; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
+        :root { --gid-red: #e31e24; --navy: #0f172a; }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: var(--navy); }
+        header { background: white; border-bottom: 2px solid var(--gid-red); padding: 15px; text-align: center; font-weight: 800; font-size: 1.2rem; }
+        .hero { background: var(--navy); color: white; padding: 60px 20px; text-align: center; }
+        .card { max-width: 500px; margin: -30px auto 40px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         .btn { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .btn-red { background: var(--red); color: white; }
-        .btn-navy { background: var(--navy); color: white; }
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: 700; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .btn-red { background: var(--gid-red); color: white; }
+        .btn-navy { background: var(--navy); color: white; margin-top: 10px; }
+        #trackResult { display: none; margin-top: 20px; text-align: left; padding-top: 20px; border-top: 1px dashed #ccc; }
     </style>
 </head>
 <body>
 
-<header><div class="nav"><strong>GID LOGISTICS</strong><a href="https://wa.me/2347066958826" style="color:var(--navy); text-decoration:none; font-weight:700;">Help Center</a></div></header>
+<header>GID LOGISTICS</header>
 
-<div class="hero"><h1>Seamless Logistics. <br>Real-Time Tracking.</h1></div>
-
-<div class="card">
-    <h3>Track Shipment</h3>
-    <input type="text" id="tID" placeholder="Enter Waybill ID (e.g. GID-1001)">
-    <button class="btn btn-red" onclick="goToTrack()">TRACK PACKAGE</button>
+<div class="hero">
+    <h1>Track & Manage Shipments</h1>
+    <p>Premium Freight Services</p>
 </div>
 
 <div class="card">
-    <h3>Request Freight Quote</h3>
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-        <input type="text" id="qName" placeholder="Full Name" style="grid-column: span 2;">
-        <input type="text" id="qFrom" placeholder="Origin">
-        <input type="text" id="qTo" placeholder="Destination">
-        <select id="qType"><option>Air Freight</option><option>Ocean Freight</option></select>
-        <input type="number" id="qWeight" placeholder="Weight (kg)">
+    <h3 style="margin-top:0">Tracking Portal</h3>
+    <input type="text" id="trackInput" placeholder="Enter Waybill (e.g., GID-1001)">
+    <button class="btn btn-red" onclick="runTrack()">TRACK SHIPMENT</button>
+    
+    <div id="trackResult">
+        <label style="font-size: 10px; color: #999; font-weight: 800;">CURRENT STATUS</label>
+        <div id="resStatus" style="font-size: 1.5rem; font-weight: 800; color: var(--gid-red);">...</div>
+        <div style="margin-top:15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div><label style="font-size: 10px; color: #999;">DESTINATION</label><div id="resDest" style="font-weight:700">...</div></div>
+            <div><label style="font-size: 10px; color: #999;">WEIGHT</label><div id="resWeight" style="font-weight:700">...</div></div>
+        </div>
     </div>
-    <textarea id="qDesc" placeholder="Describe your items..."></textarea>
+</div>
+
+<div class="card">
+    <h3 style="margin-top:0">Request Freight Quote</h3>
+    <input type="text" id="qName" placeholder="Full Name">
+    <input type="text" id="qFrom" placeholder="Origin City">
+    <input type="text" id="qTo" placeholder="Destination City">
     <button class="btn btn-navy" id="qBtn" onclick="submitQuote()">SUBMIT REQUEST</button>
 </div>
 
-<a href="https://wa.me/2347066958826" class="whatsapp-float">Support Chat</a>
-
 <script>
-    const DEPLOY_URL = "https://script.google.com/macros/s/AKfycbwTXxHgV4-s7oQ0Y3XXU7aALp8mElBbrV5g06eWoHyVLF6FLTwzSDS7vdQc7idLV1hh/exec";
+    const URL = "https://script.google.com/macros/s/AKfycbyEBcbokYysCtn61RU2Y6LyjaUBqhdDnaVjIY45f3Waz0R_Y9nDtJpHbxttuUqGxI3t/exec";
 
-    function goToTrack() {
-        const id = document.getElementById('tID').value.trim();
-        if(id) window.location.href = `track.html?id=${id.toUpperCase()}`;
+    function runTrack() {
+        const id = document.getElementById('trackInput').value.trim();
+        if(!id) return;
+        const script = document.createElement('script');
+        script.src = `${URL}?tracking=${id.toUpperCase()}&callback=showTrack`;
+        document.body.appendChild(script);
+    }
+
+    function showTrack(res) {
+        if(res.error) return alert("ID Not Found");
+        document.getElementById('trackResult').style.display = 'block';
+        document.getElementById('resStatus').innerText = res.status;
+        document.getElementById('resDest').innerText = res.destination;
+        document.getElementById('resWeight').innerText = res.weight;
     }
 
     async function submitQuote() {
         const btn = document.getElementById('qBtn');
-        const q = {
-            name: document.getElementById('qName').value,
-            from: document.getElementById('qFrom').value,
-            to: document.getElementById('qTo').value,
-            type: document.getElementById('qType').value,
-            weight: document.getElementById('qWeight').value,
-            desc: document.getElementById('qDesc').value
-        };
-        if(!q.name || !q.from || !q.to) return alert("Fill required fields");
+        const name = document.getElementById('qName').value;
+        const from = document.getElementById('qFrom').value;
+        const to = document.getElementById('qTo').value;
+        if(!name || !from || !to) return alert("Please fill fields");
+        
         btn.innerText = "Submitting...";
-        await fetch(`${DEPLOY_URL}?action=saveQuote&name=${q.name}&type=${q.type}&origin=${q.from}&destination=${q.to}&weight=${q.weight}&desc=${q.desc}`, {mode:'no-cors'});
-        alert("Quote Submitted Successfully!");
+        await fetch(`${URL}?action=saveQuote&name=${name}&origin=${from}&destination=${to}`, {mode: 'no-cors'});
+        alert("Quote Logged Successfully. Our team will review it.");
         btn.innerText = "SUBMIT REQUEST";
     }
 </script>
