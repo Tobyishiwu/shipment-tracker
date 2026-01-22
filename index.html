@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>GID Logistics | Enterprise Global Solutions</title>
+    <title>GID Logistics | Global Supply Chain & Freight</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root{--navy:#0f172a;--red:#e31e24;--bg:#ffffff;--soft-bg:#f8fafc;--muted:#64748b;--border:#e2e8f0;--green:#10b981}
         *{box-sizing:border-box; margin:0; padding:0}
-        body{font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--navy); line-height:1.6}
+        body{font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--navy); line-height:1.6; overflow-x:hidden}
         .container{max-width:1200px; margin:auto; padding:0 25px}
 
         /* NAVIGATION */
@@ -16,38 +16,60 @@
         .nav-flex{display:flex; justify-content:space-between; align-items:center}
         .logo{font-size:26px; font-weight:900; letter-spacing:-1.2px}
         .logo span{color:var(--red)}
+        .nav-links{display:none; gap:25px}
+        @media(min-width: 992px){.nav-links{display:flex; font-size:14px; font-weight:700}}
+        .nav-links a{text-decoration:none; color:var(--navy); transition:0.3s}
+        .nav-links a:hover{color:var(--red)}
 
         /* HERO & ANIMATION */
         .hero{position:relative; background:var(--navy); color:#fff; padding:120px 0 180px; text-align:center; overflow:hidden}
         .hero-bg{position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.3; animation:zoom 20s infinite alternate}
-        @keyframes zoom { from{transform:scale(1)} to{transform:scale(1.1)} }
+        @keyframes zoom { from{transform:scale(1)} to{transform:scale(1.15)} }
         .hero-content{position:relative; z-index:2}
+        .hero h1{font-size:clamp(40px, 7vw, 64px); font-weight:800; line-height:1.1; margin-bottom:20px}
 
         /* SEARCH HUB */
-        .hub-box{max-width:950px; margin:-100px auto 80px; background:#fff; border-radius:24px; box-shadow:0 50px 100px rgba(0,0,0,0.15); padding:10px; position:relative; z-index:10}
-        .hub-tabs{display:flex; gap:5px; padding:10px; background:var(--soft-bg); border-radius:18px}
-        .hub-tab{flex:1; padding:15px; border:none; border-radius:12px; font-weight:800; cursor:pointer; color:var(--muted)}
+        .hub-box{max-width:1000px; margin:-100px auto 80px; background:#fff; border-radius:24px; box-shadow:0 50px 100px rgba(0,0,0,0.15); padding:10px; position:relative; z-index:10}
+        .hub-tabs{display:flex; gap:5px; padding:10px; background:var(--soft-bg); border-radius:18px; margin-bottom:10px}
+        .hub-tab{flex:1; padding:15px; border:none; border-radius:12px; font-weight:800; cursor:pointer; color:var(--muted); transition:0.3s}
         .hub-tab.active{background:var(--red); color:#fff}
 
         /* SECTIONS */
-        section{padding:80px 0}
-        .section-h2{text-align:center; font-size:36px; font-weight:800; margin-bottom:50px}
-        .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px}
-        .card{padding:40px; border:1px solid var(--border); border-radius:20px; transition:0.3s}
-        .card:hover{border-color:var(--red); transform:translateY(-5px)}
-
-        /* BUTTONS & INPUTS */
-        .btn-main{background:var(--red); color:#fff; border:none; padding:18px; border-radius:12px; font-weight:800; cursor:pointer; width:100%; transition:0.3s}
-        .btn-main:disabled{background:var(--muted); opacity:0.6}
-        .input-main{width:100%; padding:18px; border:2px solid var(--border); border-radius:12px; margin-bottom:15px; outline:none; font-size:16px}
+        section{padding:100px 0}
+        .section-tag{color:var(--red); font-weight:800; font-size:14px; letter-spacing:2px; display:block; margin-bottom:10px; text-align:center}
+        .section-h2{text-align:center; font-size:36px; font-weight:800; margin-bottom:60px}
         
+        /* SERVICE GRID */
+        .services-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px}
+        .s-card{padding:40px; border:1px solid var(--border); border-radius:20px; transition:0.3s}
+        .s-card:hover{border-color:var(--red); box-shadow:0 20px 40px rgba(0,0,0,0.04); transform:translateY(-5px)}
+        .s-card i{font-size:40px; display:block; margin-bottom:20px; font-style:normal}
+
+        /* HOW IT WORKS */
+        .flow-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:40px; text-align:center}
+        .flow-num{width:50px; height:50px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-weight:800; font-size:20px}
+
+        /* COMPLIANCE */
+        .compliance{background:var(--navy); color:#fff; padding:80px 40px; border-radius:30px; text-align:center}
+        .comp-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:15px; margin-top:40px}
+        .comp-item{background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); font-size:14px}
+
+        /* INPUTS & UTILS */
+        .input-main{width:100%; padding:18px; border:2px solid var(--border); border-radius:12px; margin-bottom:15px; outline:none; font-size:16px}
+        .btn-main{background:var(--red); color:#fff; border:none; padding:18px; border-radius:12px; font-weight:800; cursor:pointer; width:100%; transition:0.3s}
+        .btn-main:disabled{opacity:0.6; cursor:not-allowed}
+        .hidden{display:none}
+        .status-box{margin-top:20px; padding:20px; background:var(--soft-bg); border-radius:12px; border-left:5px solid var(--red)}
+
+        /* FOOTER */
+        footer{background:#0a0f1c; color:#fff; padding:100px 0 50px}
+        .footer-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:60px}
+        .footer-col h4{margin-bottom:25px; color:var(--red)}
+        .footer-col a{display:block; color:#94a3b8; text-decoration:none; margin-bottom:12px; font-size:14px}
+
         /* WHATSAPP FAB */
         .wa-btn{position:fixed; bottom:30px; right:30px; width:65px; height:65px; background:#25d366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(37,211,102,0.4); z-index:1000}
         .wa-btn svg{width:32px; fill:#fff}
-
-        .hidden{display:none}
-        .status-box{margin-top:20px; padding:20px; background:var(--soft-bg); border-radius:12px; border-left:5px solid var(--red)}
-        footer{background:#0a0f1c; color:#fff; padding:80px 0 40px}
     </style>
 </head>
 <body>
@@ -55,43 +77,47 @@
 <header>
     <div class="container nav-flex">
         <div class="logo">GID<span>LOGISTICS</span></div>
-        <div style="font-weight:700; font-size:12px; color:var(--muted)">RC: 1234567</div>
+        <nav class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#how-it-works">Process</a>
+            <a href="#compliance">Compliance</a>
+            <a href="#support">Support</a>
+        </nav>
+        <div style="font-weight:800; font-size:12px; background:var(--soft-bg); padding:5px 15px; border-radius:20px">RC: 1234567</div>
     </div>
 </header>
 
 <section class="hero">
-    <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&q=80&w=2000" class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000" class="hero-bg">
     <div class="container hero-content">
-        <h1>Global Logistics. <br>Local Expertise.</h1>
-        <p>Your premier gateway for international freight and domestic delivery.</p>
+        <h1>Global Freight. <br> Delivered with Trust.</h1>
+        <p>Your premier logistics partner connecting Nigeria to the world.</p>
     </div>
 </section>
 
 <div class="container">
     <div class="hub-box">
         <div class="hub-tabs">
-            <button class="hub-tab active" id="tab-track" onclick="setHub('track')">Track</button>
+            <button class="hub-tab active" id="tab-track" onclick="setHub('track')">Track Shipment</button>
             <button class="hub-tab" id="tab-quote" onclick="setHub('quote')">Instant Quote</button>
         </div>
         <div style="padding:30px">
             <div id="h-track">
-                <input id="tid" class="input-main" placeholder="Enter Waybill ID (e.g. GID-1001)">
-                <button class="btn-main" id="btn-track" onclick="runTrack()">Track Shipment</button>
+                <input id="tid" class="input-main" placeholder="Enter Waybill ID (e.g. GID-101)">
+                <button class="btn-main" id="btn-track" onclick="runTrack()">Track Now</button>
                 <div id="track-res" class="hidden status-box">
                     <h3 id="r-status"></h3>
-                    <p>Location: <span id="r-dest"></span></p>
-                    <p>Last Update: <span id="r-time"></span></p>
+                    <p>Destination: <span id="r-dest"></span> | Updated: <span id="r-time"></span></p>
                 </div>
             </div>
-
             <div id="h-quote" class="hidden">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-                    <input id="qN" class="input-main" placeholder="Name">
+                    <input id="qN" class="input-main" placeholder="Full Name">
                     <input id="qW" class="input-main" type="number" placeholder="Weight (KG)">
                 </div>
-                <input id="qT" class="input-main" placeholder="Destination (e.g. London, UK)">
-                <button class="btn-main" id="btn-quote" onclick="runQuote()">Calculate Rate</button>
-                <div id="quote-res" class="hidden status-box" style="text-align:center; border-left-color:var(--green)">
+                <input id="qT" class="input-main" placeholder="Destination City/Country">
+                <button class="btn-main" id="btn-quote" onclick="runQuote()">Get Estimate</button>
+                <div id="quote-res" class="hidden status-box" style="text-align:center">
                     <p>Estimated Cost:</p>
                     <h2 id="r-cost" style="color:var(--green); font-size:32px"></h2>
                 </div>
@@ -99,37 +125,65 @@
         </div>
     </div>
 
-    <section id="solutions">
-        <h2 class="section-h2">Corporate Solutions</h2>
-        <div class="grid">
-            <div class="card" style="background:var(--navy); color:#fff">
-                <h3>Business Proposals</h3>
-                <p style="margin:15px 0; opacity:0.8">High volume shipping? Request a custom corporate rate.</p>
-                <input id="corp-name" class="input-main" style="background:rgba(255,255,255,0.1); border:none; color:#fff" placeholder="Company Name">
-                <button class="btn-main" id="btn-corp" onclick="runCorporate()">Request Proposal</button>
-            </div>
-            <div class="card">
-                <h3>Global Hubs</h3>
-                <p>Strategically located in Lagos, London, and Guangzhou to serve you better.</p>
+    <section id="services">
+        <span class="section-tag">OUR SOLUTIONS</span>
+        <h2 class="section-h2">Global Logistics Services</h2>
+        <div class="services-grid">
+            <div class="s-card"><i>✈️</i><h3>Air Freight</h3><p>Fast international shipping with express customs clearance.</p></div>
+            <div class="s-card"><i>🚚</i><h3>Domestic Courier</h3><p>Door-to-door delivery across all 36 Nigerian states.</p></div>
+            <div class="s-card"><i>🚢</i><h3>Sea Cargo</h3><p>Cost-effective ocean freight for large, heavy shipments.</p></div>
+            <div class="s-card"><i>📦</i><h3>E-commerce</h3><p>Fulfillment solutions for online vendors and retailers.</p></div>
+            <div class="s-card"><i>🏭</i><h3>Warehousing</h3><p>Secure storage with real-time inventory tracking.</p></div>
+            <div class="s-card"><i>🛡️</i><h3>Insurance</h3><p>Total peace of mind with comprehensive cargo protection.</p></div>
+        </div>
+    </section>
+
+    <section id="how-it-works" style="background:var(--soft-bg); border-radius:30px; padding:80px 40px">
+        <h2 class="section-h2">The GID Process</h2>
+        <div class="flow-grid">
+            <div class="flow-item"><div class="flow-num">1</div><h4>Book</h4><p>Submit shipment details online.</p></div>
+            <div class="flow-item"><div class="flow-num">2</div><h4>Pickup</h4><p>We collect from your location.</p></div>
+            <div class="flow-item"><div class="flow-num">3</div><h4>Transit</h4><p>Global movement via air/sea.</p></div>
+            <div class="flow-item"><div class="flow-num">4</div><h4>Deliver</h4><p>Safe arrival at destination.</p></div>
+        </div>
+    </section>
+
+    <section id="compliance">
+        <div class="compliance">
+            <h2>Shipping Compliance</h2>
+            <p style="opacity:0.7">The following items are strictly prohibited for transport:</p>
+            <div class="comp-grid">
+                <div class="comp-item">🚫 Explosives</div>
+                <div class="comp-item">🚫 Flammable Liquids</div>
+                <div class="comp-item">🚫 Illegal Substances</div>
+                <div class="comp-item">🚫 Loose Batteries</div>
+                <div class="comp-item">🚫 Perishables</div>
+                <div class="comp-item">🚫 Corrosives</div>
             </div>
         </div>
     </section>
 </div>
 
 <footer>
-    <div class="container">
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:40px">
-            <div>
-                <div class="logo">GID<span>LOGISTICS</span></div>
-                <p style="color:var(--muted); margin-top:15px">24/7 Support: +234 706 695 8826</p>
-            </div>
-            <div>
-                <h4>Newsletter</h4>
-                <div style="display:flex; gap:10px; margin-top:15px">
-                    <input id="sub-email" style="padding:10px; border-radius:8px; border:none; flex:1" placeholder="Email Address">
-                    <button class="btn-main" id="btn-sub" style="width:auto; padding:10px 20px" onclick="runSubscribe()">Join</button>
-                </div>
-            </div>
+    <div class="container footer-grid">
+        <div class="footer-col">
+            <div class="logo">GID<span>LOGISTICS</span></div>
+            <p style="margin-top:20px; color:#94a3b8; font-size:14px">Serving Lagos, London, and Guangzhou.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Support</h4>
+            <a href="#">Help Center</a>
+            <a href="#">Tracking FAQ</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="footer-col" id="support">
+            <h4>Contact Info</h4>
+            <p style="color:#94a3b8; font-size:14px">+234 706 695 8826<br>help@gidlogistics.com</p>
+        </div>
+        <div class="footer-col">
+            <h4>Newsletter</h4>
+            <input id="sub-email" style="width:100%; padding:12px; background:#1e293b; border:none; border-radius:8px; color:#fff; margin-bottom:10px" placeholder="Email">
+            <button class="btn-main" id="btn-sub" style="padding:10px" onclick="runSubscribe()">Subscribe</button>
         </div>
     </div>
 </footer>
@@ -148,29 +202,27 @@ function setHub(t){
     document.getElementById('tab-quote').classList.toggle('active', t==='quote');
 }
 
-// 1. TRACKING ENGINE
+// 1. TRACKING
 function runTrack(){
     const id = document.getElementById('tid').value.trim();
-    if(!id) return alert("Please enter a waybill ID");
-    
+    if(!id) return;
     toggleBtn('btn-track', true);
     callApi(`tracking=${encodeURIComponent(id)}`, (r) => {
         toggleBtn('btn-track', false);
         if(r.error){ alert(r.error); return; }
         document.getElementById('track-res').classList.remove('hidden');
-        document.getElementById('r-status').innerText = r.status;
+        document.getElementById('r-status').innerText = r.status.toUpperCase();
         document.getElementById('r-dest').innerText = r.destination;
         document.getElementById('r-time').innerText = r.updated;
     });
 }
 
-// 2. QUOTE ENGINE
+// 2. QUOTING
 function runQuote(){
     const name = document.getElementById('qN').value;
     const weight = document.getElementById('qW').value;
     const dest = document.getElementById('qT').value;
-    if(!name || !weight || !dest) return alert("All fields required");
-
+    if(!name || !weight || !dest) return alert("Fill all fields");
     toggleBtn('btn-quote', true);
     callApi(`action=saveQuote&name=${encodeURIComponent(name)}&weight=${weight}&destination=${encodeURIComponent(dest)}`, (r) => {
         toggleBtn('btn-quote', false);
@@ -179,40 +231,23 @@ function runQuote(){
     });
 }
 
-// 3. CORPORATE ENGINE
-function runCorporate(){
-    const name = document.getElementById('corp-name').value;
-    if(!name) return alert("Company name required");
-
-    toggleBtn('btn-corp', true);
-    callApi(`action=corporate&company=${encodeURIComponent(name)}&volume=ContactRequested`, (r) => {
-        toggleBtn('btn-corp', false);
-        alert("Proposal request sent! Our team will contact you shortly.");
-    });
-}
-
-// 4. NEWSLETTER ENGINE
+// 3. NEWSLETTER
 function runSubscribe(){
     const email = document.getElementById('sub-email').value;
     if(!email) return;
-
     toggleBtn('btn-sub', true);
     callApi(`action=subscribe&email=${encodeURIComponent(email)}`, (r) => {
         toggleBtn('btn-sub', false);
-        alert("Thanks for joining our newsletter!");
+        alert("Subscribed!");
     });
 }
 
-// API UTILS
+// API HANDLER
 function callApi(params, callbackName){
-    const callbackId = 'cb_' + Math.floor(Math.random() * 1000000);
-    window[callbackId] = function(data){
-        delete window[callbackId];
-        document.body.removeChild(script);
-        callbackName(data);
-    };
+    const cb = 'cb_' + Math.floor(Math.random() * 1000000);
+    window[cb] = (data) => { delete window[cb]; document.body.removeChild(script); callbackName(data); };
     const script = document.createElement('script');
-    script.src = `${SCRIPT_URL}?${params}&callback=${callbackId}`;
+    script.src = `${SCRIPT_URL}?${params}&callback=${cb}`;
     document.body.appendChild(script);
 }
 
