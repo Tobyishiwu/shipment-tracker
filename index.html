@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GID Logistics</title>
+<title>GID Logistics | Excellence. Simply Delivered.</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -18,7 +18,7 @@ a{text-decoration:none;color:var(--muted);font-weight:600}
 /* Top bars */
 .utility{background:#fff;border-bottom:1px solid var(--b);font-size:12px}
 .utility .wrap{display:flex;justify-content:flex-end;gap:20px;padding:8px 20px}
-header{background:#fff;position:sticky;top:0;border-bottom:1px solid var(--b)}
+header{background:#fff;position:sticky;top:0;border-bottom:1px solid var(--b);z-index:100}
 header .wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
 .logo{font-size:22px;font-weight:800}
 .logo span{color:var(--red)}
@@ -26,22 +26,23 @@ header .wrap{display:flex;justify-content:space-between;align-items:center;paddi
 /* Hero */
 .hero{background:var(--navy);color:#fff;text-align:center;padding:90px 20px 140px}
 .hero h1{margin:0;font-size:42px}
-.hero p{opacity:.85}
+.hero p{opacity:.85; font-size: 18px}
 
 /* Hub */
 .hub{max-width:960px;margin:-90px auto 60px;padding:0 20px}
 .tabs{display:flex}
 .tab{padding:14px 26px;font-size:13px;font-weight:800;text-transform:uppercase;cursor:pointer;
-background:rgba(255,255,255,.15);color:#fff}
+background:rgba(255,255,255,.15);color:#fff; transition: 0.3s;}
 .tab.active{background:#fff;color:var(--navy)}
 
 .card{background:#fff;padding:40px;border-radius:0 0 12px 12px;
 box-shadow:0 25px 50px -15px rgba(0,0,0,.15)}
 
 .row{display:flex;gap:10px}
-input{flex:1;padding:16px;border:1.8px solid var(--b);border-radius:6px;font-size:16px}
+input{flex:1;padding:16px;border:1.8px solid var(--b);border-radius:6px;font-size:16px; transition: 0.3s;}
 input:focus{outline:none;border-color:var(--red)}
 button{background:var(--red);color:#fff;border:none;padding:16px 36px;border-radius:6px;font-weight:800;cursor:pointer}
+button:disabled{opacity: 0.6; cursor: not-allowed;}
 
 /* Result */
 .result{margin-top:30px;border:1px solid var(--b);border-radius:10px;overflow:hidden;display:none}
@@ -49,20 +50,24 @@ button{background:var(--red);color:#fff;border:none;padding:16px 36px;border-rad
 display:flex;justify-content:space-between;align-items:center}
 .badge{background:var(--red);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:800}
 
+/* Timeline */
 .timeline{display:flex;justify-content:space-between;padding:25px}
-.step{flex:1;text-align:center;font-size:13px;font-weight:700;position:relative}
-.step:before{content:'';width:14px;height:14px;background:#d1d5db;border-radius:50%;
-display:block;margin:0 auto 8px}
+.step{flex:1;text-align:center;font-size:11px;font-weight:800;text-transform:uppercase;position:relative;color:#d1d5db}
+.step:before{content:'';width:16px;height:16px;background:#d1d5db;border-radius:50%;
+display:block;margin:0 auto 8px; position: relative; z-index: 2;}
+.step.active{color:var(--navy)}
 .step.active:before{background:var(--red)}
-.step:not(:last-child):after{content:'';position:absolute;top:6px;right:-50%;
-width:100%;height:2px;background:#d1d5db}
+.step:not(:last-child):after{content:'';position:absolute;top:7px;left:50%;
+width:100%;height:2px;background:#d1d5db; z-index: 1;}
+.step.active.completed:after{background:var(--red)}
 
 .hidden{display:none}
 
 /* Footer */
 footer{background:#fff;border-top:1px solid var(--b);padding:50px 20px}
 footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px}
-footer p{font-size:14px;color:var(--muted)}
+footer h4{margin-bottom: 15px;}
+footer p{font-size:14px;color:var(--muted); line-height: 1.6;}
 </style>
 </head>
 
@@ -79,7 +84,7 @@ footer p{font-size:14px;color:var(--muted)}
 <header>
   <div class="wrap">
     <div class="logo">GID<span>LOGISTICS</span></div>
-    <div style="font-size:14px;color:var(--muted)">Shipment Tracking & Management</div>
+    <div style="font-size:14px;color:var(--muted); font-weight: 600;">Shipment Management</div>
   </div>
 </header>
 
@@ -98,53 +103,122 @@ footer p{font-size:14px;color:var(--muted)}
     <div id="track">
       <h2>Track Shipment</h2>
       <div class="row">
-        <input id="tid" placeholder="Tracking ID">
-        <button onclick="track()">Track</button>
+        <input id="tid" placeholder="Enter Waybill ID (e.g. GID-1001)">
+        <button id="trackBtn" onclick="runTrack()">Track</button>
       </div>
 
       <div class="result" id="result">
         <div class="res-head">
-          <strong id="status">IN TRANSIT</strong>
+          <strong id="status">—</strong>
           <span class="badge">LIVE</span>
         </div>
         <div class="timeline">
-          <div class="step active">Ordered</div>
-          <div class="step active">Picked Up</div>
-          <div class="step">In Transit</div>
-          <div class="step">Delivered</div>
+          <div class="step" id="step1">Ordered</div>
+          <div class="step" id="step2">Picked Up</div>
+          <div class="step" id="step3">In Transit</div>
+          <div class="step" id="step4">Delivered</div>
         </div>
       </div>
     </div>
 
     <div id="quote" class="hidden">
       <h2>Request a Quote</h2>
-      <input placeholder="Full Name">
-      <div class="row">
-        <input placeholder="From">
-        <input placeholder="To">
+      <input id="qName" placeholder="Full Name">
+      <div class="row" style="margin-top:10px">
+        <input id="qFrom" placeholder="From (City, Country)">
+        <input id="qTo" placeholder="To (City, Country)">
       </div>
-      <button style="width:100%;margin-top:10px">Submit</button>
+      <button id="quoteBtn" onclick="runQuote()" style="width:100%;margin-top:15px">Submit Request</button>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div><h4>About</h4><p>International freight & supply chain solutions.</p></div>
-    <div><h4>Help</h4><p>Tracking FAQ<br>Customs Support</p></div>
+    <div><h4>About</h4><p>GID Logistics provides international freight forwarding and air cargo solutions tailored to your business needs.</p></div>
+    <div><h4>Help</h4><p>Tracking FAQ<br>Customs Support<br>Dangerous Goods</p></div>
     <div><h4>Contact</h4><p>support@gidlogistics.com<br>+234 706 695 8826</p></div>
   </div>
 </footer>
 
 <script>
+const URL = "https://script.google.com/macros/s/AKfycbz2HobpPNk0wRVQnvcZHjlNeuqtKVc4ADXSvtWBRlDXihcxL5T9F9Mtjk70nq5qIxDB/exec";
+
 function show(id,el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'))
-  el.classList.add('active')
-  document.querySelectorAll('.card>div').forEach(d=>d.classList.add('hidden'))
-  document.getElementById(id).classList.remove('hidden')
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.card>div').forEach(d=>d.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
 }
-function track(){
-  document.getElementById('result').style.display='block'
+
+// BACKEND TRACKING
+function runTrack(){
+  const id = document.getElementById('tid').value.trim();
+  if(!id) return alert("Please enter ID");
+  
+  const btn = document.getElementById('trackBtn');
+  btn.innerText = "Searching...";
+  btn.disabled = true;
+
+  const script = document.createElement('script');
+  script.src = `${URL}?tracking=${id.toUpperCase()}&callback=handleTrack`;
+  document.body.appendChild(script);
+}
+
+function handleTrack(r){
+  const btn = document.getElementById('trackBtn');
+  btn.innerText = "Track";
+  btn.disabled = false;
+
+  if(r.error){
+    alert("Waybill not found.");
+    document.getElementById('result').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('result').style.display='block';
+  document.getElementById('status').innerText = r.status.toUpperCase();
+  
+  // Update Timeline
+  const steps = [
+    document.getElementById('step1'),
+    document.getElementById('step2'),
+    document.getElementById('step3'),
+    document.getElementById('step4')
+  ];
+  
+  steps.forEach(s => {s.classList.remove('active'); s.classList.remove('completed');});
+  const st = r.status.toLowerCase();
+
+  steps[0].classList.add('active'); // Always active
+  if(st.includes("picked") || st.includes("transit") || st.includes("delivered")) { steps[0].classList.add('completed'); steps[1].classList.add('active'); }
+  if(st.includes("transit") || st.includes("delivered")) { steps[1].classList.add('completed'); steps[2].classList.add('active'); }
+  if(st.includes("delivered")) { steps[2].classList.add('completed'); steps[3].classList.add('active'); }
+}
+
+// BACKEND QUOTING
+async function runQuote(){
+  const data = {
+    n: document.getElementById('qName').value,
+    f: document.getElementById('qFrom').value,
+    t: document.getElementById('qTo').value
+  };
+  if(!data.n || !data.f || !data.t) return alert("Fill all fields");
+
+  const btn = document.getElementById('quoteBtn');
+  btn.innerText = "Processing...";
+  btn.disabled = true;
+
+  try {
+    await fetch(`${URL}?action=saveQuote&name=${encodeURIComponent(data.n)}&origin=${encodeURIComponent(data.f)}&destination=${encodeURIComponent(data.t)}`, {mode:'no-cors'});
+    alert("Quote Request Sent Successfully!");
+    document.querySelectorAll('#quote input').forEach(i => i.value = "");
+  } catch(e) {
+    alert("Connection Error");
+  } finally {
+    btn.innerText = "Submit Request";
+    btn.disabled = false;
+  }
 }
 </script>
 
