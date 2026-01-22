@@ -6,29 +6,53 @@
     <title>GID Logistics | Command Centre</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root{--navy:#0f172a;--red:#e31e24;--bg:#f4f6f8;--muted:#64748b;--b:#e5e7eb}
+        :root{--navy:#0f172a;--red:#e31e24;--bg:#f4f6f8;--muted:#64748b;--b:#e5e7eb;--green:#22c55e}
         *{box-sizing:border-box}
         body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
         .wrap{max-width:1200px;margin:auto;padding:0 20px}
+        
+        /* Navigation & UI */
         header{background:#fff; border-bottom:1px solid var(--b); padding:18px 0; position: sticky; top:0; z-index: 100}
         .logo{font-size:22px;font-weight:800}.logo span{color:var(--red)}
         .hero{background:var(--navy);color:#fff;text-align:center;padding:80px 20px 120px}
-        .hub{max-width:800px;margin:-80px auto 60px}
+        .hub{max-width:850px;margin:-80px auto 60px}
         .tabs{display:flex;gap:5px}.tab{padding:15px 30px; border:none; border-radius:8px 8px 0 0; cursor:pointer; font-weight:700; background:rgba(255,255,255,0.2); color:#fff; transition: 0.3s}
         .tab.active{background:#fff; color:var(--navy)}
         .card{background:#fff;padding:40px;border-radius:0 12px 12px 12px;box-shadow:0 20px 40px rgba(0,0,0,0.1)}
+        
+        /* Forms */
         .row{display:flex;gap:15px;margin-bottom:15px}
-        input{flex:1;padding:14px;border:1.8px solid var(--b);border-radius:6px;font-size:16px; outline: none; transition: 0.2s}
+        input{flex:1;padding:14px;border:1.8px solid var(--b);border-radius:8px;font-size:16px; outline: none}
         input:focus{border-color: var(--red)}
-        button{background:var(--red);color:#fff;border:none;padding:16px;border-radius:6px;font-weight:800;cursor:pointer;width:100%; transition: 0.3s}
-        button:hover{filter: brightness(1.1)}
+        button{background:var(--red);color:#fff;border:none;padding:16px;border-radius:8px;font-weight:800;cursor:pointer;width:100%; transition: 0.3s}
         button:disabled{background: var(--muted); cursor: not-allowed}
+        
+        /* Service Toggle */
         .service-toggle{display:flex;gap:10px;margin-bottom:20px}
-        .s-opt{flex:1;padding:15px;border:2px solid var(--b);border-radius:8px;text-align:center;cursor:pointer;font-weight:700; transition: 0.3s}
+        .s-opt{flex:1;padding:15px;border:2px solid var(--b);border-radius:8px;text-align:center;cursor:pointer;font-weight:700}
         .s-opt.active{border-color:var(--red);background:#fff5f5;color:var(--red)}
+
+        /* History & Terms */
+        .history-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+        .h-tag{background:#f1f5f9; border:1px solid var(--b); padding:4px 10px; border-radius:15px; font-size:11px; font-weight:700; cursor:pointer}
+        .terms-row{display:flex; align-items:flex-start; gap:10px; margin:15px 0; font-size:13px; color:var(--muted)}
+        .terms-row input{width:18px; height:18px; flex:none}
+        
+        /* Modal */
+        .modal{display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px)}
+        .modal-content{background:#fff; margin:10% auto; padding:30px; border-radius:12px; max-width:500px; position:relative}
+
+        /* Timeline */
+        .timeline { display: flex; justify-content: space-between; margin: 30px 0; padding-top: 20px; border-top: 1px solid var(--b); }
+        .step { flex: 1; text-align: center; font-size: 10px; font-weight: 800; color: #d1d5db; position: relative; }
+        .step i { display: block; font-size: 20px; margin-bottom: 8px; font-style: normal; filter: grayscale(1); }
+        .step.active { color: var(--red); }
+        .step.active i { filter: grayscale(0); }
+        .step:not(:last-child)::after { content: ''; position: absolute; top: 10px; left: 50%; width: 100%; height: 2px; background: #d1d5db; z-index: 1; }
+        .step.active:not(:last-child)::after { background: var(--red); }
+
         .hidden{display:none}
-        #quote-res{margin-top:20px; padding:25px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; display:none; text-align:center}
-        #track-details{margin-top:20px; padding:20px; border:1px solid var(--b); border-radius:8px; background: #fafafa}
+        .wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: #fff; border-radius: 50px; padding: 12px 25px; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; z-index: 1000; }
     </style>
 </head>
 <body>
@@ -36,74 +60,101 @@
 <header>
     <div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
         <div class="logo">GID<span>LOGISTICS</span></div>
-        <div style="font-size:12px; font-weight:700; color:var(--muted)">v8.2 STABLE</div>
+        <div style="font-size:12px; font-weight:700; color:var(--muted)">v9.2 MASTER</div>
     </div>
 </header>
 
 <section class="hero">
-    <h1>Logistics Command Centre</h1>
-    <p>Secure waybill tracking and instant freight cost estimation.</p>
+    <h1>Operational Command Centre</h1>
+    <p>Waybill tracking and instant freight cost estimation.</p>
 </section>
 
 <section class="hub">
     <div class="tabs">
-        <button id="t-track" class="tab active" onclick="show('track')">Track Shipment</button>
-        <button id="t-quote" class="tab" onclick="show('quote')">Request Quote</button>
+        <button id="t-track" class="tab active" onclick="showTab('track')">Track Shipment</button>
+        <button id="t-quote" class="tab" onclick="showTab('quote')">Request Quote</button>
     </div>
+    
     <div class="card">
         <div id="track">
-            <h3>Track Your Shipment</h3>
-            <div class="row">
-                <input id="tid" placeholder="Enter Waybill ID (e.g. GID-1001)">
-                <button onclick="runTrack()" style="width:140px" id="btn-t">Track</button>
-            </div>
-            <div id="track-details" class="hidden">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <div><small style="color:var(--muted)">STATUS</small><br><strong id="r-status" style="color:var(--red)"></strong></div>
-                    <div><small style="color:var(--muted)">DESTINATION</small><br><strong id="r-dest"></strong></div>
-                    <div><small style="color:var(--muted)">WEIGHT</small><br><strong id="r-weight"></strong></div>
-                    <div><small style="color:var(--muted)">LAST UPDATE</small><br><strong id="r-date"></strong></div>
+            <div id="track-search-box">
+                <div class="row">
+                    <input id="tid" placeholder="Enter Waybill ID (e.g. GID-1001)">
+                    <button onclick="runTrack()" style="width:140px" id="btn-t">Track</button>
                 </div>
+                <div id="track-history" class="history-tags"></div>
+            </div>
+
+            <div id="track-details" class="hidden" style="margin-top:20px; padding:20px; background:#fafafa; border-radius:12px">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div><small>STATUS</small><br><strong id="r-status" style="color:var(--red)"></strong></div>
+                    <div><small>DESTINATION</small><br><strong id="r-dest"></strong></div>
+                    <div><small>WEIGHT</small><br><strong id="r-weight"></strong></div>
+                    <div><small>LAST UPDATE</small><br><strong id="r-date"></strong></div>
+                </div>
+                <div class="timeline">
+                    <div class="step" id="s1"><i>📦</i>PREPARING</div>
+                    <div class="step" id="s2"><i>🚚</i>PICKED UP</div>
+                    <div class="step" id="s3"><i>✈️</i>IN TRANSIT</div>
+                    <div class="step" id="s4"><i>✅</i>DELIVERED</div>
+                </div>
+                <button onclick="resetTrack()" style="background:var(--navy); font-size:12px">Track New Waybill</button>
             </div>
         </div>
 
         <div id="quote" class="hidden">
-            <h3>Freight Calculator</h3>
-            <div class="service-toggle">
-                <div class="s-opt active" id="s-air" onclick="setService('Air')">✈️ Air Freight</div>
-                <div class="s-opt" id="s-sea" onclick="setService('Sea')">🚢 Ocean Freight</div>
+            <div id="quote-form-box">
+                <div class="service-toggle">
+                    <div class="s-opt active" id="s-air" onclick="setService('Air')">✈️ Air Freight</div>
+                    <div class="s-opt" id="s-sea" onclick="setService('Sea')">🚢 Ocean Freight</div>
+                </div>
+                <div class="row">
+                    <input id="qN" placeholder="Full Name">
+                    <input id="qW" type="number" placeholder="Weight (kg)">
+                </div>
+                <div class="row">
+                    <input id="qF" placeholder="Origin City">
+                    <input id="qT" placeholder="Destination City">
+                </div>
+                <div class="terms-row">
+                    <input type="checkbox" id="qTerms">
+                    <label for="qTerms">I agree to the <a href="javascript:void(0)" onclick="openTerms()" style="color:var(--red); font-weight:700">Service Terms</a> and prohibited items policy.</label>
+                </div>
+                <button onclick="runQuote()" id="btn-q">Get Instant Estimate</button>
             </div>
-            <div class="row">
-                <input id="qN" placeholder="Full Name">
-                <input id="qW" type="number" placeholder="Weight (kg)">
-            </div>
-            <div class="row">
-                <input id="qF" placeholder="Origin City">
-                <input id="qT" placeholder="Destination City">
-            </div>
-            <button onclick="runQuote()" id="btn-q">Get Instant Estimate</button>
-            <div id="quote-res">
-                <small style="text-transform:uppercase; letter-spacing:1px; font-weight:800; color:#16a34a">Estimated Total</small>
-                <h2 id="final-price" style="margin:10px 0; font-size:32px; color:#065f46">$0.00</h2>
-                <p style="font-size:13px; margin:0; color:#065f46">Submission successful. An admin has been notified.</p>
+
+            <div id="quote-res" class="hidden" style="text-align:center; padding:25px; background:#f0fdf4; border-radius:12px">
+                <small style="color:var(--green); font-weight:800">ESTIMATED TOTAL</small>
+                <h2 id="final-price" style="margin:10px 0; font-size:36px; color:#166534">$0.00</h2>
+                <p style="font-size:13px; margin-bottom:20px">Quote saved. Admin notified via Email & WhatsApp.</p>
+                <button onclick="resetQuote()" style="background:var(--green); font-size:12px">Request Another Quote</button>
             </div>
         </div>
     </div>
 </section>
 
-<script>
-// UPDATED TO YOUR LATEST DEPLOYMENT URL
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGB4VPw-K5x9NrLKBWY0LPCBdf4Xu3fR-4UuhThbqRvjVQ08XbAgDdXA8Hq44DvvoI/exec";
-let selectedService = "Air";
+<div id="termsModal" class="modal">
+    <div class="modal-content">
+        <span style="position:absolute; right:20px; top:15px; cursor:pointer; font-size:24px" onclick="closeTerms()">&times;</span>
+        <h2 style="color:var(--red)">Service Terms</h2>
+        <p style="font-size:14px">1. <strong>Inspection:</strong> All items are subject to physical inspection.<br>2. <strong>Prohibited:</strong> No batteries, liquids, or flammables unless declared.<br>3. <strong>Pricing:</strong> Quotes are valid for 7 days.</p>
+        <button onclick="closeTerms()" style="background:var(--navy); margin-top:10px">Close</button>
+    </div>
+</div>
 
-function show(id){
+<a href="https://wa.me/2347066958826" class="wa-float" target="_blank">💬 WhatsApp Support</a>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGB4VPw-K5x9NrLKBWY0LPCBdf4Xu3fR-4UuhThbqRvjVQ08XbAgDdXA8Hq44DvvoI/exec";
+let selectedService = "Air", isTrackPending = false, isQuotePending = false;
+
+document.addEventListener('DOMContentLoaded', updateHistoryUI);
+
+function showTab(id){
     document.getElementById('track').classList.toggle('hidden', id !== 'track');
     document.getElementById('quote').classList.toggle('hidden', id !== 'quote');
     document.getElementById('t-track').classList.toggle('active', id === 'track');
     document.getElementById('t-quote').classList.toggle('active', id === 'quote');
-    // Hide results when switching
-    if(id === 'quote') document.getElementById('quote-res').style.display = 'none';
-    if(id === 'track') document.getElementById('track-details').classList.add('hidden');
 }
 
 function setService(s){
@@ -112,57 +163,102 @@ function setService(s){
     document.getElementById('s-sea').classList.toggle('active', s === 'Sea');
 }
 
-// JSONP HANDLERS
-function handleTrack(r){
-    document.getElementById('btn-t').innerText = "Track";
-    document.getElementById('btn-t').disabled = false;
-    if(r.error) {
-        alert("Error: " + r.error);
-        document.getElementById('track-details').classList.add('hidden');
-        return;
-    }
-    document.getElementById('track-details').classList.remove('hidden');
-    document.getElementById('r-status').innerText = r.status.toUpperCase();
-    document.getElementById('r-dest').innerText = r.destination;
-    document.getElementById('r-weight').innerText = r.weight;
-    document.getElementById('r-date').innerText = r.updated;
-}
-
-function handleQuote(r){
-    document.getElementById('btn-q').innerText = "Get Instant Estimate";
-    document.getElementById('btn-q').disabled = false;
-    if(r.status === "Success"){
-        document.getElementById('quote-res').style.display = 'block';
-        document.getElementById('final-price').innerText = r.cost;
-        document.getElementById('quote-res').scrollIntoView({behavior: 'smooth'});
-    } else {
-        alert("System error. Please contact support.");
-    }
-}
-
+/* TRACKING */
 function runTrack(){
+    if(isTrackPending) return;
     const id = document.getElementById('tid').value.trim();
-    if(!id) return alert("Please enter a waybill ID");
-    document.getElementById('btn-t').innerText = "Searching...";
+    if(!id) return alert("Enter Waybill ID");
+    isTrackPending = true;
+    document.getElementById('btn-t').innerText = "...";
     document.getElementById('btn-t').disabled = true;
-    
     const s = document.createElement('script');
     s.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=handleTrack`;
     document.body.appendChild(s);
 }
 
+function handleTrack(r){
+    isTrackPending = false;
+    document.getElementById('btn-t').innerText = "Track";
+    document.getElementById('btn-t').disabled = false;
+    if(r.error) return alert(r.error);
+
+    saveToHistory(r.id);
+    document.getElementById('track-search-box').classList.add('hidden');
+    document.getElementById('track-details').classList.remove('hidden');
+    document.getElementById('r-status').innerText = r.status.toUpperCase();
+    document.getElementById('r-dest').innerText = r.destination;
+    document.getElementById('r-weight').innerText = r.weight;
+    document.getElementById('r-date').innerText = r.updated;
+
+    const st = r.status.toLowerCase();
+    const ids = ['s1','s2','s3','s4'];
+    ids.forEach(i => document.getElementById(i).classList.remove('active'));
+    document.getElementById('s1').classList.add('active');
+    if(st.includes("pick") || st.includes("transit") || st.includes("delivered")) document.getElementById('s2').classList.add('active');
+    if(st.includes("transit") || st.includes("delivered")) document.getElementById('s3').classList.add('active');
+    if(st.includes("delivered")) document.getElementById('s4').classList.add('active');
+}
+
+function resetTrack(){
+    document.getElementById('track-search-box').classList.remove('hidden');
+    document.getElementById('track-details').classList.add('hidden');
+    document.getElementById('tid').value = "";
+}
+
+/* QUOTING */
 function runQuote(){
-    const n = document.getElementById('qN').value, w = document.getElementById('qW').value;
-    const f = document.getElementById('qF').value, t = document.getElementById('qT').value;
-    if(!n || !w || !f || !t) return alert("All fields are required.");
-    
-    document.getElementById('btn-q').innerText = "Calculating...";
+    if(isQuotePending) return;
+    const n = document.getElementById('qN').value, w = document.getElementById('qW').value,
+          f = document.getElementById('qF').value, t = document.getElementById('qT').value,
+          terms = document.getElementById('qTerms').checked;
+    if(!n || !w || !f || !t) return alert("Fill all fields");
+    if(!terms) return alert("Agree to Terms first");
+
+    isQuotePending = true;
+    document.getElementById('btn-q').innerText = "Processing...";
     document.getElementById('btn-q').disabled = true;
-    
     const s = document.createElement('script');
     s.src = `${SCRIPT_URL}?action=saveQuote&name=${encodeURIComponent(n)}&weight=${w}&origin=${encodeURIComponent(f)}&destination=${encodeURIComponent(t)}&service=${selectedService}&callback=handleQuote`;
     document.body.appendChild(s);
 }
+
+function handleQuote(r){
+    isQuotePending = false;
+    if(r.status === "Success"){
+        document.getElementById('quote-form-box').classList.add('hidden');
+        document.getElementById('quote-res').classList.remove('hidden');
+        document.getElementById('final-price').innerText = r.cost;
+    }
+}
+
+function resetQuote(){
+    document.getElementById('quote-form-box').classList.remove('hidden');
+    document.getElementById('quote-res').classList.add('hidden');
+    document.getElementById('qTerms').checked = false;
+    document.getElementById('btn-q').disabled = false;
+    document.getElementById('btn-q').innerText = "Get Instant Estimate";
+}
+
+/* HISTORY & MODAL */
+function saveToHistory(id){
+    let h = JSON.parse(localStorage.getItem('gid_history') || '[]');
+    h = h.filter(x => x !== id); h.unshift(id);
+    if(h.length > 5) h.pop();
+    localStorage.setItem('gid_history', JSON.stringify(h));
+    updateHistoryUI();
+}
+function updateHistoryUI(){
+    const h = JSON.parse(localStorage.getItem('gid_history') || '[]');
+    const c = document.getElementById('track-history');
+    c.innerHTML = h.length > 0 ? '<small style="width:100%; display:block; margin-bottom:5px">RECENT:</small>' : '';
+    h.forEach(id => {
+        const s = document.createElement('span'); s.className='h-tag'; s.innerText=id;
+        s.onclick=()=>{ document.getElementById('tid').value=id; runTrack(); };
+        c.appendChild(s);
+    });
+}
+function openTerms(){ document.getElementById('termsModal').style.display='block'; }
+function closeTerms(){ document.getElementById('termsModal').style.display='none'; }
 </script>
 </body>
 </html>
