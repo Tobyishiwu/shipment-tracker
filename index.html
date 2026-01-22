@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Global Tracking</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GID Logistics | Command Center</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --gid-red: #e31e24; --navy: #0f172a; }
+        :root { --red: #e31e24; --navy: #0f172a; }
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: var(--navy); }
-        header { background: white; border-bottom: 2px solid var(--gid-red); padding: 15px; text-align: center; font-weight: 800; font-size: 1.2rem; }
+        header { background: white; border-bottom: 2px solid var(--red); padding: 20px; text-align: center; font-weight: 800; }
         .hero { background: var(--navy); color: white; padding: 60px 20px; text-align: center; }
-        .card { max-width: 500px; margin: -30px auto 40px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .card { max-width: 500px; margin: -30px auto 40px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         .btn { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .btn-red { background: var(--gid-red); color: white; }
-        .btn-navy { background: var(--navy); color: white; margin-top: 10px; }
-        #trackResult { display: none; margin-top: 20px; text-align: left; padding-top: 20px; border-top: 1px dashed #ccc; }
+        .btn-red { background: var(--red); color: white; }
+        .btn-navy { background: var(--navy); color: white; }
+        #trackBox { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ccc; }
     </style>
 </head>
 <body>
@@ -23,63 +22,77 @@
 <header>GID LOGISTICS</header>
 
 <div class="hero">
-    <h1>Track & Manage Shipments</h1>
-    <p>Premium Freight Services</p>
+    <h1>Global Logistics Dashboard</h1>
+    <p>DHL-Style Tracking & Quoting</p>
 </div>
 
 <div class="card">
-    <h3 style="margin-top:0">Tracking Portal</h3>
-    <input type="text" id="trackInput" placeholder="Enter Waybill (e.g., GID-1001)">
-    <button class="btn btn-red" onclick="runTrack()">TRACK SHIPMENT</button>
-    
-    <div id="trackResult">
-        <label style="font-size: 10px; color: #999; font-weight: 800;">CURRENT STATUS</label>
-        <div id="resStatus" style="font-size: 1.5rem; font-weight: 800; color: var(--gid-red);">...</div>
-        <div style="margin-top:15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <div><label style="font-size: 10px; color: #999;">DESTINATION</label><div id="resDest" style="font-weight:700">...</div></div>
-            <div><label style="font-size: 10px; color: #999;">WEIGHT</label><div id="resWeight" style="font-weight:700">...</div></div>
+    <h3 style="margin-top:0">Track Shipment</h3>
+    <input type="text" id="tID" placeholder="Enter Waybill (e.g. GID-1001)">
+    <button class="btn btn-red" onclick="track()">FIND SHIPMENT</button>
+    <div id="trackBox">
+        <label style="font-size: 10px; color: #999; font-weight: 800;">STATUS</label>
+        <div id="resStatus" style="font-size: 1.5rem; font-weight: 800; color: var(--red);"></div>
+        <div style="margin-top:10px; font-size: 13px;">
+            <b>Destination:</b> <span id="resDest"></span><br>
+            <b>Weight:</b> <span id="resWeight"></span> kg<br>
+            <b>Last Update:</b> <span id="resDate"></span>
         </div>
     </div>
 </div>
 
 <div class="card">
-    <h3 style="margin-top:0">Request Freight Quote</h3>
+    <h3 style="margin-top:0">Request a Quote</h3>
     <input type="text" id="qName" placeholder="Full Name">
     <input type="text" id="qFrom" placeholder="Origin City">
     <input type="text" id="qTo" placeholder="Destination City">
-    <button class="btn btn-navy" id="qBtn" onclick="submitQuote()">SUBMIT REQUEST</button>
+    <button class="btn btn-navy" id="qBtn" onclick="quote()">SUBMIT TO SYSTEM</button>
 </div>
 
 <script>
-    const URL = "https://script.google.com/macros/s/AKfycbyEBcbokYysCtn61RU2Y6LyjaUBqhdDnaVjIY45f3Waz0R_Y9nDtJpHbxttuUqGxI3t/exec";
+    const URL = "https://script.google.com/macros/s/AKfycbwt1q8Cj-kgdKaF2YXplaGcMBwN1TpGizqzCIlUFxsADbd_qVyYxFzzqYTZv5_AbPMW/exec";
 
-    function runTrack() {
-        const id = document.getElementById('trackInput').value.trim();
+    function track() {
+        const id = document.getElementById('tID').value.trim();
         if(!id) return;
-        const script = document.createElement('script');
-        script.src = `${URL}?tracking=${id.toUpperCase()}&callback=showTrack`;
-        document.body.appendChild(script);
+        const s = document.createElement('script');
+        s.src = `${URL}?tracking=${id.toUpperCase()}&callback=showTrack`;
+        document.body.appendChild(s);
     }
 
     function showTrack(res) {
-        if(res.error) return alert("ID Not Found");
-        document.getElementById('trackResult').style.display = 'block';
+        if(res.error) return alert("Waybill not found");
+        document.getElementById('trackBox').style.display = 'block';
         document.getElementById('resStatus').innerText = res.status;
         document.getElementById('resDest').innerText = res.destination;
         document.getElementById('resWeight').innerText = res.weight;
+        document.getElementById('resDate').innerText = res.updated;
     }
 
-    async function submitQuote() {
+    async function quote() {
         const btn = document.getElementById('qBtn');
-        const name = document.getElementById('qName').value;
-        const from = document.getElementById('qFrom').value;
-        const to = document.getElementById('qTo').value;
-        if(!name || !from || !to) return alert("Please fill fields");
+        const d = {
+            name: document.getElementById('qName').value,
+            from: document.getElementById('qFrom').value,
+            to: document.getElementById('qTo').value
+        };
+        if(!d.name || !d.from || !d.to) return alert("Please fill all fields");
         
-        btn.innerText = "Submitting...";
-        await fetch(`${URL}?action=saveQuote&name=${name}&origin=${from}&destination=${to}`, {mode: 'no-cors'});
-        alert("Quote Logged Successfully. Our team will review it.");
-        btn.innerText = "SUBMIT REQUEST";
+        btn.innerText = "Processing...";
+        btn.disabled = true;
+
+        try {
+            await fetch(`${URL}?action=saveQuote&name=${d.name}&origin=${d.from}&destination=${d.to}`, {mode: 'no-cors'});
+            alert("Success! Your quote has been logged in our system.");
+            document.getElementById('qName').value = "";
+            document.getElementById('qFrom').value = "";
+            document.getElementById('qTo').value = "";
+        } catch (e) {
+            alert("Error connecting to server.");
+        } finally {
+            btn.innerText = "SUBMIT TO SYSTEM";
+            btn.disabled = false;
+        }
     }
 </script>
 </body>
