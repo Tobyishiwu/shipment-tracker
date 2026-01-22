@@ -1,218 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GID Logistics | Command Centre</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root{--navy:#0f172a;--red:#e31e24;--bg:#f4f6f8;--muted:#64748b;--b:#e5e7eb}
-*{box-sizing:border-box}
-body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy)}
-a{text-decoration:none;color:var(--muted);font-weight:600}
-.wrap{max-width:1200px;margin:auto;padding:0 20px}
-
-/* Navigation */
-.utility{background:#fff;border-bottom:1px solid var(--b);font-size:12px;padding:8px 0}
-.utility .wrap{display:flex;justify-content:flex-end;gap:20px}
-header{background:#fff;position:sticky;top:0;border-bottom:1px solid var(--b);z-index:100}
-header .wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
-.logo{font-size:22px;font-weight:800}.logo span{color:var(--red)}
-
-/* Hero */
-.hero{background:var(--navy);color:#fff;text-align:center;padding:90px 20px 140px}
-.hero h1{margin:0;font-size:42px;letter-spacing:-1px}
-.hero p{opacity:.85; font-size: 18px}
-
-/* Main Hub */
-.hub{max-width:960px;margin:-90px auto 60px;padding:0 20px}
-.tabs{display:flex}
-.tab{padding:14px 26px;font-size:13px;font-weight:800;text-transform:uppercase;cursor:pointer;background:rgba(255,255,255,.15);color:#fff;transition: 0.3s;border:none}
-.tab.active{background:#fff;color:var(--navy)}
-.card{background:#fff;padding:40px;border-radius:0 0 12px 12px;box-shadow:0 25px 50px -15px rgba(0,0,0,.15)}
-
-/* Forms */
-.row{display:flex;gap:10px;margin-bottom:10px}
-input{flex:1;padding:16px;border:1.8px solid var(--b);border-radius:6px;font-size:16px;transition: 0.3s;outline:none}
-input:focus{border-color:var(--red)}
-button{background:var(--red);color:#fff;border:none;padding:16px 36px;border-radius:6px;font-weight:800;cursor:pointer}
-button:disabled{opacity: 0.6; cursor: not-allowed}
-
-/* Tracking Result UI */
-.result{margin-top:30px;border:1px solid var(--b);border-radius:10px;overflow:hidden;display:none;background:#fff}
-.res-head{padding:16px 24px;background:#f9fafb;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center}
-.details-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:15px;padding:20px;border-bottom:1px solid var(--b)}
-.det-item span{display:block;color:var(--muted);text-transform:uppercase;font-size:10px;font-weight:800;margin-bottom:4px}
-.det-item strong{font-size:14px}
-
-/* Timeline */
-.timeline{display:flex;justify-content:space-between;padding:30px 25px}
-.step{flex:1;text-align:center;font-size:11px;font-weight:800;text-transform:uppercase;position:relative;color:#d1d5db}
-.step:before{content:'';width:16px;height:16px;background:#d1d5db;border-radius:50%;display:block;margin:0 auto 8px; position: relative; z-index: 2}
-.step.active{color:var(--navy)}
-.step.active:before{background:var(--red)}
-.step:not(:last-child):after{content:'';position:absolute;top:7px;left:50%;width:100%;height:2px;background:#d1d5db; z-index: 1}
-.step.active.completed:after{background:var(--red)}
-
-.hidden{display:none}
-footer{background:#fff;border-top:1px solid var(--b);padding:50px 20px}
-footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>GID Logistics | Command Centre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--navy:#0f172a;--red:#e31e24;--bg:#f4f6f8;--muted:#64748b;--b:#e5e7eb}
+        *{box-sizing:border-box}
+        body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
+        .wrap{max-width:1200px;margin:auto;padding:0 20px}
+        header{background:#fff; border-bottom:1px solid var(--b); padding:18px 0; position: sticky; top:0; z-index: 100}
+        .logo{font-size:22px;font-weight:800}.logo span{color:var(--red)}
+        .hero{background:var(--navy);color:#fff;text-align:center;padding:80px 20px 120px}
+        .hub{max-width:800px;margin:-80px auto 60px}
+        .tabs{display:flex;gap:5px}.tab{padding:15px 30px; border:none; border-radius:8px 8px 0 0; cursor:pointer; font-weight:700; background:rgba(255,255,255,0.2); color:#fff; transition: 0.3s}
+        .tab.active{background:#fff; color:var(--navy)}
+        .card{background:#fff;padding:40px;border-radius:0 12px 12px 12px;box-shadow:0 20px 40px rgba(0,0,0,0.1)}
+        .row{display:flex;gap:15px;margin-bottom:15px}
+        input{flex:1;padding:14px;border:1.8px solid var(--b);border-radius:6px;font-size:16px; outline: none; transition: 0.2s}
+        input:focus{border-color: var(--red)}
+        button{background:var(--red);color:#fff;border:none;padding:16px;border-radius:6px;font-weight:800;cursor:pointer;width:100%; transition: 0.3s}
+        button:hover{filter: brightness(1.1)}
+        button:disabled{background: var(--muted); cursor: not-allowed}
+        .service-toggle{display:flex;gap:10px;margin-bottom:20px}
+        .s-opt{flex:1;padding:15px;border:2px solid var(--b);border-radius:8px;text-align:center;cursor:pointer;font-weight:700; transition: 0.3s}
+        .s-opt.active{border-color:var(--red);background:#fff5f5;color:var(--red)}
+        .hidden{display:none}
+        #quote-res{margin-top:20px; padding:25px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; display:none; text-align:center}
+        #track-details{margin-top:20px; padding:20px; border:1px solid var(--b); border-radius:8px; background: #fafafa}
+    </style>
 </head>
-
 <body>
 
-<div class="utility">
-  <div class="wrap">
-    <a href="#">Support</a>
-    <a href="#">Global Locations</a>
-  </div>
-</div>
-
 <header>
-  <div class="wrap">
-    <div class="logo">GID<span>LOGISTICS</span></div>
-    <div style="font-size:14px;color:var(--muted); font-weight: 600;">Operational Portal</div>
-  </div>
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
+        <div class="logo">GID<span>LOGISTICS</span></div>
+        <div style="font-size:12px; font-weight:700; color:var(--muted)">v8.2 STABLE</div>
+    </div>
 </header>
 
 <section class="hero">
-  <h1>Logistics for a Connected World</h1>
-  <p>Real-time visibility into your global supply chain.</p>
+    <h1>Logistics Command Centre</h1>
+    <p>Secure waybill tracking and instant freight cost estimation.</p>
 </section>
 
 <section class="hub">
-  <div class="tabs">
-    <button id="tab-track" class="tab active" onclick="show('track')">Track</button>
-    <button id="tab-quote" class="tab" onclick="show('quote')">Get a Quote</button>
-  </div>
-
-  <div class="card">
-    <div id="track">
-      <h2>Track Shipment</h2>
-      <div class="row">
-        <input id="tid" placeholder="Enter Waybill ID (e.g. GID-1001)">
-        <button id="trackBtn" onclick="runTrack()">Track</button>
-      </div>
-
-      <div class="result" id="result">
-        <div class="res-head"><strong id="statusLabel">—</strong><span style="background:var(--red);color:#fff;padding:4px 10px;border-radius:12px;font-size:10px;font-weight:800">LIVE DATA</span></div>
-        
-        <div class="details-grid">
-          <div class="det-item"><span>Destination</span><strong id="res-dest">---</strong></div>
-          <div class="det-item"><span>Weight</span><strong id="res-weight">---</strong></div>
-          <div class="det-item"><span>Last Update</span><strong id="res-date">---</strong></div>
+    <div class="tabs">
+        <button id="t-track" class="tab active" onclick="show('track')">Track Shipment</button>
+        <button id="t-quote" class="tab" onclick="show('quote')">Request Quote</button>
+    </div>
+    <div class="card">
+        <div id="track">
+            <h3>Track Your Shipment</h3>
+            <div class="row">
+                <input id="tid" placeholder="Enter Waybill ID (e.g. GID-1001)">
+                <button onclick="runTrack()" style="width:140px" id="btn-t">Track</button>
+            </div>
+            <div id="track-details" class="hidden">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div><small style="color:var(--muted)">STATUS</small><br><strong id="r-status" style="color:var(--red)"></strong></div>
+                    <div><small style="color:var(--muted)">DESTINATION</small><br><strong id="r-dest"></strong></div>
+                    <div><small style="color:var(--muted)">WEIGHT</small><br><strong id="r-weight"></strong></div>
+                    <div><small style="color:var(--muted)">LAST UPDATE</small><br><strong id="r-date"></strong></div>
+                </div>
+            </div>
         </div>
 
-        <div class="timeline">
-          <div class="step" id="step1">Ordered</div>
-          <div class="step" id="step2">Picked Up</div>
-          <div class="step" id="step3">In Transit</div>
-          <div class="step" id="step4">Delivered</div>
+        <div id="quote" class="hidden">
+            <h3>Freight Calculator</h3>
+            <div class="service-toggle">
+                <div class="s-opt active" id="s-air" onclick="setService('Air')">✈️ Air Freight</div>
+                <div class="s-opt" id="s-sea" onclick="setService('Sea')">🚢 Ocean Freight</div>
+            </div>
+            <div class="row">
+                <input id="qN" placeholder="Full Name">
+                <input id="qW" type="number" placeholder="Weight (kg)">
+            </div>
+            <div class="row">
+                <input id="qF" placeholder="Origin City">
+                <input id="qT" placeholder="Destination City">
+            </div>
+            <button onclick="runQuote()" id="btn-q">Get Instant Estimate</button>
+            <div id="quote-res">
+                <small style="text-transform:uppercase; letter-spacing:1px; font-weight:800; color:#16a34a">Estimated Total</small>
+                <h2 id="final-price" style="margin:10px 0; font-size:32px; color:#065f46">$0.00</h2>
+                <p style="font-size:13px; margin:0; color:#065f46">Submission successful. An admin has been notified.</p>
+            </div>
         </div>
-      </div>
     </div>
-
-    <div id="quote" class="hidden">
-      <h2>Request a Quote</h2>
-      <div class="row">
-        <input id="qName" placeholder="Full Name">
-        <input id="qWeight" type="number" placeholder="Total Weight (kg)">
-      </div>
-      <div class="row">
-        <input id="qFrom" placeholder="Origin City">
-        <input id="qTo" placeholder="Destination City">
-      </div>
-      <button id="quoteBtn" onclick="runQuote()" style="width:100%;margin-top:15px">Submit Request</button>
-    </div>
-  </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div><h4>About GID</h4><p>International freight forwarding and supply chain management solutions.</p></div>
-    <div><h4>Contact</h4><p>support@gidlogistics.com<br>+234 706 695 8826</p></div>
-  </div>
-</footer>
-
 <script>
-// UPDATED WITH YOUR NEW DEPLOYMENT URL
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzvDRsMKHFQGGWZXfwH666a3aFMordowj8lJdHXfa0waRrBW4dz8-dkLwKl-5AK97l4/exec";
+// UPDATED TO YOUR LATEST DEPLOYMENT URL
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGB4VPw-K5x9NrLKBWY0LPCBdf4Xu3fR-4UuhThbqRvjVQ08XbAgDdXA8Hq44DvvoI/exec";
+let selectedService = "Air";
 
 function show(id){
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  document.getElementById('track').classList.add('hidden');
-  document.getElementById('quote').classList.add('hidden');
-  document.getElementById(id).classList.remove('hidden');
+    document.getElementById('track').classList.toggle('hidden', id !== 'track');
+    document.getElementById('quote').classList.toggle('hidden', id !== 'quote');
+    document.getElementById('t-track').classList.toggle('active', id === 'track');
+    document.getElementById('t-quote').classList.toggle('active', id === 'quote');
+    // Hide results when switching
+    if(id === 'quote') document.getElementById('quote-res').style.display = 'none';
+    if(id === 'track') document.getElementById('track-details').classList.add('hidden');
+}
+
+function setService(s){
+    selectedService = s;
+    document.getElementById('s-air').classList.toggle('active', s === 'Air');
+    document.getElementById('s-sea').classList.toggle('active', s === 'Sea');
+}
+
+// JSONP HANDLERS
+function handleTrack(r){
+    document.getElementById('btn-t').innerText = "Track";
+    document.getElementById('btn-t').disabled = false;
+    if(r.error) {
+        alert("Error: " + r.error);
+        document.getElementById('track-details').classList.add('hidden');
+        return;
+    }
+    document.getElementById('track-details').classList.remove('hidden');
+    document.getElementById('r-status').innerText = r.status.toUpperCase();
+    document.getElementById('r-dest').innerText = r.destination;
+    document.getElementById('r-weight').innerText = r.weight;
+    document.getElementById('r-date').innerText = r.updated;
+}
+
+function handleQuote(r){
+    document.getElementById('btn-q').innerText = "Get Instant Estimate";
+    document.getElementById('btn-q').disabled = false;
+    if(r.status === "Success"){
+        document.getElementById('quote-res').style.display = 'block';
+        document.getElementById('final-price').innerText = r.cost;
+        document.getElementById('quote-res').scrollIntoView({behavior: 'smooth'});
+    } else {
+        alert("System error. Please contact support.");
+    }
 }
 
 function runTrack(){
-  const id = document.getElementById('tid').value.trim();
-  if(!id) return alert("Please enter Waybill ID");
-  const btn = document.getElementById('trackBtn');
-  btn.innerText = "Searching...";
-  btn.disabled = true;
-
-  const script = document.createElement('script');
-  script.src = SCRIPT_URL + "?tracking=" + id.toUpperCase() + "&callback=handleTrack";
-  document.body.appendChild(script);
-}
-
-function handleTrack(r){
-  document.getElementById('trackBtn').innerText = "Track";
-  document.getElementById('trackBtn').disabled = false;
-
-  if(r.error){
-    alert("Waybill not found in system.");
-    document.getElementById('result').style.display = 'none';
-    return;
-  }
-
-  document.getElementById('result').style.display='block';
-  document.getElementById('statusLabel').innerText = r.status.toUpperCase();
-  document.getElementById('res-dest').innerText = r.destination || "TBD";
-  document.getElementById('res-weight').innerText = r.weight || "N/A";
-  document.getElementById('res-date').innerText = r.updated || "Recently";
-
-  // Update Progress Timeline
-  const steps = [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3'), document.getElementById('step4')];
-  steps.forEach(s => {s.classList.remove('active'); s.classList.remove('completed');});
-  
-  const st = r.status.toLowerCase();
-  steps[0].classList.add('active');
-  if(st.includes("picked") || st.includes("transit") || st.includes("delivered")) { steps[0].classList.add('completed'); steps[1].classList.add('active'); }
-  if(st.includes("transit") || st.includes("delivered")) { steps[1].classList.add('completed'); steps[2].classList.add('active'); }
-  if(st.includes("delivered")) { steps[2].classList.add('completed'); steps[3].classList.add('active'); }
-}
-
-async function runQuote(){
-  const n = document.getElementById('qName').value;
-  const w = document.getElementById('qWeight').value;
-  const f = document.getElementById('qFrom').value;
-  const t = document.getElementById('qTo').value;
-  
-  if(!n || !f || !t || !w) return alert("Please complete all fields");
-  const btn = document.getElementById('quoteBtn');
-  btn.innerText = "Processing...";
-  btn.disabled = true;
-  
-  try {
-    const qURL = SCRIPT_URL + "?action=saveQuote&name=" + encodeURIComponent(n) + "&origin=" + encodeURIComponent(f) + "&destination=" + encodeURIComponent(t) + "&weight=" + encodeURIComponent(w);
-    // mode: 'no-cors' allows us to send data to the script even if it doesn't return a specific CORS header
-    await fetch(qURL, {mode:'no-cors'});
-    alert("Quote Request Submitted Successfully!");
+    const id = document.getElementById('tid').value.trim();
+    if(!id) return alert("Please enter a waybill ID");
+    document.getElementById('btn-t').innerText = "Searching...";
+    document.getElementById('btn-t').disabled = true;
     
-    // Reset Form
-    document.getElementById('qName').value = ""; document.getElementById('qWeight').value = "";
-    document.getElementById('qFrom').value = ""; document.getElementById('qTo').value = "";
-  } catch(e) {
-    alert("Submission error. Please check connection.");
-  } finally {
-    btn.innerText = "Submit Request";
-    btn.disabled = false;
-  }
+    const s = document.createElement('script');
+    s.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=handleTrack`;
+    document.body.appendChild(s);
+}
+
+function runQuote(){
+    const n = document.getElementById('qN').value, w = document.getElementById('qW').value;
+    const f = document.getElementById('qF').value, t = document.getElementById('qT').value;
+    if(!n || !w || !f || !t) return alert("All fields are required.");
+    
+    document.getElementById('btn-q').innerText = "Calculating...";
+    document.getElementById('btn-q').disabled = true;
+    
+    const s = document.createElement('script');
+    s.src = `${SCRIPT_URL}?action=saveQuote&name=${encodeURIComponent(n)}&weight=${w}&origin=${encodeURIComponent(f)}&destination=${encodeURIComponent(t)}&service=${selectedService}&callback=handleQuote`;
+    document.body.appendChild(s);
 }
 </script>
 </body>
