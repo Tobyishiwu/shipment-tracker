@@ -6,15 +6,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --red: #e31e24; --navy: #0f172a; }
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: var(--navy); }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; }
         header { background: white; border-bottom: 2px solid var(--red); padding: 20px; text-align: center; font-weight: 800; }
-        .hero { background: var(--navy); color: white; padding: 60px 20px; text-align: center; }
-        .card { max-width: 500px; margin: -30px auto 40px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .btn-red { background: var(--red); color: white; }
-        .btn-navy { background: var(--navy); color: white; }
-        #trackBox { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ccc; }
+        .hero { background: var(--navy); color: white; padding: 40px 20px; text-align: center; }
+        .card { max-width: 450px; margin: -30px auto 30px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; color: white; }
+        .btn-red { background: var(--red); }
+        .btn-navy { background: var(--navy); }
+        #res { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ccc; }
     </style>
 </head>
 <body>
@@ -22,77 +22,63 @@
 <header>GID LOGISTICS</header>
 
 <div class="hero">
-    <h1>Global Logistics Dashboard</h1>
-    <p>DHL-Style Tracking & Quoting</p>
+    <h2>Global Operations Hub</h2>
 </div>
 
 <div class="card">
-    <h3 style="margin-top:0">Track Shipment</h3>
-    <input type="text" id="tID" placeholder="Enter Waybill (e.g. GID-1001)">
-    <button class="btn btn-red" onclick="track()">FIND SHIPMENT</button>
-    <div id="trackBox">
-        <label style="font-size: 10px; color: #999; font-weight: 800;">STATUS</label>
-        <div id="resStatus" style="font-size: 1.5rem; font-weight: 800; color: var(--red);"></div>
-        <div style="margin-top:10px; font-size: 13px;">
-            <b>Destination:</b> <span id="resDest"></span><br>
-            <b>Weight:</b> <span id="resWeight"></span> kg<br>
-            <b>Last Update:</b> <span id="resDate"></span>
-        </div>
+    <h3 style="margin-top:0">Shipment Tracking</h3>
+    <input type="text" id="tID" placeholder="Enter Waybill (e.g. GID-101)">
+    <button class="btn btn-red" onclick="track()">TRACK NOW</button>
+    
+    <div id="res">
+        <label style="font-size: 10px; color: gray;">CURRENT STATUS</label>
+        <div id="resStatus" style="font-size: 1.4rem; font-weight: 800; color: var(--red);"></div>
+        <p style="font-size: 13px;"><b>To:</b> <span id="resDest"></span> | <b>Weight:</b> <span id="resWeight"></span>kg</p>
     </div>
 </div>
 
 <div class="card">
-    <h3 style="margin-top:0">Request a Quote</h3>
-    <input type="text" id="qName" placeholder="Full Name">
+    <h3 style="margin-top:0">Request Quote</h3>
+    <input type="text" id="qName" placeholder="Your Name">
     <input type="text" id="qFrom" placeholder="Origin City">
     <input type="text" id="qTo" placeholder="Destination City">
-    <button class="btn btn-navy" id="qBtn" onclick="quote()">SUBMIT TO SYSTEM</button>
+    <button class="btn btn-navy" id="qBtn" onclick="quote()">SUBMIT REQUEST</button>
 </div>
 
 <script>
-    const URL = "https://script.google.com/macros/s/AKfycbwt1q8Cj-kgdKaF2YXplaGcMBwN1TpGizqzCIlUFxsADbd_qVyYxFzzqYTZv5_AbPMW/exec";
+    const URL = "https://script.google.com/macros/s/AKfycbz2HobpPNk0wRVQnvcZHjlNeuqtKVc4ADXSvtWBRlDXihcxL5T9F9Mtjk70nq5qIxDB/exec";
 
     function track() {
         const id = document.getElementById('tID').value.trim();
         if(!id) return;
         const s = document.createElement('script');
-        s.src = `${URL}?tracking=${id.toUpperCase()}&callback=showTrack`;
+        s.src = `${URL}?tracking=${id.toUpperCase()}&callback=handleTrack`;
         document.body.appendChild(s);
     }
 
-    function showTrack(res) {
-        if(res.error) return alert("Waybill not found");
-        document.getElementById('trackBox').style.display = 'block';
-        document.getElementById('resStatus').innerText = res.status;
-        document.getElementById('resDest').innerText = res.destination;
-        document.getElementById('resWeight').innerText = res.weight;
-        document.getElementById('resDate').innerText = res.updated;
+    function handleTrack(r) {
+        if(r.error) return alert("Not Found");
+        document.getElementById('res').style.display = 'block';
+        document.getElementById('resStatus').innerText = r.status;
+        document.getElementById('resDest').innerText = r.destination;
+        document.getElementById('resWeight').innerText = r.weight;
     }
 
     async function quote() {
         const btn = document.getElementById('qBtn');
-        const d = {
-            name: document.getElementById('qName').value,
-            from: document.getElementById('qFrom').value,
-            to: document.getElementById('qTo').value
-        };
-        if(!d.name || !d.from || !d.to) return alert("Please fill all fields");
+        const name = document.getElementById('qName').value;
+        const from = document.getElementById('qFrom').value;
+        const to = document.getElementById('qTo').value;
         
-        btn.innerText = "Processing...";
-        btn.disabled = true;
-
-        try {
-            await fetch(`${URL}?action=saveQuote&name=${d.name}&origin=${d.from}&destination=${d.to}`, {mode: 'no-cors'});
-            alert("Success! Your quote has been logged in our system.");
-            document.getElementById('qName').value = "";
-            document.getElementById('qFrom').value = "";
-            document.getElementById('qTo').value = "";
-        } catch (e) {
-            alert("Error connecting to server.");
-        } finally {
-            btn.innerText = "SUBMIT TO SYSTEM";
-            btn.disabled = false;
-        }
+        if(!name || !from || !to) return alert("Fill all fields");
+        
+        btn.innerText = "Sending...";
+        // This direct URL call ensures the data reaches your sheet
+        const finalURL = `${URL}?action=saveQuote&name=${encodeURIComponent(name)}&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}`;
+        
+        await fetch(finalURL, { mode: 'no-cors' });
+        alert("Quote Logged! Check your Google Sheet.");
+        btn.innerText = "SUBMIT REQUEST";
     }
 </script>
 </body>
