@@ -7,9 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --gid-red: #e31e24; --dark-navy: #0f172a; --slate-600: #475569; }
+        * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding-top: 80px; scroll-behavior: smooth; }
         
-        /* HEADER */
         header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--dark-navy); }
@@ -19,7 +19,6 @@
         .nav-links a:hover { color: var(--gid-red); }
         .btn-cta { background: var(--dark-navy); color: white !important; padding: 10px 22px; border-radius: 8px; }
 
-        /* HERO SECTION */
         .hero-section {
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
                         url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=2000');
@@ -28,14 +27,12 @@
         .hero-section h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin: 0; line-height: 1.1; }
         .hero-section p { color: #cbd5e1; font-size: 1.2rem; margin: 25px 0 45px; max-width: 700px; margin-inline: auto; }
 
-        /* SEARCH BAR */
         .search-container { max-width: 650px; margin: -60px auto 0; padding: 0 20px; position: relative; z-index: 10; }
         .search-card { background: #fff; padding: 12px; border-radius: 16px; display: flex; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); }
         .search-card input { flex: 1; border: none; padding: 15px; font-size: 1.1rem; outline: none; font-weight: 600; text-transform: uppercase; }
         .search-card button { background: var(--gid-red); color: white; border: none; padding: 0 40px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.2s; }
         .search-card button:hover { background: #b91c1c; transform: scale(1.02); }
 
-        /* SERVICES SECTION */
         .services { max-width: 1200px; margin: 100px auto; padding: 0 25px; text-align: center; }
         .section-title { margin-bottom: 60px; }
         .section-title h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark-navy); margin: 10px 0; }
@@ -47,15 +44,13 @@
         .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
         .service-card p { color: var(--slate-600); line-height: 1.6; font-size: 1rem; }
 
-        /* CALCULATOR SECTION */
         .quote-tool { max-width: 900px; margin: 100px auto; padding: 0 25px; }
         .calculator-card { background: var(--dark-navy); color: white; padding: 40px; border-radius: 24px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; }
         .input-group label { display: block; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; color: #94a3b8; text-align: left; }
-        .input-group input, .input-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; font-weight: 600; font-family: inherit; box-sizing: border-box; }
+        .input-group input, .input-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; font-weight: 600; font-family: inherit; }
         .result-display { text-align: center; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 18px; border: 1px dashed #334155; }
         #totalPrice { font-size: 2.5rem; margin: 10px 0; color: var(--gid-red); }
 
-        /* FOOTER */
         footer { background: #070b14; color: white; padding: 60px 25px; text-align: center; margin-top: 100px; border-top: 4px solid var(--gid-red); }
         .footer-logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; display: block; text-decoration: none; color: white; }
         .footer-logo span { color: var(--gid-red); }
@@ -63,7 +58,7 @@
         .footer-links a { color: #64748b; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-links a:hover { color: white; }
 
-        @media (max-width: 768px) { .calculator-card { grid-template-columns: 1fr; } .hero-section h1 { font-size: 2.5rem; } }
+        @media (max-width: 768px) { .calculator-card { grid-template-columns: 1fr; padding: 25px; } .hero-section h1 { font-size: 2.5rem; } .nav-links { display: none; } }
     </style>
 </head>
 <body>
@@ -74,7 +69,7 @@
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#rates">Rates</a></li>
-            <li><a href="#" class="btn-cta">Request Quote</a></li>
+            <li><a href="#" class="btn-cta">Contact Us</a></li>
         </ul>
     </nav>
 </header>
