@@ -3,260 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>GID Logistics | Command Centre</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>GID Logistics | Global Freight & Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root{--navy:#0f172a;--red:#e31e24;--bg:#f4f6f8;--muted:#64748b;--b:#e5e7eb;--green:#22c55e}
-        *{box-sizing:border-box}
-        body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy);line-height:1.6}
-        .wrap{max-width:1200px;margin:auto;padding:0 20px}
-        
-        /* Navigation & UI */
-        header{background:#fff; border-bottom:1px solid var(--b); padding:18px 0; position: sticky; top:0; z-index: 100}
-        .logo{font-size:22px;font-weight:800}.logo span{color:var(--red)}
-        .hero{background:var(--navy);color:#fff;text-align:center;padding:80px 20px 120px}
-        .hub{max-width:850px;margin:-80px auto 60px}
-        .tabs{display:flex;gap:5px}.tab{padding:15px 30px; border:none; border-radius:8px 8px 0 0; cursor:pointer; font-weight:700; background:rgba(255,255,255,0.2); color:#fff; transition: 0.3s}
-        .tab.active{background:#fff; color:var(--navy)}
-        .card{background:#fff;padding:40px;border-radius:0 12px 12px 12px;box-shadow:0 20px 40px rgba(0,0,0,0.1)}
-        
-        /* Forms */
-        .row{display:flex;gap:15px;margin-bottom:15px}
-        input{flex:1;padding:14px;border:1.8px solid var(--b);border-radius:8px;font-size:16px; outline: none}
-        input:focus{border-color: var(--red)}
-        button{background:var(--red);color:#fff;border:none;padding:16px;border-radius:8px;font-weight:800;cursor:pointer;width:100%; transition: 0.3s}
-        button:disabled{background: var(--muted); cursor: not-allowed}
-        
-        /* Service Toggle */
-        .service-toggle{display:flex;gap:10px;margin-bottom:20px}
-        .s-opt{flex:1;padding:15px;border:2px solid var(--b);border-radius:8px;text-align:center;cursor:pointer;font-weight:700}
-        .s-opt.active{border-color:var(--red);background:#fff5f5;color:var(--red)}
+        :root{--navy:#0f172a;--red:#e31e24;--bg:#ffffff;--soft-bg:#f8fafc;--muted:#64748b;--border:#e2e8f0;--green:#10b981}
+        *{box-sizing:border-box; margin:0; padding:0}
+        body{font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--navy); overflow-x:hidden}
+        .container{max-width:1200px; margin:auto; padding:0 20px}
 
-        /* History & Terms */
-        .history-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
-        .h-tag{background:#f1f5f9; border:1px solid var(--b); padding:4px 10px; border-radius:15px; font-size:11px; font-weight:700; cursor:pointer}
-        .terms-row{display:flex; align-items:flex-start; gap:10px; margin:15px 0; font-size:13px; color:var(--muted)}
-        .terms-row input{width:18px; height:18px; flex:none}
+        /* DHL-STYLE HEADER */
+        header{background:#fff; border-bottom:1px solid var(--border); padding:15px 0; position:sticky; top:0; z-index:1000}
+        .nav-flex{display:flex; justify-content:space-between; align-items:center}
+        .logo{font-size:24px; font-weight:900; letter-spacing:-1px}
+        .logo span{color:var(--red)}
+        .nav-links{display:flex; gap:25px; font-size:14px; font-weight:700}
+        .nav-links a{text-decoration:none; color:var(--navy); transition:0.2s}
+        .nav-links a:hover{color:var(--red)}
+
+        /* HERO & SEARCH BAR (DHL PRIMARY FUNCTION) */
+        .hero{background:var(--navy); color:#fff; padding:60px 0 100px; text-align:center}
+        .hero h1{font-size:42px; font-weight:800; margin-bottom:15px}
+        .hero p{font-size:18px; opacity:0.8; margin-bottom:40px}
+
+        .search-hub{max-width:900px; margin:-60px auto 40px; background:#fff; border-radius:12px; box-shadow:0 30px 60px rgba(0,0,0,0.12); padding:10px; display:flex; flex-direction:column}
+        .hub-tabs{display:flex; border-bottom:1px solid var(--border)}
+        .hub-tab{flex:1; padding:20px; border:none; background:none; font-weight:800; cursor:pointer; font-size:15px; color:var(--muted); border-bottom:3px solid transparent}
+        .hub-tab.active{color:var(--red); border-bottom-color:var(--red)}
+
+        .hub-content{padding:30px}
+        .input-group{display:flex; gap:10px}
+        .main-input{flex:1; padding:18px; border:2px solid var(--border); border-radius:8px; font-size:16px; outline:none}
+        .main-input:focus{border-color:var(--red)}
+        .btn-primary{background:var(--red); color:#fff; border:none; padding:0 40px; border-radius:8px; font-weight:800; cursor:pointer; font-size:16px}
         
-        /* Modal */
-        .modal{display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px)}
-        .modal-content{background:#fff; margin:10% auto; padding:30px; border-radius:12px; max-width:500px; position:relative}
+        /* SERVICE GRID (DHL DIVISIONS STYLE) */
+        .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px; margin:60px 0}
+        .service-card{background:var(--soft-bg); padding:30px; border-radius:12px; border-bottom:4px solid transparent; transition:0.3s}
+        .service-card:hover{transform:translateY(-10px); border-bottom-color:var(--red); background:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.05)}
+        .service-card h3{margin:15px 0 10px; font-size:20px}
+        .service-card p{color:var(--muted); font-size:14px; margin-bottom:20px}
 
-        /* Timeline */
-        .timeline { display: flex; justify-content: space-between; margin: 30px 0; padding-top: 20px; border-top: 1px solid var(--b); }
-        .step { flex: 1; text-align: center; font-size: 10px; font-weight: 800; color: #d1d5db; position: relative; }
-        .step i { display: block; font-size: 20px; margin-bottom: 8px; font-style: normal; filter: grayscale(1); }
-        .step.active { color: var(--red); }
-        .step.active i { filter: grayscale(0); }
-        .step:not(:last-child)::after { content: ''; position: absolute; top: 10px; left: 50%; width: 100%; height: 2px; background: #d1d5db; z-index: 1; }
-        .step.active:not(:last-child)::after { background: var(--red); }
+        /* MODAL & TIMELINE */
+        .timeline{display:flex; justify-content:space-between; margin:30px 0; padding:20px; background:#fff; border-radius:8px}
+        .step{flex:1; text-align:center; font-size:10px; font-weight:800; color:#cbd5e1; position:relative}
+        .step.active{color:var(--red)}
+        .step i{display:block; font-size:22px; margin-bottom:8px; font-style:normal}
+        .modal{display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px)}
+        .modal-content{background:#fff; margin:10% auto; padding:40px; border-radius:15px; max-width:550px; position:relative}
 
+        /* WHATSAPP & FOOTER */
+        .wa-float{position:fixed; bottom:30px; right:30px; background:#25d366; color:#fff; padding:15px 25px; border-radius:50px; text-decoration:none; font-weight:800; box-shadow:0 10px 25px rgba(37,211,102,0.3); z-index:1000}
+        footer{background:var(--navy); color:#fff; padding:60px 0; margin-top:100px; font-size:14px}
         .hidden{display:none}
-        .wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: #fff; border-radius: 50px; padding: 12px 25px; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-decoration: none; z-index: 1000; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
+    <div class="container nav-flex">
         <div class="logo">GID<span>LOGISTICS</span></div>
-        <div style="font-size:12px; font-weight:700; color:var(--muted)">v9.2 MASTER</div>
+        <nav class="nav-links">
+            <a href="#">Track</a>
+            <a href="#">Ship</a>
+            <a href="#">Enterprise Solutions</a>
+            <a href="#">Help Center</a>
+        </nav>
+        <div style="font-weight:800; font-size:12px; color:var(--red)">NIGERIA | EN</div>
     </div>
 </header>
 
 <section class="hero">
-    <h1>Operational Command Centre</h1>
-    <p>Waybill tracking and instant freight cost estimation.</p>
+    <div class="container">
+        <h1>Excellence. Simply Delivered.</h1>
+        <p>Your global partner for air, sea, and express logistics.</p>
+    </div>
 </section>
 
-<section class="hub">
-    <div class="tabs">
-        <button id="t-track" class="tab active" onclick="showTab('track')">Track Shipment</button>
-        <button id="t-quote" class="tab" onclick="showTab('quote')">Request Quote</button>
-    </div>
-    
-    <div class="card">
-        <div id="track">
-            <div id="track-search-box">
-                <div class="row">
-                    <input id="tid" placeholder="Enter Waybill ID (e.g. GID-1001)">
-                    <button onclick="runTrack()" style="width:140px" id="btn-t">Track</button>
-                </div>
-                <div id="track-history" class="history-tags"></div>
-            </div>
-
-            <div id="track-details" class="hidden" style="margin-top:20px; padding:20px; background:#fafafa; border-radius:12px">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                    <div><small>STATUS</small><br><strong id="r-status" style="color:var(--red)"></strong></div>
-                    <div><small>DESTINATION</small><br><strong id="r-dest"></strong></div>
-                    <div><small>WEIGHT</small><br><strong id="r-weight"></strong></div>
-                    <div><small>LAST UPDATE</small><br><strong id="r-date"></strong></div>
-                </div>
-                <div class="timeline">
-                    <div class="step" id="s1"><i>📦</i>PREPARING</div>
-                    <div class="step" id="s2"><i>🚚</i>PICKED UP</div>
-                    <div class="step" id="s3"><i>✈️</i>IN TRANSIT</div>
-                    <div class="step" id="s4"><i>✅</i>DELIVERED</div>
-                </div>
-                <button onclick="resetTrack()" style="background:var(--navy); font-size:12px">Track New Waybill</button>
-            </div>
+<div class="container">
+    <div class="search-hub">
+        <div class="hub-tabs">
+            <button class="hub-tab active" onclick="switchMode('track')">Track Shipment</button>
+            <button class="hub-tab" onclick="switchMode('quote')">Request a Quote</button>
         </div>
+        
+        <div class="hub-content">
+            <div id="m-track">
+                <div class="input-group">
+                    <input id="tid" class="main-input" placeholder="Enter Waybill ID (e.g., GID-1001)">
+                    <button class="btn-primary" onclick="runTrack()" id="btn-t">Track</button>
+                </div>
+                <div id="track-history" style="display:flex; gap:10px; margin-top:15px"></div>
 
-        <div id="quote" class="hidden">
-            <div id="quote-form-box">
-                <div class="service-toggle">
-                    <div class="s-opt active" id="s-air" onclick="setService('Air')">✈️ Air Freight</div>
-                    <div class="s-opt" id="s-sea" onclick="setService('Sea')">🚢 Ocean Freight</div>
+                <div id="track-details" class="hidden" style="margin-top:30px; padding:30px; background:var(--soft-bg); border-radius:12px">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end">
+                        <h2 id="r-status" style="color:var(--red); font-size:28px"></h2>
+                        <span id="r-date" style="font-weight:700; color:var(--muted)"></span>
+                    </div>
+                    <hr style="margin:20px 0; border:0; border-top:1px solid var(--border)">
+                    <div class="timeline">
+                        <div class="step" id="s1"><i>📦</i>PREPARING</div>
+                        <div class="step" id="s2"><i>🚚</i>PICKED UP</div>
+                        <div class="step" id="s3"><i>✈️</i>IN TRANSIT</div>
+                        <div class="step" id="s4"><i>✅</i>DELIVERED</div>
+                    </div>
+                    <button onclick="resetTrack()" style="background:var(--navy); color:#fff; border:none; padding:10px 20px; border-radius:5px; cursor:pointer">Track Another</button>
                 </div>
-                <div class="row">
-                    <input id="qN" placeholder="Full Name">
-                    <input id="qW" type="number" placeholder="Weight (kg)">
-                </div>
-                <div class="row">
-                    <input id="qF" placeholder="Origin City">
-                    <input id="qT" placeholder="Destination City">
-                </div>
-                <div class="terms-row">
-                    <input type="checkbox" id="qTerms">
-                    <label for="qTerms">I agree to the <a href="javascript:void(0)" onclick="openTerms()" style="color:var(--red); font-weight:700">Service Terms</a> and prohibited items policy.</label>
-                </div>
-                <button onclick="runQuote()" id="btn-q">Get Instant Estimate</button>
             </div>
 
-            <div id="quote-res" class="hidden" style="text-align:center; padding:25px; background:#f0fdf4; border-radius:12px">
-                <small style="color:var(--green); font-weight:800">ESTIMATED TOTAL</small>
-                <h2 id="final-price" style="margin:10px 0; font-size:36px; color:#166534">$0.00</h2>
-                <p style="font-size:13px; margin-bottom:20px">Quote saved. Admin notified via Email & WhatsApp.</p>
-                <button onclick="resetQuote()" style="background:var(--green); font-size:12px">Request Another Quote</button>
+            <div id="m-quote" class="hidden">
+                <div style="display:flex; gap:10px; margin-bottom:20px">
+                    <button id="s-air" class="btn-primary" onclick="setService('Air')" style="flex:1">Air Freight</button>
+                    <button id="s-sea" class="btn-primary" onclick="setService('Sea')" style="flex:1; background:var(--soft-bg); color:var(--navy)">Sea Freight</button>
+                </div>
+                <div class="row" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px">
+                    <input id="qN" class="main-input" placeholder="Your Name">
+                    <input id="qW" class="main-input" type="number" placeholder="Weight (kg)">
+                </div>
+                <div class="row" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px">
+                    <input id="qF" class="main-input" placeholder="From City">
+                    <input id="qT" class="main-input" placeholder="To City">
+                </div>
+                <label style="font-size:12px; display:block; margin-bottom:15px">
+                    <input type="checkbox" id="qTerms"> I agree to the <a href="javascript:void(0)" onclick="openTerms()" style="color:var(--red)">Service Terms</a>.
+                </label>
+                <button class="btn-primary" onclick="runQuote()" id="btn-q" style="width:100%; height:60px">Get Instant Rate</button>
+                
+                <div id="quote-res" class="hidden" style="margin-top:20px; text-align:center; padding:20px; background:#f0fdf4; border-radius:10px">
+                    <p>Estimated Cost:</p>
+                    <h2 id="final-price" style="color:var(--green); font-size:32px"></h2>
+                    <button onclick="resetQuote()" style="margin-top:10px; background:none; border:none; color:var(--muted); cursor:pointer; text-decoration:underline">Start New Quote</button>
+                </div>
             </div>
         </div>
     </div>
-</section>
+
+    <div class="grid">
+        <div class="service-card">
+            <h3>GID Express</h3>
+            <p>Door-to-door delivery for documents and parcels worldwide.</p>
+            <a href="#" style="color:var(--red); font-weight:800; text-decoration:none">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <h3>Global Freight</h3>
+            <p>Specialized air and ocean cargo solutions for large-scale logistics.</p>
+            <a href="#" style="color:var(--red); font-weight:800; text-decoration:none">Learn More →</a>
+        </div>
+        <div class="service-card">
+            <h3>Supply Chain</h3>
+            <p>Warehousing and distribution management for growing enterprises.</p>
+            <a href="#" style="color:var(--red); font-weight:800; text-decoration:none">Learn More →</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container" style="display:flex; justify-content:space-between">
+        <div>
+            <div class="logo">GID<span>LOGISTICS</span></div>
+            <p style="margin-top:10px; opacity:0.6">© 2026 GID Group. All rights reserved.</p>
+        </div>
+        <div style="display:flex; gap:60px">
+            <div><strong>Company</strong><br><br>About Us<br>Careers<br>Legal</div>
+            <div><strong>Social</strong><br><br>LinkedIn<br>Instagram</div>
+        </div>
+    </div>
+</footer>
 
 <div id="termsModal" class="modal">
     <div class="modal-content">
         <span style="position:absolute; right:20px; top:15px; cursor:pointer; font-size:24px" onclick="closeTerms()">&times;</span>
-        <h2 style="color:var(--red)">Service Terms</h2>
-        <p style="font-size:14px">1. <strong>Inspection:</strong> All items are subject to physical inspection.<br>2. <strong>Prohibited:</strong> No batteries, liquids, or flammables unless declared.<br>3. <strong>Pricing:</strong> Quotes are valid for 7 days.</p>
-        <button onclick="closeTerms()" style="background:var(--navy); margin-top:10px">Close</button>
+        <h2 style="color:var(--red); margin-bottom:15px">Service Terms</h2>
+        <p style="font-size:14px; margin-bottom:10px">1. <strong>Inspection:</strong> All cargo is subject to security screening.</p>
+        <p style="font-size:14px; margin-bottom:10px">2. <strong>Pricing:</strong> Quotes are valid for 7 days and based on actual weight.</p>
+        <p style="font-size:14px; margin-bottom:20px">3. <strong>Liability:</strong> Standard carriage insurance applies to all shipments.</p>
+        <button class="btn-primary" onclick="closeTerms()" style="width:100%">I Accept</button>
     </div>
 </div>
 
-<a href="https://wa.me/2347066958826" class="wa-float" target="_blank">💬 WhatsApp Support</a>
+<a href="https://wa.me/2347066958826" class="wa-float">💬 WhatsApp Support</a>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGB4VPw-K5x9NrLKBWY0LPCBdf4Xu3fR-4UuhThbqRvjVQ08XbAgDdXA8Hq44DvvoI/exec";
 let selectedService = "Air", isTrackPending = false, isQuotePending = false;
 
-document.addEventListener('DOMContentLoaded', updateHistoryUI);
-
-function showTab(id){
-    document.getElementById('track').classList.toggle('hidden', id !== 'track');
-    document.getElementById('quote').classList.toggle('hidden', id !== 'quote');
-    document.getElementById('t-track').classList.toggle('active', id === 'track');
-    document.getElementById('t-quote').classList.toggle('active', id === 'quote');
+function switchMode(mode){
+    document.getElementById('m-track').classList.toggle('hidden', mode !== 'track');
+    document.getElementById('m-quote').classList.toggle('hidden', mode !== 'quote');
+    const tabs = document.querySelectorAll('.hub-tab');
+    tabs[0].classList.toggle('active', mode === 'track');
+    tabs[1].classList.toggle('active', mode === 'quote');
 }
 
 function setService(s){
     selectedService = s;
-    document.getElementById('s-air').classList.toggle('active', s === 'Air');
-    document.getElementById('s-sea').classList.toggle('active', s === 'Sea');
+    document.getElementById('s-air').style.background = (s === 'Air' ? 'var(--red)' : 'var(--soft-bg)');
+    document.getElementById('s-air').style.color = (s === 'Air' ? '#fff' : 'var(--navy)');
+    document.getElementById('s-sea').style.background = (s === 'Sea' ? 'var(--red)' : 'var(--soft-bg)');
+    document.getElementById('s-sea').style.color = (s === 'Sea' ? '#fff' : 'var(--navy)');
 }
 
-/* TRACKING */
+/* API CORE */
 function runTrack(){
-    if(isTrackPending) return;
     const id = document.getElementById('tid').value.trim();
-    if(!id) return alert("Enter Waybill ID");
-    isTrackPending = true;
-    document.getElementById('btn-t').innerText = "...";
-    document.getElementById('btn-t').disabled = true;
+    if(!id || isTrackPending) return;
+    isTrackPending = true; document.getElementById('btn-t').innerText = "...";
     const s = document.createElement('script');
     s.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=handleTrack`;
     document.body.appendChild(s);
 }
 
 function handleTrack(r){
-    isTrackPending = false;
-    document.getElementById('btn-t').innerText = "Track";
-    document.getElementById('btn-t').disabled = false;
+    isTrackPending = false; document.getElementById('btn-t').innerText = "Track";
     if(r.error) return alert(r.error);
-
-    saveToHistory(r.id);
-    document.getElementById('track-search-box').classList.add('hidden');
     document.getElementById('track-details').classList.remove('hidden');
     document.getElementById('r-status').innerText = r.status.toUpperCase();
-    document.getElementById('r-dest').innerText = r.destination;
-    document.getElementById('r-weight').innerText = r.weight;
     document.getElementById('r-date').innerText = r.updated;
-
-    const st = r.status.toLowerCase();
-    const ids = ['s1','s2','s3','s4'];
+    // Timeline Logic
+    const ids=['s1','s2','s3','s4'];
     ids.forEach(i => document.getElementById(i).classList.remove('active'));
     document.getElementById('s1').classList.add('active');
+    const st = r.status.toLowerCase();
     if(st.includes("pick") || st.includes("transit") || st.includes("delivered")) document.getElementById('s2').classList.add('active');
     if(st.includes("transit") || st.includes("delivered")) document.getElementById('s3').classList.add('active');
     if(st.includes("delivered")) document.getElementById('s4').classList.add('active');
 }
 
-function resetTrack(){
-    document.getElementById('track-search-box').classList.remove('hidden');
-    document.getElementById('track-details').classList.add('hidden');
-    document.getElementById('tid').value = "";
-}
-
-/* QUOTING */
 function runQuote(){
-    if(isQuotePending) return;
     const n = document.getElementById('qN').value, w = document.getElementById('qW').value,
           f = document.getElementById('qF').value, t = document.getElementById('qT').value,
           terms = document.getElementById('qTerms').checked;
-    if(!n || !w || !f || !t) return alert("Fill all fields");
-    if(!terms) return alert("Agree to Terms first");
-
-    isQuotePending = true;
-    document.getElementById('btn-q').innerText = "Processing...";
-    document.getElementById('btn-q').disabled = true;
+    if(!n || !w || !f || !t || !terms || isQuotePending) return alert("Complete all fields & accept terms.");
+    isQuotePending = true; document.getElementById('btn-q').innerText = "CALCULATING...";
     const s = document.createElement('script');
     s.src = `${SCRIPT_URL}?action=saveQuote&name=${encodeURIComponent(n)}&weight=${w}&origin=${encodeURIComponent(f)}&destination=${encodeURIComponent(t)}&service=${selectedService}&callback=handleQuote`;
     document.body.appendChild(s);
 }
 
 function handleQuote(r){
-    isQuotePending = false;
+    isQuotePending = false; document.getElementById('btn-q').innerText = "Get Instant Rate";
     if(r.status === "Success"){
-        document.getElementById('quote-form-box').classList.add('hidden');
         document.getElementById('quote-res').classList.remove('hidden');
         document.getElementById('final-price').innerText = r.cost;
     }
 }
 
-function resetQuote(){
-    document.getElementById('quote-form-box').classList.remove('hidden');
-    document.getElementById('quote-res').classList.add('hidden');
-    document.getElementById('qTerms').checked = false;
-    document.getElementById('btn-q').disabled = false;
-    document.getElementById('btn-q').innerText = "Get Instant Estimate";
-}
-
-/* HISTORY & MODAL */
-function saveToHistory(id){
-    let h = JSON.parse(localStorage.getItem('gid_history') || '[]');
-    h = h.filter(x => x !== id); h.unshift(id);
-    if(h.length > 5) h.pop();
-    localStorage.setItem('gid_history', JSON.stringify(h));
-    updateHistoryUI();
-}
-function updateHistoryUI(){
-    const h = JSON.parse(localStorage.getItem('gid_history') || '[]');
-    const c = document.getElementById('track-history');
-    c.innerHTML = h.length > 0 ? '<small style="width:100%; display:block; margin-bottom:5px">RECENT:</small>' : '';
-    h.forEach(id => {
-        const s = document.createElement('span'); s.className='h-tag'; s.innerText=id;
-        s.onclick=()=>{ document.getElementById('tid').value=id; runTrack(); };
-        c.appendChild(s);
-    });
-}
+function resetTrack(){ document.getElementById('track-details').classList.add('hidden'); document.getElementById('tid').value=""; }
+function resetQuote(){ document.getElementById('quote-res').classList.add('hidden'); }
 function openTerms(){ document.getElementById('termsModal').style.display='block'; }
 function closeTerms(){ document.getElementById('termsModal').style.display='none'; }
 </script>
