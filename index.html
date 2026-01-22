@@ -3,121 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Global Freight & Tracking</title>
+    <title>GID Logistics | Global Freight & Supply Chain</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gid-red: #e31e24;
-            --dark-navy: #0f172a;
-            --slate-600: #475569;
-            --bg-body: #f8fafc;
-        }
-
-        body {
-            margin: 0;
-            background-color: var(--bg-body);
-            color: var(--dark-navy);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.5;
-            padding-top: 80px; /* Space for sticky header */
-        }
-
-        /* --- MODERN STICKY HEADER --- */
-        header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 2px solid var(--gid-red);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
+        :root { --gid-red: #e31e24; --dark-navy: #0f172a; --slate-600: #475569; }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding-top: 80px; }
+        
+        /* HEADER */
+        header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--dark-navy); }
         .logo span { color: var(--gid-red); }
-
-        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; }
-        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--gid-red); }
-
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; }
         .btn-cta { background: var(--dark-navy); color: white !important; padding: 8px 20px; border-radius: 6px; }
 
-        /* --- HERO SECTION --- */
+        /* HERO */
         .hero-section {
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
                         url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover;
-            background-position: center;
-            padding: 100px 20px;
-            text-align: center;
-            color: white;
+            background-size: cover; background-position: center; padding: 120px 20px; text-align: center; color: white;
         }
+        .hero-section h1 { font-size: 3.5rem; font-weight: 800; margin: 0; }
+        .hero-section p { color: #cbd5e1; font-size: 1.2rem; margin: 20px 0 40px; }
 
-        .hero-section h1 { font-size: 3rem; font-weight: 800; margin: 0; }
-        .hero-section p { color: #cbd5e1; font-size: 1.2rem; max-width: 600px; margin: 15px auto 40px; }
-
-        /* --- TRACKING CARD (Adjusted) --- */
-        .container { max-width: 580px; margin: -80px auto 40px; padding: 0 20px; position: relative; z-index: 10; }
-
-        .search-card {
-            background: #fff; padding: 10px; border-radius: 12px;
-            display: flex; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .search-card input {
-            flex: 1; border: none; padding: 15px; font-size: 1rem;
-            outline: none; font-weight: 600; text-transform: uppercase;
-        }
-
-        .search-card button {
-            background: var(--gid-red); color: #fff; border: none;
-            padding: 0 30px; border-radius: 8px; font-weight: 700; cursor: pointer;
-        }
-
-        #results { display: none; animation: fadeIn 0.5s ease; }
-
-        .status-header {
-            background: #fff; padding: 25px; border-radius: 16px;
-            border-left: 8px solid var(--gid-red); box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 15px; text-align: left;
-        }
-
-        .status-header h2 { font-size: 1.8rem; margin: 5px 0; color: var(--dark-navy); }
-
-        .tracker-card { background: #fff; padding: 40px 20px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 15px; }
-
-        .stepper { display: flex; justify-content: space-between; position: relative; }
-        .line-bg { position: absolute; top: 12px; left: 8%; right: 8%; height: 3px; background: #e2e8f0; z-index: 1; }
-        .line-fill { position: absolute; top: 12px; left: 8%; width: 0%; height: 3px; background: var(--gid-red); z-index: 2; transition: width 1.2s ease; }
-        
-        .step { position: relative; z-index: 3; text-align: center; width: 20%; }
-        .dot { width: 18px; height: 18px; background: #fff; border: 3px solid #e2e8f0; border-radius: 50%; margin: 0 auto; transition: 0.3s; }
-        .step.active .dot { border-color: var(--gid-red); background: var(--gid-red); }
-        .step label { display: block; margin-top: 10px; font-size: 0.65rem; font-weight: 800; color: var(--slate-600); text-transform: uppercase; }
-
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .detail-box { background: #fff; padding: 18px; border-radius: 12px; border: 1px solid #e2e8f0; }
-        .detail-box label { font-size: 0.65rem; font-weight: 800; color: var(--slate-600); text-transform: uppercase; display: block; }
-        .detail-box div { font-weight: 700; color: var(--dark-navy); margin-top: 4px; }
-
-        .btn-receipt {
-            display: none; width: 100%; background: var(--dark-navy); color: white;
-            border: none; padding: 18px; border-radius: 12px; font-weight: 800;
-            margin-top: 20px; cursor: pointer; text-transform: uppercase;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 768px) { .nav-links { display: none; } .hero-section h1 { font-size: 2rem; } }
+        /* SEARCH BAR */
+        .search-container { max-width: 600px; margin: -50px auto 0; padding: 0 20px; position: relative; z-index: 10; }
+        .search-card { background: #fff; padding: 10px; border-radius: 12px; display: flex; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .search-card input { flex: 1; border: none; padding: 15px; font-size: 1.1rem; outline: none; font-weight: 600; text-transform: uppercase; }
+        .search-card button { background: var(--gid-red); color: white; border: none; padding: 0 35px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -126,106 +40,37 @@
     <nav class="nav-container">
         <a href="#" class="logo">GID <span>LOGISTICS</span></a>
         <ul class="nav-links">
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Rates</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#" class="btn-cta">Request Quote</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#" class="btn-cta">Get a Quote</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="hero-section">
-    <h1>Global Logistics, <br> Simplified.</h1>
-    <p>Premium freight forwarding and real-time supply chain solutions for the modern world.</p>
+    <h1>Reliable. Fast. <br> Global.</h1>
+    <p>The next generation of logistics management for your business.</p>
 </div>
 
-<div class="container">
+<div class="search-container">
     <div class="search-card">
-        <input type="text" id="waybillInput" placeholder="Enter Waybill Number">
-        <button id="searchBtn">TRACK</button>
-    </div>
-
-    <div id="results">
-        <div class="status-header">
-            <small>Current Status</small>
-            <h2 id="stText">Processing</h2>
-        </div>
-
-        <div class="tracker-card">
-            <div class="stepper">
-                <div class="line-bg"></div>
-                <div class="line-fill" id="fillBar"></div>
-                <div class="step" id="s1"><div class="dot"></div><label>Created</label></div>
-                <div class="step" id="s2"><div class="dot"></div><label>Picked</label></div>
-                <div class="step" id="s3"><div class="dot"></div><label>Transit</label></div>
-                <div class="step" id="s4"><div class="dot"></div><label>Out</label></div>
-                <div class="step" id="s5"><div class="dot"></div><label>Arrived</label></div>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="detail-box"><label>Destination</label><div id="lcText">—</div></div>
-            <div class="detail-box"><label>Last Update</label><div id="tmText">—</div></div>
-        </div>
-
-        <button class="btn-receipt" id="receiptBtn">Download Official Receipt</button>
-        <p style="text-align:center; color:#64748b; font-size:12px; margin-top:20px; cursor:pointer;" onclick="location.reload()">New Search</p>
+        <input type="text" id="waybillInput" placeholder="Enter Waybill Number (e.g. GID-WBL-1001)">
+        <button onclick="initiateSearch()">TRACK</button>
     </div>
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCSYD4qFpSqMYtHlZdPzCDveU2AVXhaiQUQ00lbibiVPw56nlb8j_383SEO0zMtqTR/exec";
-
-function initiateSearch() {
-    const waybill = document.getElementById('waybillInput').value.trim();
-    if(!waybill) return;
+    function initiateSearch() {
+        const waybill = document.getElementById('waybillInput').value.trim();
+        if(!waybill) return alert("Please enter a waybill number");
+        // Opens the results in a new tab
+        window.open(`track.html?id=${waybill.toUpperCase()}`, "_blank");
+    }
     
-    document.getElementById('searchBtn').innerText = "...";
-    const script = document.createElement('script');
-    script.src = `${SCRIPT_URL}?tracking=${waybill.toUpperCase()}&callback=handleTracking`;
-    document.body.appendChild(script);
-}
-
-document.getElementById('searchBtn').onclick = initiateSearch;
-
-function handleTracking(data) {
-    document.getElementById('searchBtn').innerText = "TRACK";
-    if(data.error) return alert(data.error);
-
-    document.getElementById('results').style.display = "block";
-    document.getElementById('stText').innerText = data.status;
-    document.getElementById('lcText').innerText = data.destination || "Registered";
-    document.getElementById('tmText').innerText = data.lastUpdated || "Just now";
-
-    const s = data.status.toLowerCase();
-    let p = 0, n = 0;
-
-    if(s.includes("delivered") || s.includes("arrived")){ p=84; n=5; }
-    else if(s.includes("out")){ p=63; n=4; }
-    else if(s.includes("transit")){ p=42; n=3; }
-    else if(s.includes("picked")){ p=21; n=2; }
-    else { p=5; n=1; }
-
-    document.getElementById('fillBar').style.width = p + "%";
-    for(let i=1; i<=5; i++) {
-        document.getElementById('s'+i).classList.toggle('active', i<=n);
-    }
-
-    if(n === 5) {
-        const rBtn = document.getElementById('receiptBtn');
-        rBtn.style.display = "block";
-        rBtn.onclick = () => window.open(`${SCRIPT_URL}?tracking=${data.tracking}&mode=receipt`, "_blank");
-    }
-}
-
-window.onload = function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id') || urlParams.get('tracking');
-    if(id) {
-        document.getElementById('waybillInput').value = id;
-        initiateSearch();
-    }
-}
+    // Allow 'Enter' key to trigger search
+    document.getElementById('waybillInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') initiateSearch();
+    });
 </script>
 </body>
 </html>
