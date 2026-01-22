@@ -40,7 +40,6 @@
         .section-title { margin-bottom: 60px; }
         .section-title h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark-navy); margin: 10px 0; }
         .section-title small { color: var(--gid-red); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
-
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .service-card { background: white; padding: 50px 30px; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; transition: 0.3s; }
         .service-card:hover { transform: translateY(-12px); border-color: var(--gid-red); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
@@ -48,7 +47,23 @@
         .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
         .service-card p { color: var(--slate-600); line-height: 1.6; font-size: 1rem; }
 
-        @media (max-width: 768px) { .nav-links { display: none; } .hero-section { padding: 100px 20px; } }
+        /* CALCULATOR SECTION */
+        .quote-tool { max-width: 900px; margin: 100px auto; padding: 0 25px; }
+        .calculator-card { background: var(--dark-navy); color: white; padding: 40px; border-radius: 24px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: center; }
+        .input-group label { display: block; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; color: #94a3b8; text-align: left; }
+        .input-group input, .input-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: white; font-weight: 600; font-family: inherit; box-sizing: border-box; }
+        .result-display { text-align: center; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 18px; border: 1px dashed #334155; }
+        #totalPrice { font-size: 2.5rem; margin: 10px 0; color: var(--gid-red); }
+
+        /* FOOTER */
+        footer { background: #070b14; color: white; padding: 60px 25px; text-align: center; margin-top: 100px; border-top: 4px solid var(--gid-red); }
+        .footer-logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; display: block; text-decoration: none; color: white; }
+        .footer-logo span { color: var(--gid-red); }
+        .footer-links { display: flex; justify-content: center; gap: 30px; list-style: none; padding: 0; margin-bottom: 30px; }
+        .footer-links a { color: #64748b; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-links a:hover { color: white; }
+
+        @media (max-width: 768px) { .calculator-card { grid-template-columns: 1fr; } .hero-section h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
@@ -58,7 +73,7 @@
         <a href="#" class="logo">GID <span>LOGISTICS</span></a>
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
-            <li><a href="#about">Our Network</a></li>
+            <li><a href="#rates">Rates</a></li>
             <li><a href="#" class="btn-cta">Request Quote</a></li>
         </ul>
     </nav>
@@ -88,6 +103,45 @@
     </div>
 </section>
 
+<section class="quote-tool" id="rates">
+    <div class="section-title">
+        <small>Pricing Transparency</small>
+        <h2>Estimate Shipping Cost</h2>
+    </div>
+    <div class="calculator-card">
+        <div class="calc-grid">
+            <div class="input-group">
+                <label>Weight (kg)</label>
+                <input type="number" id="weight" placeholder="0.00" oninput="calculateRate()">
+            </div>
+            <div class="input-group" style="margin-top: 20px;">
+                <label>Destination</label>
+                <select id="region" onchange="calculateRate()">
+                    <option value="500">Local (Within City)</option>
+                    <option value="1500">Regional (Within State)</option>
+                    <option value="3500">National (Cross Country)</option>
+                    <option value="15000">International</option>
+                </select>
+            </div>
+        </div>
+        <div class="result-display">
+            <p style="color: #94a3b8; margin: 0;">Estimated Total:</p>
+            <h2 id="totalPrice">₦0.00</h2>
+            <small style="color: #475569;">*Excludes insurance and handling</small>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <a href="#" class="footer-logo">GID <span>LOGISTICS</span></a>
+    <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Support</a></li>
+    </ul>
+    <p style="color: #475569; font-size: 12px;">© 2026 GID Logistics Global. All Rights Reserved.</p>
+</footer>
+
 <script>
     function initiateSearch() {
         const waybill = document.getElementById('waybillInput').value.trim();
@@ -95,6 +149,13 @@
         window.open(`track.html?id=${waybill.toUpperCase()}`, "_blank");
     }
     document.getElementById('waybillInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') initiateSearch(); });
+
+    function calculateRate() {
+        const weight = document.getElementById('weight').value || 0;
+        const baseRate = document.getElementById('region').value;
+        const total = weight * baseRate;
+        document.getElementById('totalPrice').innerText = '₦' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
+    }
 </script>
 </body>
 </html>
