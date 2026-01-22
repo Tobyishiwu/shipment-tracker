@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Results | GID Logistics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --gid-red: #e31e24; --navy: #0f172a; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f1f5f9; margin: 0; padding: 40px 20px; color: var(--navy); }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); position: relative; }
+        .brand-header { text-align: center; margin-bottom: 30px; }
+        .brand-header h2 { margin: 0; color: var(--gid-red); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .status-hero { text-align: center; margin-bottom: 40px; }
+        .status-hero h1 { font-size: 2.5rem; margin: 10px 0; font-weight: 800; }
+        .status-hero small { font-weight: 700; color: #64748b; text-transform: uppercase; }
+
+        /* STEPPER */
+        .stepper { display: flex; justify-content: space-between; position: relative; margin: 40px 0; }
+        .line-bg { position: absolute; top: 11px; left: 10%; right: 10%; height: 4px; background: #e2e8f0; z-index: 1; border-radius: 2px; }
+        .line-fill { position: absolute; top: 11px; left: 10%; width: 0%; height: 4px; background: var(--gid-red); z-index: 2; transition: 1.5s ease; border-radius: 2px; }
+        .step { position: relative; z-index: 3; text-align: center; width: 20%; }
+        .dot { width: 22px; height: 22px; background: white; border: 4px solid #e2e8f0; border-radius: 50%; margin: 0 auto; transition: 0.4s; }
+        .step.active .dot { border-color: var(--gid-red); background: var(--gid-red); box-shadow: 0 0 10px rgba(227, 30, 36, 0.3); }
+        .step label { display: block; margin-top: 12px; font-size: 10px; font-weight: 800; text-transform: uppercase; color: #94a3b8; }
+        .step.active label { color: var(--navy); }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; border-top: 1px solid #f1f5f9; pt: 30px; }
+        .info-box { background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .info-box label { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; }
+        .info-box div { font-weight: 700; font-size: 1rem; margin-top: 6px; }
+
+        .btn-receipt { display: none; width: 100%; background: var(--navy); color: white; border: none; padding: 20px; border-radius: 14px; font-weight: 800; margin-top: 30px; cursor: pointer; font-size: 1rem; }
+        .loader { text-align: center; padding: 60px; font-weight: 700; color: var(--navy); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="loading" class="loader">Verifying Waybill Security...</div>
+
+    <div id="results" style="display:none;">
+        <div class="card">
+            <div class="brand-header"><h2>GID Logistics</h2></div>
+            
+            <div class="status-hero">
+                <small id="wbDisplay">---</small>
+                <h1 id="stText">Processing</h1>
+            </div>
+
+            <div class="stepper">
+                <div class="line-bg"></div>
+                <div class="line-fill" id="fillBar"></div>
+                <div class="step" id="s1"><div class="dot"></div><label>Created</label></div>
+                <div class="step" id="s2"><div class="dot"></div><label>Picked</label></div>
+                <div class="step" id="s3"><div class="dot"></div><label>Transit</label></div>
+                <div class="step" id="s4"><div class="dot"></div><label>Out</label></div>
+                <div class="step" id="s5"><div class="dot"></div><label>Delivered</label></div>
+            </div>
+
+            <div class="grid">
+                <div class="info-box"><label>Destination</label><div id="lcText">---</div></div>
+                <div class="info-box"><label>Last Updated</label><div id="tmText">---</div></div>
+            </div>
+
+            <button class="btn-receipt" id="receiptBtn">Generate Official Receipt</button>
+        </div>
+        <p style="text-align:center; margin-top:30px; color:#64748b; font-size:14px;">Secure encrypted connection via GID Global Systems.</p>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCSYD4qFpSqMYtHlZdPzCDveU2AVXhaiQUQ00lbibiVPw56nlb8j_383SEO0zMtqTR/exec";
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const trk = urlParams.get('id');
+        if(!trk) return document.getElementById('loading').innerText = "Waybill ID is missing.";
+
+        const script = document.createElement('script');
+        script.src = `${SCRIPT_URL}?tracking=${trk.toUpperCase()}&callback=handleResults`;
+        document.body.appendChild(script);
+    };
+
+    function handleResults(data) {
+        if(data.error) {
+            document.getElementById('loading').innerText = "Tracking ID Not Found.";
+            return;
+        }
+
+        document.getElementById('loading').style.display = "none";
+        document.getElementById('results').style.display = "block";
+        
+        document.getElementById('stText').innerText = data.status;
+        document.getElementById('wbDisplay').innerText = data.tracking;
+        document.getElementById('lcText').innerText = data.destination || "In Processing";
+        document.getElementById('tmText').innerText = data.lastUpdated || "Live Now";
+
+        const s = data.status.toLowerCase();
+        let p = 0, n = 0;
+        if(s.includes("delivered") || s.includes("arrived")){ p=80; n=5; }
+        else if(s.includes("out")){ p=60; n=4; }
+        else if(s.includes("transit")){ p=40; n=3; }
+        else if(s.includes("picked")){ p=20; n=2; }
+        else { p=5; n=1; }
+
+        setTimeout(() => {
+            document.getElementById('fillBar').style.width = p + "%";
+            for(let i=1; i<=5; i++) {
+                document.getElementById('s'+i).classList.toggle('active', i<=n);
+            }
+        }, 300);
+
+        if(n === 5) {
+            const btn = document.getElementById('receiptBtn');
+            btn.style.display = "block";
+            btn.onclick = () => window.open(`${SCRIPT_URL}?tracking=${data.tracking}&mode=receipt`, "_blank");
+        }
+    }
+</script>
+</body>
+</html>
