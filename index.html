@@ -10,36 +10,50 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding-top: 80px; scroll-behavior: smooth; }
         
-        header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); }
+        header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--dark-navy); }
         .logo span { color: var(--gid-red); }
-        .btn-cta { background: var(--dark-navy); color: white !important; padding: 10px 22px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; }
+        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .btn-cta { background: var(--dark-navy); color: white !important; padding: 10px 22px; border-radius: 8px; text-decoration: none; }
 
         .hero-section {
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
                         url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover; background-position: center; padding: 120px 20px; text-align: center; color: white;
+            background-size: cover; background-position: center; padding: 140px 20px; text-align: center; color: white;
         }
+        .hero-section h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin: 0; line-height: 1.1; }
+        .hero-section p { color: #cbd5e1; font-size: 1.2rem; margin: 25px 0 45px; max-width: 700px; margin-inline: auto; }
 
         .search-container { max-width: 650px; margin: -60px auto 0; padding: 0 20px; position: relative; z-index: 10; }
-        .search-card { background: #fff; padding: 12px; border-radius: 16px; display: flex; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
+        .search-card { background: #fff; padding: 12px; border-radius: 16px; display: flex; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); }
         .search-card input { flex: 1; border: none; padding: 15px; font-size: 1.1rem; outline: none; font-weight: 600; text-transform: uppercase; }
         .search-card button { background: var(--gid-red); color: white; border: none; padding: 0 40px; border-radius: 10px; font-weight: 800; cursor: pointer; }
 
-        .quote-form-section { max-width: 1200px; margin: 80px auto; padding: 0 25px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+        .services { max-width: 1200px; margin: 100px auto; padding: 0 25px; text-align: center; }
+        .section-title { margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark-navy); }
+        .section-title small { color: var(--gid-red); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; }
+
+        .quote-form-section { max-width: 1200px; margin: 100px auto; padding: 0 25px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start; }
         .main-form { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .full-width { grid-column: span 2; }
         .form-group label { display: block; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; color: #94a3b8; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; }
-        .submit-btn { width: 100%; background: var(--dark-navy); color: white; padding: 18px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .submit-btn:hover { background: var(--gid-red); }
+        .submit-btn { width: 100%; background: var(--dark-navy); color: white; padding: 18px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+
+        .testimonials { background: #f1f5f9; padding: 100px 25px; text-align: center; }
+        .testimonial-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .testi-card { background: white; padding: 30px; border-radius: 20px; text-align: left; }
 
         .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
-
-        footer { background: #070b14; color: white; padding: 40px 25px; text-align: center; }
-        @media (max-width: 768px) { .quote-form-section { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } }
+        footer { background: #070b14; color: white; padding: 60px 25px; text-align: center; }
+        
+        @media (max-width: 768px) { .quote-form-section { grid-template-columns: 1fr; } .nav-links { display: none; } }
     </style>
 </head>
 <body>
@@ -47,26 +61,39 @@
 <header>
     <nav class="nav-container">
         <a href="#" class="logo">GID <span>LOGISTICS</span></a>
-        <a href="https://wa.me/2347066958826" class="btn-cta">Live Chat</a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#quote">Request Quote</a></li>
+            <li><a href="https://wa.me/2347066958826" class="btn-cta">Live Chat</a></li>
+        </ul>
     </nav>
 </header>
 
 <div class="hero-section">
     <h1>Logistics Without <br> Boundaries.</h1>
-    <p>Premium shipping and global tracking solutions.</p>
+    <p>Empowering global commerce through high-velocity freight and smart tracking.</p>
 </div>
 
 <div class="search-container">
     <div class="search-card">
-        <input type="text" id="waybillInput" placeholder="Enter Waybill ID">
+        <input type="text" id="waybillInput" placeholder="Enter Waybill ID (e.g. GID-1001)">
         <button onclick="initiateSearch()">TRACK</button>
     </div>
 </div>
 
+<section class="services" id="services">
+    <div class="section-title"><small>Capabilities</small><h2>Global Solutions</h2></div>
+    <div class="services-grid">
+        <div class="service-card"><h3>✈️ Air Freight</h3><p>Fast global delivery for urgent cargo.</p></div>
+        <div class="service-card"><h3>🚢 Ocean Cargo</h3><p>Reliable FCL and LCL container shipping.</p></div>
+        <div class="service-card"><h3>🚛 Land Transport</h3><p>Secure haulage and last-mile delivery.</p></div>
+    </div>
+</section>
+
 <section class="quote-form-section" id="quote">
     <div class="form-info">
         <h2 style="font-size: 2.5rem; color: var(--dark-navy);">Get a <span style="color: var(--gid-red);">Quote</span></h2>
-        <p>Log your shipment details here. We will save your request and connect you to an agent on WhatsApp.</p>
+        <p>Log your shipment and we will contact you on WhatsApp within minutes.</p>
     </div>
 
     <form class="main-form" id="freightForm">
@@ -74,9 +101,7 @@
             <div class="form-group"><label>Name</label><input type="text" id="custName" required></div>
             <div class="form-group"><label>Service</label>
                 <select id="shipType">
-                    <option>Air Freight</option>
-                    <option>Ocean Freight</option>
-                    <option>Local Logistics</option>
+                    <option>Air Freight</option><option>Ocean Freight</option><option>Local</option>
                 </select>
             </div>
             <div class="form-group"><label>Origin</label><input type="text" id="pickup" required></div>
@@ -84,8 +109,16 @@
             <div class="form-group full-width"><label>Weight (kg)</label><input type="number" id="shipWeight" required></div>
             <div class="form-group full-width"><label>Description</label><textarea id="shipDesc" rows="2"></textarea></div>
         </div>
-        <button type="button" class="submit-btn" id="submitBtn" onclick="sendQuoteRequest()">Submit & Chat</button>
+        <button type="button" class="submit-btn" id="submitBtn" onclick="sendQuoteRequest()">Submit & Chat on WhatsApp</button>
     </form>
+</section>
+
+<section class="testimonials">
+    <div class="section-title"><h2>Client Reviews</h2></div>
+    <div class="testimonial-grid">
+        <div class="testi-card"><p>"Fastest delivery from China to Lagos!"</p><strong>- Chidi O.</strong></div>
+        <div class="testi-card"><p>"Excellent support and live tracking."</p><strong>- Sarah A.</strong></div>
+    </div>
 </section>
 
 <a href="https://wa.me/2347066958826" class="chat-widget" target="_blank">
@@ -105,29 +138,25 @@
 
     async function sendQuoteRequest() {
         const btn = document.getElementById('submitBtn');
-        const data = {
-            name: document.getElementById('custName').value,
-            type: document.getElementById('shipType').value,
-            origin: document.getElementById('pickup').value,
-            destination: document.getElementById('dropoff').value,
-            weight: document.getElementById('shipWeight').value,
-            desc: document.getElementById('shipDesc').value
-        };
+        const name = document.getElementById('custName').value;
+        const type = document.getElementById('shipType').value;
+        const from = document.getElementById('pickup').value;
+        const to = document.getElementById('dropoff').value;
+        const weight = document.getElementById('shipWeight').value;
+        const desc = document.getElementById('shipDesc').value;
 
-        if(!data.name || !data.origin || !data.destination || !data.weight) return alert("Please fill in all fields.");
+        if(!name || !from || !to || !weight) return alert("Please fill in all fields.");
+        btn.innerText = "Processing...";
 
-        btn.innerText = "Syncing Data...";
-        
         // Save to Google Sheets
-        const query = `?action=saveQuote&name=${encodeURIComponent(data.name)}&type=${encodeURIComponent(data.type)}&origin=${encodeURIComponent(data.origin)}&destination=${encodeURIComponent(data.destination)}&weight=${data.weight}&desc=${encodeURIComponent(data.desc)}`;
+        const query = `?action=saveQuote&name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}&weight=${weight}&desc=${encodeURIComponent(desc)}`;
         fetch(BACKEND_URL + query, { mode: 'no-cors' });
 
         // Open WhatsApp
-        const msg = `*GID QUOTE REQUEST*%0A------------------%0A*Name:* ${data.name}%0A*Route:* ${data.origin} to ${data.destination}%0A*Service:* ${data.type}%0A*Weight:* ${data.weight}kg`;
+        const msg = `*GID QUOTE REQUEST*%0A------------------%0A*Name:* ${name}%0A*Route:* ${from} to ${to}%0A*Service:* ${type}%0A*Weight:* ${weight}kg`;
         window.open(`https://wa.me/2347066958826?text=${msg}`, '_blank');
         
-        btn.innerText = "Success! Opening WhatsApp...";
-        setTimeout(() => { btn.innerText = "Submit & Chat"; }, 3000);
+        btn.innerText = "Submit & Chat on WhatsApp";
     }
 </script>
 </body>
