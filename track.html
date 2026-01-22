@@ -34,6 +34,17 @@
         .btn-receipt { display: none; width: 100%; background: var(--navy); color: white; border: none; padding: 22px; border-radius: 16px; font-weight: 800; margin-top: 35px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
         .btn-receipt:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2); }
         .loader { text-align: center; padding: 80px; font-weight: 800; font-size: 1.2rem; }
+
+        /* LIVE CHAT WIDGET */
+        .chat-widget {
+            position: fixed; bottom: 30px; right: 30px; z-index: 1000;
+            background: #25d366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            transition: 0.3s;
+        }
+        .chat-widget:hover { transform: scale(1.1); }
+        .chat-widget svg { width: 32px; height: 32px; fill: white; }
         
         @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } .status-hero h1 { font-size: 2rem; } }
     </style>
@@ -72,6 +83,10 @@
     </div>
 </div>
 
+<a id="chatLink" href="https://wa.me/2347066958826?text=Hi GID Support, I need help with my tracking." class="chat-widget" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.006.332.013c.101.007.237-.038.371.29s.462 1.128.502 1.209c.039.081.066.174.011.282-.055.108-.083.174-.166.27-.083.097-.167.177-.247.273-.081.096-.164.2-.07.362.094.161.411.679.883 1.101.607.541 1.117.708 1.282.79s.259.061.356-.049c.098-.11.411-.479.522-.642.11-.164.221-.137.371-.083.15.054.95.448 1.113.53s.271.136.311.204c.04.068.04.394-.104.799z"></path></svg>
+</a>
+
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCSYD4qFpSqMYtHlZdPzCDveU2AVXhaiQUQ00lbibiVPw56nlb8j_383SEO0zMtqTR/exec";
 
@@ -79,6 +94,10 @@
         const urlParams = new URLSearchParams(window.location.search);
         const trk = urlParams.get('id');
         if(!trk) return document.getElementById('loading').innerText = "Waybill ID Required.";
+
+        // Update WhatsApp text to include the tracking number automatically
+        const chatLink = document.getElementById('chatLink');
+        chatLink.href = `https://wa.me/2347066958826?text=Hi GID Support, I need help with tracking number ${trk.toUpperCase()}.`;
 
         const script = document.createElement('script');
         script.src = `${SCRIPT_URL}?tracking=${trk.toUpperCase()}&callback=handleResults`;
