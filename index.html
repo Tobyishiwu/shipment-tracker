@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GID Logistics | Excellence. Simply Delivered.</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -12,62 +11,39 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--navy)}
 a{text-decoration:none;color:var(--muted);font-weight:600}
-
 .wrap{max-width:1200px;margin:auto;padding:0 20px}
-
-/* Top bars */
 .utility{background:#fff;border-bottom:1px solid var(--b);font-size:12px}
 .utility .wrap{display:flex;justify-content:flex-end;gap:20px;padding:8px 20px}
 header{background:#fff;position:sticky;top:0;border-bottom:1px solid var(--b);z-index:100}
 header .wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
-.logo{font-size:22px;font-weight:800}
-.logo span{color:var(--red)}
-
-/* Hero */
+.logo{font-size:22px;font-weight:800}.logo span{color:var(--red)}
 .hero{background:var(--navy);color:#fff;text-align:center;padding:90px 20px 140px}
-.hero h1{margin:0;font-size:42px}
-.hero p{opacity:.85; font-size: 18px}
-
-/* Hub */
+.hero h1{margin:0;font-size:42px}.hero p{opacity:.85; font-size: 18px}
 .hub{max-width:960px;margin:-90px auto 60px;padding:0 20px}
 .tabs{display:flex}
-.tab{padding:14px 26px;font-size:13px;font-weight:800;text-transform:uppercase;cursor:pointer;
-background:rgba(255,255,255,.15);color:#fff; transition: 0.3s;}
+.tab{padding:14px 26px;font-size:13px;font-weight:800;text-transform:uppercase;cursor:pointer;background:rgba(255,255,255,.15);color:#fff;transition: 0.3s;border:none}
 .tab.active{background:#fff;color:var(--navy)}
-
-.card{background:#fff;padding:40px;border-radius:0 0 12px 12px;
-box-shadow:0 25px 50px -15px rgba(0,0,0,.15)}
-
+.card{background:#fff;padding:40px;border-radius:0 0 12px 12px;box-shadow:0 25px 50px -15px rgba(0,0,0,.15)}
 .row{display:flex;gap:10px}
-input{flex:1;padding:16px;border:1.8px solid var(--b);border-radius:6px;font-size:16px; transition: 0.3s;}
+input{flex:1;padding:16px;border:1.8px solid var(--b);border-radius:6px;font-size:16px;transition: 0.3s}
 input:focus{outline:none;border-color:var(--red)}
 button{background:var(--red);color:#fff;border:none;padding:16px 36px;border-radius:6px;font-weight:800;cursor:pointer}
-button:disabled{opacity: 0.6; cursor: not-allowed;}
-
-/* Result */
+button:disabled{opacity: 0.6; cursor: not-allowed}
 .result{margin-top:30px;border:1px solid var(--b);border-radius:10px;overflow:hidden;display:none}
-.res-head{padding:16px 24px;background:#f9fafb;border-bottom:1px solid var(--b);
-display:flex;justify-content:space-between;align-items:center}
+.res-head{padding:16px 24px;background:#f9fafb;border-bottom:1px solid var(--b);display:flex;justify-content:space-between;align-items:center}
 .badge{background:var(--red);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:800}
-
-/* Timeline */
 .timeline{display:flex;justify-content:space-between;padding:25px}
 .step{flex:1;text-align:center;font-size:11px;font-weight:800;text-transform:uppercase;position:relative;color:#d1d5db}
-.step:before{content:'';width:16px;height:16px;background:#d1d5db;border-radius:50%;
-display:block;margin:0 auto 8px; position: relative; z-index: 2;}
+.step:before{content:'';width:16px;height:16px;background:#d1d5db;border-radius:50%;display:block;margin:0 auto 8px; position: relative; z-index: 2}
 .step.active{color:var(--navy)}
 .step.active:before{background:var(--red)}
-.step:not(:last-child):after{content:'';position:absolute;top:7px;left:50%;
-width:100%;height:2px;background:#d1d5db; z-index: 1;}
+.step:not(:last-child):after{content:'';position:absolute;top:7px;left:50%;width:100%;height:2px;background:#d1d5db; z-index: 1}
 .step.active.completed:after{background:var(--red)}
-
 .hidden{display:none}
-
-/* Footer */
 footer{background:#fff;border-top:1px solid var(--b);padding:50px 20px}
 footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px}
-footer h4{margin-bottom: 15px;}
-footer p{font-size:14px;color:var(--muted); line-height: 1.6;}
+footer h4{margin-bottom: 15px}
+footer p{font-size:14px;color:var(--muted); line-height: 1.6}
 </style>
 </head>
 
@@ -95,8 +71,8 @@ footer p{font-size:14px;color:var(--muted); line-height: 1.6;}
 
 <section class="hub">
   <div class="tabs">
-    <div class="tab active" onclick="show('track',this)">Track</div>
-    <div class="tab" onclick="show('quote',this)">Get a Quote</div>
+    <div id="tab-track" class="tab active" onclick="show('track')">Track</div>
+    <div id="tab-quote" class="tab" onclick="show('quote')">Get a Quote</div>
   </div>
 
   <div class="card">
@@ -106,12 +82,8 @@ footer p{font-size:14px;color:var(--muted); line-height: 1.6;}
         <input id="tid" placeholder="Enter Waybill ID (e.g. GID-1001)">
         <button id="trackBtn" onclick="runTrack()">Track</button>
       </div>
-
       <div class="result" id="result">
-        <div class="res-head">
-          <strong id="status">—</strong>
-          <span class="badge">LIVE</span>
-        </div>
+        <div class="res-head"><strong id="status">—</strong><span class="badge">LIVE</span></div>
         <div class="timeline">
           <div class="step" id="step1">Ordered</div>
           <div class="step" id="step2">Picked Up</div>
@@ -135,8 +107,8 @@ footer p{font-size:14px;color:var(--muted); line-height: 1.6;}
 
 <footer>
   <div class="wrap">
-    <div><h4>About</h4><p>GID Logistics provides international freight forwarding and air cargo solutions tailored to your business needs.</p></div>
-    <div><h4>Help</h4><p>Tracking FAQ<br>Customs Support<br>Dangerous Goods</p></div>
+    <div><h4>About</h4><p>GID Logistics provides international freight solutions.</p></div>
+    <div><h4>Help</h4><p>Tracking FAQ<br>Customs Support</p></div>
     <div><h4>Contact</h4><p>support@gidlogistics.com<br>+234 706 695 8826</p></div>
   </div>
 </footer>
@@ -144,24 +116,22 @@ footer p{font-size:14px;color:var(--muted); line-height: 1.6;}
 <script>
 const URL = "https://script.google.com/macros/s/AKfycbz2HobpPNk0wRVQnvcZHjlNeuqtKVc4ADXSvtWBRlDXihcxL5T9F9Mtjk70nq5qIxDB/exec";
 
-function show(id,el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('.card>div').forEach(d=>d.classList.add('hidden'));
+function show(id){
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.getElementById('track').classList.add('hidden');
+  document.getElementById('quote').classList.add('hidden');
   document.getElementById(id).classList.remove('hidden');
 }
 
-// BACKEND TRACKING
 function runTrack(){
   const id = document.getElementById('tid').value.trim();
   if(!id) return alert("Please enter ID");
-  
   const btn = document.getElementById('trackBtn');
   btn.innerText = "Searching...";
   btn.disabled = true;
-
   const script = document.createElement('script');
-  script.src = `${URL}?tracking=${id.toUpperCase()}&callback=handleTrack`;
+  script.src = URL + "?tracking=" + id.toUpperCase() + "&callback=handleTrack";
   document.body.appendChild(script);
 }
 
@@ -169,50 +139,36 @@ function handleTrack(r){
   const btn = document.getElementById('trackBtn');
   btn.innerText = "Track";
   btn.disabled = false;
-
   if(r.error){
     alert("Waybill not found.");
     document.getElementById('result').style.display = 'none';
     return;
   }
-
   document.getElementById('result').style.display='block';
   document.getElementById('status').innerText = r.status.toUpperCase();
-  
-  // Update Timeline
-  const steps = [
-    document.getElementById('step1'),
-    document.getElementById('step2'),
-    document.getElementById('step3'),
-    document.getElementById('step4')
-  ];
-  
+  const steps = [document.getElementById('step1'), document.getElementById('step2'), document.getElementById('step3'), document.getElementById('step4')];
   steps.forEach(s => {s.classList.remove('active'); s.classList.remove('completed');});
   const st = r.status.toLowerCase();
-
-  steps[0].classList.add('active'); // Always active
+  steps[0].classList.add('active');
   if(st.includes("picked") || st.includes("transit") || st.includes("delivered")) { steps[0].classList.add('completed'); steps[1].classList.add('active'); }
   if(st.includes("transit") || st.includes("delivered")) { steps[1].classList.add('completed'); steps[2].classList.add('active'); }
   if(st.includes("delivered")) { steps[2].classList.add('completed'); steps[3].classList.add('active'); }
 }
 
-// BACKEND QUOTING
 async function runQuote(){
-  const data = {
-    n: document.getElementById('qName').value,
-    f: document.getElementById('qFrom').value,
-    t: document.getElementById('qTo').value
-  };
-  if(!data.n || !data.f || !data.t) return alert("Fill all fields");
-
+  const n = document.getElementById('qName').value;
+  const f = document.getElementById('qFrom').value;
+  const t = document.getElementById('qTo').value;
+  if(!n || !f || !t) return alert("Fill all fields");
   const btn = document.getElementById('quoteBtn');
   btn.innerText = "Processing...";
   btn.disabled = true;
-
   try {
-    await fetch(`${URL}?action=saveQuote&name=${encodeURIComponent(data.n)}&origin=${encodeURIComponent(data.f)}&destination=${encodeURIComponent(data.t)}`, {mode:'no-cors'});
+    await fetch(URL + "?action=saveQuote&name=" + encodeURIComponent(n) + "&origin=" + encodeURIComponent(f) + "&destination=" + encodeURIComponent(t), {mode:'no-cors'});
     alert("Quote Request Sent Successfully!");
-    document.querySelectorAll('#quote input').forEach(i => i.value = "");
+    document.getElementById('qName').value = "";
+    document.getElementById('qFrom').value = "";
+    document.getElementById('qTo').value = "";
   } catch(e) {
     alert("Connection Error");
   } finally {
@@ -221,6 +177,5 @@ async function runQuote(){
   }
 }
 </script>
-
 </body>
 </html>
