@@ -3,58 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>GID Logistics | Global Freight & Tracking</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>GID Logistics | Enterprise Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root{--navy:#0f172a;--red:#e31e24;--bg:#ffffff;--soft-bg:#f8fafc;--muted:#64748b;--border:#e2e8f0;--green:#10b981}
         *{box-sizing:border-box; margin:0; padding:0}
         body{font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--navy); overflow-x:hidden}
         .container{max-width:1200px; margin:auto; padding:0 20px}
 
-        /* DHL-STYLE HEADER */
+        /* HEADER */
         header{background:#fff; border-bottom:1px solid var(--border); padding:15px 0; position:sticky; top:0; z-index:1000}
         .nav-flex{display:flex; justify-content:space-between; align-items:center}
         .logo{font-size:24px; font-weight:900; letter-spacing:-1px}
         .logo span{color:var(--red)}
-        .nav-links{display:flex; gap:25px; font-size:14px; font-weight:700}
-        .nav-links a{text-decoration:none; color:var(--navy); transition:0.2s}
-        .nav-links a:hover{color:var(--red)}
+        .nav-links{display:none; gap:25px; font-size:14px; font-weight:700}
+        @media(min-width: 768px) { .nav-links { display: flex; } }
 
-        /* HERO & SEARCH BAR (DHL PRIMARY FUNCTION) */
+        /* HERO & HUB */
         .hero{background:var(--navy); color:#fff; padding:60px 0 100px; text-align:center}
-        .hero h1{font-size:42px; font-weight:800; margin-bottom:15px}
-        .hero p{font-size:18px; opacity:0.8; margin-bottom:40px}
+        .hero h1{font-size:clamp(32px, 5vw, 48px); font-weight:800; margin-bottom:15px; letter-spacing:-1.5px}
+        .hero p{font-size:clamp(16px, 2vw, 20px); opacity:0.8; padding: 0 20px}
 
-        .search-hub{max-width:900px; margin:-60px auto 40px; background:#fff; border-radius:12px; box-shadow:0 30px 60px rgba(0,0,0,0.12); padding:10px; display:flex; flex-direction:column}
+        .search-hub{max-width:900px; margin:-80px auto 40px; background:#fff; border-radius:16px; box-shadow:0 30px 60px rgba(15,23,42,0.15); padding:8px; display:flex; flex-direction:column}
         .hub-tabs{display:flex; border-bottom:1px solid var(--border)}
-        .hub-tab{flex:1; padding:20px; border:none; background:none; font-weight:800; cursor:pointer; font-size:15px; color:var(--muted); border-bottom:3px solid transparent}
+        .hub-tab{flex:1; padding:18px; border:none; background:none; font-weight:800; cursor:pointer; font-size:14px; color:var(--muted); border-bottom:4px solid transparent; transition:0.3s}
         .hub-tab.active{color:var(--red); border-bottom-color:var(--red)}
 
-        .hub-content{padding:30px}
-        .input-group{display:flex; gap:10px}
-        .main-input{flex:1; padding:18px; border:2px solid var(--border); border-radius:8px; font-size:16px; outline:none}
-        .main-input:focus{border-color:var(--red)}
-        .btn-primary{background:var(--red); color:#fff; border:none; padding:0 40px; border-radius:8px; font-weight:800; cursor:pointer; font-size:16px}
+        .hub-content{padding:20px}
+        @media(min-width: 768px) { .hub-content { padding: 40px; } }
+
+        /* FORMS */
+        .input-group{display:flex; flex-direction:column; gap:10px}
+        @media(min-width: 600px) { .input-group { flex-direction: row; } }
         
-        /* SERVICE GRID (DHL DIVISIONS STYLE) */
-        .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px; margin:60px 0}
-        .service-card{background:var(--soft-bg); padding:30px; border-radius:12px; border-bottom:4px solid transparent; transition:0.3s}
-        .service-card:hover{transform:translateY(-10px); border-bottom-color:var(--red); background:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.05)}
-        .service-card h3{margin:15px 0 10px; font-size:20px}
-        .service-card p{color:var(--muted); font-size:14px; margin-bottom:20px}
+        .main-input{flex:1; padding:16px; border:2px solid var(--border); border-radius:12px; font-size:16px; outline:none; transition: 0.3s; width: 100%}
+        .main-input:focus{border-color:var(--red); box-shadow: 0 0 0 4px rgba(227, 30, 36, 0.1)}
+        
+        .btn-primary{background:var(--red); color:#fff; border:none; padding:16px 30px; border-radius:12px; font-weight:800; cursor:pointer; font-size:16px; transition:0.3s}
+        .btn-primary:hover{filter:brightness(1.1); transform:translateY(-2px)}
+        
+        .grid-row{display:grid; grid-template-columns: 1fr; gap:15px; margin-bottom:15px}
+        @media(min-width: 600px) { .grid-row { grid-template-columns: 1fr 1fr; } }
 
-        /* MODAL & TIMELINE */
-        .timeline{display:flex; justify-content:space-between; margin:30px 0; padding:20px; background:#fff; border-radius:8px}
-        .step{flex:1; text-align:center; font-size:10px; font-weight:800; color:#cbd5e1; position:relative}
-        .step.active{color:var(--red)}
-        .step i{display:block; font-size:22px; margin-bottom:8px; font-style:normal}
-        .modal{display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px)}
-        .modal-content{background:#fff; margin:10% auto; padding:40px; border-radius:15px; max-width:550px; position:relative}
+        /* SERVICES */
+        .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; margin:60px 0}
+        .service-card{background:var(--soft-bg); padding:30px; border-radius:16px; border-bottom:5px solid transparent; transition:0.3s}
+        .service-card:hover{transform:translateY(-8px); border-bottom-color:var(--red); background:#fff; box-shadow:0 15px 30px rgba(0,0,0,0.05)}
 
-        /* WHATSAPP & FOOTER */
-        .wa-float{position:fixed; bottom:30px; right:30px; background:#25d366; color:#fff; padding:15px 25px; border-radius:50px; text-decoration:none; font-weight:800; box-shadow:0 10px 25px rgba(37,211,102,0.3); z-index:1000}
-        footer{background:var(--navy); color:#fff; padding:60px 0; margin-top:100px; font-size:14px}
+        /* WHATSAPP ROUND MODERN */
+        .wa-fab {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 65px; height: 65px;
+            background: #25d366; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 25px rgba(37,211,102,0.4);
+            z-index: 1000; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .wa-fab:hover { transform: scale(1.1) rotate(10deg); }
+        .wa-fab svg { width: 35px; height: 35px; fill: white; }
+        .wa-pulse {
+            position: absolute; width: 100%; height: 100%;
+            background: #25d366; border-radius: 50%;
+            z-index: -1; animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        /* TIMELINE RESPONSIVE */
+        .timeline { display: flex; flex-direction: column; gap: 20px; margin: 30px 0; padding: 20px; background: #fff; border-radius: 12px; border: 1px solid var(--border); }
+        @media(min-width: 600px) { .timeline { flex-direction: row; justify-content: space-between; } }
+        
+        .step { flex: 1; text-align: center; font-size: 11px; font-weight: 800; color: #cbd5e1; position: relative; }
+        .step.active { color: var(--red); }
+        .step i { display: block; font-size: 24px; margin-bottom: 8px; font-style: normal; }
+        
+        /* FOOTER */
+        footer{background:var(--navy); color:#fff; padding:60px 0; font-size: 14px}
+        .footer-grid{display:grid; grid-template-columns: 1fr; gap:40px}
+        @media(min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+
         .hidden{display:none}
+        .modal{display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px)}
+        .modal-content{background:#fff; margin:15% auto; padding:30px; border-radius:16px; width:90%; max-width:500px; position:relative}
     </style>
 </head>
 <body>
@@ -62,136 +95,93 @@
 <header>
     <div class="container nav-flex">
         <div class="logo">GID<span>LOGISTICS</span></div>
-        <nav class="nav-links">
-            <a href="#">Track</a>
-            <a href="#">Ship</a>
-            <a href="#">Enterprise Solutions</a>
-            <a href="#">Help Center</a>
-        </nav>
-        <div style="font-weight:800; font-size:12px; color:var(--red)">NIGERIA | EN</div>
+        <nav class="nav-links"><a href="#">Track</a><a href="#">Ship</a><a href="#">Help</a></nav>
+        <div style="font-weight:800; font-size:11px; color:var(--red); border:1.5px solid var(--red); padding:4px 10px; border-radius:20px">NIGERIA</div>
     </div>
 </header>
 
 <section class="hero">
     <div class="container">
-        <h1>Excellence. Simply Delivered.</h1>
-        <p>Your global partner for air, sea, and express logistics.</p>
+        <h1>Global Freight. Redefined.</h1>
+        <p>Speed, security, and transparency in every shipment.</p>
     </div>
 </section>
 
 <div class="container">
     <div class="search-hub">
         <div class="hub-tabs">
-            <button class="hub-tab active" onclick="switchMode('track')">Track Shipment</button>
-            <button class="hub-tab" onclick="switchMode('quote')">Request a Quote</button>
+            <button class="hub-tab active" onclick="switchMode('track')">Track</button>
+            <button class="hub-tab" onclick="switchMode('quote')">Quote</button>
         </div>
         
         <div class="hub-content">
             <div id="m-track">
                 <div class="input-group">
-                    <input id="tid" class="main-input" placeholder="Enter Waybill ID (e.g., GID-1001)">
+                    <input id="tid" class="main-input" placeholder="Enter Waybill ID">
                     <button class="btn-primary" onclick="runTrack()" id="btn-t">Track</button>
                 </div>
-                <div id="track-history" style="display:flex; gap:10px; margin-top:15px"></div>
-
-                <div id="track-details" class="hidden" style="margin-top:30px; padding:30px; background:var(--soft-bg); border-radius:12px">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-end">
-                        <h2 id="r-status" style="color:var(--red); font-size:28px"></h2>
-                        <span id="r-date" style="font-weight:700; color:var(--muted)"></span>
-                    </div>
-                    <hr style="margin:20px 0; border:0; border-top:1px solid var(--border)">
+                <div id="track-history" style="display:flex; gap:8px; margin-top:12px; flex-wrap: wrap;"></div>
+                <div id="track-details" class="hidden" style="margin-top:25px; padding:20px; background:var(--soft-bg); border-radius:12px">
+                    <h3 id="r-status" style="color:var(--red); margin-bottom:15px"></h3>
                     <div class="timeline">
-                        <div class="step" id="s1"><i>📦</i>PREPARING</div>
-                        <div class="step" id="s2"><i>🚚</i>PICKED UP</div>
-                        <div class="step" id="s3"><i>✈️</i>IN TRANSIT</div>
-                        <div class="step" id="s4"><i>✅</i>DELIVERED</div>
+                        <div class="step" id="s1"><i>📦</i>PREP</div>
+                        <div class="step" id="s2"><i>🚚</i>PICK</div>
+                        <div class="step" id="s3"><i>✈️</i>AIR</div>
+                        <div class="step" id="s4"><i>✅</i>DONE</div>
                     </div>
-                    <button onclick="resetTrack()" style="background:var(--navy); color:#fff; border:none; padding:10px 20px; border-radius:5px; cursor:pointer">Track Another</button>
+                    <button onclick="resetTrack()" style="background:var(--navy); color:#fff; border:none; padding:10px; border-radius:8px; width:100%">Search Again</button>
                 </div>
             </div>
 
             <div id="m-quote" class="hidden">
-                <div style="display:flex; gap:10px; margin-bottom:20px">
-                    <button id="s-air" class="btn-primary" onclick="setService('Air')" style="flex:1">Air Freight</button>
-                    <button id="s-sea" class="btn-primary" onclick="setService('Sea')" style="flex:1; background:var(--soft-bg); color:var(--navy)">Sea Freight</button>
+                <div class="grid-row">
+                    <button id="s-air" class="btn-primary" onclick="setService('Air')">✈️ Air</button>
+                    <button id="s-sea" class="btn-primary" onclick="setService('Sea')" style="background:var(--soft-bg); color:var(--navy)">🚢 Sea</button>
                 </div>
-                <div class="row" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px">
-                    <input id="qN" class="main-input" placeholder="Your Name">
+                <div class="grid-row">
+                    <input id="qN" class="main-input" placeholder="Full Name">
                     <input id="qW" class="main-input" type="number" placeholder="Weight (kg)">
                 </div>
-                <div class="row" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px">
-                    <input id="qF" class="main-input" placeholder="From City">
-                    <input id="qT" class="main-input" placeholder="To City">
+                <div class="grid-row">
+                    <input id="qF" class="main-input" placeholder="Origin">
+                    <input id="qT" class="main-input" placeholder="Destination">
                 </div>
                 <label style="font-size:12px; display:block; margin-bottom:15px">
-                    <input type="checkbox" id="qTerms"> I agree to the <a href="javascript:void(0)" onclick="openTerms()" style="color:var(--red)">Service Terms</a>.
+                    <input type="checkbox" id="qTerms"> Agree to <a href="#" onclick="openTerms()" style="color:var(--red)">Terms</a>
                 </label>
-                <button class="btn-primary" onclick="runQuote()" id="btn-q" style="width:100%; height:60px">Get Instant Rate</button>
-                
-                <div id="quote-res" class="hidden" style="margin-top:20px; text-align:center; padding:20px; background:#f0fdf4; border-radius:10px">
-                    <p>Estimated Cost:</p>
-                    <h2 id="final-price" style="color:var(--green); font-size:32px"></h2>
-                    <button onclick="resetQuote()" style="margin-top:10px; background:none; border:none; color:var(--muted); cursor:pointer; text-decoration:underline">Start New Quote</button>
+                <button class="btn-primary" onclick="runQuote()" id="btn-q" style="width:100%">Calculate Rate</button>
+                <div id="quote-res" class="hidden" style="margin-top:20px; text-align:center; padding:20px; background:#f0fdf4; border-radius:12px">
+                    <h2 id="final-price" style="color:var(--green)"></h2>
+                    <button onclick="resetQuote()" style="margin-top:10px; background:none; border:none; color:var(--muted); text-decoration:underline">Reset</button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="grid">
-        <div class="service-card">
-            <h3>GID Express</h3>
-            <p>Door-to-door delivery for documents and parcels worldwide.</p>
-            <a href="#" style="color:var(--red); font-weight:800; text-decoration:none">Learn More →</a>
-        </div>
-        <div class="service-card">
-            <h3>Global Freight</h3>
-            <p>Specialized air and ocean cargo solutions for large-scale logistics.</p>
-            <a href="#" style="color:var(--red); font-weight:800; text-decoration:none">Learn More →</a>
-        </div>
-        <div class="service-card">
-            <h3>Supply Chain</h3>
-            <p>Warehousing and distribution management for growing enterprises.</p>
-            <a href="#" style="color:var(--red); font-weight:800; text-decoration:none">Learn More →</a>
         </div>
     </div>
 </div>
 
 <footer>
-    <div class="container" style="display:flex; justify-content:space-between">
-        <div>
-            <div class="logo">GID<span>LOGISTICS</span></div>
-            <p style="margin-top:10px; opacity:0.6">© 2026 GID Group. All rights reserved.</p>
-        </div>
-        <div style="display:flex; gap:60px">
-            <div><strong>Company</strong><br><br>About Us<br>Careers<br>Legal</div>
-            <div><strong>Social</strong><br><br>LinkedIn<br>Instagram</div>
-        </div>
+    <div class="container footer-grid">
+        <div><strong>GID LOGISTICS</strong><br><p style="opacity:0.6; margin-top:10px">Your excellence partner in global supply chains.</p></div>
+        <div><strong>Services</strong><br>Air Freight<br>Sea Cargo</div>
+        <div><strong>Support</strong><br>+234 706 695 8826<br>Lagos, Nigeria</div>
     </div>
 </footer>
 
-<div id="termsModal" class="modal">
-    <div class="modal-content">
-        <span style="position:absolute; right:20px; top:15px; cursor:pointer; font-size:24px" onclick="closeTerms()">&times;</span>
-        <h2 style="color:var(--red); margin-bottom:15px">Service Terms</h2>
-        <p style="font-size:14px; margin-bottom:10px">1. <strong>Inspection:</strong> All cargo is subject to security screening.</p>
-        <p style="font-size:14px; margin-bottom:10px">2. <strong>Pricing:</strong> Quotes are valid for 7 days and based on actual weight.</p>
-        <p style="font-size:14px; margin-bottom:20px">3. <strong>Liability:</strong> Standard carriage insurance applies to all shipments.</p>
-        <button class="btn-primary" onclick="closeTerms()" style="width:100%">I Accept</button>
-    </div>
-</div>
-
-<a href="https://wa.me/2347066958826" class="wa-float">💬 WhatsApp Support</a>
+<a href="https://wa.me/2347066958826" class="wa-fab" target="_blank">
+    <div class="wa-pulse"></div>
+    <svg viewBox="0 0 32 32"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.48 2.025 7.787l-2.025 7.387 7.563-1.987c2.237 1.2 4.805 1.887 7.537 1.887 8.837 0 16-7.163 16-16s-7.163-16-16-16zM23.712 22.112c-0.312 0.887-1.55 1.625-2.137 1.737-0.575 0.125-1.125 0.2-3.812-0.887-3.45-1.387-5.662-4.9-5.837-5.125-0.162-0.225-1.35-1.8-1.35-3.425s0.837-2.425 1.137-2.763c0.3-0.325 0.663-0.413 0.887-0.413s0.438 0.013 0.637 0.025c0.2 0.013 0.475-0.075 0.737 0.563s0.912 2.212 0.987 2.375c0.075 0.162 0.125 0.35 0.025 0.55s-0.15 0.337-0.3 0.512c-0.15 0.175-0.312 0.387-0.45 0.525-0.15 0.15-0.312 0.312-0.137 0.612s0.775 1.275 1.663 2.062c1.15 1.025 2.112 1.337 2.412 1.487s0.475 0.125 0.65-0.075c0.175-0.2 0.75-0.875 0.95-1.175s0.4-0.25 0.675-0.15 1.737 0.825 2.037 0.975c0.3 0.15 0.5 0.225 0.575 0.35s0.075 0.737-0.237 1.625z"></path></svg>
+</a>
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzGB4VPw-K5x9NrLKBWY0LPCBdf4Xu3fR-4UuhThbqRvjVQ08XbAgDdXA8Hq44DvvoI/exec";
 let selectedService = "Air", isTrackPending = false, isQuotePending = false;
 
-function switchMode(mode){
-    document.getElementById('m-track').classList.toggle('hidden', mode !== 'track');
-    document.getElementById('m-quote').classList.toggle('hidden', mode !== 'quote');
+function switchMode(m){
+    document.getElementById('m-track').classList.toggle('hidden', m !== 'track');
+    document.getElementById('m-quote').classList.toggle('hidden', m !== 'quote');
     const tabs = document.querySelectorAll('.hub-tab');
-    tabs[0].classList.toggle('active', mode === 'track');
-    tabs[1].classList.toggle('active', mode === 'quote');
+    tabs[0].classList.toggle('active', m === 'track');
+    tabs[1].classList.toggle('active', m === 'quote');
 }
 
 function setService(s){
@@ -202,7 +192,6 @@ function setService(s){
     document.getElementById('s-sea').style.color = (s === 'Sea' ? '#fff' : 'var(--navy)');
 }
 
-/* API CORE */
 function runTrack(){
     const id = document.getElementById('tid').value.trim();
     if(!id || isTrackPending) return;
@@ -215,14 +204,13 @@ function runTrack(){
 function handleTrack(r){
     isTrackPending = false; document.getElementById('btn-t').innerText = "Track";
     if(r.error) return alert(r.error);
+    document.getElementById('tid').parentElement.classList.add('hidden');
     document.getElementById('track-details').classList.remove('hidden');
     document.getElementById('r-status').innerText = r.status.toUpperCase();
-    document.getElementById('r-date').innerText = r.updated;
-    // Timeline Logic
+    const st = r.status.toLowerCase();
     const ids=['s1','s2','s3','s4'];
     ids.forEach(i => document.getElementById(i).classList.remove('active'));
     document.getElementById('s1').classList.add('active');
-    const st = r.status.toLowerCase();
     if(st.includes("pick") || st.includes("transit") || st.includes("delivered")) document.getElementById('s2').classList.add('active');
     if(st.includes("transit") || st.includes("delivered")) document.getElementById('s3').classList.add('active');
     if(st.includes("delivered")) document.getElementById('s4').classList.add('active');
@@ -232,25 +220,23 @@ function runQuote(){
     const n = document.getElementById('qN').value, w = document.getElementById('qW').value,
           f = document.getElementById('qF').value, t = document.getElementById('qT').value,
           terms = document.getElementById('qTerms').checked;
-    if(!n || !w || !f || !t || !terms || isQuotePending) return alert("Complete all fields & accept terms.");
-    isQuotePending = true; document.getElementById('btn-q').innerText = "CALCULATING...";
+    if(!n || !w || !f || !t || !terms || isQuotePending) return alert("Error: Data missing or Terms not accepted.");
+    isQuotePending = true; document.getElementById('btn-q').innerText = "PROCCESSING...";
     const s = document.createElement('script');
     s.src = `${SCRIPT_URL}?action=saveQuote&name=${encodeURIComponent(n)}&weight=${w}&origin=${encodeURIComponent(f)}&destination=${encodeURIComponent(t)}&service=${selectedService}&callback=handleQuote`;
     document.body.appendChild(s);
 }
 
 function handleQuote(r){
-    isQuotePending = false; document.getElementById('btn-q').innerText = "Get Instant Rate";
+    isQuotePending = false; document.getElementById('btn-q').innerText = "Calculate Rate";
     if(r.status === "Success"){
         document.getElementById('quote-res').classList.remove('hidden');
         document.getElementById('final-price').innerText = r.cost;
     }
 }
 
-function resetTrack(){ document.getElementById('track-details').classList.add('hidden'); document.getElementById('tid').value=""; }
+function resetTrack(){ document.getElementById('track-details').classList.add('hidden'); document.getElementById('tid').parentElement.classList.remove('hidden'); document.getElementById('tid').value=""; }
 function resetQuote(){ document.getElementById('quote-res').classList.add('hidden'); }
-function openTerms(){ document.getElementById('termsModal').style.display='block'; }
-function closeTerms(){ document.getElementById('termsModal').style.display='none'; }
 </script>
 </body>
 </html>
