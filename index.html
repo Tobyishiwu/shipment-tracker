@@ -1,107 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GID Logistics | Command Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GID Logistics | Excellence. Simply Delivered.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --red: #e31e24; --navy: #0f172a; }
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f4f7f9; color: var(--navy); }
-        header { background: white; border-bottom: 3px solid var(--red); padding: 15px; text-align: center; font-weight: 800; font-size: 1.4rem; }
-        .hero { background: var(--navy); color: white; padding: 50px 20px; text-align: center; }
-        .container { max-width: 500px; margin: -40px auto 40px; padding: 0 15px; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 25px; }
-        input { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; box-sizing: border-box; }
-        .btn { width: 100%; padding: 16px; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; color: white; transition: 0.3s; }
-        .btn-red { background: var(--red); }
-        .btn-navy { background: var(--navy); }
-        .btn:active { transform: scale(0.98); }
-        #res { display: none; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #eee; }
-        .status-text { font-size: 1.6rem; font-weight: 800; color: var(--red); display: block; margin-bottom: 10px; }
+        :root { --gid-navy: #0f172a; --gid-red: #e31e24; --bg-gray: #f2f5f8; --text-gray: #64748b; }
+        
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-gray); color: var(--gid-navy); }
+
+        /* DHL-Style Top Utility Bar */
+        .utility-bar { background: #fff; padding: 8px 5%; font-size: 12px; display: flex; justify-content: flex-end; gap: 20px; border-bottom: 1px solid #e2e8f0; }
+        .utility-bar a { text-decoration: none; color: var(--text-gray); font-weight: 600; }
+
+        /* Main Header */
+        header { background: #fff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .logo { font-size: 24px; font-weight: 800; color: var(--gid-navy); letter-spacing: -1.5px; }
+        .logo span { color: var(--gid-red); }
+
+        /* Hero Area with Tabbed Module */
+        .hero { background: var(--gid-navy); color: white; padding: 80px 5% 120px; text-align: center; }
+        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+
+        /* The Modular Hub (Arranged like DHL) */
+        .service-container { max-width: 900px; margin: -80px auto 40px; padding: 0 20px; }
+        .tab-group { display: flex; gap: 5px; }
+        .tab { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: white; padding: 18px 35px; border-radius: 12px 12px 0 0; cursor: pointer; font-weight: 700; transition: 0.3s; }
+        .tab.active { background: white; color: var(--gid-navy); }
+
+        .content-card { background: white; padding: 40px; border-radius: 0 12px 12px 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
+
+        /* Action Form Elements */
+        .input-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        input { flex: 1; padding: 16px; border: 2px solid #f1f5f9; border-radius: 8px; font-size: 16px; outline: none; transition: 0.3s; }
+        input:focus { border-color: var(--gid-red); }
+        .btn-action { background: var(--gid-red); color: white; padding: 16px 40px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 16px; }
+        .btn-action:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* DHL-Style Result Box */
+        #trackResult { display: none; margin-top: 30px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .res-head { background: #f8fafc; padding: 15px 25px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .res-body { padding: 25px; }
+        .status-pill { background: var(--gid-red); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 800; }
+
+        .hidden { display: none; }
+        
+        /* Footer features */
+        footer { background: #fff; padding: 40px 5%; margin-top: 60px; border-top: 1px solid #e2e8f0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        footer h4 { color: var(--gid-navy); margin-bottom: 15px; }
+        footer p { color: var(--text-gray); font-size: 14px; line-height: 1.6; }
     </style>
 </head>
 <body>
 
-<header>GID LOGISTICS</header>
+<div class="utility-bar">
+    <a href="#">Customer Service</a>
+    <a href="#">Portal Login</a>
+    <a href="#">Locations</a>
+</div>
+
+<header>
+    <div class="logo">GID<span>LOGISTICS</span></div>
+    <div style="font-weight: 600; color: var(--text-gray); font-size: 14px;">Shipment Tracking & Management</div>
+</header>
 
 <div class="hero">
-    <h1>Global Track & Trace</h1>
-    <p style="opacity: 0.7;">Official Freight Management Portal</p>
+    <h1>Logistics for a Connected World</h1>
+    <p style="opacity: 0.8; font-size: 18px;">Fast, Secure, and Reliable Freight Services</p>
 </div>
 
-<div class="container">
-    <div class="card">
-        <h3 style="margin-top:0">Instant Tracking</h3>
-        <input type="text" id="tID" placeholder="Enter Waybill ID (e.g. GID-1001)">
-        <button class="btn btn-red" onclick="track()">FIND SHIPMENT</button>
-        
-        <div id="res">
-            <span style="font-size: 11px; font-weight: 800; color: #888;">CURRENT STATUS</span>
-            <span id="resStatus" class="status-text">---</span>
-            <div style="font-size: 14px; line-height: 1.6;">
-                <b>To:</b> <span id="resDest">---</span><br>
-                <b>Weight:</b> <span id="resWeight">---</span> kg<br>
-                <b>Last Scanned:</b> <span id="resDate">---</span>
+<div class="service-container">
+    <div class="tab-group">
+        <div class="tab active" onclick="switchTab('track')">Track</div>
+        <div class="tab" onclick="switchTab('quote')">Get a Quote</div>
+        <div class="tab" onclick="switchTab('ship')">Ship Now</div>
+    </div>
+
+    <div class="content-card">
+        <div id="module-track">
+            <h2 style="margin-top:0">Track Your Shipment</h2>
+            <p style="color: var(--text-gray);">Enter your waybill number to see real-time updates.</p>
+            <div class="input-group">
+                <input type="text" id="tID" placeholder="Tracking ID (e.g. GID-1001)">
+                <button class="btn-action" onclick="runTrack()">TRACK</button>
+            </div>
+
+            <div id="trackResult">
+                <div class="res-head">
+                    <span id="resStatus" style="font-weight: 800; font-size: 1.2rem; color: var(--gid-red);">---</span>
+                    <span class="status-pill">LIVE UPDATE</span>
+                </div>
+                <div class="res-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div><small style="color: var(--text-gray); font-weight: 700;">DESTINATION</small><br><strong id="resDest">---</strong></div>
+                        <div><small style="color: var(--text-gray); font-weight: 700;">WEIGHT</small><br><strong id="resWeight">---</strong></div>
+                        <div><small style="color: var(--text-gray); font-weight: 700;">LAST SCANNED</small><br><strong id="resDate">---</strong></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h3 style="margin-top:0">Request Freight Quote</h3>
-        <input type="text" id="qName" placeholder="Full Name">
-        <input type="text" id="qFrom" placeholder="Origin (City/Country)">
-        <input type="text" id="qTo" placeholder="Destination (City/Country)">
-        <button class="btn btn-navy" id="qBtn" onclick="quote()">SUBMIT TO SYSTEM</button>
+        <div id="module-quote" class="hidden">
+            <h2 style="margin-top:0">Request a Price</h2>
+            <p style="color: var(--text-gray);">Submit your shipment details for an instant callback.</p>
+            <input type="text" id="qName" placeholder="Full Name">
+            <div class="input-group">
+                <input type="text" id="qFrom" placeholder="From (City, Country)">
+                <input type="text" id="qTo" placeholder="To (City, Country)">
+            </div>
+            <button class="btn-action" style="width:100%" id="qBtn" onclick="runQuote()">GET A QUOTE</button>
+        </div>
     </div>
 </div>
 
-<script>
-    const URL = "https://script.google.com/macros/s/AKfycbyHNapCPLKvlA1O-_puwmLJ54DvM8me9XPr-FEZNNPHIWHIaj1nWvwwnqETk_QE5aly/exec";
+<footer>
+    <div>
+        <h4>About GID</h4>
+        <p>Global logistics leader specializing in international freight, air cargo, and supply chain solutions.</p>
+    </div>
+    <div>
+        <h4>Help Center</h4>
+        <p>Tracking FAQ<br>Customs Support<br>Dangerous Goods</p>
+    </div>
+    <div>
+        <h4>Quick Contact</h4>
+        <p>Email: support@gidlogistics.com<br>Phone: +234 (0) 706 695 8826</p>
+    </div>
+</footer>
 
-    function track() {
+<script>
+    const APP_URL = "https://script.google.com/macros/s/AKfycbz2HobpPNk0wRVQnvcZHjlNeuqtKVc4ADXSvtWBRlDXihcxL5T9F9Mtjk70nq5qIxDB/exec";
+
+    function switchTab(type) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        document.getElementById('module-track').classList.add('hidden');
+        document.getElementById('module-quote').classList.add('hidden');
+        document.getElementById('module-' + type).classList.remove('hidden');
+    }
+
+    function runTrack() {
         const id = document.getElementById('tID').value.trim();
-        if(!id) return alert("Please enter an ID");
+        if(!id) return;
         const s = document.createElement('script');
-        s.src = `${URL}?tracking=${id.toUpperCase()}&callback=handleTrack`;
+        s.src = `${APP_URL}?tracking=${id.toUpperCase()}&callback=handleTrack`;
         document.body.appendChild(s);
     }
 
     function handleTrack(r) {
-        if(r.error) return alert("Waybill ID not found in system.");
-        document.getElementById('res').style.display = 'block';
+        if(r.error) return alert("Waybill not found in system.");
+        document.getElementById('trackResult').style.display = 'block';
         document.getElementById('resStatus').innerText = r.status;
         document.getElementById('resDest').innerText = r.destination;
-        document.getElementById('resWeight').innerText = r.weight;
+        document.getElementById('resWeight').innerText = r.weight + " kg";
         document.getElementById('resDate').innerText = r.updated;
     }
 
-    async function quote() {
+    async function runQuote() {
         const btn = document.getElementById('qBtn');
-        const d = {
-            n: document.getElementById('qName').value,
-            f: document.getElementById('qFrom').value,
-            t: document.getElementById('qTo').value
-        };
+        const name = document.getElementById('qName').value;
+        const from = document.getElementById('qFrom').value;
+        const to = document.getElementById('qTo').value;
         
-        if(!d.n || !d.f || !d.t) return alert("Please complete the form");
+        if(!name || !from || !to) return alert("Please fill all fields");
         
-        btn.innerText = "Synchronizing...";
-        btn.disabled = true;
+        btn.innerText = "Processing...";
+        await fetch(`${APP_URL}?action=saveQuote&name=${encodeURIComponent(name)}&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}`, {mode: 'no-cors'});
         
-        const finalURL = `${URL}?action=saveQuote&name=${encodeURIComponent(d.n)}&origin=${encodeURIComponent(d.f)}&destination=${encodeURIComponent(d.t)}`;
-        
-        try {
-            await fetch(finalURL, { mode: 'no-cors' });
-            alert("Success! Quote logged. Check your Google Sheet.");
-            document.getElementById('qName').value = "";
-            document.getElementById('qFrom').value = "";
-            document.getElementById('qTo').value = "";
-        } catch(e) {
-            alert("Connection Error");
-        } finally {
-            btn.innerText = "SUBMIT TO SYSTEM";
-            btn.disabled = false;
-        }
+        alert("Quote Request Logged! We will contact you shortly.");
+        btn.innerText = "GET A QUOTE";
     }
 </script>
 </body>
