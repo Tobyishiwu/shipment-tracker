@@ -7,31 +7,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --gid-red: #e31e24; --dark-navy: #0f172a; --slate-600: #475569; }
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding-top: 80px; }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; padding-top: 80px; scroll-behavior: smooth; }
         
         /* HEADER */
-        header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); }
+        header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 2px solid var(--gid-red); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: var(--dark-navy); }
         .logo span { color: var(--gid-red); }
-        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; }
-        .btn-cta { background: var(--dark-navy); color: white !important; padding: 8px 20px; border-radius: 6px; }
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; margin: 0; }
+        .nav-links a { text-decoration: none; color: var(--dark-navy); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gid-red); }
+        .btn-cta { background: var(--dark-navy); color: white !important; padding: 10px 22px; border-radius: 8px; }
 
-        /* HERO */
+        /* HERO SECTION */
         .hero-section {
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
-                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');
-            background-size: cover; background-position: center; padding: 120px 20px; text-align: center; color: white;
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; padding: 140px 20px; text-align: center; color: white;
         }
-        .hero-section h1 { font-size: 3.5rem; font-weight: 800; margin: 0; }
-        .hero-section p { color: #cbd5e1; font-size: 1.2rem; margin: 20px 0 40px; }
+        .hero-section h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; margin: 0; line-height: 1.1; }
+        .hero-section p { color: #cbd5e1; font-size: 1.2rem; margin: 25px 0 45px; max-width: 700px; margin-inline: auto; }
 
         /* SEARCH BAR */
-        .search-container { max-width: 600px; margin: -50px auto 0; padding: 0 20px; position: relative; z-index: 10; }
-        .search-card { background: #fff; padding: 10px; border-radius: 12px; display: flex; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .search-container { max-width: 650px; margin: -60px auto 0; padding: 0 20px; position: relative; z-index: 10; }
+        .search-card { background: #fff; padding: 12px; border-radius: 16px; display: flex; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border: 1px solid rgba(0,0,0,0.05); }
         .search-card input { flex: 1; border: none; padding: 15px; font-size: 1.1rem; outline: none; font-weight: 600; text-transform: uppercase; }
-        .search-card button { background: var(--gid-red); color: white; border: none; padding: 0 35px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; }
+        .search-card button { background: var(--gid-red); color: white; border: none; padding: 0 40px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+        .search-card button:hover { background: #b91c1c; transform: scale(1.02); }
+
+        /* SERVICES SECTION */
+        .services { max-width: 1200px; margin: 100px auto; padding: 0 25px; text-align: center; }
+        .section-title { margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark-navy); margin: 10px 0; }
+        .section-title small { color: var(--gid-red); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { background: white; padding: 50px 30px; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; transition: 0.3s; }
+        .service-card:hover { transform: translateY(-12px); border-color: var(--gid-red); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .icon { font-size: 3.5rem; margin-bottom: 25px; display: block; }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 800; }
+        .service-card p { color: var(--slate-600); line-height: 1.6; font-size: 1rem; }
+
+        @media (max-width: 768px) { .nav-links { display: none; } .hero-section { padding: 100px 20px; } }
     </style>
 </head>
 <body>
@@ -41,61 +58,43 @@
         <a href="#" class="logo">GID <span>LOGISTICS</span></a>
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#" class="btn-cta">Get a Quote</a></li>
+            <li><a href="#about">Our Network</a></li>
+            <li><a href="#" class="btn-cta">Request Quote</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="hero-section">
-    <h1>Reliable. Fast. <br> Global.</h1>
-    <p>The next generation of logistics management for your business.</p>
+    <h1>Logistics Without <br> Boundaries.</h1>
+    <p>Empowering global commerce through high-velocity freight forwarding and smart tracking solutions.</p>
 </div>
 
 <div class="search-container">
     <div class="search-card">
-        <input type="text" id="waybillInput" placeholder="Enter Waybill Number (e.g. GID-WBL-1001)">
+        <input type="text" id="waybillInput" placeholder="Enter Waybill ID (e.g. GID-WBL-1001)">
         <button onclick="initiateSearch()">TRACK</button>
     </div>
 </div>
+
 <section class="services" id="services">
     <div class="section-title">
-        <small>What We Do</small>
-        <h2>Global Logistics Solutions</h2>
+        <small>Our Core Capabilities</small>
+        <h2>Global Solutions</h2>
     </div>
-
     <div class="services-grid">
-        <div class="service-card">
-            <div class="icon">✈️</div>
-            <h3>Air Freight</h3>
-            <p>Priority international shipping for time-sensitive cargo with global airport coverage.</p>
-        </div>
-
-        <div class="service-card">
-            <div class="icon">🚢</div>
-            <h3>Ocean Cargo</h3>
-            <p>Cost-effective sea freight solutions for large-scale shipments and container logistics.</p>
-        </div>
-
-        <div class="service-card">
-            <div class="icon">🚛</div>
-            <h3>Land Transport</h3>
-            <p>Reliable door-to-door trucking and haulage services across the continent.</p>
-        </div>
+        <div class="service-card"><span class="icon">✈️</span><h3>Air Freight</h3><p>Next-day delivery solutions and priority handling for high-value cargo worldwide.</p></div>
+        <div class="service-card"><span class="icon">🚢</span><h3>Ocean Cargo</h3><p>Full container load (FCL) and consolidated shipping for major global ports.</p></div>
+        <div class="service-card"><span class="icon">🚛</span><h3>Land Transport</h3><p>Precision haulage and last-mile delivery services tailored to your schedule.</p></div>
     </div>
 </section>
+
 <script>
     function initiateSearch() {
         const waybill = document.getElementById('waybillInput').value.trim();
         if(!waybill) return alert("Please enter a waybill number");
-        // Opens the results in a new tab
         window.open(`track.html?id=${waybill.toUpperCase()}`, "_blank");
     }
-    
-    // Allow 'Enter' key to trigger search
-    document.getElementById('waybillInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') initiateSearch();
-    });
+    document.getElementById('waybillInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') initiateSearch(); });
 </script>
 </body>
 </html>
