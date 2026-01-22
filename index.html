@@ -24,7 +24,7 @@ header .wrap{display:flex;justify-content:space-between;align-items:center;paddi
 .tab{padding:14px 26px;font-size:13px;font-weight:800;text-transform:uppercase;cursor:pointer;background:rgba(255,255,255,.15);color:#fff;transition: 0.3s;border:none}
 .tab.active{background:#fff;color:var(--navy)}
 .card{background:#fff;padding:40px;border-radius:0 0 12px 12px;box-shadow:0 25px 50px -15px rgba(0,0,0,.15)}
-.row{display:flex;gap:10px}
+.row{display:flex;gap:10px;margin-bottom:10px}
 input{flex:1;padding:16px;border:1.8px solid var(--b);border-radius:6px;font-size:16px;transition: 0.3s}
 input:focus{outline:none;border-color:var(--red)}
 button{background:var(--red);color:#fff;border:none;padding:16px 36px;border-radius:6px;font-weight:800;cursor:pointer}
@@ -42,8 +42,6 @@ button:disabled{opacity: 0.6; cursor: not-allowed}
 .hidden{display:none}
 footer{background:#fff;border-top:1px solid var(--b);padding:50px 20px}
 footer .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px}
-footer h4{margin-bottom: 15px}
-footer p{font-size:14px;color:var(--muted); line-height: 1.6}
 </style>
 </head>
 
@@ -95,8 +93,11 @@ footer p{font-size:14px;color:var(--muted); line-height: 1.6}
 
     <div id="quote" class="hidden">
       <h2>Request a Quote</h2>
-      <input id="qName" placeholder="Full Name">
-      <div class="row" style="margin-top:10px">
+      <div class="row">
+        <input id="qName" placeholder="Full Name">
+        <input id="qWeight" type="number" placeholder="Weight (kg)">
+      </div>
+      <div class="row">
         <input id="qFrom" placeholder="From (City, Country)">
         <input id="qTo" placeholder="To (City, Country)">
       </div>
@@ -157,16 +158,26 @@ function handleTrack(r){
 
 async function runQuote(){
   const n = document.getElementById('qName').value;
+  const w = document.getElementById('qWeight').value;
   const f = document.getElementById('qFrom').value;
   const t = document.getElementById('qTo').value;
-  if(!n || !f || !t) return alert("Fill all fields");
+  
+  if(!n || !f || !t || !w) return alert("Fill all fields, including weight");
+  
   const btn = document.getElementById('quoteBtn');
   btn.innerText = "Processing...";
   btn.disabled = true;
+  
   try {
-    await fetch(URL + "?action=saveQuote&name=" + encodeURIComponent(n) + "&origin=" + encodeURIComponent(f) + "&destination=" + encodeURIComponent(t), {mode:'no-cors'});
+    // Added &weight= to the URL params
+    const finalURL = URL + "?action=saveQuote&name=" + encodeURIComponent(n) + "&origin=" + encodeURIComponent(f) + "&destination=" + encodeURIComponent(t) + "&weight=" + encodeURIComponent(w);
+    
+    await fetch(finalURL, {mode:'no-cors'});
     alert("Quote Request Sent Successfully!");
+    
+    // Clear fields
     document.getElementById('qName').value = "";
+    document.getElementById('qWeight').value = "";
     document.getElementById('qFrom').value = "";
     document.getElementById('qTo').value = "";
   } catch(e) {
