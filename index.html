@@ -21,7 +21,6 @@
             line-height: 1.5;
         }
 
-        /* Clean Navbar */
         nav {
             background: #fff;
             padding: 1.2rem 5%;
@@ -38,12 +37,10 @@
             padding: 0 20px;
         }
 
-        /* Hero Text */
         .hero { text-align: center; margin-bottom: 30px; }
         .hero h1 { font-size: 2rem; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
         .hero p { color: var(--slate-600); margin-top: 5px; font-size: 1rem; }
 
-        /* Classic Search Card */
         .search-card {
             background: #fff;
             padding: 10px;
@@ -59,6 +56,7 @@
             font-size: 1rem;
             outline: none;
             font-weight: 600;
+            text-transform: uppercase;
         }
         .search-card button {
             background: var(--dark-navy);
@@ -72,7 +70,6 @@
         }
         .search-card button:hover { background: #1e293b; }
 
-        /* Results Area */
         #results { display: none; animation: fadeIn 0.5s ease; }
 
         .status-header {
@@ -85,9 +82,8 @@
             text-align: center;
         }
         .status-header small { color: var(--slate-600); font-weight: 700; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
-        .status-header h2 { font-size: 1.8rem; margin: 8px 0 0; font-weight: 800; color: var(--dark-navy); }
+        .status-header h2 { font-size: 1.8rem; margin: 8px 0 0; font-weight: 800; color: var(--gid-red); }
 
-        /* Progress Tracker */
         .tracker-card {
             background: #fff;
             padding: 35px 15px;
@@ -109,14 +105,13 @@
         .step label { display: block; margin-top: 10px; font-size: 0.6rem; font-weight: 800; color: var(--slate-600); text-transform: uppercase; }
         .step.active label { color: var(--dark-navy); }
 
-        /* Details Grid */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .detail-box { background: #fff; padding: 18px; border-radius: 12px; border: 1px solid #e2e8f0; }
         .detail-box label { font-size: 0.65rem; font-weight: 800; color: var(--slate-600); text-transform: uppercase; display: block; }
         .detail-box div { font-weight: 700; font-size: 0.9rem; margin-top: 4px; color: var(--dark-navy); }
 
         .btn-receipt {
-            display: none; width: 100%; background: var(--gid-red); color: white;
+            display: none; width: 100%; background: var(--dark-navy); color: white;
             border: none; padding: 18px; border-radius: 12px; font-weight: 800;
             font-size: 1rem; margin-top: 20px; cursor: pointer; text-transform: uppercase;
         }
@@ -145,7 +140,7 @@
 
     <div id="results">
         <div class="status-header">
-            <small>Current Status</small>
+            <small>Live Status</small>
             <h2 id="stText">Processing</h2>
         </div>
 
@@ -162,7 +157,7 @@
         </div>
 
         <div class="grid">
-            <div class="detail-box"><label>Current Location</label><div id="lcText">—</div></div>
+            <div class="detail-box"><label>Destination</label><div id="lcText">—</div></div>
             <div class="detail-box"><label>Last Update</label><div id="tmText">—</div></div>
         </div>
 
@@ -172,17 +167,19 @@
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyvOEvVJPxH8Ilm6BGrzdDLBLwxfVUDYkltjcV9Bk8Jqc2HfgaPAS_DkF2_bXc9x5p5/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwoNk5dY535gpRSQCnOyywDsyGz_y3TlzTcAbNjaojzLrlRC4DiSlRwiJaX_WRVmVk2/exec";
 
-document.getElementById('searchBtn').onclick = function() {
+function initiateSearch() {
     const waybill = document.getElementById('waybillInput').value.trim();
-    if(!waybill) return alert("Please enter your tracking number");
+    if(!waybill) return;
     
-    this.innerText = "WAIT...";
+    document.getElementById('searchBtn').innerText = "...";
     const script = document.createElement('script');
     script.src = `${SCRIPT_URL}?tracking=${waybill.toUpperCase()}&callback=handleTracking`;
     document.body.appendChild(script);
-};
+}
+
+document.getElementById('searchBtn').onclick = initiateSearch;
 
 function handleTracking(data) {
     document.getElementById('searchBtn').innerText = "TRACK";
@@ -190,7 +187,7 @@ function handleTracking(data) {
 
     document.getElementById('results').style.display = "block";
     document.getElementById('stText').innerText = data.status;
-    document.getElementById('lcText').innerText = data.currentLocation || "GID Facility";
+    document.getElementById('lcText').innerText = data.destination || "Registered";
     document.getElementById('tmText').innerText = data.lastUpdated || "Just now";
 
     const s = data.status.toLowerCase();
@@ -200,7 +197,7 @@ function handleTracking(data) {
     else if(s.includes("out")){ p=63; n=4; }
     else if(s.includes("transit")){ p=42; n=3; }
     else if(s.includes("picked")){ p=21; n=2; }
-    else { p=0; n=1; }
+    else { p=5; n=1; }
 
     document.getElementById('fillBar').style.width = p + "%";
     for(let i=1; i<=5; i++) {
@@ -211,6 +208,16 @@ function handleTracking(data) {
         const rBtn = document.getElementById('receiptBtn');
         rBtn.style.display = "block";
         rBtn.onclick = () => window.open(`${SCRIPT_URL}?tracking=${data.tracking}&mode=receipt`, "_blank");
+    }
+}
+
+// Auto-run if ID is in the URL
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id') || urlParams.get('tracking');
+    if(id) {
+        document.getElementById('waybillInput').value = id;
+        initiateSearch();
     }
 }
 </script>
