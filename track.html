@@ -1,54 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Track Shipment | GID Logistics</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Update | GID Logistics</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root { --gid-red: #e31e24; --navy: #0f172a; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f1f5f9; padding: 60px 20px; color: var(--navy); }
-        .card { max-width: 500px; margin: 0 auto; background: white; padding: 40px; border-radius: 28px; box-shadow: 0 15px 40px rgba(0,0,0,0.06); text-align: center; }
-        .status-badge { color: var(--gid-red); font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
-        h1 { margin: 10px 0 30px; font-size: 2rem; }
-        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; border-top: 1px solid #eee; padding-top: 25px; }
-        .label { font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 800; }
-        .val { font-weight: 700; font-size: 1.1rem; }
-        .back-btn { margin-top: 30px; display: inline-block; text-decoration: none; color: #64748b; font-weight: 600; font-size: 14px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .box { background: white; width: 100%; max-width: 450px; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; }
+        .status-header { font-size: 10px; font-weight: 800; color: #e31e24; text-transform: uppercase; margin-bottom: 5px; }
+        .status-main { font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; border-top: 1px solid #f1f5f9; padding-top: 20px; }
+        .label { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; }
+        .val { font-weight: 700; color: #0f172a; }
+        .btn { display: block; margin-top: 30px; text-decoration: none; color: #64748b; font-weight: 700; font-size: 14px; }
     </style>
 </head>
 <body>
-    <div id="loading" style="text-align:center;">🔍 Fetching Shipment Data...</div>
-    <div id="resultCard" class="card" style="display:none;">
-        <span class="status-badge" id="idDisplay"></span>
-        <h1 id="statusText">...</h1>
-        <div class="data-grid">
-            <div><label class="label">Destination</label><div class="val" id="destText">---</div></div>
-            <div><label class="label">Last Updated</label><div class="val" id="dateText">---</div></div>
+    <div id="loader">Syncing...</div>
+    <div class="box" id="content" style="display:none;">
+        <div class="status-header">Current Shipment Status</div>
+        <div class="status-main" id="rStatus">---</div>
+        <div class="grid">
+            <div><div class="label">Waybill</div><div class="val" id="rID">---</div></div>
+            <div><div class="label">Destination</div><div class="val" id="rDest">---</div></div>
+            <div><div class="label">Weight</div><div class="val" id="rWeight">---</div></div>
+            <div><div class="label">Last Updated</div><div class="val" id="rDate">---</div></div>
         </div>
-        <a href="index.html" class="back-btn">← Back to Home</a>
+        <a href="index.html" class="btn">← Back to Home</a>
     </div>
 
     <script>
-        const BACKEND_URL = "https://script.google.com/macros/s/AKfycbTGL_f2a9P4gqd8v_6lWYgwFDljHNujW_P5NPOSZ_HlhTtx2qulU8GFE76g1hpGCUt/exec";
-
+        const DEPLOY_URL = "https://script.google.com/macros/s/AKfycbwTXxHgV4-s7oQ0Y3XXU7aALp8mElBbrV5g06eWoHyVLF6FLTwzSDS7vdQc7idLV1hh/exec";
         window.onload = function() {
-            const trk = new URLSearchParams(window.location.search).get('id');
-            if(!trk) { document.getElementById('loading').innerText = "Waybill ID missing."; return; }
-            
-            const script = document.createElement('script');
-            script.src = `${BACKEND_URL}?tracking=${trk.toUpperCase()}&callback=showData`;
-            document.body.appendChild(script);
+            const id = new URLSearchParams(window.location.search).get('id');
+            if(!id) return document.body.innerText = "No ID provided";
+            const s = document.createElement('script');
+            s.src = `${DEPLOY_URL}?tracking=${id}&callback=render`;
+            document.body.appendChild(s);
         };
-
-        function showData(res) {
-            if(res.error) { document.getElementById('loading').innerText = "Shipment not found."; return; }
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('resultCard').style.display = 'block';
-            document.getElementById('idDisplay').innerText = res.tracking;
-            document.getElementById('statusText').innerText = res.status;
-            document.getElementById('destText').innerText = res.destination;
-            document.getElementById('dateText').innerText = res.lastUpdated;
+        function render(res) {
+            if(res.error) return document.body.innerText = "Invalid Waybill ID";
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('rStatus').innerText = res.status;
+            document.getElementById('rID').innerText = res.tracking;
+            document.getElementById('rDest').innerText = res.destination;
+            document.getElementById('rWeight').innerText = res.weight + " kg";
+            document.getElementById('rDate').innerText = res.lastUpdated;
         }
     </script>
 </body>
