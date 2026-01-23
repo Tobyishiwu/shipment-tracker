@@ -12,6 +12,7 @@
         .bg-red-accent { background-color: #E31B23; }
         .border-red-accent { border-color: #E31B23; }
         .glass-card { background: rgba(20, 23, 28, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        input::placeholder { color: #4B5563; }
     </style>
 </head>
 <body>
@@ -20,119 +21,139 @@
         <div class="text-2xl font-bold tracking-tighter">
             GID<span class="red-accent">LOGISTICS</span>
         </div>
-        <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest">
+        <div class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-[0.2em]">
             <a href="#" class="hover:text-red-500 transition">Home</a>
             <a href="#" class="hover:text-red-500 transition">Tracking</a>
             <a href="#" class="hover:text-red-500 transition">Services</a>
             <a href="#" class="hover:text-red-500 transition">About</a>
-            <a href="#" class="text-white bg-red-accent px-5 py-2 rounded-sm hover:bg-red-700 transition">Contact</a>
+            <a href="#" class="text-white bg-red-accent px-6 py-2 rounded-sm hover:bg-red-700 transition">Contact</a>
         </div>
     </nav>
 
-    <section class="relative h-[85vh] flex items-center justify-center overflow-hidden">
+    <section class="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-80"></div>
-            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000" alt="Logistics Fleet" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-black opacity-90"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_60%)]"></div>
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000"
+                 alt="Logistics Fleet"
+                 class="w-full h-full object-cover scale-105">
         </div>
 
-        <div class="relative z-10 text-center px-4 max-w-4xl">
-            <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tight">
+        <div class="relative z-10 text-center px-4 max-w-5xl">
+            <p class="uppercase tracking-[0.35em] text-xs text-gray-400 mb-6">
+                Africa → Global Logistics Network
+            </p>
+
+            <h1 class="text-6xl md:text-8xl font-extrabold mb-6 tracking-tight leading-[0.95]">
                 Delivery. <span class="red-accent">Simplified.</span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Enterprise-grade logistics solutions bridging Africa to the world. We combine local expertise with global infrastructure.
+
+            <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Enterprise-grade logistics solutions connecting Africa to global trade 
+                corridors with speed, security, and total visibility.
             </p>
-            
-            <div class="glass-card p-2 rounded-lg max-w-2xl mx-auto shadow-2xl">
+
+            <div class="glass-card p-2 rounded-lg max-w-3xl mx-auto shadow-2xl">
                 <div class="flex flex-col md:flex-row">
-                    <input type="text" placeholder="Enter Waybill or Container ID" class="bg-transparent flex-grow px-6 py-4 text-white focus:outline-none border-b md:border-b-0 md:border-r border-gray-700">
-                    <button class="bg-red-accent hover:bg-red-700 px-10 py-4 font-bold transition uppercase tracking-widest">
-                        Track Now
+                    <input 
+                        type="text" 
+                        placeholder="Enter Waybill or Container ID" 
+                        class="bg-transparent flex-grow px-6 py-4 text-white placeholder-gray-500 focus:outline-none border-b md:border-b-0 md:border-r border-gray-700 focus:border-red-500 transition"
+                    />
+                    <button 
+                        class="bg-red-accent hover:bg-red-700 px-10 py-4 font-bold transition uppercase tracking-widest">
+                        Track Shipment
                     </button>
                 </div>
             </div>
+
+            <p class="mt-8 text-xs uppercase tracking-widest text-gray-500">
+                Trusted by businesses • Real-time tracking • Secure handling
+            </p>
         </div>
     </section>
 
     <section class="py-24 px-8 bg-[#0A0C10]">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-bold mb-16 border-l-4 border-red-accent pl-6">Core Capabilities</h2>
+            <h2 class="text-4xl font-bold mb-16 border-l-4 border-red-accent pl-6 uppercase tracking-tight">Core Capabilities</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card p-10 hover:border-red-accent transition duration-500 group">
+                <div class="glass-card p-10 hover:border-red-accent transition duration-500 group cursor-pointer">
                     <div class="w-12 h-12 bg-red-accent/10 flex items-center justify-center mb-6 group-hover:bg-red-accent transition">
                         <svg class="w-6 h-6 red-accent group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Express Delivery</h3>
-                    <p class="text-gray-400">Time-critical door-to-door solutions for high-priority documents and parcels worldwide.</p>
+                    <p class="text-gray-400 leading-relaxed">Time-critical door-to-door solutions for high-priority documents and parcels worldwide.</p>
                 </div>
 
-                <div class="glass-card p-10 hover:border-red-accent transition duration-500 group">
+                <div class="glass-card p-10 hover:border-red-accent transition duration-500 group cursor-pointer">
                     <div class="w-12 h-12 bg-red-accent/10 flex items-center justify-center mb-6 group-hover:bg-red-accent transition">
                         <svg class="w-6 h-6 red-accent group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Freight & Cargo</h3>
-                    <p class="text-gray-400">Heavy-lift air, sea, and land transport designed for industrial-scale global operations.</p>
+                    <p class="text-gray-400 leading-relaxed">Heavy-lift air, sea, and land transport designed for industrial-scale global operations.</p>
                 </div>
 
-                <div class="glass-card p-10 hover:border-red-accent transition duration-500 group">
+                <div class="glass-card p-10 hover:border-red-accent transition duration-500 group cursor-pointer">
                     <div class="w-12 h-12 bg-red-accent/10 flex items-center justify-center mb-6 group-hover:bg-red-accent transition">
                         <svg class="w-6 h-6 red-accent group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">E-commerce Logistics</h3>
-                    <p class="text-gray-400">End-to-end fulfillment, automated warehousing, and last-mile delivery for digital brands.</p>
+                    <p class="text-gray-400 leading-relaxed">End-to-end fulfillment, automated warehousing, and last-mile delivery for digital brands.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-[#14171C] py-20 border-y border-gray-800">
-        <div class="max-w-7xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <section class="bg-[#14171C] py-20 border-y border-gray-900">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
             <div>
-                <div class="text-4xl font-extrabold red-accent mb-2">99.9%</div>
-                <div class="text-sm uppercase tracking-widest text-gray-500">On-Time Delivery</div>
+                <div class="text-5xl font-extrabold red-accent mb-2">99.9%</div>
+                <div class="text-xs uppercase tracking-[0.2em] text-gray-500">On-Time Delivery</div>
             </div>
             <div>
-                <div class="text-4xl font-extrabold red-accent mb-2">200+</div>
-                <div class="text-sm uppercase tracking-widest text-gray-500">Global Hubs</div>
+                <div class="text-5xl font-extrabold red-accent mb-2">200+</div>
+                <div class="text-xs uppercase tracking-[0.2em] text-gray-500">Global Hubs</div>
             </div>
             <div>
-                <div class="text-4xl font-extrabold red-accent mb-2">24/7</div>
-                <div class="text-sm uppercase tracking-widest text-gray-500">Live Monitoring</div>
+                <div class="text-5xl font-extrabold red-accent mb-2">24/7</div>
+                <div class="text-xs uppercase tracking-[0.2em] text-gray-500">Live Monitoring</div>
             </div>
             <div>
-                <div class="text-4xl font-extrabold red-accent mb-2">5M+</div>
-                <div class="text-sm uppercase tracking-widest text-gray-500">Tons Moved Yearly</div>
+                <div class="text-5xl font-extrabold red-accent mb-2">5M+</div>
+                <div class="text-xs uppercase tracking-[0.2em] text-gray-500">Tons Moved Yearly</div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black py-16 px-8 border-t border-gray-900">
+    <footer class="bg-black py-20 px-8 border-t border-gray-900">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
-            <div class="mb-10 md:mb-0">
-                <div class="text-2xl font-bold tracking-tighter mb-4">
+            <div class="mb-12 md:mb-0">
+                <div class="text-2xl font-bold tracking-tighter mb-6">
                     GID<span class="red-accent">LOGISTICS</span>
                 </div>
-                <p class="text-gray-500 max-w-xs">Connecting the African continent to the global marketplace with precision.</p>
+                <p class="text-gray-500 max-w-xs leading-relaxed">Connecting the African continent to the global marketplace with precision and speed.</p>
             </div>
-            <div class="grid grid-cols-2 gap-12 text-sm uppercase tracking-widest text-gray-400">
+            <div class="grid grid-cols-2 gap-16 text-sm uppercase tracking-[0.2em] text-gray-400">
                 <div class="flex flex-col space-y-4">
-                    <a href="#" class="hover:text-white transition">Careers</a>
-                    <a href="#" class="hover:text-white transition">Compliance</a>
-                    <a href="#" class="hover:text-white transition">Privacy</a>
+                    <span class="text-white font-bold mb-2">Company</span>
+                    <a href="#" class="hover:text-red-500 transition">Careers</a>
+                    <a href="#" class="hover:text-red-500 transition">Compliance</a>
+                    <a href="#" class="hover:text-red-500 transition">Privacy</a>
                 </div>
                 <div class="flex flex-col space-y-4">
-                    <a href="#" class="hover:text-white transition">Air Freight</a>
-                    <a href="#" class="hover:text-white transition">Sea Freight</a>
-                    <a href="#" class="hover:text-white transition">Warehousing</a>
+                    <span class="text-white font-bold mb-2">Solutions</span>
+                    <a href="#" class="hover:text-red-500 transition">Air Freight</a>
+                    <a href="#" class="hover:text-red-500 transition">Sea Freight</a>
+                    <a href="#" class="hover:text-red-500 transition">Warehousing</a>
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-900 text-xs text-gray-600 flex justify-between">
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-gray-900 text-[10px] text-gray-600 flex justify-between tracking-[0.3em]">
             <p>© 2026 GID LOGISTICS. ALL RIGHTS RESERVED.</p>
-            <div class="flex space-x-4">
-                <span>LINKEDIN</span>
-                <span>TWITTER</span>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white transition">LINKEDIN</a>
+                <a href="#" class="hover:text-white transition">TWITTER</a>
             </div>
         </div>
     </footer>
