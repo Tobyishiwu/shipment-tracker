@@ -3,72 +3,86 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Orbit Express | Global Logistics & Supply Chain Solutions</title>
+<title>Orbit Express — Global Logistics Infrastructure</title>
 
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-  body { font-family: 'Inter', sans-serif; }
+  body { font-family: 'Inter', system-ui, sans-serif; }
+
   .hero-bg {
     background:
-      linear-gradient(rgba(11,29,51,.85), rgba(11,29,51,.85)),
-      url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');
+      linear-gradient(180deg, rgba(11,29,51,.88), rgba(11,29,51,.92)),
+      url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000");
     background-size: cover;
     background-position: center;
   }
 </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-900 antialiased">
 
-<!-- NAV -->
-<nav class="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
-  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<!-- ================= NAVBAR ================= -->
+<nav class="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="h-20 flex items-center justify-between">
 
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-        <i data-lucide="orbit" class="text-white"></i>
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
+          <i data-lucide="orbit" class="text-white"></i>
+        </div>
+        <span class="text-xl font-extrabold tracking-tight">
+          ORBIT<span class="text-blue-600">EXPRESS</span>
+        </span>
       </div>
-      <span class="text-xl font-extrabold">
-        ORBIT<span class="text-blue-600">EXPRESS</span>
-      </span>
-    </div>
 
-    <div class="hidden md:flex gap-8 text-sm font-semibold">
-      <a href="#">Services</a>
-      <a href="#">Industries</a>
-      <a href="#">Compliance</a>
-      <a href="#">Sustainability</a>
-    </div>
+      <!-- Links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
+        <a href="#" class="hover:text-blue-600">Services</a>
+        <a href="#" class="hover:text-blue-600">Industries</a>
+        <a href="#" class="hover:text-blue-600">Compliance</a>
+        <a href="#" class="hover:text-blue-600">Sustainability</a>
+      </div>
 
-    <div class="flex gap-4">
-      <button class="font-semibold text-sm">Client Login</button>
-      <button class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-blue-700">
-        Get a Quote
-      </button>
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <button class="text-sm font-semibold hover:text-blue-600">
+          Client Login
+        </button>
+        <button class="bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-blue-700 transition">
+          Get a Quote
+        </button>
+      </div>
+
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero-bg min-h-[620px] flex items-center text-white px-6">
+<!-- ================= HERO ================= -->
+<section class="hero-bg min-h-[640px] flex items-center px-6 text-white">
   <div class="max-w-4xl mx-auto text-center">
 
-    <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
-      Global Logistics, Elevated.
+    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+      Global Logistics,<br class="hidden sm:block"> Built for Scale.
     </h1>
 
-    <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-12">
-      Enterprise-grade freight, customs, and real-time shipment visibility
-      across 220+ countries.
+    <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-12">
+      Enterprise-grade freight forwarding, customs clearance, and
+      real-time shipment visibility across 220+ countries.
     </p>
 
-    <!-- TRACKING CARD -->
+    <!-- Tracking Card -->
     <div class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl max-w-2xl mx-auto text-slate-900">
 
-      <div class="border-b px-6 py-4 font-bold text-blue-600">
+      <div class="px-6 py-4 border-b border-slate-200 font-bold text-blue-600">
         Track & Trace
       </div>
 
@@ -76,19 +90,20 @@
         <input
           id="trackingInput"
           type="text"
+          inputmode="text"
           placeholder="Enter Tracking ID (e.g. GID-0001)"
-          class="px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-600"
+          class="px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"
         />
 
         <button
           id="trackBtn"
-          class="bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition"
+          class="bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition disabled:opacity-60"
         >
-          Trace Shipment
+          Track Shipment
         </button>
 
         <p class="text-xs text-slate-500 text-left">
-          Real-time updates from Orbit Express global infrastructure.
+          Real-time updates from Orbit Express global operations network.
         </p>
       </div>
     </div>
@@ -96,7 +111,7 @@
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- ================= SERVICES ================= -->
 <section class="py-20 max-w-7xl mx-auto px-6">
   <div class="text-center mb-16">
     <h2 class="text-3xl font-bold mb-4">Core Freight Solutions</h2>
@@ -104,58 +119,69 @@
   </div>
 
   <div class="grid md:grid-cols-4 gap-8">
-    <div class="bg-white p-8 rounded-xl border hover:shadow-xl transition">
+
+    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
       <i data-lucide="plane" class="w-12 h-12 text-blue-600 mb-6"></i>
       <h3 class="font-bold text-xl mb-2">Air Freight</h3>
-      <p class="text-sm text-slate-600">Priority global air cargo services.</p>
+      <p class="text-sm text-slate-600">
+        Time-critical international air cargo with priority routing.
+      </p>
     </div>
 
-    <div class="bg-white p-8 rounded-xl border hover:shadow-xl transition">
+    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
       <i data-lucide="ship" class="w-12 h-12 text-blue-600 mb-6"></i>
       <h3 class="font-bold text-xl mb-2">Ocean Freight</h3>
-      <p class="text-sm text-slate-600">Scalable maritime logistics.</p>
+      <p class="text-sm text-slate-600">
+        Cost-efficient FCL & LCL maritime shipping solutions.
+      </p>
     </div>
 
-    <div class="bg-white p-8 rounded-xl border hover:shadow-xl transition">
+    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
       <i data-lucide="truck" class="w-12 h-12 text-blue-600 mb-6"></i>
       <h3 class="font-bold text-xl mb-2">Land Transport</h3>
-      <p class="text-sm text-slate-600">Secure regional & cross-border trucking.</p>
+      <p class="text-sm text-slate-600">
+        Secure cross-border trucking and last-mile delivery.
+      </p>
     </div>
 
-    <div class="bg-white p-8 rounded-xl border hover:shadow-xl transition">
+    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
       <i data-lucide="warehouse" class="w-12 h-12 text-blue-600 mb-6"></i>
       <h3 class="font-bold text-xl mb-2">Warehousing</h3>
-      <p class="text-sm text-slate-600">Smart storage & inventory systems.</p>
+      <p class="text-sm text-slate-600">
+        Smart inventory management with real-time synchronization.
+      </p>
     </div>
+
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-slate-900 text-slate-400 py-16">
+<!-- ================= FOOTER ================= -->
+<footer class="bg-slate-900 text-slate-400 py-12">
   <div class="text-center text-xs">
     © 2026 Orbit Express International. All rights reserved.
   </div>
 </footer>
 
+<!-- ================= SCRIPTS ================= -->
 <script>
   lucide.createIcons();
 
   const btn = document.getElementById("trackBtn");
   const input = document.getElementById("trackingInput");
 
-  btn.addEventListener("click", () => {
+  function goTrack() {
     const id = input.value.trim();
     if (!id) {
-      input.classList.add("ring-2","ring-red-500");
+      input.classList.add("ring-2", "ring-red-500");
       return;
     }
-
-    // 🔗 REDIRECT TO STATUS PAGE (JSONP SAFE)
     window.location.href = `tracker.html?id=${encodeURIComponent(id)}`;
-  });
+  }
+
+  btn.addEventListener("click", goTrack);
 
   input.addEventListener("keydown", e => {
-    if (e.key === "Enter") btn.click();
+    if (e.key === "Enter") goTrack();
   });
 </script>
 
