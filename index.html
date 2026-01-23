@@ -3,249 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orbit Express | Global Logistics Leader 2026</title>
+    <title>Orbit Express | Global Logistics Leader</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         .hero-bg {
-            background: linear-gradient(rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.85)), 
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4)), 
                         url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=2000');
             background-size: cover; background-position: center;
         }
-        .map-dots { background-image: radial-gradient(#3b82f6 1px, transparent 1px); background-size: 20px 20px; }
+        .map-dot { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            70% { transform: scale(3); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
     </style>
 </head>
 <body class="bg-white text-slate-900">
 
-    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100">
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center rotate-3">
-                    <i data-lucide="orbit" class="text-white"></i>
-                </div>
+                <i data-lucide="orbit" class="text-blue-600 w-8 h-8"></i>
                 <span class="text-2xl font-bold tracking-tighter">ORBIT<span class="text-blue-600">EXPRESS</span></span>
             </div>
-            <div class="hidden lg:flex gap-8 text-sm font-semibold uppercase tracking-wider">
+            <div class="hidden lg:flex items-center gap-8 text-sm font-semibold uppercase tracking-widest">
                 <a href="#services" class="hover:text-blue-600 transition">Services</a>
-                <a href="#industries" class="hover:text-blue-600 transition">Industries</a>
-                <a href="#network" class="hover:text-blue-600 transition">Global Network</a>
+                <a href="#solutions" class="hover:text-blue-600 transition">Industries</a>
+                <a href="#network" class="hover:text-blue-600 transition">Network</a>
                 <a href="#resources" class="hover:text-blue-600 transition">Resources</a>
             </div>
             <div class="flex items-center gap-4">
-                <div class="hidden sm:flex items-center gap-2 text-xs font-bold bg-slate-100 px-3 py-1 rounded-full">
-                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> SYSTEM STATUS: OPTIMAL
-                </div>
-                <button class="bg-blue-600 text-white px-6 py-2.5 rounded-md font-bold text-sm hover:shadow-lg hover:shadow-blue-200 transition">GET A QUOTE</button>
+                <button class="text-sm font-bold flex items-center gap-1 hover:text-blue-600"><i data-lucide="user" class="w-4"></i> PORTAL</button>
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-bold hover:shadow-lg hover:shadow-blue-200 transition">GET QUOTE</button>
             </div>
         </div>
     </nav>
 
-    <section class="hero-bg min-h-[80vh] flex items-center justify-center px-6">
-        <div class="max-w-5xl w-full">
-            <div class="text-center mb-12">
-                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">World-Class Logistics.<br><span class="text-blue-400">Zero Friction.</span></h1>
-                <p class="text-slate-300 text-lg max-w-2xl mx-auto">Providing international enterprises with real-time visibility, automated compliance, and sustainable shipping lanes across 220+ territories.</p>
+    <section class="pt-32 pb-20 hero-bg min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div class="text-white">
+                <span class="inline-block bg-blue-600/20 border border-blue-500/30 px-4 py-1 rounded-full text-blue-400 text-xs font-bold mb-6 tracking-widest uppercase">Global Operations 2026</span>
+                <h1 class="text-5xl lg:text-7xl font-bold leading-tight mb-6">Logistics for a<br><span class="text-blue-500">Borderless</span> World.</h1>
+                <p class="text-lg text-slate-300 mb-8 max-w-lg">Orbit Express provides AI-driven freight, warehousing, and customs solutions across 220+ territories.</p>
             </div>
             
-            <div class="bg-white rounded-2xl shadow-2xl p-2 max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-2">
-                    <div class="p-6 bg-blue-50 rounded-xl">
-                        <label class="block text-xs font-bold text-blue-900 uppercase mb-4">Track Shipment</label>
-                        <div class="flex gap-2">
-                            <input type="text" placeholder="Tracking ID: OBX-000-000" class="w-full px-4 py-3 rounded-lg border-2 border-blue-100 focus:border-blue-600 outline-none">
-                            <button class="bg-blue-600 text-white px-6 rounded-lg hover:bg-blue-700"><i data-lucide="search"></i></button>
-                        </div>
+            <div class="bg-white rounded-3xl p-8 shadow-2xl">
+                <div class="flex gap-4 mb-8 border-b border-slate-100 pb-4">
+                    <button id="trackBtn" class="text-sm font-bold text-blue-600 border-b-2 border-blue-600 pb-2">TRACK SHIPMENT</button>
+                    <button id="quoteBtn" class="text-sm font-bold text-slate-400 hover:text-blue-600 pb-2">INSTANT BOOKING</button>
+                </div>
+                <div id="trackContent" class="space-y-4">
+                    <label class="text-xs font-bold text-slate-500 uppercase">Enter Tracking Number</label>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="OBX-XXXX-XXXX" class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 focus:ring-2 focus:ring-blue-500 outline-none">
+                        <button class="bg-slate-900 text-white px-6 rounded-xl hover:bg-blue-600 transition flex items-center gap-2 font-bold uppercase text-xs">Trace <i data-lucide="arrow-right" class="w-4"></i></button>
                     </div>
-                    <div class="p-6">
-                        <label class="block text-xs font-bold text-slate-500 uppercase mb-4">Instant Quote Engine</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <input type="text" placeholder="Origin" class="px-3 py-2 text-sm border-b-2 border-slate-100 outline-none focus:border-blue-600">
-                            <input type="text" placeholder="Destination" class="px-3 py-2 text-sm border-b-2 border-slate-100 outline-none focus:border-blue-600">
-                        </div>
-                        <button class="w-full mt-4 text-blue-600 font-bold text-sm hover:underline">Calculate Rates →</button>
-                    </div>
+                    <p class="text-[10px] text-slate-400">Multiple IDs? <a href="#" class="underline">Upload manifest</a></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="bg-slate-50 border-b border-slate-200 py-6">
-        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center opacity-60 grayscale hover:grayscale-0 transition duration-500">
-            <span class="font-bold text-sm">ISO 9001:2025 CERTIFIED</span>
-            <span class="font-bold text-sm">C-TPAT REGISTERED</span>
-            <span class="font-bold text-sm">IATA CARGO AGENT</span>
-            <span class="font-bold text-sm">FIATA MEMBER</span>
-            <span class="font-bold text-sm">AEO COMPLIANT</span>
-        </div>
-    </div>
-
     <section id="services" class="py-24 max-w-7xl mx-auto px-6">
-        <h2 class="text-3xl font-bold mb-12">Premier Shipping Services</h2>
-        <div class="grid md:grid-cols-4 gap-8">
-            <div class="group border-l-4 border-blue-600 pl-6 py-4 hover:bg-blue-50 transition">
-                <i data-lucide="plane-takeoff" class="mb-4 text-blue-600"></i>
-                <h3 class="font-bold text-xl mb-2">Air Express</h3>
-                <p class="text-slate-500 text-sm">Next-flight-out services for time-critical components and pharma.</p>
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div class="max-w-2xl">
+                <h2 class="text-4xl font-bold mb-4 italic">Core Capabilities</h2>
+                <p class="text-slate-500">From high-altitude air freight to last-mile delivery, we own every step of the journey.</p>
             </div>
-            <div class="group border-l-4 border-slate-200 pl-6 py-4 hover:border-blue-600 hover:bg-blue-50 transition">
-                <i data-lucide="anchor" class="mb-4 text-blue-600"></i>
-                <h3 class="font-bold text-xl mb-2">Ocean Freight</h3>
-                <p class="text-slate-500 text-sm">FCL and LCL shipping with guaranteed space allocation.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="group p-8 border border-slate-100 rounded-3xl hover:border-blue-500 transition-all duration-300">
+                <i data-lucide="plane-takeoff" class="w-10 h-10 text-blue-600 mb-6 group-hover:-translate-y-2 transition"></i>
+                <h3 class="font-bold text-xl mb-4">Air Freight</h3>
+                <ul class="text-sm text-slate-500 space-y-2 mb-6">
+                    <li>• Next-Day Global</li>
+                    <li>• Charter Services</li>
+                    <li>• Temperature Control</li>
+                </ul>
+                <a href="#" class="text-blue-600 text-xs font-bold flex items-center gap-2">DETAILS <i data-lucide="plus" class="w-3"></i></a>
             </div>
-            <div class="group border-l-4 border-slate-200 pl-6 py-4 hover:border-blue-600 hover:bg-blue-50 transition">
-                <i data-lucide="container" class="mb-4 text-blue-600"></i>
-                <h3 class="font-bold text-xl mb-2">Customs Brokerage</h3>
-                <p class="text-slate-500 text-sm">Automated tariff classification and digital duty processing.</p>
+            <div class="group p-8 border border-slate-100 rounded-3xl hover:border-blue-500 transition-all">
+                <i data-lucide="ship" class="w-10 h-10 text-blue-600 mb-6"></i>
+                <h3 class="font-bold text-xl mb-4">Ocean Freight</h3>
+                <ul class="text-sm text-slate-500 space-y-2 mb-6"><li>• LCL/FCL Shipping</li><li>• Port-to-Port</li><li>• Multi-modal</li></ul>
+                <a href="#" class="text-blue-600 text-xs font-bold flex items-center gap-2 uppercase">Details <i data-lucide="plus" class="w-3"></i></a>
             </div>
-            <div class="group border-l-4 border-slate-200 pl-6 py-4 hover:border-blue-600 hover:bg-blue-50 transition">
-                <i data-lucide="box" class="mb-4 text-blue-600"></i>
-                <h3 class="font-bold text-xl mb-2">Last-Mile</h3>
-                <p class="text-slate-500 text-sm">White-glove delivery and e-commerce reverse logistics.</p>
+            <div class="group p-8 border border-slate-100 rounded-3xl hover:border-blue-500 transition-all">
+                <i data-lucide="truck" class="w-10 h-10 text-blue-600 mb-6"></i>
+                <h3 class="font-bold text-xl mb-4">Last Mile</h3>
+                <ul class="text-sm text-slate-500 space-y-2 mb-6"><li>• Dynamic Routing</li><li>• White Glove</li><li>• EV Fleet</li></ul>
+                <a href="#" class="text-blue-600 text-xs font-bold flex items-center gap-2 uppercase">Details <i data-lucide="plus" class="w-3"></i></a>
+            </div>
+            <div class="group p-8 border border-slate-100 rounded-3xl hover:border-blue-500 transition-all">
+                <i data-lucide="package-check" class="w-10 h-10 text-blue-600 mb-6"></i>
+                <h3 class="font-bold text-xl mb-4">Brokerage</h3>
+                <ul class="text-sm text-slate-500 space-y-2 mb-6"><li>• Duty Deferment</li><li>• Compliance Audit</li><li>• Digital Filing</li></ul>
+                <a href="#" class="text-blue-600 text-xs font-bold flex items-center gap-2 uppercase">Details <i data-lucide="plus" class="w-3"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-3xl font-bold mb-16 uppercase tracking-tighter">Sector Specifics</h2>
+            <div class="grid lg:grid-cols-3 gap-12">
+                <div class="relative overflow-hidden rounded-2xl h-80 group">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent p-8 flex flex-col justify-end">
+                        <h4 class="text-white text-2xl font-bold">Tech & Electronics</h4>
+                        <p class="text-slate-300 text-sm mt-2">High-security transit for premium hardware.</p>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl h-80 group">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent p-8 flex flex-col justify-end">
+                        <h4 class="text-white text-2xl font-bold">Cold Chain Pharma</h4>
+                        <p class="text-slate-300 text-sm mt-2">GXP-certified temperature controlled shipping.</p>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-2xl h-80 group">
+                    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent p-8 flex flex-col justify-end">
+                        <h4 class="text-white text-2xl font-bold">Retail & E-com</h4>
+                        <p class="text-slate-300 text-sm mt-2">D2C fulfillment and automated returns.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="network" class="py-24 bg-slate-900 text-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
             <div>
-                <h2 class="text-4xl font-bold mb-6">Our Infrastructure,<br>Your Competitive Edge.</h2>
-                <p class="text-slate-400 mb-8 text-lg">Hover over our primary hubs to see real-time transit status and capacity.</p>
+                <h2 class="text-4xl font-bold mb-6 italic">Strategic Global Presence</h2>
+                <p class="text-slate-400 mb-10 leading-relaxed">We operate through 14 main hubs and over 2,000 regional delivery centers. Our presence in Singapore, Dubai, Rotterdam, and New York ensures your cargo never stops moving.</p>
                 <div class="space-y-6">
-                    <div class="flex items-center gap-4 bg-slate-800 p-4 rounded-lg">
-                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold">EU</div>
-                        <div><h4 class="font-bold">Frankfurt Hub</h4><p class="text-xs text-slate-400">Processing 400+ tons daily</p></div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-600/20 flex items-center justify-center"><i data-lucide="map-pin" class="text-blue-500"></i></div>
+                        <div><p class="font-bold">Main Hub: Singapore</p><p class="text-xs text-slate-500">Connecting Asia-Pacific to the world.</p></div>
                     </div>
-                    <div class="flex items-center gap-4 bg-slate-800 p-4 rounded-lg">
-                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold">AS</div>
-                        <div><h4 class="font-bold">Singapore Port</h4><p class="text-xs text-slate-400">Primary Trans-Pacific Gateway</p></div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-600/20 flex items-center justify-center"><i data-lucide="map-pin" class="text-blue-500"></i></div>
+                        <div><p class="font-bold">Main Hub: Rotterdam</p><p class="text-xs text-slate-500">Gateway to Europe.</p></div>
                     </div>
                 </div>
             </div>
-            <div class="relative h-96 map-dots rounded-3xl border border-slate-700 flex items-center justify-center">
-                <span class="text-slate-500 font-mono text-sm animate-pulse">[ INTERACTIVE MAP COMPONENT ]</span>
-                <div class="absolute top-1/4 left-1/4 w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
-                <div class="absolute top-1/2 left-1/2 w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
-                <div class="absolute top-1/3 right-1/4 w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
+            <div class="relative bg-slate-800 rounded-3xl p-4 border border-slate-700 h-[400px]">
+                 <div class="absolute top-1/4 left-1/4 w-3 h-3 bg-blue-500 rounded-full"><div class="absolute inset-0 bg-blue-500 rounded-full map-dot"></div></div>
+                 <div class="absolute top-1/2 left-3/4 w-3 h-3 bg-blue-500 rounded-full"><div class="absolute inset-0 bg-blue-500 rounded-full map-dot"></div></div>
+                 <div class="absolute top-2/3 left-1/2 w-3 h-3 bg-blue-500 rounded-full"><div class="absolute inset-0 bg-blue-500 rounded-full map-dot"></div></div>
+                 <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700 w-48 mt-auto absolute bottom-4 left-4">
+                    <p class="text-[10px] uppercase font-bold text-blue-500">Live Traffic</p>
+                    <p class="text-lg font-bold">14,291</p>
+                    <p class="text-[10px] text-slate-400 italic">Containers in transit</p>
+                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="py-24 max-w-7xl mx-auto px-6">
-        <div class="bg-blue-600 rounded-3xl p-12 text-white flex flex-col md:flex-row items-center gap-12">
-            <div class="flex-1">
-                <h2 class="text-4xl font-bold mb-6">Orbit Control Center</h2>
-                <p class="text-blue-100 mb-8">Access the most advanced logistics dashboard in the industry. Predictive delay alerts, digital document vaults, and 1-click re-booking.</p>
-                <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold shadow-xl">Launch Dashboard</button>
-            </div>
-            <div class="flex-1 bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20">
-                <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800" class="rounded shadow-2xl" alt="UI Dashboard">
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-green-50">
-        <div class="max-w-3xl mx-auto text-center px-6">
-            <div class="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-1 rounded-full text-xs font-bold mb-6">
-                <i data-lucide="leaf" class="w-3"></i> ESG COMMITMENT 2026
-            </div>
-            <h2 class="text-4xl font-bold mb-6 text-green-900">Carbon-Neutral Lanes by Default.</h2>
-            <p class="text-green-800/70 text-lg mb-8">We don't just ship cargo; we protect the planet. Every Orbit Express route is optimized via AI to reduce fuel consumption by 22% compared to industry standards.</p>
-            <a href="#" class="text-green-700 font-bold underline">Read our Sustainability Report</a>
         </div>
     </section>
 
     <section id="resources" class="py-24 max-w-7xl mx-auto px-6">
-        <div class="flex justify-between items-end mb-12">
-            <div>
-                <h2 class="text-3xl font-bold mb-2">Knowledge Hub</h2>
-                <p class="text-slate-500">Expert analysis on global trade and supply chains.</p>
+        <div class="grid lg:grid-cols-3 gap-16">
+            <div class="lg:col-span-1">
+                <h3 class="text-2xl font-bold mb-6 italic">Trust & Compliance</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                        <i data-lucide="shield-check" class="text-blue-600 w-6 h-6 mb-2"></i>
+                        <p class="text-[10px] font-bold">ISO 9001:2025</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex flex-col items-center text-center">
+                        <i data-lucide="award" class="text-blue-600 w-6 h-6 mb-2"></i>
+                        <p class="text-[10px] font-bold">C-TPAT GOLD</p>
+                    </div>
+                </div>
+                <div class="mt-8 p-6 bg-blue-600 rounded-2xl text-white">
+                    <i data-lucide="leaf" class="w-8 h-8 mb-4"></i>
+                    <h4 class="font-bold">Sustainability</h4>
+                    <p class="text-xs opacity-80 mb-4">Tracking toward zero-emissions by 2040.</p>
+                    <a href="#" class="text-xs font-bold underline">ESG REPORT 2026</a>
+                </div>
             </div>
-            <button class="text-blue-600 font-bold flex items-center gap-2">All Articles <i data-lucide="chevron-right"></i></button>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <article class="group cursor-pointer">
-                <div class="overflow-hidden rounded-xl mb-4 h-48 bg-slate-200">
-                    <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&q=80&w=800" class="group-hover:scale-105 transition duration-500 h-full w-full object-cover">
+            <div class="lg:col-span-2">
+                <h3 class="text-2xl font-bold mb-6 italic">Resource Center</h3>
+                <div class="space-y-6">
+                    <div class="flex gap-6 items-center group cursor-pointer">
+                        <div class="w-32 h-20 rounded-xl overflow-hidden shrink-0"><img src="https://images.unsplash.com/photo-1521791136064-7986c2959443?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover"></div>
+                        <div>
+                            <span class="text-[10px] text-blue-600 font-bold uppercase">Market Trends</span>
+                            <h4 class="font-bold group-hover:text-blue-600 transition">Q1 Global Freight Pricing Outlook</h4>
+                            <p class="text-xs text-slate-500 mt-1">Analyzing port congestion and fuel surcharge impacts.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-center group cursor-pointer border-t border-slate-100 pt-6">
+                        <div class="w-32 h-20 rounded-xl overflow-hidden shrink-0"><img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80&w=200" class="w-full h-full object-cover"></div>
+                        <div>
+                            <span class="text-[10px] text-blue-600 font-bold uppercase">Compliance</span>
+                            <h4 class="font-bold group-hover:text-blue-600 transition">New EU Customs Directives 2026</h4>
+                            <p class="text-xs text-slate-500 mt-1">A guide for international shippers moving goods into Europe.</p>
+                        </div>
+                    </div>
                 </div>
-                <h4 class="font-bold text-lg group-hover:text-blue-600 transition">Managing Port Congestion in Southeast Asia</h4>
-                <p class="text-slate-500 text-sm mt-2">Strategic insights for Q3 2026 shipping peaks.</p>
-            </article>
-            <article class="group cursor-pointer">
-                <div class="overflow-hidden rounded-xl mb-4 h-48 bg-slate-200">
-                    <img src="https://images.unsplash.com/photo-1521791136064-7986c29535a7?auto=format&fit=crop&q=80&w=800" class="group-hover:scale-105 transition duration-500 h-full w-full object-cover">
-                </div>
-                <h4 class="font-bold text-lg group-hover:text-blue-600 transition">Understanding New Incoterms for Digital Assets</h4>
-                <p class="text-slate-500 text-sm mt-2">A guide for tech hardware manufacturers.</p>
-            </article>
-            <article class="group cursor-pointer">
-                <div class="overflow-hidden rounded-xl mb-4 h-48 bg-slate-200">
-                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=800" class="group-hover:scale-105 transition duration-500 h-full w-full object-cover">
-                </div>
-                <h4 class="font-bold text-lg group-hover:text-blue-600 transition">AI-Driven Route Optimization 101</h4>
-                <p class="text-slate-500 text-sm mt-2">How we reduced transit times by 14% this year.</p>
-            </article>
+            </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 pt-20 pb-10 text-slate-400">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12 border-b border-slate-800 pb-16 mb-16">
-                <div class="flex items-start gap-4">
-                    <i data-lucide="phone-call" class="text-blue-500"></i>
-                    <div>
-                        <h5 class="text-white font-bold">24/7 Global Priority</h5>
-                        <p class="text-sm">+1 (800) ORBIT-EXP</p>
-                    </div>
+    <footer class="bg-slate-900 pt-20 pb-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-20 text-slate-400">
+            <div class="col-span-1">
+                <div class="flex items-center gap-2 mb-6 text-white">
+                    <i data-lucide="orbit" class="text-blue-600 w-6 h-6"></i>
+                    <span class="text-xl font-bold uppercase tracking-tight">Orbit Express</span>
                 </div>
-                <div class="flex items-start gap-4">
-                    <i data-lucide="message-square" class="text-blue-500"></i>
-                    <div>
-                        <h5 class="text-white font-bold">Live AI Chat</h5>
-                        <p class="text-sm">Instant tracking & documentation help</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4">
-                    <i data-lucide="mail" class="text-blue-500"></i>
-                    <div>
-                        <h5 class="text-white font-bold">RFP / Enterprise</h5>
-                        <p class="text-sm">solutions@orbit-express.com</p>
-                    </div>
+                <p class="text-xs leading-relaxed mb-6">Redefining logistics through data and transparency since 2010.</p>
+                <div class="flex gap-4">
+                    <i data-lucide="linkedin" class="w-4 h-4 hover:text-white cursor-pointer"></i>
+                    <i data-lucide="twitter" class="w-4 h-4 hover:text-white cursor-pointer"></i>
                 </div>
             </div>
-
-            <div class="grid md:grid-cols-4 gap-12 mb-16">
-                <div>
-                    <span class="text-2xl font-bold text-white tracking-tighter mb-6 block">ORBIT<span class="text-blue-600">EXPRESS</span></span>
-                    <p class="text-sm leading-relaxed">Pioneering the next era of logistics through transparency, technology, and trust.</p>
-                </div>
-                <div>
-                    <h5 class="text-white font-bold mb-6">Service Lanes</h5>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-white transition">Trans-Pacific</a></li>
-                        <li><a href="#" class="hover:text-white transition">Euro-Asia Express</a></li>
-                        <li><a href="#" class="hover:text-white transition">Americas Network</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-white font-bold mb-6">Company</h5>
-                    <ul class="space-y-3 text-sm">
-                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
-                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
-                        <li><a href="#" class="hover:text-white transition">Investor Relations</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-white font-bold mb-6">Follow Orbit</h5>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i data-lucide="linkedin" class="w-4 text-white"></i></a>
-                        <a href="#" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i data-lucide="twitter" class="w-4 text-white"></i></a>
-                    </div>
+            <div>
+                <h5 class="text-white font-bold text-sm mb-6 uppercase tracking-widest">Support</h5>
+                <ul class="text-xs space-y-4">
+                    <li>24/7 International: +1 (800) ORBIT-EX</li>
+                    <li>RFP Inquiries: sales@orbitexpress.com</li>
+                    <li>Global Locations</li>
+                    <li>Help Center & FAQ</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold text-sm mb-6 uppercase tracking-widest">Services</h5>
+                <ul class="text-xs space-y-4">
+                    <li>Supply Chain Design</li>
+                    <li>Digital Warehousing</li>
+                    <li>Incoterms 2026 Guide</li>
+                    <li>API Documentation</li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold text-sm mb-6 uppercase tracking-widest">Global Status</h5>
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                    <p class="text-[10px] text-green-500 font-bold uppercase flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full"></span> All Systems Operational
+                    </p>
+                    <p class="text-[9px] mt-2 italic text-slate-500 italic">No major port delays reported.</p>
                 </div>
             </div>
-            <div class="text-center text-xs font-medium border-t border-slate-800 pt-8">
-                &copy; 2026 Orbit Express Logistics Group. All Rights Reserved. ISO 9001:2025 Certified.
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-10 border-t border-slate-800 flex justify-between items-center text-[10px] text-slate-600 uppercase tracking-widest font-bold">
+            <p>© 2026 Orbit Express Intl.</p>
+            <div class="flex gap-8">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Security Statement</a>
             </div>
         </div>
     </footer>
