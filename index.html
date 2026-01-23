@@ -20,7 +20,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
-body{background:#fff;color:var(--navy);line-height:1.6}
+body{background:#fff;color:var(--navy);line-height:1.65}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
 /* HEADER */
@@ -92,10 +92,10 @@ nav a{text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
   object-fit:cover;
 }
 
-/* TRACK + QUOTE CARD */
+/* ACTION CARD */
 .action-card{
   background:#fff;
-  padding:20px;
+  padding:22px;
   border-radius:22px;
   box-shadow:0 25px 50px rgba(0,0,0,.08);
   max-width:520px;
@@ -156,19 +156,75 @@ nav a{text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
   gap:10px;
   margin-top:14px;
 }
-.step{
+.progress .step{
   flex:1;
   height:6px;
   background:#e5e7eb;
   border-radius:10px;
 }
-.step.active{background:var(--red)}
+.progress .step.active{background:var(--red)}
 
-/* QUOTE RESULT */
-.quote-result{
-  margin-top:14px;
-  font-weight:700;
-  color:var(--success);
+/* SECTIONS */
+section{padding:90px 0}
+.section-title{
+  max-width:720px;
+  margin-bottom:60px;
+}
+.section-title h2{
+  font-size:32px;
+  font-weight:800;
+  margin-bottom:10px;
+}
+.section-title p{color:var(--gray)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:32px;
+}
+.card{
+  background:#fff;
+  border-radius:24px;
+  padding:36px;
+  box-shadow:0 20px 40px rgba(0,0,0,.06);
+}
+
+/* STATS */
+.stats{
+  background:linear-gradient(135deg,#e31e24,#c4161c);
+  color:#fff;
+}
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:26px;
+  text-align:center;
+}
+@media(min-width:768px){
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+}
+.stats-grid h3{
+  font-size:42px;
+  font-weight:800;
+}
+
+/* CTA */
+.cta{
+  background:var(--navy);
+  color:#fff;
+  text-align:center;
+}
+
+/* FOOTER */
+footer{
+  background:var(--dark);
+  color:#fff;
+  padding:70px 0 30px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:48px;
 }
 
 /* RESPONSIVE */
@@ -177,6 +233,9 @@ nav a{text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
   nav{display:none}
   .menu-btn{display:block}
   .mobile-nav{display:flex}
+}
+@media(max-width:768px){
+  .footer-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -187,31 +246,27 @@ nav a{text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
   <div class="container header">
     <div class="logo">GID<span>LOGISTICS</span></div>
     <nav>
-      <a href="#">Services</a>
-      <a href="#">Track</a>
-      <a href="#">Quote</a>
-      <a href="#">Contact</a>
+      <a href="#services">Services</a>
+      <a href="#how">How It Works</a>
+      <a href="#contact">Contact</a>
     </nav>
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
   </div>
 
   <div class="mobile-nav" id="mobileNav">
-    <a href="#">Services</a>
-    <a href="#">Track</a>
-    <a href="#">Quote</a>
-    <a href="#">Contact</a>
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#how" onclick="toggleMenu()">How It Works</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container hero-grid">
 
     <div>
       <h1>Fast, reliable courier<br>services you can trust</h1>
-      <p>
-        Ship, track, and get instant delivery estimates with GID Logistics.
-        Built for individuals and businesses across Nigeria.
-      </p>
+      <p>Ship, track, and get instant delivery estimates with GID Logistics.</p>
 
       <div class="action-card">
         <div class="tabs">
@@ -219,15 +274,13 @@ nav a{text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
           <div class="tab" onclick="switchTab('quote',this)">Quick Quote</div>
         </div>
 
-        <!-- TRACK -->
         <div id="trackTab">
           <div class="input-row">
-            <input id="trackInput" placeholder="Enter tracking number">
+            <input placeholder="Enter tracking number">
             <button class="btn" onclick="runTrack()">Track</button>
           </div>
-
           <div class="track-result" id="trackResult">
-            <div class="status transit" id="statusText">In Transit</div>
+            <span class="status transit">In Transit</span>
             <div class="progress">
               <div class="step active"></div>
               <div class="step active"></div>
@@ -236,52 +289,116 @@ nav a{text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
           </div>
         </div>
 
-        <!-- QUOTE -->
         <div id="quoteTab" style="display:none">
           <div class="input-row">
-            <input id="origin" placeholder="Origin">
-            <input id="destination" placeholder="Destination">
+            <input placeholder="Origin">
+            <input placeholder="Destination">
           </div>
           <div class="input-row">
-            <input id="weight" type="number" placeholder="Weight (kg)">
+            <input type="number" id="weight" placeholder="Weight (kg)">
             <button class="btn" onclick="calcQuote()">Calculate</button>
           </div>
-          <div class="quote-result" id="quoteResult"></div>
+          <div id="quoteResult"></div>
         </div>
-
       </div>
     </div>
 
-    <!-- HERO IMAGE -->
     <div class="hero-img">
-      <img src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg" alt="Courier delivery">
+      <img src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg">
     </div>
 
   </div>
 </section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-title">
+      <h2>Our Courier Services</h2>
+      <p>Flexible delivery solutions for individuals and businesses</p>
+    </div>
+
+    <div class="grid">
+      <div class="card"><h4>Domestic Delivery</h4><p>Nationwide coverage across Nigeria.</p></div>
+      <div class="card"><h4>International Shipping</h4><p>Reliable global delivery.</p></div>
+      <div class="card"><h4>E-commerce Logistics</h4><p>Perfect for online sellers.</p></div>
+      <div class="card"><h4>Corporate & Bulk</h4><p>Enterprise-grade logistics.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background:var(--light)">
+  <div class="container">
+    <div class="section-title">
+      <h2>How It Works</h2>
+      <p>Simple and transparent delivery process</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">Book shipment</div>
+      <div class="card">Pickup</div>
+      <div class="card">Track</div>
+      <div class="card">Deliver</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div><h3>230+</h3><p>Locations</p></div>
+    <div><h3>150+</h3><p>Centres</p></div>
+    <div><h3>5M+</h3><p>Deliveries</p></div>
+    <div><h3>600+</h3><p>Fleet</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Ready to ship with confidence?</h2>
+    <button class="btn">Get Started</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo">GID<span>LOGISTICS</span></div>
+      <p>Smart courier solutions you can trust.</p>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <p>About · Careers · Partners</p>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <p>Contact · FAQs · Privacy</p>
+    </div>
+  </div>
+</footer>
 
 <script>
 function toggleMenu(){
   const nav=document.getElementById("mobileNav");
   nav.style.display = nav.style.display==="flex" ? "none" : "flex";
 }
-
 function switchTab(tab,el){
   document.getElementById("trackTab").style.display = tab==="track"?"block":"none";
   document.getElementById("quoteTab").style.display = tab==="quote"?"block":"none";
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   el.classList.add("active");
 }
-
 function runTrack(){
   document.getElementById("trackResult").style.display="block";
 }
-
 function calcQuote(){
   const w=document.getElementById("weight").value;
   if(!w) return;
-  const price = 2500 + (w * 800);
-  document.getElementById("quoteResult").innerText = "Estimated cost: ₦" + price.toLocaleString();
+  document.getElementById("quoteResult").innerText =
+    "Estimated cost: ₦" + (2500 + w*800).toLocaleString();
 }
 </script>
 
