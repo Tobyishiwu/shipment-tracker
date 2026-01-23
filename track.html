@@ -1,53 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Status Update | GID Logistics</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .box { background: white; width: 100%; max-width: 450px; padding: 40px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); text-align: center; }
-        .status-header { font-size: 10px; font-weight: 800; color: #e31e24; text-transform: uppercase; margin-bottom: 5px; }
-        .status-main { font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 30px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; border-top: 1px solid #f1f5f9; padding-top: 20px; }
-        .label { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; }
-        .val { font-weight: 700; color: #0f172a; }
-        .btn { display: block; margin-top: 30px; text-decoration: none; color: #64748b; font-weight: 700; font-size: 14px; }
-    </style>
-</head>
-<body>
-    <div id="loader">Syncing...</div>
-    <div class="box" id="content" style="display:none;">
-        <div class="status-header">Current Shipment Status</div>
-        <div class="status-main" id="rStatus">---</div>
-        <div class="grid">
-            <div><div class="label">Waybill</div><div class="val" id="rID">---</div></div>
-            <div><div class="label">Destination</div><div class="val" id="rDest">---</div></div>
-            <div><div class="label">Weight</div><div class="val" id="rWeight">---</div></div>
-            <div><div class="label">Last Updated</div><div class="val" id="rDate">---</div></div>
-        </div>
-        <a href="index.html" class="btn">← Back to Home</a>
-    </div>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script>
-        const DEPLOY_URL = "https://script.google.com/macros/s/AKfycbwTXxHgV4-s7oQ0Y3XXU7aALp8mElBbrV5g06eWoHyVLF6FLTwzSDS7vdQc7idLV1hh/exec";
-        window.onload = function() {
-            const id = new URLSearchParams(window.location.search).get('id');
-            if(!id) return document.body.innerText = "No ID provided";
-            const s = document.createElement('script');
-            s.src = `${DEPLOY_URL}?tracking=${id}&callback=render`;
-            document.body.appendChild(s);
-        };
-        function render(res) {
-            if(res.error) return document.body.innerText = "Invalid Waybill ID";
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-            document.getElementById('rStatus').innerText = res.status;
-            document.getElementById('rID').innerText = res.tracking;
-            document.getElementById('rDest').innerText = res.destination;
-            document.getElementById('rWeight').innerText = res.weight + " kg";
-            document.getElementById('rDate').innerText = res.lastUpdated;
-        }
-    </script>
+<title>Shipment Status | GID Logistics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --brand-red:#e31e24;
+  --brand-dark:#0f172a;
+  --muted:#64748b;
+  --bg:#f8fafc;
+  --border:#e5e7eb;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  color:var(--brand-dark);
+}
+
+.card{
+  background:#fff;
+  width:100%;
+  max-width:460px;
+  padding:40px;
+  border-radius:24px;
+  box-shadow:0 25px 50px rgba(0,0,0,.06);
+  animation:fadeIn .4s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+.brand{
+  font-size:11px;
+  font-weight:800;
+  color:var(--brand-red);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.status{
+  font-size:32px;
+  font-weight:800;
+  margin-bottom:28px;
+}
+
+.status.badge{
+  display:inline-block;
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:14px;
+}
+
+.badge.transit{background:#eef2ff;color:#4338ca}
+.badge.delivered{background:#ecfdf5;color:#047857}
+.badge.pending{background:#fff7ed;color:#c2410c}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+}
+
+.label{
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+
+.value{
+  font-weight:700;
+  font-size:14px;
+}
+
+.loader{
+  text-align:center;
+}
+
+.spinner{
+  width:42px;
+  height:42px;
+  border:4px solid #e5e7eb;
+  border-top-color:var(--brand-red);
+  border-radius:50%;
+  margin:20px auto;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.error{
+  color:#b91c1c;
+  font-weight:700;
+  margin-top:12px;
+}
+
+.back{
+  display:block;
+  margin-top:32px;
+  text-align:center;
+  font-weight:700;
+  text-decoration:none;
+  color:var(--muted);
+}
+
+.back:hover{color:var(--brand-dark)}
+</style>
+</head>
+
+<body>
+
+<!-- LOADING STATE -->
+<div class="card loader" id="loading">
+  <div class="brand">GID Logistics</div>
+  <div class="status">Fetching shipment…</div>
+  <div class="spinner"></div>
+</div>
+
+<!-- CONTENT -->
+<div class="card" id="content" style="display:none">
+  <div class="brand">Shipment Status</div>
+  <div class="status badge pending" id="statusText">—</div>
+
+  <div class="grid">
+    <div>
+      <div class="label">Waybill</div>
+      <div class="value" id="waybill">—</div>
+    </div>
+    <div>
+      <div class="label">Destination</div>
+      <div class="value" id="destination">—</div>
+    </div>
+    <div>
+      <div class="label">Weight</div>
+      <div class="value" id="weight">—</div>
+    </div>
+    <div>
+      <div class="label">Last Updated</div>
+      <div class="value" id="updated">—</div>
+    </div>
+  </div>
+
+  <a href="index.html" class="back">← Back to Home</a>
+</div>
+
+<!-- ERROR -->
+<div class="card" id="error" style="display:none">
+  <div class="brand">GID Logistics</div>
+  <div class="status">Unable to load shipment</div>
+  <p class="error" id="errorMsg"></p>
+  <a href="index.html" class="back">← Back to Home</a>
+</div>
+
+<script>
+const DEPLOY_URL =
+"https://script.google.com/macros/s/AKfycbwTXxHgV4-s7oQ0Y3XXU7aALp8mElBbrV5g06eWoHyVLF6FLTwzSDS7vdQc7idLV1hh/exec";
+
+const qs = id => document.getElementById(id);
+
+const show = id => qs(id).style.display = "block";
+const hide = id => qs(id).style.display = "none";
+
+const params = new URLSearchParams(window.location.search);
+const trackingId = params.get("id");
+
+if(!trackingId){
+  hide("loading");
+  show("error");
+  qs("errorMsg").innerText = "No tracking ID provided.";
+}else{
+  const script = document.createElement("script");
+  script.src = `${DEPLOY_URL}?tracking=${encodeURIComponent(trackingId)}&callback=render`;
+  script.onerror = () => fail("Network error. Please try again.");
+  document.body.appendChild(script);
+
+  setTimeout(() => {
+    if(qs("content").style.display === "none"){
+      fail("Request timed out.");
+    }
+  }, 10000);
+}
+
+function render(res){
+  if(!res || res.error){
+    fail("Invalid tracking number.");
+    return;
+  }
+
+  hide("loading");
+  show("content");
+
+  qs("waybill").innerText = res.tracking || "—";
+  qs("destination").innerText = res.destination || "—";
+  qs("weight").innerText = res.weight ? `${res.weight} kg` : "—";
+  qs("updated").innerText = res.lastUpdated
+    ? new Date(res.lastUpdated).toLocaleString()
+    : "—";
+
+  const statusEl = qs("statusText");
+  const status = (res.status || "").toLowerCase();
+
+  statusEl.innerText = res.status || "Pending";
+  statusEl.className = "status badge " +
+    (status.includes("deliver") ? "delivered" :
+     status.includes("transit") ? "transit" : "pending");
+}
+
+function fail(msg){
+  hide("loading");
+  hide("content");
+  show("error");
+  qs("errorMsg").innerText = msg;
+}
+</script>
+
 </body>
 </html>
