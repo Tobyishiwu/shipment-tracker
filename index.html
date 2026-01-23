@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>GID Logistics | Global Supply Chain & Freight</title>
+    <title>GID Logistics | Enterprise Freight Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root{--navy:#0f172a;--red:#e31e24;--bg:#ffffff;--soft-bg:#f8fafc;--muted:#64748b;--border:#e2e8f0;--green:#10b981}
-        *{box-sizing:border-box; margin:0; padding:0}
+        *{box-sizing:border-box; margin:0; padding:0; scroll-behavior: smooth;}
         body{font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--navy); line-height:1.6; overflow-x:hidden}
         .container{max-width:1200px; margin:auto; padding:0 25px}
 
@@ -21,7 +21,7 @@
         .nav-links a{text-decoration:none; color:var(--navy); transition:0.3s}
         .nav-links a:hover{color:var(--red)}
 
-        /* HERO & ANIMATION */
+        /* HERO */
         .hero{position:relative; background:var(--navy); color:#fff; padding:120px 0 180px; text-align:center; overflow:hidden}
         .hero-bg{position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.3; animation:zoom 20s infinite alternate}
         @keyframes zoom { from{transform:scale(1)} to{transform:scale(1.15)} }
@@ -34,64 +34,52 @@
         .hub-tab{flex:1; padding:15px; border:none; border-radius:12px; font-weight:800; cursor:pointer; color:var(--muted); transition:0.3s}
         .hub-tab.active{background:var(--red); color:#fff}
 
-        /* SECTIONS */
-        section{padding:100px 0}
-        .section-tag{color:var(--red); font-weight:800; font-size:14px; letter-spacing:2px; display:block; margin-bottom:10px; text-align:center}
-        .section-h2{text-align:center; font-size:36px; font-weight:800; margin-bottom:60px}
-        
-        /* SERVICE GRID */
-        .services-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:30px}
-        .s-card{padding:40px; border:1px solid var(--border); border-radius:20px; transition:0.3s}
-        .s-card:hover{border-color:var(--red); box-shadow:0 20px 40px rgba(0,0,0,0.04); transform:translateY(-5px)}
-        .s-card i{font-size:40px; display:block; margin-bottom:20px; font-style:normal}
+        /* MAP MOCKUP */
+        .map-container{width:100%; height:250px; background:#e5e7eb; border-radius:15px; margin-top:20px; position:relative; overflow:hidden; border:1px solid var(--border)}
+        .map-mockup{width:100%; height:100%; background: url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/0,0,1/1000x250?access_token=mock') center/cover; opacity:0.6}
+        .map-pin{position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:20px; height:20px; background:var(--red); border-radius:50%; border:4px solid #fff; box-shadow:0 0 15px rgba(227,30,36,0.5); animation: pulse 2s infinite}
+        @keyframes pulse { 0%{transform:translate(-50%,-50%) scale(1); opacity:1} 100%{transform:translate(-50%,-50%) scale(2.5); opacity:0} }
 
-        /* HOW IT WORKS */
-        .flow-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:40px; text-align:center}
-        .flow-num{width:50px; height:50px; background:var(--red); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-weight:800; font-size:20px}
+        /* WHY CHOOSE US */
+        .why-grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:30px}
+        .why-card{padding:40px; background:var(--soft-bg); border-radius:24px; text-align:left; transition:0.3s}
+        .why-card:hover{background:var(--navy); color:#fff}
+        .why-card i{font-size:32px; color:var(--red); margin-bottom:20px; display:block; font-style:normal}
 
-        /* COMPLIANCE */
-        .compliance{background:var(--navy); color:#fff; padding:80px 40px; border-radius:30px; text-align:center}
-        .comp-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:15px; margin-top:40px}
-        .comp-item{background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; border:1px solid rgba(255,255,255,0.1); font-size:14px}
+        /* BACK TO TOP ARROW */
+        #backToTop{position:fixed; bottom:110px; right:30px; width:50px; height:50px; background:var(--navy); color:#fff; border-radius:50%; display:none; align-items:center; justify-content:center; cursor:pointer; border:none; box-shadow:0 5px 15px rgba(0,0,0,0.2); z-index:999; transition:0.3s}
+        #backToTop:hover{background:var(--red); transform:translateY(-5px)}
 
-        /* INPUTS & UTILS */
-        .input-main{width:100%; padding:18px; border:2px solid var(--border); border-radius:12px; margin-bottom:15px; outline:none; font-size:16px}
+        /* FOOTER & BUTTONS */
         .btn-main{background:var(--red); color:#fff; border:none; padding:18px; border-radius:12px; font-weight:800; cursor:pointer; width:100%; transition:0.3s}
-        .btn-main:disabled{opacity:0.6; cursor:not-allowed}
+        .input-main{width:100%; padding:18px; border:2px solid var(--border); border-radius:12px; margin-bottom:15px; outline:none; font-size:16px}
+        footer{background:#0a0f1c; color:#fff; padding:80px 0}
         .hidden{display:none}
         .status-box{margin-top:20px; padding:20px; background:var(--soft-bg); border-radius:12px; border-left:5px solid var(--red)}
-
-        /* FOOTER */
-        footer{background:#0a0f1c; color:#fff; padding:100px 0 50px}
-        .footer-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:60px}
-        .footer-col h4{margin-bottom:25px; color:var(--red)}
-        .footer-col a{display:block; color:#94a3b8; text-decoration:none; margin-bottom:12px; font-size:14px}
-
-        /* WHATSAPP FAB */
-        .wa-btn{position:fixed; bottom:30px; right:30px; width:65px; height:65px; background:#25d366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(37,211,102,0.4); z-index:1000}
-        .wa-btn svg{width:32px; fill:#fff}
     </style>
 </head>
 <body>
+
+<button id="backToTop" onclick="scrollToTop()">↑</button>
 
 <header>
     <div class="container nav-flex">
         <div class="logo">GID<span>LOGISTICS</span></div>
         <nav class="nav-links">
             <a href="#services">Services</a>
-            <a href="#how-it-works">Process</a>
-            <a href="#compliance">Compliance</a>
+            <a href="#why-choose-us">Why Us</a>
+            <a href="#quote">Get Quote</a>
             <a href="#support">Support</a>
         </nav>
-        <div style="font-weight:800; font-size:12px; background:var(--soft-bg); padding:5px 15px; border-radius:20px">RC: 1234567</div>
+        <div style="font-weight:800; font-size:12px; color:var(--muted)">LIVE TRACKING v13.0</div>
     </div>
 </header>
 
 <section class="hero">
-    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000" class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1566633806327-68e152abc212?auto=format&fit=crop&q=80&w=2000" class="hero-bg">
     <div class="container hero-content">
-        <h1>Global Freight. <br> Delivered with Trust.</h1>
-        <p>Your premier logistics partner connecting Nigeria to the world.</p>
+        <h1>Global Logistics. <br> Seamless Movement.</h1>
+        <p>Reliable freight solutions powered by real-time technology.</p>
     </div>
 </section>
 
@@ -99,91 +87,94 @@
     <div class="hub-box">
         <div class="hub-tabs">
             <button class="hub-tab active" id="tab-track" onclick="setHub('track')">Track Shipment</button>
-            <button class="hub-tab" id="tab-quote" onclick="setHub('quote')">Instant Quote</button>
+            <button class="hub-tab" id="tab-quote" onclick="setHub('quote')">Calculate Rate</button>
         </div>
         <div style="padding:30px">
             <div id="h-track">
-                <input id="tid" class="input-main" placeholder="Enter Waybill ID (e.g. GID-101)">
-                <button class="btn-main" id="btn-track" onclick="runTrack()">Track Now</button>
-                <div id="track-res" class="hidden status-box">
-                    <h3 id="r-status"></h3>
-                    <p>Destination: <span id="r-dest"></span> | Updated: <span id="r-time"></span></p>
+                <input id="tid" class="input-main" placeholder="Enter Waybill ID (GID-101)">
+                <button class="btn-main" id="btn-track" onclick="runTrack()">Track Parcel</button>
+                <div id="track-res" class="hidden">
+                    <div class="status-box">
+                        <h3 id="r-status" style="color:var(--red)"></h3>
+                        <p style="font-size:14px; color:var(--muted)">Current Location: <span id="r-dest" style="color:var(--navy); font-weight:700"></span></p>
+                    </div>
+                    <div class="map-container">
+                        <div class="map-mockup"></div>
+                        <div class="map-pin"></div>
+                        <div style="position:absolute; bottom:10px; left:10px; background:#fff; padding:5px 10px; border-radius:5px; font-size:10px; font-weight:800">SATELLITE VIEW ACTIVE</div>
+                    </div>
                 </div>
             </div>
+            
             <div id="h-quote" class="hidden">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-                    <input id="qN" class="input-main" placeholder="Full Name">
+                    <input id="qN" class="input-main" placeholder="Your Name">
                     <input id="qW" class="input-main" type="number" placeholder="Weight (KG)">
                 </div>
-                <input id="qT" class="input-main" placeholder="Destination City/Country">
+                <input id="qT" class="input-main" placeholder="Destination City">
                 <button class="btn-main" id="btn-quote" onclick="runQuote()">Get Estimate</button>
                 <div id="quote-res" class="hidden status-box" style="text-align:center">
-                    <p>Estimated Cost:</p>
+                    <p>Estimated Shipping Cost:</p>
                     <h2 id="r-cost" style="color:var(--green); font-size:32px"></h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <section id="services">
-        <span class="section-tag">OUR SOLUTIONS</span>
-        <h2 class="section-h2">Global Logistics Services</h2>
-        <div class="services-grid">
-            <div class="s-card"><i>✈️</i><h3>Air Freight</h3><p>Fast international shipping with express customs clearance.</p></div>
-            <div class="s-card"><i>🚚</i><h3>Domestic Courier</h3><p>Door-to-door delivery across all 36 Nigerian states.</p></div>
-            <div class="s-card"><i>🚢</i><h3>Sea Cargo</h3><p>Cost-effective ocean freight for large, heavy shipments.</p></div>
-            <div class="s-card"><i>📦</i><h3>E-commerce</h3><p>Fulfillment solutions for online vendors and retailers.</p></div>
-            <div class="s-card"><i>🏭</i><h3>Warehousing</h3><p>Secure storage with real-time inventory tracking.</p></div>
-            <div class="s-card"><i>🛡️</i><h3>Insurance</h3><p>Total peace of mind with comprehensive cargo protection.</p></div>
-        </div>
-    </section>
-
-    <section id="how-it-works" style="background:var(--soft-bg); border-radius:30px; padding:80px 40px">
-        <h2 class="section-h2">The GID Process</h2>
-        <div class="flow-grid">
-            <div class="flow-item"><div class="flow-num">1</div><h4>Book</h4><p>Submit shipment details online.</p></div>
-            <div class="flow-item"><div class="flow-num">2</div><h4>Pickup</h4><p>We collect from your location.</p></div>
-            <div class="flow-item"><div class="flow-num">3</div><h4>Transit</h4><p>Global movement via air/sea.</p></div>
-            <div class="flow-item"><div class="flow-num">4</div><h4>Deliver</h4><p>Safe arrival at destination.</p></div>
-        </div>
-    </section>
-
-    <section id="compliance">
-        <div class="compliance">
-            <h2>Shipping Compliance</h2>
-            <p style="opacity:0.7">The following items are strictly prohibited for transport:</p>
-            <div class="comp-grid">
-                <div class="comp-item">🚫 Explosives</div>
-                <div class="comp-item">🚫 Flammable Liquids</div>
-                <div class="comp-item">🚫 Illegal Substances</div>
-                <div class="comp-item">🚫 Loose Batteries</div>
-                <div class="comp-item">🚫 Perishables</div>
-                <div class="comp-item">🚫 Corrosives</div>
+    <section id="why-choose-us">
+        <span class="section-tag">DIFFERENTIATION</span>
+        <h2 class="section-h2">Why Partners Choose GID</h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <i>🚀</i>
+                <h4>Lightning Fast Delivery</h4>
+                <p>We optimize routes using AI to ensure your cargo arrives up to 30% faster than traditional couriers.</p>
             </div>
+            <div class="why-card">
+                <i>🛡️</i>
+                <h4>Full Cargo Protection</h4>
+                <p>Enterprise-grade insurance covers every single shipment, providing peace of mind from pickup to delivery.</p>
+            </div>
+            <div class="why-card">
+                <i>💰</i>
+                <h4>Transparent Pricing</h4>
+                <p>No hidden fuel surcharges or surprise customs fees. Our quotes are final and inclusive.</p>
+            </div>
+            <div class="why-card">
+                <i>🎧</i>
+                <h4>24/7 Priority Support</h4>
+                <p>A dedicated account manager for every client, ensuring your questions are answered in minutes, not days.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-h2">Our Core Services</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px">
+            <div style="padding:20px; border-bottom:4px solid var(--red); background:var(--soft-bg)"><strong>Air Freight</strong></div>
+            <div style="padding:20px; border-bottom:4px solid var(--red); background:var(--soft-bg)"><strong>Ocean Cargo</strong></div>
+            <div style="padding:20px; border-bottom:4px solid var(--red); background:var(--soft-bg)"><strong>E-commerce</strong></div>
+            <div style="padding:20px; border-bottom:4px solid var(--red); background:var(--soft-bg)"><strong>Warehousing</strong></div>
         </div>
     </section>
 </div>
 
-<footer>
-    <div class="container footer-grid">
-        <div class="footer-col">
-            <div class="logo">GID<span>LOGISTICS</span></div>
-            <p style="margin-top:20px; color:#94a3b8; font-size:14px">Serving Lagos, London, and Guangzhou.</p>
+<footer id="support">
+    <div class="container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:50px">
+        <div>
+            <div class="logo" style="color:#fff">GID<span>LOGISTICS</span></div>
+            <p style="margin-top:20px; color:#94a3b8">The standard in modern African logistics.</p>
         </div>
-        <div class="footer-col">
-            <h4>Support</h4>
-            <a href="#">Help Center</a>
-            <a href="#">Tracking FAQ</a>
-            <a href="#">Contact Us</a>
+        <div>
+            <h4>Contact Us</h4>
+            <p style="color:#94a3b8; font-size:14px; margin-top:10px">Lagos HQ: 12 Logistics Way, Ikeja<br>Email: help@gidlogistics.com<br>Tel: +234 706 695 8826</p>
         </div>
-        <div class="footer-col" id="support">
-            <h4>Contact Info</h4>
-            <p style="color:#94a3b8; font-size:14px">+234 706 695 8826<br>help@gidlogistics.com</p>
-        </div>
-        <div class="footer-col">
+        <div>
             <h4>Newsletter</h4>
-            <input id="sub-email" style="width:100%; padding:12px; background:#1e293b; border:none; border-radius:8px; color:#fff; margin-bottom:10px" placeholder="Email">
-            <button class="btn-main" id="btn-sub" style="padding:10px" onclick="runSubscribe()">Subscribe</button>
+            <div style="display:flex; gap:10px; margin-top:10px">
+                <input id="sub-email" style="flex:1; padding:12px; border-radius:8px; border:none" placeholder="Enter Email">
+                <button class="btn-main" style="width:auto; padding:0 20px" onclick="runSubscribe()">Join</button>
+            </div>
         </div>
     </div>
 </footer>
@@ -202,7 +193,17 @@ function setHub(t){
     document.getElementById('tab-quote').classList.toggle('active', t==='quote');
 }
 
-// 1. TRACKING
+// BACK TO TOP LOGIC
+window.onscroll = function() {
+    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+        document.getElementById("backToTop").style.display = "flex";
+    } else {
+        document.getElementById("backToTop").style.display = "none";
+    }
+};
+function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+
+// TRACKING
 function runTrack(){
     const id = document.getElementById('tid').value.trim();
     if(!id) return;
@@ -213,11 +214,10 @@ function runTrack(){
         document.getElementById('track-res').classList.remove('hidden');
         document.getElementById('r-status').innerText = r.status.toUpperCase();
         document.getElementById('r-dest').innerText = r.destination;
-        document.getElementById('r-time').innerText = r.updated;
     });
 }
 
-// 2. QUOTING
+// QUOTING
 function runQuote(){
     const name = document.getElementById('qN').value;
     const weight = document.getElementById('qW').value;
@@ -228,17 +228,6 @@ function runQuote(){
         toggleBtn('btn-quote', false);
         document.getElementById('quote-res').classList.remove('hidden');
         document.getElementById('r-cost').innerText = r.cost;
-    });
-}
-
-// 3. NEWSLETTER
-function runSubscribe(){
-    const email = document.getElementById('sub-email').value;
-    if(!email) return;
-    toggleBtn('btn-sub', true);
-    callApi(`action=subscribe&email=${encodeURIComponent(email)}`, (r) => {
-        toggleBtn('btn-sub', false);
-        alert("Subscribed!");
     });
 }
 
