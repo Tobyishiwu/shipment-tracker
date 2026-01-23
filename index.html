@@ -1,31 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-  ============================================================
-  ORBIT EXPRESS
-  Global Logistics & Transportation Platform
-  ------------------------------------------------------------
-  Purpose:
-  - International-facing corporate landing page
-  - Enterprise credibility
-  - Clear service communication
-  - Long-form, professional presentation
-  ============================================================
-  -->
-
   <meta charset="UTF-8">
-  <title>Orbit Express | Global Logistics Solutions</title>
+  <title>Orbit Express | Global Logistics & Supply Chain Solutions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Icons -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- Brand Theme -->
   <script>
     tailwind.config = {
       theme: {
@@ -33,251 +16,253 @@
           colors: {
             space: "#0B1D33",
             orbit: "#FF6B35",
-            light: "#F8FAFC"
+            "orbit-hover": "#E55A2B",
+            light: "#F8FAFC",
+            "slate-750": "#1E293B"
           }
         }
       }
     }
   </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
+  </style>
 </head>
 
-<body class="bg-white text-slate-800 leading-relaxed">
+<body class="bg-white text-slate-800 leading-relaxed overflow-x-hidden text-sm md:text-base">
 
-<!-- ============================================================
-NAVBAR
-============================================================ -->
-<header class="fixed top-0 w-full bg-space text-white z-50">
+<header class="fixed top-0 w-full bg-space/95 backdrop-blur-md text-white z-50 border-b border-white/10">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="font-bold text-xl">
-      Orbit <span class="text-orbit">Express</span>
+    <div class="font-bold text-2xl tracking-tight">
+      ORBIT <span class="text-orbit">EXPRESS</span>
     </div>
 
-    <nav class="hidden lg:flex gap-8 text-sm">
-      <a href="#">Home</a>
-      <a href="#">Services</a>
-      <a href="#">Industries</a>
-      <a href="#">Network</a>
-      <a href="#">Tracking</a>
-      <a href="#">Contact</a>
+    <nav class="hidden lg:flex gap-10 text-sm font-medium tracking-wide uppercase">
+      <a href="#" class="hover:text-orbit transition-colors">Services</a>
+      <a href="#" class="hover:text-orbit transition-colors">Industries</a>
+      <a href="#" class="hover:text-orbit transition-colors">Tracking</a>
+      <a href="#" class="hover:text-orbit transition-colors">About</a>
+      <a href="#" class="hover:text-orbit transition-colors">Global Network</a>
     </nav>
 
-    <a href="#"
-       class="hidden lg:inline-block bg-orbit px-6 py-2 rounded font-semibold">
-      Global Dashboard
-    </a>
+    <div class="flex items-center gap-6">
+      <a href="#" class="hidden sm:inline-block text-sm font-medium hover:text-orbit">Support</a>
+      <a href="#" class="bg-orbit hover:bg-orbit-hover px-6 py-2.5 rounded shadow-lg shadow-orbit/20 font-bold transition-all transform hover:-translate-y-0.5">
+        Client Portal
+      </a>
+    </div>
   </div>
 </header>
 
-<!-- ============================================================
-HERO SECTION
-============================================================ -->
-<section class="pt-32 pb-24 bg-gradient-to-br from-space to-slate-900 text-white">
-  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+<section class="relative pt-48 pb-32 bg-space overflow-hidden">
+  <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[600px] h-[600px] bg-orbit/10 rounded-full blur-[120px]"></div>
+  
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+    <div class="space-y-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orbit/10 border border-orbit/20 text-orbit text-xs font-bold uppercase tracking-widest">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orbit opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-orbit"></span>
+        </span>
+        Real-Time Logistics Monitoring Active
+      </div>
 
-    <div>
-      <h1 class="text-4xl xl:text-5xl font-bold leading-tight">
-        Global Logistics Solutions<br>
-        Built for International Trade
+      <h1 class="text-5xl xl:text-7xl font-bold leading-[1.1] text-white">
+        Moving the World's <span class="text-transparent bg-clip-text bg-gradient-to-r from-orbit to-orange-400">Ambition.</span>
       </h1>
 
-      <p class="mt-6 text-slate-300 max-w-xl">
-        Orbit Express provides reliable international shipping,
-        enterprise logistics, and real-time shipment visibility
-        for businesses operating across global markets.
+      <p class="text-lg text-slate-400 max-w-xl leading-relaxed">
+        Orbit Express bridges the gap between continents with precision logistics. From enterprise warehousing to intelligent freight, we optimize every mile of your supply chain.
       </p>
 
-      <p class="mt-4 text-slate-400 max-w-xl text-sm">
-        From cross-border freight to last-mile delivery,
-        we help organizations move goods efficiently,
-        securely, and on time.
-      </p>
-
-      <!-- Tracking -->
-      <div class="mt-10 bg-white rounded-lg p-4 flex gap-3">
-        <input class="flex-1 border px-4 py-3 rounded"
-               placeholder="Enter tracking number">
-        <button class="bg-orbit text-white px-6 rounded font-semibold">
-          Track Shipment
-        </button>
+      <div class="bg-white/5 p-2 rounded-xl border border-white/10 glass max-w-lg shadow-2xl">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <div class="flex-1 relative">
+            <i class="fas fa-box absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+            <input class="w-full bg-space/50 border border-white/10 px-12 py-4 rounded-lg text-white focus:outline-none focus:border-orbit transition-all"
+                   placeholder="Enter Waybill or Tracking ID">
+          </div>
+          <button class="bg-orbit text-white px-8 py-4 rounded-lg font-bold hover:bg-orbit-hover transition-all whitespace-nowrap">
+            Track Cargo
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="h-96 bg-slate-800 rounded-xl flex items-center justify-center">
-      <i class="fas fa-globe text-white text-8xl opacity-10"></i>
+    <div class="relative hidden lg:block">
+      <div class="absolute inset-0 bg-orbit/20 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+      <div class="relative bg-slate-800/50 border border-white/10 rounded-2xl p-8 backdrop-blur-sm overflow-hidden group">
+        <div class="flex justify-between items-start mb-12">
+            <div>
+                <p class="text-orbit font-mono text-sm">GLOBAL_OPERATIONS_MAP</p>
+                <h3 class="text-white text-2xl font-bold">24/7 Global Oversight</h3>
+            </div>
+            <i class="fas fa-satellite text-4xl text-white/20 group-hover:text-orbit transition-colors"></i>
+        </div>
+        <div class="aspect-video bg-space/80 rounded-lg flex items-center justify-center border border-white/5">
+             <i class="fas fa-earth-americas text-white/5 text-9xl"></i>
+             <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-1 h-1 bg-orbit rounded-full animate-ping"></div>
+                <div class="absolute top-1/3 left-1/4 w-1 h-1 bg-orbit rounded-full animate-ping delay-700"></div>
+                <div class="absolute bottom-1/4 right-1/3 w-1 h-1 bg-orbit rounded-full animate-ping delay-1000"></div>
+             </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </section>
 
-<!-- ============================================================
-ABOUT ORBIT EXPRESS
-============================================================ -->
-<section class="py-24">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-space mb-6">
-      About Orbit Express
-    </h2>
-
-    <p class="text-slate-600 max-w-4xl">
-      Orbit Express is a global logistics company focused on providing
-      dependable transportation and supply chain solutions for businesses
-      of all sizes. We support international trade by connecting markets
-      through air, ocean, and ground networks, powered by modern logistics
-      technology and operational expertise.
-    </p>
-
-    <p class="mt-4 text-slate-600 max-w-4xl">
-      Our approach combines industry experience, data-driven systems,
-      and customer-focused operations to ensure shipments move seamlessly
-      across borders and regions.
-    </p>
-  </div>
-</section>
-
-<!-- ============================================================
-WHY CHOOSE US
-============================================================ -->
-<section class="py-24 bg-light">
+<section class="bg-light py-12 border-b">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-space mb-12">
-      Why Businesses Choose Orbit Express
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
       <div>
-        <h3 class="font-semibold text-lg">Global Coverage</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Operations spanning over 220 countries and territories,
-          enabling seamless international shipping.
-        </p>
+        <p class="text-3xl font-bold text-space">220+</p>
+        <p class="text-slate-500 text-sm uppercase font-semibold">Countries Covered</p>
       </div>
-
       <div>
-        <h3 class="font-semibold text-lg">Operational Reliability</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Proven logistics processes designed to minimize delays,
-          reduce risk, and ensure predictable delivery timelines.
-        </p>
+        <p class="text-3xl font-bold text-space">1.2M</p>
+        <p class="text-slate-500 text-sm uppercase font-semibold">Tons Shipped / Year</p>
       </div>
-
       <div>
-        <h3 class="font-semibold text-lg">Technology-Driven</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Real-time tracking, automated workflows, and data visibility
-          that give customers full control over their shipments.
-        </p>
+        <p class="text-3xl font-bold text-space">99.8%</p>
+        <p class="text-slate-500 text-sm uppercase font-semibold">On-Time Delivery</p>
+      </div>
+      <div>
+        <p class="text-3xl font-bold text-space">24/7</p>
+        <p class="text-slate-500 text-sm uppercase font-semibold">Global Support</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-SERVICES
-============================================================ -->
-<section class="py-24">
+<section class="py-24 bg-white">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-space mb-12">
-      Our Logistics Services
-    </h2>
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+      <div class="max-w-2xl">
+        <h2 class="text-orbit font-bold uppercase tracking-widest text-sm mb-4">Core Capabilities</h2>
+        <h3 class="text-4xl font-bold text-space">Integrated Logistics for a Modern Economy</h3>
+      </div>
+      <a href="#" class="text-space font-bold border-b-2 border-orbit pb-1 hover:text-orbit transition-colors">View All Services</a>
+    </div>
 
-    <div class="grid lg:grid-cols-3 gap-12">
-
-      <div>
-        <h3 class="font-semibold text-lg">International Air Freight</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Fast and secure air freight solutions for time-sensitive cargo,
-          supporting global trade lanes and major airports worldwide.
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="group p-8 rounded-2xl border border-slate-100 bg-light hover:bg-space hover:text-white transition-all duration-300">
+        <div class="w-14 h-14 bg-orbit/10 text-orbit rounded-lg flex items-center justify-center mb-6 group-hover:bg-orbit group-hover:text-white transition-colors">
+          <i class="fas fa-plane-up text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold mb-4">Priority Air Freight</h4>
+        <p class="text-slate-600 group-hover:text-slate-400 text-sm leading-relaxed mb-6">
+          Direct connections to major global hubs. We handle high-value, time-critical cargo with door-to-door expedited service.
         </p>
+        <ul class="space-y-2 text-sm">
+          <li><i class="fas fa-check text-orbit mr-2"></i> Next-Flight-Out Service</li>
+          <li><i class="fas fa-check text-orbit mr-2"></i> Temperature Controlled</li>
+        </ul>
       </div>
 
-      <div>
-        <h3 class="font-semibold text-lg">Ocean Freight</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Cost-effective ocean shipping services including full container
-          load (FCL) and less-than-container load (LCL) options.
+      <div class="group p-8 rounded-2xl border border-slate-100 bg-light hover:bg-space hover:text-white transition-all duration-300">
+        <div class="w-14 h-14 bg-orbit/10 text-orbit rounded-lg flex items-center justify-center mb-6 group-hover:bg-orbit group-hover:text-white transition-colors">
+          <i class="fas fa-ship text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold mb-4">Ocean & Maritime</h4>
+        <p class="text-slate-600 group-hover:text-slate-400 text-sm leading-relaxed mb-6">
+          Scalable sea freight solutions for bulk and containerized goods, offering a perfect balance between cost and transit time.
         </p>
+        <ul class="space-y-2 text-sm">
+          <li><i class="fas fa-check text-orbit mr-2"></i> FCL & LCL Consolidation</li>
+          <li><i class="fas fa-check text-orbit mr-2"></i> Port-to-Port Expertise</li>
+        </ul>
       </div>
 
-      <div>
-        <h3 class="font-semibold text-lg">Last-Mile Delivery</h3>
-        <p class="mt-3 text-sm text-slate-600">
-          Reliable final-mile delivery services designed to meet
-          customer expectations in urban and regional markets.
+      <div class="group p-8 rounded-2xl border border-slate-100 bg-light hover:bg-space hover:text-white transition-all duration-300">
+        <div class="w-14 h-14 bg-orbit/10 text-orbit rounded-lg flex items-center justify-center mb-6 group-hover:bg-orbit group-hover:text-white transition-colors">
+          <i class="fas fa-warehouse text-2xl"></i>
+        </div>
+        <h4 class="text-xl font-bold mb-4">Smart Warehousing</h4>
+        <p class="text-slate-600 group-hover:text-slate-400 text-sm leading-relaxed mb-6">
+          Strategic distribution centers equipped with AI-driven inventory management and automated fulfillment systems.
         </p>
+        <ul class="space-y-2 text-sm">
+          <li><i class="fas fa-check text-orbit mr-2"></i> Real-time Stock Sync</li>
+          <li><i class="fas fa-check text-orbit mr-2"></i> Last-Mile Integration</li>
+        </ul>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-INDUSTRIES
-============================================================ -->
-<section class="py-24 bg-light">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-space mb-12">
-      Industries We Serve
-    </h2>
-
-    <div class="grid md:grid-cols-4 gap-8 text-sm text-slate-600">
-      <div>Manufacturing</div>
-      <div>Retail & E-commerce</div>
-      <div>Healthcare & Pharmaceuticals</div>
-      <div>Technology & Electronics</div>
-      <div>Agriculture & Commodities</div>
-      <div>Automotive</div>
-      <div>Aerospace</div>
-      <div>Energy & Infrastructure</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-CALL TO ACTION
-============================================================ -->
-<section class="py-24 bg-space text-white text-center">
-  <div class="max-w-4xl mx-auto px-6">
-    <h2 class="text-3xl font-bold">
-      Ready to Move Your Business Forward?
-    </h2>
-
-    <p class="mt-4 text-slate-300">
-      Partner with Orbit Express for dependable global logistics
-      solutions tailored to your business needs.
+<section class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 bg-slate-900"></div>
+  <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">Ready to Optimize Your Logistics?</h2>
+    <p class="text-slate-400 text-lg mb-12 max-w-2xl mx-auto">
+      Talk to our supply chain experts today for a custom assessment of your global transportation needs.
     </p>
-
-    <div class="mt-8">
-      <a href="#"
-         class="inline-block bg-orbit px-8 py-3 rounded font-semibold">
-        Contact Our Team
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#" class="bg-orbit hover:bg-orbit-hover text-white px-10 py-4 rounded-lg font-bold transition-all shadow-xl shadow-orbit/20">
+        Get a Quote
+      </a>
+      <a href="#" class="bg-white/10 hover:bg-white/20 text-white px-10 py-4 rounded-lg font-bold transition-all border border-white/10">
+        Schedule a Call
       </a>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-FOOTER
-============================================================ -->
-<footer class="bg-space text-slate-400 py-16">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+<footer class="bg-space text-slate-400 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+    
+    <div class="col-span-1 md:col-span-1">
+      <h4 class="text-white font-bold text-2xl mb-6">ORBIT <span class="text-orbit">EXPRESS</span></h4>
+      <p class="text-sm leading-relaxed mb-6">
+        Setting the standard for international freight and enterprise supply chain management since 1998.
+      </p>
+      <div class="flex gap-4 text-xl">
+        <a href="#" class="hover:text-orbit"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="hover:text-orbit"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="hover:text-orbit"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
 
     <div>
-      <h4 class="text-white font-bold text-lg">Orbit Express</h4>
-      <p class="mt-4 text-sm max-w-md">
-        Delivering reliable logistics and transportation services
-        that support international trade and global business growth.
-      </p>
-      <p class="mt-6 text-xs">
-        © 2026 Orbit Express. All rights reserved.
-      </p>
+      <h5 class="text-white font-bold uppercase text-xs tracking-widest mb-6">Services</h5>
+      <ul class="space-y-4 text-sm">
+        <li><a href="#" class="hover:text-white transition-colors">Air Freight</a></li>
+        <li><a href="#" class="hover:text-white transition-colors">Ocean Freight</a></li>
+        <li><a href="#" class="hover:text-white transition-colors">Road Transport</a></li>
+        <li><a href="#" class="hover:text-white transition-colors">Warehousing</a></li>
+      </ul>
     </div>
 
-    <div class="flex items-center gap-6 text-xl">
-      <i class="fab fa-linkedin"></i>
-      <i class="fab fa-x-twitter"></i>
-      <i class="fab fa-facebook"></i>
+    <div>
+      <h5 class="text-white font-bold uppercase text-xs tracking-widest mb-6">Company</h5>
+      <ul class="space-y-4 text-sm">
+        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+        <li><a href="#" class="hover:text-white transition-colors">Global Network</a></li>
+        <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+      </ul>
     </div>
 
+    <div>
+      <h5 class="text-white font-bold uppercase text-xs tracking-widest mb-6">Newsletter</h5>
+      <p class="text-xs mb-4">Stay updated with global trade insights.</p>
+      <div class="flex">
+        <input class="bg-white/5 border border-white/10 px-4 py-2 rounded-l-md w-full focus:outline-none focus:border-orbit" placeholder="Email">
+        <button class="bg-orbit text-white px-4 py-2 rounded-r-md"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+  </div>
+  <div class="max-w-7xl mx-auto px-6 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between gap-4 text-xs">
+    <p>© 2026 Orbit Express Global. All rights reserved.</p>
+    <div class="flex gap-6 uppercase tracking-widest">
+      <a href="#" class="hover:text-white">Privacy Policy</a>
+      <a href="#" class="hover:text-white">Terms of Service</a>
+      <a href="#" class="hover:text-white">Cookies</a>
+    </div>
   </div>
 </footer>
 
