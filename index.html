@@ -21,6 +21,26 @@
 body{background:#fff;color:var(--navy);line-height:1.6; overflow-x: hidden;}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
+/* --- BRANDED GID LOGO --- */
+.gid-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -1.5px;
+    color: var(--navy);
+}
+.gid-brand .accent { color: var(--red); }
+.gid-brand i { 
+    font-style: normal; 
+    font-size: 10px; 
+    letter-spacing: 3px; 
+    margin-left: 10px; 
+    color: var(--gray); 
+    text-transform: uppercase;
+}
+
 /* NAVIGATION */
 header{
   background: #fff;
@@ -30,22 +50,10 @@ header{
 .header-inner{
   display:flex; justify-content:space-between; align-items:center; padding:18px 0;
 }
-.logo { 
-    font-size: 26px; 
-    font-weight: 800; 
-    text-decoration: none; 
-    color: var(--navy); 
-    letter-spacing: -1.5px;
-    display: flex;
-    align-items: center;
-}
-.logo span { color: var(--red); }
-.logo i { font-style: normal; font-size: 10px; letter-spacing: 2px; margin-left: 8px; color: var(--gray); opacity: 0.6; }
-
 nav a{ margin-left:26px; font-size:14px; font-weight:700; color:var(--navy); text-decoration:none; transition: 0.3s; }
 nav a:hover{ color: var(--red); }
 
-/* HERO - THE BLEED DESIGN */
+/* HERO SECTION */
 .hero {
   position: relative;
   background: #fff;
@@ -63,24 +71,25 @@ nav a:hover{ color: var(--red); }
   line-height: 0.95;
   margin-bottom: 24px;
   letter-spacing: -4px;
-  color: var(--dark);
 }
 .hero-text p { font-size: 20px; color: var(--gray); margin-bottom: 40px; max-width: 450px; }
 
-/* THE RECREATED IMAGE - NO LONGER BROKEN */
+/* THE BLEED IMAGE AREA */
 .hero-visual {
   position: relative;
   display: flex;
   justify-content: flex-end;
 }
 .hero-visual img {
-  width: 140%; /* Professional Bleed Effect */
+  width: 135%; /* Creates the bleed effect */
   height: auto;
-  max-width: 1000px;
-  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.15));
+  max-width: 950px;
+  /* Soft shadow to match the generated image depth */
+  filter: drop-shadow(0 40px 60px rgba(0,0,0,0.15));
+  border-radius: 0 0 0 40px;
 }
 
-/* FLOATING ACTION STRIP */
+/* ACTION STRIP */
 .action-strip {
   position: relative;
   margin-top: -80px;
@@ -121,16 +130,16 @@ nav a:hover{ color: var(--red); }
   cursor: pointer;
   transition: 0.3s;
 }
-.btn-red:hover { background: #b31419; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(227,30,36,0.3); }
+.btn-red:hover { background: #b31419; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(227,30,36,0.3); }
 
 /* FOOTER */
 footer { background: var(--dark); color: #fff; padding: 100px 0 40px; text-align: center; }
 
 @media(max-width: 992px) {
   .hero-grid { grid-template-columns: 1fr; text-align: center; }
-  .hero-visual { order: -1; margin-bottom: 40px; }
-  .hero-visual img { width: 100%; }
-  .strip-box { grid-template-columns: 1fr; margin-top: -120px;}
+  .hero-visual { display: none; } /* Better UX for mobile */
+  .strip-box { grid-template-columns: 1fr; margin-top: -120px; }
+  .hero-text h1 { letter-spacing: -2px; }
 }
 </style>
 </head>
@@ -139,12 +148,14 @@ footer { background: var(--dark); color: #fff; padding: 100px 0 40px; text-align
 
 <header>
   <div class="container header-inner">
-    <a href="#" class="logo">GI<span>D</span> <i>LOGISTICS</i></a>
+    <a href="#" class="gid-brand">
+        GI<span class="accent">D</span> <i>Logistics</i>
+    </a>
     <nav>
       <a href="#">Ship Now</a>
       <a href="#">Tracking</a>
-      <a href="#">Centers</a>
-      <a href="#" style="background:var(--red); color:#fff; padding:10px 22px; border-radius:10px;">Login</a>
+      <a href="#">Centres</a>
+      <a href="#" style="background:var(--red); color:#fff; padding:12px 24px; border-radius:12px;">Login</a>
     </nav>
   </div>
 </header>
@@ -157,9 +168,9 @@ footer { background: var(--dark); color: #fff; padding: 100px 0 40px; text-align
     </div>
 
     <div class="hero-visual">
-      <img src="https://files.oaiusercontent.com/file-6U8FzF7P9H4yD3f2yJ5Y7Y?se=2024-05-23T10%3A00%3A00Z&sp=r&sv=2024-05-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dgid-logistics-fleet.png&sig=...REPLACED_WITH_STABLE_LINK..." 
-           onerror="this.src='https://i.ibb.co/L5hY5M7/Logistics-Fleet-Bleed.png'" 
-           alt="GID Logistics Fleet">
+      <img src="https://i.ibb.co/L5hY5M7/Logistics-Fleet-Bleed.png" 
+           alt="GID Logistics Fleet" 
+           id="heroImage">
     </div>
   </div>
 </section>
@@ -180,17 +191,19 @@ footer { background: var(--dark); color: #fff; padding: 100px 0 40px; text-align
   </div>
 </section>
 
-<section style="padding: 120px 0; background: var(--light); text-align: center;">
+<section style="padding: 120px 0; text-align: center;">
     <div class="container">
-        <h2 style="font-size: 36px; font-weight: 800; letter-spacing: -1.5px;">Africa's Smartest Network</h2>
-        <p style="color: var(--gray); margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">With over 230 experience centers and a digital-first approach, we are the bridge between your business and the world.</p>
+        <h2 style="font-size: 38px; font-weight: 800; letter-spacing: -1.5px;">Beyond Boundaries</h2>
+        <p style="color: var(--gray); margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">With our specialized fleet of trucks, vans, and planes, GID Logistics ensures your cargo is handled with enterprise-grade care.</p>
     </div>
 </section>
 
 <footer>
   <div class="container">
-    <div class="logo" style="color:#fff; justify-content: center; font-size: 34px;">GI<span>D</span> <i>LOGISTICS</i></div>
-    <p style="margin-top: 20px; opacity: 0.5; font-size: 14px;">© 2026 GID Logistics Technologies. All Rights Reserved.</p>
+    <div class="gid-brand" style="color:#fff; justify-content: center; font-size: 34px;">
+        GI<span class="accent">D</span> <i>Logistics</i>
+    </div>
+    <p style="margin-top: 20px; opacity: 0.5;">© 2026 GID Logistics Technologies. All Rights Reserved.</p>
   </div>
 </footer>
 
