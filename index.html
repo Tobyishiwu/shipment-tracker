@@ -1,36 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GID Logistics | Delivering Confidence</title>
+<title>GID Logistics | Smart Courier Services</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --red:#e31e24;
-  --red-dark:#c4161c;
   --navy:#0f172a;
   --gray:#64748b;
   --light:#f8fafc;
   --dark:#020617;
-  --white:#ffffff;
+  --soft:#fff5f5;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
-body{background:#fff;color:var(--navy);line-height:1.65}
+body{background:#fff;color:var(--navy);line-height:1.6}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
-/* ================= NAV ================= */
+/* TOP BAR */
+.topbar{
+  background:var(--dark);
+  color:#fff;
+  font-size:12px;
+  padding:10px 0;
+}
+.topbar .row{
+  display:flex;
+  justify-content:space-between;
+}
+@media(max-width:600px){.topbar{display:none}}
+
+/* HEADER */
 header{
+  background:#fff;
+  border-bottom:1px solid #eee;
   position:sticky;
   top:0;
   z-index:1000;
-  background:#fff;
-  box-shadow:0 10px 30px rgba(0,0,0,.06);
 }
-.nav{
+.header{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -39,210 +52,178 @@ header{
 .logo{
   font-size:22px;
   font-weight:800;
-  text-decoration:none;
-  color:var(--navy);
 }
 .logo span{color:var(--red)}
-.nav-links{
-  display:flex;
-  gap:28px;
-}
-.nav-links a{
-  text-decoration:none;
+nav a{
+  margin-left:26px;
   font-size:14px;
   font-weight:600;
   color:var(--navy);
-}
-.menu-btn{
-  display:none;
-  font-size:26px;
-  cursor:pointer;
-}
-.mobile-nav{
-  display:none;
-  flex-direction:column;
-  background:#fff;
-  border-top:1px solid #eee;
-}
-.mobile-nav a{
-  padding:16px 20px;
-  border-bottom:1px solid #f1f5f9;
   text-decoration:none;
-  font-weight:600;
-  color:var(--navy);
 }
+@media(max-width:900px){nav{display:none}}
 
-/* ================= HERO ================= */
+/* HERO */
 .hero{
-  position:relative;
-  min-height:95vh;
-  display:flex;
-  align-items:center;
-  background:
-    linear-gradient(
-      rgba(2,6,23,.45),
-      rgba(2,6,23,.65)
-    ),
-    url("https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg");
-  background-size:cover;
-  background-position:center;
+  background:linear-gradient(180deg,var(--soft),#ffffff 70%);
+  padding:100px 0 80px;
 }
-.hero-content{
-  max-width:650px;
-}
+.hero-inner{max-width:800px}
 .hero h1{
-  font-size:clamp(42px,6vw,64px);
+  font-size:clamp(36px,5vw,54px);
   font-weight:800;
-  line-height:1.05;
-  color:#ffffff;
-  margin-bottom:22px;
-  text-shadow:0 6px 20px rgba(0,0,0,.45);
+  margin-bottom:18px;
 }
 .hero p{
   font-size:18px;
-  color:#f1f5f9;
-  margin-bottom:34px;
-  max-width:560px;
+  color:var(--gray);
+  margin-bottom:30px;
 }
 
-/* ACTION CARD */
-.hero-card{
-  background:#ffffff;
-  padding:26px;
-  border-radius:26px;
-  box-shadow:0 50px 100px rgba(0,0,0,.25);
-  max-width:520px;
-}
-.tabs{
-  display:flex;
-  gap:22px;
-  margin-bottom:18px;
-}
-.tab{
-  font-size:14px;
-  font-weight:700;
-  cursor:pointer;
-  color:#6b7280;
-}
-.tab.active{color:var(--red)}
-.input-row{
+/* TRACK BOX */
+.track-box{
+  background:#fff;
+  padding:14px;
+  border-radius:16px;
   display:flex;
   gap:12px;
+  box-shadow:0 25px 45px rgba(0,0,0,.08);
+  max-width:560px;
 }
-.input-row input{
+.track-box input{
+  border:none;
+  padding:16px;
+  font-size:15px;
   flex:1;
-  padding:15px;
-  border-radius:16px;
-  border:1px solid #e5e7eb;
 }
+.track-box input:focus{outline:none}
 .btn{
   background:var(--red);
   color:#fff;
   border:none;
-  padding:15px 28px;
-  border-radius:16px;
+  padding:16px 28px;
+  border-radius:12px;
   font-weight:700;
   cursor:pointer;
 }
-.btn:hover{background:var(--red-dark)}
 
-.hero-badge{
-  margin-top:24px;
-  display:inline-block;
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(8px);
-  padding:14px 22px;
-  border-radius:22px;
-  color:#fff;
-  font-size:14px;
-  font-weight:700;
+/* TRUST BADGE */
+.trust-badge{
+  margin-top:18px;
+  display:inline-flex;
+  gap:10px;
+  background:#fff;
+  padding:14px 18px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+  font-size:13px;
 }
 
-/* ================= SECTIONS ================= */
-section{padding:110px 0}
+/* SECTIONS */
+section{padding:90px 0}
 .section-title{
-  max-width:720px;
-  margin-bottom:60px;
+  max-width:700px;
+  margin-bottom:55px;
 }
 .section-title h2{
-  font-size:36px;
+  font-size:32px;
   font-weight:800;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 .section-title p{color:var(--gray)}
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:36px;
+  gap:30px;
 }
 .card{
   background:#fff;
-  padding:40px;
-  border-radius:30px;
-  box-shadow:0 30px 60px rgba(0,0,0,.08);
+  border-radius:22px;
+  padding:34px;
+  box-shadow:0 18px 35px rgba(0,0,0,.06);
+  transition:.3s;
 }
+.card:hover{transform:translateY(-6px)}
 .icon{
-  width:56px;
-  height:56px;
-  border-radius:20px;
-  background:#ffe4e4;
+  width:46px;
+  height:46px;
+  background:var(--soft);
+  border-radius:14px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
-  margin-bottom:22px;
+  font-size:22px;
+  margin-bottom:16px;
 }
 
-/* ================= STATS ================= */
+/* HOW IT WORKS */
+.step{
+  background:#fff;
+  border-radius:22px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 16px 30px rgba(0,0,0,.06);
+}
+.step span{
+  display:inline-block;
+  background:var(--red);
+  color:#fff;
+  font-size:13px;
+  padding:6px 14px;
+  border-radius:20px;
+  margin-bottom:12px;
+}
+
+/* STATS */
 .stats{
-  background:linear-gradient(135deg,#e31e24,#b01217);
+  background:linear-gradient(135deg,#e31e24,#c4161c);
   color:#fff;
 }
 .stats-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:30px;
+  gap:24px;
   text-align:center;
 }
-.stats-grid h3{
-  font-size:46px;
-  font-weight:800;
+@media(min-width:768px){
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
 }
+.stats-grid h3{font-size:40px}
 
-/* ================= CTA ================= */
+/* CTA */
 .cta{
   background:var(--navy);
   color:#fff;
   text-align:center;
 }
 .cta h2{
-  font-size:40px;
+  font-size:34px;
   font-weight:800;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
+.cta p{opacity:.85;margin-bottom:24px}
 
-/* ================= FOOTER ================= */
+/* FOOTER */
 footer{
   background:var(--dark);
   color:#fff;
-  padding:80px 0 40px;
+  padding:60px 0 30px;
 }
 .footer-grid{
   display:grid;
   grid-template-columns:2fr 1fr 1fr;
-  gap:48px;
+  gap:40px;
 }
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:900px){
-  .nav-links{display:none}
-  .menu-btn{display:block}
-  .mobile-nav{display:flex}
-  .hero{min-height:100vh}
+footer h4{color:var(--red);margin-bottom:14px}
+footer li{
+  list-style:none;
+  font-size:14px;
+  opacity:.7;
+  margin-bottom:8px;
 }
 @media(max-width:768px){
-  .stats-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
 }
 </style>
@@ -250,54 +231,43 @@ footer{
 
 <body>
 
-<header>
-  <div class="container nav">
-    <a href="/" class="logo">GID<span>LOGISTICS</span></a>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#track">Track</a>
-      <a href="#quote">Quote</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container row">
+    <div>Support: +234 706 695 8826</div>
+    <div>Track | Centres | Contact</div>
   </div>
+</div>
 
-  <div class="mobile-nav" id="mobileNav">
-    <a href="#services" onclick="toggleMenu()">Services</a>
-    <a href="#track" onclick="toggleMenu()">Track</a>
-    <a href="#quote" onclick="toggleMenu()">Quote</a>
-    <a href="#contact" onclick="toggleMenu()">Contact</a>
+<!-- HEADER -->
+<header>
+  <div class="container header">
+    <div class="logo">GID<span>LOGISTICS</span></div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#how">How It Works</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero" id="track">
-  <div class="container">
-    <div class="hero-content">
+<section class="hero">
+  <div class="container hero-inner">
+    <h1>Send, track and deliver<br>with confidence</h1>
+    <p>
+      A warm, technology-driven courier experience inspired by GIG Logistics,
+      built for individuals and businesses across Nigeria.
+    </p>
 
-      <h1>Delivering confidence,<br>one package at a time.</h1>
+    <div class="track-box">
+      <input placeholder="Enter tracking number">
+      <button class="btn">Track</button>
+    </div>
 
-      <p>
-        From air freight to road haulage and last-mile delivery,
-        GID Logistics moves your packages safely and on time.
-      </p>
-
-      <div class="hero-card">
-        <div class="tabs">
-          <div class="tab active">Track</div>
-          <div class="tab">Quick Quote</div>
-        </div>
-
-        <div class="input-row">
-          <input placeholder="Enter tracking number">
-          <button class="btn">Track</button>
-        </div>
-      </div>
-
-      <div class="hero-badge">
-        ✈️ Air • 🚛 Haulage • 🛵 Last-mile delivery
-      </div>
-
+    <div class="trust-badge">
+      ⭐ Trusted by thousands of customers nationwide
     </div>
   </div>
 </section>
@@ -306,15 +276,70 @@ footer{
 <section id="services">
   <div class="container">
     <div class="section-title">
-      <h2>Courier services built for real life</h2>
-      <p>Flexible logistics solutions for individuals and businesses</p>
+      <h2>Courier services made simple</h2>
+      <p>Reliable delivery options inspired by GIG Logistics</p>
     </div>
 
     <div class="grid">
-      <div class="card"><div class="icon">📍</div><h4>Domestic Delivery</h4><p>Fast nationwide coverage across Nigeria.</p></div>
-      <div class="card"><div class="icon">✈️</div><h4>International Shipping</h4><p>Reliable global courier services.</p></div>
-      <div class="card"><div class="icon">🛒</div><h4>E-commerce Logistics</h4><p>Perfect for online sellers and SMEs.</p></div>
-      <div class="card"><div class="icon">🚚</div><h4>Corporate & Bulk</h4><p>Structured logistics for enterprises.</p></div>
+      <div class="card">
+        <div class="icon">📍</div>
+        <h4>Domestic Delivery</h4>
+        <p>Fast and secure delivery across Nigeria.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">✈️</div>
+        <h4>International Shipping</h4>
+        <p>Send parcels abroad with confidence.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🛒</div>
+        <h4>E-commerce Logistics</h4>
+        <p>Perfect for online sellers and SMEs.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚚</div>
+        <h4>Corporate & Bulk</h4>
+        <p>Structured delivery for enterprises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background:var(--light)">
+  <div class="container">
+    <div class="section-title">
+      <h2>How it works</h2>
+      <p>A simple, friendly delivery process</p>
+    </div>
+
+    <div class="grid">
+      <div class="step">
+        <span>Step 1</span>
+        <h4>Book your shipment</h4>
+        <p>Create your delivery request.</p>
+      </div>
+
+      <div class="step">
+        <span>Step 2</span>
+        <h4>We pick it up</h4>
+        <p>Our courier handles it with care.</p>
+      </div>
+
+      <div class="step">
+        <span>Step 3</span>
+        <h4>Track in real time</h4>
+        <p>Follow your package every step.</p>
+      </div>
+
+      <div class="step">
+        <span>Step 4</span>
+        <h4>Delivered safely</h4>
+        <p>On time and to the right place.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -330,34 +355,43 @@ footer{
 </section>
 
 <!-- CTA -->
-<section class="cta" id="quote">
+<section class="cta">
   <div class="container">
-    <h2>Ready to ship with confidence?</h2>
+    <h2>Ready to ship with peace of mind?</h2>
+    <p>Join thousands of customers who trust us every day.</p>
     <button class="btn">Get Started</button>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer id="contact">
   <div class="container footer-grid">
     <div>
-      <a href="/" class="logo" style="color:#fff">GID<span>LOGISTICS</span></a>
-      <p style="margin-top:14px;opacity:.6">Reliable courier solutions you can trust.</p>
+      <div class="logo">GID<span>LOGISTICS</span></div>
+      <p style="opacity:.6;margin-top:10px">
+        Courier services inspired by GIG Logistics (GIGL).
+      </p>
     </div>
+
     <div>
-      <p>About<br>Careers<br>Partners</p>
+      <h4>Company</h4>
+      <li>About Us</li>
+      <li>Careers</li>
+      <li>Partners</li>
     </div>
+
     <div>
-      <p>Contact<br>FAQs<br>Privacy</p>
+      <h4>Support</h4>
+      <li>Contact</li>
+      <li>FAQs</li>
+      <li>Privacy Policy</li>
     </div>
   </div>
-</footer>
 
-<script>
-function toggleMenu(){
-  const nav=document.getElementById("mobileNav");
-  nav.style.display = nav.style.display==="flex" ? "none" : "flex";
-}
-</script>
+  <div style="text-align:center;font-size:12px;opacity:.4;margin-top:40px">
+    © 2026 GID Logistics Technologies
+  </div>
+</footer>
 
 </body>
 </html>
