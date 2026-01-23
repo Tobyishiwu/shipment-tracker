@@ -1,24 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Orbit Express | Global Logistics Infrastructure</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--
+  ============================================================
+  ORBIT EXPRESS
+  Global Logistics Infrastructure Platform
+  ------------------------------------------------------------
+  File: index.html
+  Version: v1.0 (Enterprise Foundation)
+  Author: Lead Full-Stack Engineering Build
+  Purpose:
+    - Corporate credibility
+    - Enterprise customer trust
+    - Platform extensibility
+    - Backend-ready UI architecture
+  ============================================================
+  -->
 
-  <!-- Tailwind CSS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orbit Express | Global Logistics Infrastructure</title>
+
+  <!-- ============================================================
+  TAILWIND CSS (CDN)
+  Using CDN for v1 speed.
+  In production SaaS, this would be compiled + purged.
+  ============================================================ -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <!-- ============================================================
+  ICON SYSTEM
+  ============================================================ -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
 
-  <!-- Brand System -->
+  <!-- ============================================================
+  DESIGN TOKENS / BRAND SYSTEM
+  ============================================================ -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            space: "#0B1D33",
-            orbit: "#FF6B35"
+            space: "#0B1D33",      // Primary: Deep Space Blue
+            orbit: "#FF6B35",      // Accent: Electric Orange
+            steel: "#1E293B",      // Neutral dark
+            mist: "#F8FAFC"        // Light background
           }
         }
       }
@@ -26,224 +55,258 @@
   </script>
 </head>
 
-<body class="text-slate-800 bg-white antialiased">
+<body class="bg-white text-slate-800 antialiased">
 
-<!-- =====================================================
-NAVIGATION — Enterprise Grade
-===================================================== -->
-<header id="navbar" class="fixed w-full z-50 transition-all duration-300">
+<!-- ============================================================
+GLOBAL NAVIGATION SYSTEM
+- Transparent → solid on scroll
+- Desktop + mobile
+- Enterprise CTA hierarchy
+============================================================ -->
+<header id="navbar"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <div class="font-bold text-xl text-white">
+
+    <!-- Brand -->
+    <div class="text-white font-bold text-xl tracking-wide">
       Orbit <span class="text-orbit">Express</span>
     </div>
 
+    <!-- Desktop Navigation -->
     <nav class="hidden lg:flex gap-8 text-sm text-white">
       <a href="#" class="hover:text-orbit">Solutions</a>
       <a href="#" class="hover:text-orbit">Industries</a>
       <a href="#" class="hover:text-orbit">Network</a>
       <a href="#" class="hover:text-orbit">Technology</a>
-      <a href="#" class="hover:text-orbit">Tracking</a>
+      <a href="#" class="hover:text-orbit">Compliance</a>
       <a href="#" class="hover:text-orbit">Contact</a>
     </nav>
 
-    <a href="#" class="hidden lg:inline-flex bg-orbit text-white px-6 py-2 rounded-md font-semibold text-sm">
+    <!-- Primary CTA -->
+    <a href="#"
+       class="hidden lg:inline-flex bg-orbit text-white px-6 py-2 rounded-md font-semibold text-sm">
       Access Global Dashboard
     </a>
 
-    <button id="mobileBtn" class="lg:hidden text-white text-xl">
+    <!-- Mobile Toggle -->
+    <button id="mobileMenuBtn"
+            class="lg:hidden text-white text-xl">
       <i class="fas fa-bars"></i>
     </button>
   </div>
 </header>
 
-<!-- =====================================================
-HERO — Enterprise Positioning
-===================================================== -->
-<section class="min-h-screen bg-gradient-to-br from-space to-slate-900 pt-28">
+<!-- ============================================================
+MOBILE NAVIGATION DRAWER
+============================================================ -->
+<div id="mobileMenu"
+     class="fixed inset-0 bg-space text-white transform translate-x-full transition-transform duration-300 z-50">
+  <div class="p-6 space-y-6">
+    <button id="closeMobileMenu" class="text-xl">
+      <i class="fas fa-times"></i>
+    </button>
+    <a class="block text-sm">Solutions</a>
+    <a class="block text-sm">Industries</a>
+    <a class="block text-sm">Network</a>
+    <a class="block text-sm">Technology</a>
+    <a class="block text-sm">Compliance</a>
+    <a class="block text-sm">Contact</a>
+    <a class="block bg-orbit px-4 py-2 rounded text-center font-semibold">
+      Global Dashboard
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+HERO SECTION
+Purpose:
+- Establish global scale
+- Communicate seriousness
+- Immediate utility (tracking)
+============================================================ -->
+<section class="min-h-screen bg-gradient-to-br from-space to-steel pt-28">
   <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
 
+    <!-- Hero Content -->
     <div class="text-white">
       <h1 class="text-4xl xl:text-5xl font-extrabold leading-tight">
-        Global Logistics Infrastructure<br class="hidden sm:block">
-        Built for International Trade
+        Global Logistics Infrastructure<br>
+        Engineered for International Trade
       </h1>
 
       <p class="mt-6 text-slate-300 max-w-xl leading-relaxed">
-        Orbit Express is a global logistics technology platform providing
-        international shipping, enterprise freight, real-time tracking,
-        and operational visibility across air, ocean, and last-mile networks.
+        Orbit Express is a technology-driven logistics platform supporting
+        cross-border shipping, enterprise freight, and real-time operational
+        visibility across global supply chains.
       </p>
 
       <p class="mt-4 text-slate-400 text-sm max-w-xl">
-        Designed for exporters, manufacturers, e-commerce platforms,
-        and multinational supply chains.
+        Serving manufacturers, exporters, e-commerce platforms,
+        and multinational enterprises across 220+ countries.
       </p>
 
-      <!-- Tracking -->
+      <!-- Tracking Tool -->
       <div class="mt-10 bg-white rounded-lg p-4 flex gap-3">
-        <input id="trackInput" class="flex-1 border px-4 py-3 rounded"
-               placeholder="Enter shipment tracking number" />
-        <button onclick="trackShipment()"
-                class="bg-orbit text-white px-6 rounded font-semibold">
-          Track Shipment
+        <input
+          id="trackingInput"
+          type="text"
+          placeholder="Enter tracking number"
+          class="flex-1 border px-4 py-3 rounded"
+        />
+        <button
+          onclick="handleTrackShipment()"
+          class="bg-orbit text-white px-6 rounded font-semibold">
+          Track
         </button>
       </div>
 
-      <div id="trackResult" class="mt-4 text-sm hidden"></div>
+      <!-- Tracking Output -->
+      <div id="trackingOutput"
+           class="mt-4 text-sm hidden"></div>
     </div>
 
-    <!-- Visual -->
-    <div class="relative h-96 rounded-xl bg-slate-800 flex items-center justify-center">
-      <i class="fas fa-globe text-8xl text-white opacity-10"></i>
+    <!-- Global Network Visual Placeholder -->
+    <div class="relative h-[420px] rounded-xl bg-slate-800 flex items-center justify-center">
+      <i class="fas fa-globe text-9xl text-white opacity-10"></i>
       <span class="absolute bottom-4 text-xs text-slate-400">
-        Global Logistics Network Visualization
+        Global Operations Network (Placeholder)
       </span>
     </div>
-
   </div>
 </section>
 
-<!-- =====================================================
-TRUST & SCALE
-===================================================== -->
-<section class="py-20 bg-slate-50">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10 text-center">
+<!-- ============================================================
+TRUST & SCALE METRICS
+============================================================ -->
+<section class="py-20 bg-mist">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 text-center">
+
     <div>
       <h3 class="text-3xl font-bold text-space">220+</h3>
-      <p class="text-sm text-slate-600 mt-2">Countries & Territories</p>
+      <p class="text-sm text-slate-600 mt-2">
+        Countries & Territories Served
+      </p>
     </div>
+
     <div>
       <h3 class="text-3xl font-bold text-space">24/7</h3>
-      <p class="text-sm text-slate-600 mt-2">Global Operations</p>
+      <p class="text-sm text-slate-600 mt-2">
+        Global Operations Coverage
+      </p>
     </div>
+
     <div>
-      <h3 class="text-3xl font-bold text-space">Enterprise</h3>
-      <p class="text-sm text-slate-600 mt-2">Security & Compliance</p>
+      <h3 class="text-3xl font-bold text-space">Enterprise-Grade</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        Security & Compliance Standards
+      </p>
     </div>
+
     <div>
       <h3 class="text-3xl font-bold text-space">Real-Time</h3>
-      <p class="text-sm text-slate-600 mt-2">Shipment Visibility</p>
+      <p class="text-sm text-slate-600 mt-2">
+        Shipment Visibility & Alerts
+      </p>
     </div>
+
   </div>
 </section>
 
-<!-- =====================================================
-CORE CAPABILITIES
-===================================================== -->
-<section class="py-20">
+<!-- ============================================================
+CORE CAPABILITIES (EXTENSIBLE MODULES)
+============================================================ -->
+<section class="py-24">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-space mb-10">
-      End-to-End Logistics Capabilities
-    </h2>
 
-    <div class="grid lg:grid-cols-3 gap-8">
-      <div class="p-8 border rounded-xl">
-        <h3 class="font-semibold text-lg">International Shipping</h3>
-        <p class="text-sm text-slate-600 mt-3">
-          Cross-border logistics across air and ocean lanes with customs-ready
-          documentation and international compliance workflows.
-        </p>
-      </div>
-
-      <div class="p-8 border rounded-xl">
-        <h3 class="font-semibold text-lg">Enterprise Freight</h3>
-        <p class="text-sm text-slate-600 mt-3">
-          Scalable freight operations for manufacturers, distributors,
-          and global enterprises managing high-volume shipments.
-        </p>
-      </div>
-
-      <div class="p-8 border rounded-xl">
-        <h3 class="font-semibold text-lg">Real-Time Tracking</h3>
-        <p class="text-sm text-slate-600 mt-3">
-          Event-driven tracking architecture delivering live shipment status,
-          location updates, and predictive delivery timelines.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================
-SERVICE VERTICALS
-===================================================== -->
-<section class="py-20 bg-slate-50">
-  <div class="max-w-7xl mx-auto px-6">
     <h2 class="text-3xl font-bold text-space mb-12">
-      Industry-Specific Logistics Solutions
+      Platform Capabilities
     </h2>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white p-8 rounded-xl shadow-sm">
-        <i class="fas fa-rocket text-orbit text-3xl"></i>
-        <h3 class="mt-4 font-semibold text-lg">Aerospace Freight</h3>
-        <p class="text-sm text-slate-600 mt-3">
-          Time-critical air freight supporting aerospace, defense,
-          and high-value industrial cargo.
+    <div class="grid lg:grid-cols-3 gap-10">
+
+      <!-- Capability -->
+      <div class="border rounded-xl p-8">
+        <h3 class="font-semibold text-lg">
+          International Shipping Operations
+        </h3>
+        <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+          Cross-border shipping across air and ocean lanes with
+          customs-ready documentation, regulatory alignment,
+          and route optimization.
         </p>
       </div>
 
-      <div class="bg-white p-8 rounded-xl shadow-sm">
-        <i class="fas fa-ship text-orbit text-3xl"></i>
-        <h3 class="mt-4 font-semibold text-lg">Ocean Cargo</h3>
-        <p class="text-sm text-slate-600 mt-3">
-          Full-container, less-than-container, and bulk ocean shipping
-          across major global ports.
+      <div class="border rounded-xl p-8">
+        <h3 class="font-semibold text-lg">
+          Enterprise Freight Management
+        </h3>
+        <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+          High-volume freight orchestration supporting manufacturers,
+          distributors, and international procurement teams.
         </p>
       </div>
 
-      <div class="bg-white p-8 rounded-xl shadow-sm">
-        <i class="fas fa-truck-fast text-orbit text-3xl"></i>
-        <h3 class="mt-4 font-semibold text-lg">Last-Mile Fulfillment</h3>
-        <p class="text-sm text-slate-600 mt-3">
-          City-scale delivery orchestration for e-commerce and
-          retail distribution networks.
+      <div class="border rounded-xl p-8">
+        <h3 class="font-semibold text-lg">
+          Real-Time Tracking Architecture
+        </h3>
+        <p class="mt-4 text-sm text-slate-600 leading-relaxed">
+          Event-driven shipment updates delivering live location data,
+          status changes, and predictive delivery windows.
         </p>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- =====================================================
-RATE CALCULATOR — Professional Tool
-===================================================== -->
-<section class="py-20">
+<!-- ============================================================
+RATE CALCULATOR (BUSINESS TOOL)
+============================================================ -->
+<section class="py-24 bg-mist">
   <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-space mb-6">
+
+    <h2 class="text-3xl font-bold text-space mb-4">
       Shipping Rate Estimation
     </h2>
-    <p class="text-slate-600 mb-10 max-w-2xl">
-      Get an estimated international shipping cost based on route,
+
+    <p class="text-slate-600 max-w-2xl mb-10">
+      Estimate international shipping costs based on route,
       shipment weight, and service level.
     </p>
 
     <div class="bg-white border rounded-xl p-8 grid md:grid-cols-3 gap-6">
       <input class="border p-3 rounded" placeholder="Origin Country" />
       <input class="border p-3 rounded" placeholder="Destination Country" />
-      <input class="border p-3 rounded" placeholder="Shipment Weight (kg)" />
+      <input class="border p-3 rounded" placeholder="Weight (kg)" />
 
-      <button onclick="calculateRate()"
-              class="md:col-span-3 bg-space text-white py-3 rounded font-semibold">
-        Calculate Estimated Rate
+      <button
+        onclick="handleRateCalculation()"
+        class="md:col-span-3 bg-space text-white py-3 rounded font-semibold">
+        Calculate Rate
       </button>
     </div>
 
-    <div id="rateResult" class="mt-6 font-semibold text-sm"></div>
+    <div id="rateOutput" class="mt-6 font-semibold text-sm"></div>
   </div>
 </section>
 
-<!-- =====================================================
-FOOTER — Corporate
-===================================================== -->
-<footer class="bg-space text-slate-300 py-14">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+<!-- ============================================================
+FOOTER (CORPORATE)
+============================================================ -->
+<footer class="bg-space text-slate-300 py-16">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+
     <div>
-      <h4 class="font-bold text-white text-lg">Orbit Express</h4>
-      <p class="text-sm mt-3 max-w-md">
-        A global logistics infrastructure platform delivering
-        secure, scalable, and technology-driven shipping solutions.
+      <h4 class="font-bold text-white text-lg">
+        Orbit Express
+      </h4>
+      <p class="mt-4 text-sm max-w-md">
+        A global logistics infrastructure platform delivering secure,
+        scalable, and technology-driven shipping solutions
+        for international trade.
       </p>
-      <p class="text-xs mt-4 text-slate-400">
+      <p class="mt-6 text-xs text-slate-400">
         © 2026 Orbit Express. All rights reserved.
       </p>
     </div>
@@ -253,50 +316,74 @@ FOOTER — Corporate
       <i class="fab fa-x-twitter"></i>
       <i class="fab fa-github"></i>
     </div>
+
   </div>
 </footer>
 
-<!-- =====================================================
-JAVASCRIPT — Clean, Backend-Ready
-===================================================== -->
+<!-- ============================================================
+JAVASCRIPT — MODULAR, BACKEND-READY
+============================================================ -->
 <script>
-  /* Navbar scroll behavior */
+  /*
+  ============================================================
+  NAVBAR SCROLL HANDLER
+  In production:
+    - Debounce scroll
+    - Possibly move to IntersectionObserver
+  ============================================================
+  */
   window.addEventListener("scroll", () => {
-    document.getElementById("navbar")
-      .classList.toggle("bg-space", window.scrollY > 30);
+    const navbar = document.getElementById("navbar");
+    navbar.classList.toggle("bg-space", window.scrollY > 40);
   });
 
-  /* Mobile menu */
-  const mobileMenu = document.createElement("div");
-
-  document.getElementById("mobileBtn").onclick = () =>
-    alert("Mobile menu would open here in production");
-
-  /* Shipment Tracking Simulation
-     Real API: GET /api/shipments/{trackingNumber}
+  /*
+  ============================================================
+  MOBILE MENU CONTROLS
+  ============================================================
   */
-  function trackShipment() {
-    const el = document.getElementById("trackResult");
-    el.classList.remove("hidden");
-    el.textContent = "Retrieving shipment data…";
+  const mobileMenu = document.getElementById("mobileMenu");
+  document.getElementById("mobileMenuBtn").onclick = () => {
+    mobileMenu.classList.remove("translate-x-full");
+  };
+  document.getElementById("closeMobileMenu").onclick = () => {
+    mobileMenu.classList.add("translate-x-full");
+  };
+
+  /*
+  ============================================================
+  SHIPMENT TRACKING SIMULATION
+  Backend contract (future):
+    GET /api/shipments/{trackingNumber}
+  ============================================================
+  */
+  function handleTrackShipment() {
+    const output = document.getElementById("trackingOutput");
+    output.classList.remove("hidden");
+    output.textContent = "Retrieving shipment information…";
 
     setTimeout(() => {
-      el.textContent =
-        "Status: In Transit | Last Scan: London Hub | Estimated Delivery: 3–4 Days";
-    }, 1400);
+      output.textContent =
+        "Status: In Transit | Last Scan: London Hub | ETA: 3–4 Business Days";
+    }, 1500);
   }
 
-  /* Rate Calculator Simulation
-     Real API: POST /api/rates
+  /*
+  ============================================================
+  RATE CALCULATION SIMULATION
+  Backend contract (future):
+    POST /api/rates
+    Payload: { origin, destination, weight }
+  ============================================================
   */
-  function calculateRate() {
-    const el = document.getElementById("rateResult");
-    el.textContent = "Calculating rate…";
+  function handleRateCalculation() {
+    const output = document.getElementById("rateOutput");
+    output.textContent = "Calculating estimated rate…";
 
     setTimeout(() => {
-      el.textContent =
-        "Estimated Cost: USD 480 — Transit Time: 5–7 Business Days";
-    }, 1200);
+      output.textContent =
+        "Estimated Cost: USD 520 | Transit Time: 5–7 Business Days";
+    }, 1300);
   }
 </script>
 
