@@ -12,16 +12,15 @@
   --red:#e31e24;
   --red-dark:#c4161c;
   --navy:#0f172a;
-  --gray:#64748b;
-  --bg:#f8fafc;
+  --gray:#e5e7eb;
   --dark:#020617;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
-body{background:#fff;color:var(--navy);line-height:1.65}
+body{background:#fff;color:#fff;line-height:1.65}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
-/* NAV */
+/* ================= NAV ================= */
 header{
   position:sticky;
   top:0;
@@ -35,50 +34,68 @@ header{
   align-items:center;
   padding:18px 0;
 }
-.logo{font-size:22px;font-weight:800}
+.logo{
+  font-size:22px;
+  font-weight:800;
+  color:#000;
+  text-decoration:none;
+}
 .logo span{color:var(--red)}
 .links{display:flex;gap:28px}
-.links a{text-decoration:none;font-weight:600;font-size:14px;color:var(--navy)}
+.links a{
+  text-decoration:none;
+  font-weight:600;
+  font-size:14px;
+  color:#000;
+}
 .menu{display:none;font-size:26px;cursor:pointer}
 
-/* HERO */
+/* ================= HERO ================= */
 .hero{
   position:relative;
+  min-height:90vh;
+  display:flex;
+  align-items:center;
   background:
-    linear-gradient(120deg,#ffe4e4 0%,transparent 50%),
-    linear-gradient(240deg,#f1f5f9 0%,transparent 60%),
-    #ffffff;
-  padding:140px 0 160px;
+    linear-gradient(
+      rgba(2,6,23,.65),
+      rgba(2,6,23,.75)
+    ),
+    url("https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg");
+  background-size:cover;
+  background-position:center;
   overflow:hidden;
 }
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:60px;
-  align-items:center;
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:650px;
 }
+
 .hero h1{
   font-size:clamp(42px,6vw,64px);
   font-weight:800;
   line-height:1.05;
   margin-bottom:20px;
 }
+
 .hero p{
-  font-size:19px;
-  color:var(--gray);
+  font-size:18px;
+  color:#e5e7eb;
   margin-bottom:34px;
-  max-width:560px;
 }
 
 /* FLOATING ACTION CARD */
 .hero-card{
-  position:relative;
   background:#fff;
+  color:#000;
   padding:26px;
   border-radius:28px;
-  box-shadow:0 50px 100px rgba(0,0,0,.15);
+  box-shadow:0 50px 100px rgba(0,0,0,.25);
   max-width:520px;
 }
+
 .tabs{
   display:flex;
   gap:22px;
@@ -88,14 +105,13 @@ header{
   font-size:14px;
   font-weight:700;
   cursor:pointer;
-  color:var(--gray);
+  color:#6b7280;
 }
 .tab.active{color:var(--red)}
 
 .input-row{
   display:flex;
   gap:12px;
-  margin-bottom:14px;
 }
 .input-row input{
   flex:1;
@@ -114,36 +130,20 @@ header{
 }
 .btn:hover{background:var(--red-dark)}
 
-/* HERO IMAGE */
-.hero-visual{
-  position:relative;
-}
-.hero-visual img{
-  width:100%;
-  border-radius:36px;
-  box-shadow:0 60px 120px rgba(0,0,0,.18);
-}
+/* BADGE */
 .hero-badge{
-  position:absolute;
-  bottom:-20px;
-  left:20px;
-  background:#fff;
-  padding:16px 22px;
+  display:inline-block;
+  margin-top:22px;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(8px);
+  padding:14px 20px;
   border-radius:20px;
   font-size:14px;
   font-weight:700;
-  box-shadow:0 30px 60px rgba(0,0,0,.18);
 }
 
-/* OVERLAP SECTION */
-.overlap{
-  margin-top:-100px;
-  position:relative;
-  z-index:10;
-}
-
-/* SECTIONS */
-section{padding:120px 0}
+/* ================= SECTIONS ================= */
+section{padding:120px 0;color:#000}
 .section-title{
   max-width:700px;
   margin-bottom:70px;
@@ -153,7 +153,7 @@ section{padding:120px 0}
   font-weight:800;
   margin-bottom:12px;
 }
-.section-title p{color:var(--gray)}
+.section-title p{color:#64748b}
 
 .grid{
   display:grid;
@@ -178,7 +178,7 @@ section{padding:120px 0}
   margin-bottom:22px;
 }
 
-/* STATS */
+/* ================= STATS ================= */
 .stats{
   background:linear-gradient(135deg,#e31e24,#b01217);
   color:#fff;
@@ -191,7 +191,7 @@ section{padding:120px 0}
 }
 .stats-grid h3{font-size:46px}
 
-/* CTA */
+/* ================= CTA ================= */
 .cta{
   background:var(--navy);
   color:#fff;
@@ -203,18 +203,19 @@ section{padding:120px 0}
   margin-bottom:18px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer{
   background:var(--dark);
   color:#fff;
   padding:80px 0 40px;
+  text-align:center;
 }
 
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 @media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
   .links{display:none}
   .menu{display:block}
+  .hero{min-height:100vh}
 }
 </style>
 </head>
@@ -223,25 +224,30 @@ footer{
 
 <header>
   <div class="container nav">
-    <div class="logo">GID<span>LOGISTICS</span></div>
+    <!-- LOGO LINKS HOME -->
+    <a href="/" class="logo">GID<span>LOGISTICS</span></a>
+
     <div class="links">
       <a href="#">Services</a>
       <a href="#">Track</a>
       <a href="#">Quote</a>
       <a href="#">Contact</a>
     </div>
+
     <div class="menu">☰</div>
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="container hero-grid">
+  <div class="container">
+    <div class="hero-content">
 
-    <div>
       <h1>Delivering confidence,<br>one package at a time.</h1>
+
       <p>
-        GID Logistics combines speed, technology, and human care to move
-        your packages safely across Nigeria.
+        Fast, secure and transparent courier services for individuals
+        and businesses across Nigeria.
       </p>
 
       <div class="hero-card">
@@ -255,26 +261,32 @@ footer{
           <button class="btn">Track</button>
         </div>
       </div>
-    </div>
 
-    <div class="hero-visual">
-      <img src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg">
-      <div class="hero-badge">🚚 Nationwide coverage</div>
-    </div>
+      <div class="hero-badge">
+        🚚 Nationwide delivery • Real-time tracking
+      </div>
 
+    </div>
   </div>
 </section>
 
-<section class="overlap">
+<!-- SERVICES -->
+<section>
   <div class="container">
+    <div class="section-title">
+      <h2>Courier services designed for you</h2>
+      <p>Flexible logistics solutions for everyday and business needs</p>
+    </div>
+
     <div class="grid">
-      <div class="card"><div class="icon">📍</div><h4>Domestic Delivery</h4><p>Fast, reliable nationwide service.</p></div>
-      <div class="card"><div class="icon">✈️</div><h4>International Shipping</h4><p>Cross-border deliveries made easy.</p></div>
+      <div class="card"><div class="icon">📍</div><h4>Domestic Delivery</h4><p>Fast nationwide coverage.</p></div>
+      <div class="card"><div class="icon">✈️</div><h4>International Shipping</h4><p>Reliable global deliveries.</p></div>
       <div class="card"><div class="icon">🛒</div><h4>E-commerce Logistics</h4><p>Built for online sellers.</p></div>
     </div>
   </div>
 </section>
 
+<!-- STATS -->
 <section class="stats">
   <div class="container stats-grid">
     <div><h3>230+</h3><p>Locations</p></div>
@@ -284,6 +296,7 @@ footer{
   </div>
 </section>
 
+<!-- CTA -->
 <section class="cta">
   <div class="container">
     <h2>Ready to ship with confidence?</h2>
@@ -292,9 +305,7 @@ footer{
 </section>
 
 <footer>
-  <div class="container">
-    <p>© 2026 GID Logistics Technologies</p>
-  </div>
+  © 2026 GID Logistics Technologies
 </footer>
 
 </body>
