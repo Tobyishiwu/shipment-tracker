@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orbit Express — Frictionless Global Trade</title>
+  <title>Orbit Express — Africa's Leading Logistics Infrastructure</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,8 @@
       theme: {
         extend: {
           colors: {
-            space: '#08111F',
-            orbit: '#FF6B35',
+            space: '#040911',
+            orbit: '#FF6B35', // GIGL Orange inspired
             slate: '#F8FAFC',
             "orbit-muted": 'rgba(255, 107, 53, 0.2)'
           },
@@ -39,6 +39,7 @@
     .glass { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); }
     .orbit-gradient { background: linear-gradient(135deg, #FF6B35 0%, #D44D1C 100%); }
     details > summary::-webkit-details-marker { display: none; }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 
@@ -48,29 +49,29 @@
     <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3 font-extrabold text-xl tracking-tighter">
         <div class="w-8 h-8 rounded-full orbit-gradient flex items-center justify-center animate-pulse">
-           <div class="w-3 h-3 bg-space rounded-full"></div>
+            <div class="w-3 h-3 bg-space rounded-full"></div>
         </div>
         <span>ORBIT<span class="text-orbit">EXPRESS</span></span>
       </div>
       
-      <div class="hidden lg:flex items-center gap-10 text-[13px] uppercase tracking-widest font-bold text-slate/60">
-        <a href="#services" class="hover:text-orbit transition-colors">Services</a>
-        <a href="#protocol" class="hover:text-orbit transition-colors">Protocol</a>
-        <a href="#network" class="hover:text-orbit transition-colors">Global Network</a>
+      <div class="hidden lg:flex items-center gap-10 text-[11px] uppercase tracking-widest font-bold text-slate/60">
+        <a href="#services" class="hover:text-orbit transition-colors">Solutions</a>
+        <a href="#merchants" class="hover:text-orbit transition-colors">E-Commerce</a>
+        <a href="#network" class="hover:text-orbit transition-colors">Experience Centres</a>
         <div class="h-4 w-[1px] bg-white/10"></div>
         <div class="flex items-center gap-2">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </span>
-          <span class="text-[10px]">Network Live</span>
+          <span class="text-[10px]">GIGGo Mesh Active</span>
         </div>
       </div>
 
       <div class="flex items-center gap-4">
-        <a href="#" class="hidden sm:block text-sm font-semibold hover:text-orbit">Login</a>
+        <a href="#" class="hidden sm:block text-sm font-semibold hover:text-orbit">Track</a>
         <a href="#" class="px-5 py-2.5 rounded-full orbit-gradient text-white font-bold text-sm shadow-lg shadow-orbit/20 hover:scale-105 transition-transform">
-          Start Shipping
+          Ship with GIGGo
         </a>
       </div>
     </nav>
@@ -82,31 +83,46 @@
     <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
       <div class="z-10 text-center lg:text-left">
         <span class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-orbit text-xs font-bold uppercase tracking-widest mb-6">
-          Logistics v4.0 Infrastructure
+          Powered by GIG Logistics Tech
         </span>
         <h1 class="text-5xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight">
-          The World’s <span class="text-transparent bg-clip-text bg-gradient-to-r from-orbit to-orange-400">Operating System</span> for Trade.
+          Beyond Borders. <span class="text-transparent bg-clip-text bg-gradient-to-r from-orbit to-orange-400">Powered by People.</span>
         </h1>
         <p class="mt-8 text-xl text-slate/60 leading-relaxed max-w-xl mx-auto lg:mx-0">
-          From automated customs to autonomous last-mile delivery. We provide the digital and physical mesh to move anything, anywhere, instantly.
+          From Houston to Lagos. We bridge the distance with Africa's most robust delivery network, on-demand trucking, and seamless cross-border shipping.
         </p>
 
         <div class="mt-12 glass p-2 rounded-2xl flex flex-col sm:flex-row gap-2 max-w-lg mx-auto lg:mx-0">
-          <input type="text" placeholder="Global Tracking ID (e.g., OB-8829)" class="bg-transparent px-6 py-4 flex-1 focus:outline-none font-medium">
+          <input type="text" placeholder="GIGL Waybill No (e.g., GIG-12345)" class="bg-transparent px-6 py-4 flex-1 focus:outline-none font-medium text-white">
           <button class="bg-orbit text-space font-bold px-8 py-4 rounded-xl hover:bg-white transition-colors">
-            Track Path
+            Track Shipment
           </button>
         </div>
-        <p class="mt-4 text-xs text-slate/40">Trusted by 14,000+ enterprise partners globally</p>
+        <div class="mt-6 flex items-center justify-center lg:justify-start gap-6 opacity-60">
+            <div class="text-center">
+                <p class="text-xl font-bold">150+</p>
+                <p class="text-[10px] uppercase">Centres</p>
+            </div>
+            <div class="h-8 w-[1px] bg-white/10"></div>
+            <div class="text-center">
+                <p class="text-xl font-bold">230+</p>
+                <p class="text-[10px] uppercase">Global Cities</p>
+            </div>
+            <div class="h-8 w-[1px] bg-white/10"></div>
+            <div class="text-center">
+                <p class="text-xl font-bold">5M+</p>
+                <p class="text-[10px] uppercase">Deliveries</p>
+            </div>
+        </div>
       </div>
 
       <div class="relative hidden lg:block animate-float">
         <div class="absolute -inset-4 bg-orbit/20 blur-3xl rounded-full"></div>
-        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d" alt="Logistics Hub" class="relative rounded-3xl border border-white/10 shadow-2xl">
-        <div class="absolute -bottom-10 -left-10 glass p-6 rounded-2xl shadow-2xl animate-pulse-slow">
-           <p class="text-[10px] uppercase text-orbit font-bold">Live Transit Data</p>
-           <p class="text-2xl font-black mt-1">84.2k</p>
-           <p class="text-[10px] text-slate/50">Active Containers</p>
+        <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?auto=format&fit=crop&w=800" alt="GIGGo Delivery App" class="relative rounded-3xl border border-white/10 shadow-2xl">
+        <div class="absolute -bottom-10 -left-10 glass p-6 rounded-2xl shadow-2xl animate-pulse-slow border-orbit/30">
+           <p class="text-[10px] uppercase text-orbit font-bold">Intracity Pickup</p>
+           <p class="text-2xl font-black mt-1">GIGGo App</p>
+           <p class="text-[10px] text-slate/50">Request Pickup in < 30 Mins</p>
         </div>
       </div>
     </div>
@@ -115,11 +131,11 @@
   <section class="py-12 border-y border-white/5 bg-white/[0.02]">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-wrap justify-center md:justify-between gap-10 items-center grayscale opacity-40 hover:grayscale-0 transition-all duration-500">
-        <span class="text-2xl font-black italic">MAERSK</span>
-        <span class="text-2xl font-black italic">AMAZON</span>
-        <span class="text-2xl font-black italic">FEDEX</span>
-        <span class="text-2xl font-black italic">UPS</span>
-        <span class="text-2xl font-black italic">AIRBUS</span>
+        <span class="text-xl font-black">VISA PARTNER</span>
+        <span class="text-xl font-black">MINISO</span>
+        <span class="text-xl font-black">BEIERSDORF</span>
+        <span class="text-xl font-black">JET MOTORS</span>
+        <span class="text-xl font-black">SWISS PHARMA</span>
       </div>
     </div>
   </section>
@@ -128,69 +144,74 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
         <div class="max-w-2xl">
-          <h2 class="text-4xl font-black tracking-tight italic">END-TO-END SOLUTIONS</h2>
-          <p class="text-gray-600 mt-4 text-lg leading-relaxed">We’ve replaced fragmented shipping with a single, unified interface for your entire supply chain.</p>
+          <h2 class="text-4xl font-black tracking-tight italic uppercase">Service Portfolio</h2>
+          <p class="text-gray-600 mt-4 text-lg leading-relaxed">Integrated logistics designed for the African market with global operational standards.</p>
         </div>
-        <a href="#" class="text-orbit font-bold border-b-2 border-orbit hover:text-space transition-colors">View All Services</a>
+        <a href="#" class="text-orbit font-bold border-b-2 border-orbit hover:text-space transition-colors">Download Rate Card</a>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
         <div class="group p-8 rounded-3xl border border-gray-200 hover:border-orbit transition-all hover:shadow-2xl hover:shadow-orbit/10">
           <div class="w-12 h-12 rounded-2xl bg-orbit/10 flex items-center justify-center mb-6 text-orbit group-hover:bg-orbit group-hover:text-white transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h.293m1.414-1.414l.707-.707A2 2 0 0115.414 11H15a2 2 0 00-2 2v1M9 21h6a2 2 0 002-2v-1a2 2 0 00-2-2H9a2 2 0 00-2 2v1a2 2 0 002 2z"></path></svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">Air-Priority Mesh</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Direct-to-warehouse air freight with proprietary flight paths reducing transit time by 30%.</p>
+          <h3 class="text-xl font-bold mb-3">Global Shipping</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Personalized outbound/inbound services from USA, UK, and China to Nigeria and Ghana.</p>
         </div>
         <div class="group p-8 rounded-3xl border border-gray-200 hover:border-orbit transition-all hover:shadow-2xl hover:shadow-orbit/10">
           <div class="w-12 h-12 rounded-2xl bg-orbit/10 flex items-center justify-center mb-6 text-orbit group-hover:bg-orbit group-hover:text-white transition-colors">
              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">Instant Compliance</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">AI-driven customs documentation that clears before your cargo even touches the ground.</p>
+          <h3 class="text-xl font-bold mb-3">GoFaster (24-48hrs)</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Express interstate delivery within Nigeria. Time-sensitive cargo moved with priority routing.</p>
         </div>
         <div class="group p-8 rounded-3xl border border-gray-200 hover:border-orbit transition-all hover:shadow-2xl hover:shadow-orbit/10">
           <div class="w-12 h-12 rounded-2xl bg-orbit/10 flex items-center justify-center mb-6 text-orbit group-hover:bg-orbit group-hover:text-white transition-colors">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">Enterprise API</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Connect your ERP directly to our shipping mesh with two lines of code.</p>
+          <h3 class="text-xl font-bold mb-3">Haulage & Warehousing</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Full Truck Load (FTL) and inventory management for FMCG, Pharma, and Tech sectors.</p>
         </div>
       </div>
     </div>
   </section>
 
-  
-  <section id="protocol" class="py-24 relative overflow-hidden">
+  <section id="merchants" class="py-24 relative overflow-hidden bg-space">
     <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center mb-20">
-        <h2 class="text-4xl font-extrabold mb-4 uppercase tracking-tighter">The Orbit Protocol</h2>
-        <div class="h-1 w-20 bg-orbit mx-auto"></div>
-      </div>
-
-      <div class="grid md:grid-cols-4 gap-4 relative">
-        <div class="hidden md:block absolute top-1/4 left-0 w-full h-[1px] bg-white/10 -z-10"></div>
-        
-        <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-colors">
-          <div class="text-orbit font-black text-4xl mb-6">01</div>
-          <h3 class="font-bold text-lg mb-2">Smart Intake</h3>
-          <p class="text-slate/50 text-sm">Packages are digitally twin-mapped and AI-routed based on weather, fuel, and port congestion.</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 p-8 rounded-2xl mt-8 md:mt-12">
-          <div class="text-orbit font-black text-4xl mb-6">02</div>
-          <h3 class="font-bold text-lg mb-2">Global Transit</h3>
-          <p class="text-slate/50 text-sm">Multi-modal synchronization ensures freight moves seamlessly between sea, air, and rail.</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 p-8 rounded-2xl">
-          <div class="text-orbit font-black text-4xl mb-6">03</div>
-          <h3 class="font-bold text-lg mb-2">Auto-Customs</h3>
-          <p class="text-slate/50 text-sm">Our "ClearPass" tech settles duties and compliance in real-time, eliminating port delays.</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 p-8 rounded-2xl mt-8 md:mt-12">
-          <div class="text-orbit font-black text-4xl mb-6">04</div>
-          <h3 class="font-bold text-lg mb-2">Final Mile</h3>
-          <p class="text-slate/50 text-sm">Hyper-local delivery units provide minute-by-minute tracking and signature verification.</p>
-        </div>
+      <div class="grid lg:grid-cols-2 gap-20 items-center">
+          <div>
+            <h2 class="text-4xl font-extrabold mb-6 uppercase tracking-tighter">Empowering <span class="text-orbit">Social Sellers</span></h2>
+            <p class="text-slate/60 text-lg mb-8">We bridge the trust gap with our <strong>FREE Payment on Delivery (POD)</strong> service and reverse logistics for e-commerce merchants.</p>
+            <ul class="space-y-4">
+                <li class="flex items-center gap-3"><span class="w-5 h-5 rounded-full bg-orbit/20 text-orbit flex items-center justify-center text-xs">✓</span> GIGL Class Merchant Dashboard</li>
+                <li class="flex items-center gap-3"><span class="w-5 h-5 rounded-full bg-orbit/20 text-orbit flex items-center justify-center text-xs">✓</span> Bulkship Discounts & Pick-pack-ship</li>
+                <li class="flex items-center gap-3"><span class="w-5 h-5 rounded-full bg-orbit/20 text-orbit flex items-center justify-center text-xs">✓</span> Dedicated Customer Support Team</li>
+            </ul>
+            <button class="mt-10 px-8 py-4 orbit-gradient text-white rounded-full font-bold">Register as a Merchant</button>
+          </div>
+          <div class="glass p-8 rounded-3xl border-orbit/20">
+              <div class="flex items-center gap-4 mb-6">
+                  <div class="w-12 h-12 rounded-xl orbit-gradient flex items-center justify-center font-bold">APP</div>
+                  <div>
+                      <h4 class="font-bold">GIGGo Mobile</h4>
+                      <p class="text-xs text-slate/40">Africa's #1 Logistics App</p>
+                  </div>
+              </div>
+              <div class="space-y-4">
+                  <div class="bg-white/5 p-4 rounded-xl flex justify-between items-center">
+                      <span class="text-sm">Request Instant Pickup</span>
+                      <span class="text-orbit font-bold">Active</span>
+                  </div>
+                  <div class="bg-white/5 p-4 rounded-xl flex justify-between items-center">
+                      <span class="text-sm">Consolidate USA Orders</span>
+                      <span class="text-orbit font-bold">Ready</span>
+                  </div>
+                  <div class="bg-white/5 p-4 rounded-xl flex justify-between items-center">
+                      <span class="text-sm">Wallet & Instant Payments</span>
+                      <span class="text-orbit font-bold">Secure</span>
+                  </div>
+              </div>
+          </div>
       </div>
     </div>
   </section>
@@ -198,20 +219,20 @@
   <section class="py-24 bg-orbit text-space">
     <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <h2 class="text-5xl font-black leading-tight italic uppercase">Moving the <br>Fortune 500.</h2>
-        <p class="mt-6 text-space/80 text-lg">We don't just ship boxes; we optimize bottom lines. Our logistics architecture is built to withstand global volatility.</p>
-        <button class="mt-10 px-8 py-4 bg-space text-white rounded-full font-bold hover:scale-105 transition-transform">Read Case Studies</button>
+        <h2 class="text-5xl font-black leading-tight italic uppercase">Africa's Leading <br>Logistics Giant.</h2>
+        <p class="mt-6 text-space/80 text-lg">We don't just ship boxes; we move economies. From SME social sellers to global tech giants, we provide the infrastructure that fuels commerce.</p>
+        <button class="mt-10 px-8 py-4 bg-space text-white rounded-full font-bold hover:scale-105 transition-transform">Partner with Orbit Express</button>
       </div>
       <div class="space-y-6">
         <div class="bg-white p-8 rounded-3xl shadow-xl">
-           <p class="text-sm font-bold text-orbit uppercase tracking-widest mb-2">Electronics Sector</p>
-           <h4 class="text-2xl font-bold">"Reduced our cross-border friction by 40% in the first quarter."</h4>
-           <p class="mt-4 text-gray-500">— VP Operations, Global Tech</p>
+           <p class="text-sm font-bold text-orbit uppercase tracking-widest mb-2">Social Commerce</p>
+           <h4 class="text-2xl font-bold text-space">"The GIGGo App has been a game-changer for my Instagram store deliveries."</h4>
+           <p class="mt-4 text-gray-500">— Merchant, Lagos, Nigeria</p>
         </div>
         <div class="bg-space/10 p-8 rounded-3xl border border-space/20">
-           <p class="text-sm font-bold text-space uppercase tracking-widest mb-2">Retail Giants</p>
-           <h4 class="text-2xl font-bold">"The first platform that actually gives us true real-time visibility."</h4>
-           <p class="mt-4 text-space/60">— Logistics Director, EuroRetail</p>
+           <p class="text-sm font-bold text-space uppercase tracking-widest mb-2">Corporate Solutions</p>
+           <h4 class="text-2xl font-bold text-space">"Personalized overseas services made our inbound logistics effortless."</h4>
+           <p class="mt-4 text-space/60">— Ops Manager, Global FMCG</p>
         </div>
       </div>
     </div>
@@ -219,24 +240,24 @@
 
   <section class="py-24">
     <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-3xl font-black text-center mb-12 italic uppercase tracking-widest">Technical Briefing</h2>
+      <h2 class="text-3xl font-black text-center mb-12 italic uppercase tracking-widest">Support & Policy</h2>
       <div class="space-y-4">
         <details class="group border border-white/10 rounded-2xl overflow-hidden">
           <summary class="flex justify-between items-center p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors list-none">
-            <span class="font-bold">What is the "Orbit Mesh" technology?</span>
+            <span class="font-bold">What is "GoFaster" service?</span>
             <span class="text-orbit group-open:rotate-45 transition-transform">+</span>
           </summary>
           <div class="p-6 text-slate/50 text-sm leading-relaxed border-t border-white/10">
-            The Orbit Mesh is our proprietary decentralized routing engine. It analyzes over 500 million data points daily—including satellite imagery, port wait times, and fuel indices—to find the most efficient path for your cargo.
+            GoFaster is our priority interstate delivery service. It guarantees that shipments within Nigeria reach their destination within 24 to 48 hours, perfect for urgent business documents and time-critical items.
           </div>
         </details>
         <details class="group border border-white/10 rounded-2xl overflow-hidden">
           <summary class="flex justify-between items-center p-6 cursor-pointer bg-white/5 hover:bg-white/10 transition-colors list-none">
-            <span class="font-bold">How does the API handle high-concurrency?</span>
+            <span class="font-bold">How do I ship from USA/UK/China to Nigeria?</span>
             <span class="text-orbit group-open:rotate-45 transition-transform">+</span>
           </summary>
           <div class="p-6 text-slate/50 text-sm leading-relaxed border-t border-white/10">
-            Our API is built on a serverless architecture capable of handling 50k+ requests per second, perfect for enterprise-scale ERP integrations and real-time tracking updates.
+            Through the GIGGo app or our web dashboard, you can get a dedicated overseas address. Once your items arrive at our global hub (Houston, London, or Guangzhou), we consolidate and ship them directly to your doorstep in Nigeria or Ghana.
           </div>
         </details>
       </div>
@@ -246,49 +267,51 @@
   <section class="py-32 relative text-center">
     <div class="absolute inset-0 orbit-gradient opacity-10 blur-3xl rounded-full scale-50"></div>
     <div class="relative z-10 px-6">
-      <h2 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-8">Ready to <span class="text-orbit underline">Launch</span>?</h2>
-      <p class="text-xl text-slate/50 mb-12 max-w-2xl mx-auto">Join the 14,000+ companies that have graduated to modern logistics infrastructure.</p>
+      <h2 class="text-5xl md:text-7xl font-black italic uppercase tracking-tighter mb-8">Ready to <span class="text-orbit underline">Move</span>?</h2>
+      <p class="text-xl text-slate/50 mb-12 max-w-2xl mx-auto">Download the GIGGo app today and experience the future of logistics at your fingertips.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#" class="px-10 py-5 bg-orbit text-space font-black rounded-full hover:shadow-2xl hover:shadow-orbit/40 transition-all">Get Enterprise Quote</a>
-        <a href="#" class="px-10 py-5 bg-white/5 border border-white/10 rounded-full font-bold hover:bg-white/10 transition-all">Contact Sales</a>
+        <a href="#" class="px-10 py-5 bg-orbit text-space font-black rounded-full hover:shadow-2xl hover:shadow-orbit/40 transition-all">Download GIGGo App</a>
+        <a href="#" class="px-10 py-5 bg-white/5 border border-white/10 rounded-full font-bold hover:bg-white/10 transition-all">Become a Merchant</a>
       </div>
     </div>
   </section>
 
-  <footer class="bg-[#040911] pt-20 pb-10 border-t border-white/5">
+  <footer class="bg-[#02050a] pt-20 pb-10 border-t border-white/5">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-4 gap-12 mb-20">
         <div class="col-span-2">
           <div class="flex items-center gap-3 font-extrabold text-xl mb-6">
-            <span class="text-orbit">●</span> ORBIT EXPRESS
+            <span class="text-orbit">●</span> ORBIT EXPRESS x GIGL
           </div>
           <p class="max-w-sm text-slate/40 text-sm leading-relaxed">
-            Building the connective tissue for global trade. We’re on a mission to make shipping as easy as sending an email.
+            Building Africa's logistics operating system. From last-mile delivery to global freight, we provide speed, reliability, and transparency.
           </p>
         </div>
         <div>
-          <h4 class="text-white font-bold mb-6">Infrastructure</h4>
+          <h4 class="text-white font-bold mb-6">Portfolio</h4>
           <ul class="text-sm space-y-4 text-slate/40">
-            <li><a href="#" class="hover:text-orbit transition-colors">Global Mesh</a></li>
-            <li><a href="#" class="hover:text-orbit transition-colors">Customs AI</a></li>
-            <li><a href="#" class="hover:text-orbit transition-colors">API Docs</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Domestic Shipping</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">International Air Freight</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Merchant Solutions</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Pharma Logistics</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-white font-bold mb-6">Support</h4>
+          <h4 class="text-white font-bold mb-6">Company</h4>
           <ul class="text-sm space-y-4 text-slate/40">
-            <li><a href="#" class="hover:text-orbit transition-colors">Help Center</a></li>
-            <li><a href="#" class="hover:text-orbit transition-colors">Safety</a></li>
-            <li><a href="#" class="hover:text-orbit transition-colors">Contact</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Our Centres</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">The GIGGo App</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Support</a></li>
           </ul>
         </div>
       </div>
       <div class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-widest font-bold text-slate/30">
-        <p>&copy; 2026 Orbit Express Global. All Rights Reserved.</p>
+        <p>&copy; 2026 Orbit Express (GIG Logistics Network). All Rights Reserved.</p>
         <div class="flex gap-8">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
-          <a href="#">Cookies</a>
+          <a href="#">Security (ISMS)</a>
         </div>
       </div>
     </div>
