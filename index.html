@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Orbit Express — Global Logistics Infrastructure</title>
-
-  <!-- Fonts -->
+  <title>Orbit Express — Global Logistics Excellence</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -20,180 +19,214 @@
             space: '#050A14',
             subspace: '#0B1426',
             orbit: '#FF6B35',
-            slate: '#F8FAFC'
+            "orbit-light": '#FF8C61',
+            slate: '#F8FAFC',
           },
           fontFamily: {
-            sans: ['Inter', 'sans-serif']
-          }
+            sans: ['Inter', 'sans-serif'],
+          },
         }
       }
     }
   </script>
-
   <style>
+    .glass { backdrop-filter: blur(16px); background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .orbit-gradient { background: linear-gradient(135deg, #FF6B35 0%, #D44D1C 100%); }
+    .nav-link { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(248, 250, 252, 0.5); transition: all 0.3s ease; }
+    .nav-link:hover { color: #FF6B35; }
     html { scroll-behavior: smooth; }
-    .glass {
-      backdrop-filter: blur(14px);
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+    ::selection { background: #FF6B35; color: #050A14; }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
+    .animate-marquee { animation: marquee 30s linear infinite; }
   </style>
 </head>
 
-<body class="bg-space text-slate font-sans antialiased">
+<body class="bg-space text-slate font-sans antialiased selection:bg-orbit selection:text-space">
 
-<!-- ================= NAV ================= -->
-<header class="fixed top-0 inset-x-0 z-50 bg-space/90 backdrop-blur border-b border-white/5">
-  <nav class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-    <div class="flex items-center gap-3 font-black text-xl">
-      <span class="w-8 h-8 rounded-full bg-orbit"></span>
-      ORBIT<span class="text-orbit">EXPRESS</span>
-    </div>
-    <div class="hidden lg:flex gap-10 text-xs uppercase tracking-widest font-bold text-white/60">
-      <a href="#services" class="hover:text-orbit">Services</a>
-      <a href="#network" class="hover:text-orbit">Network</a>
-      <a href="#tracking" class="hover:text-orbit">Tracking</a>
-      <a href="#company" class="hover:text-orbit">Company</a>
-    </div>
-    <a href="#" class="px-6 py-3 rounded-full bg-orbit text-space font-black text-xs uppercase">
-      Ship Now
-    </a>
-  </nav>
-</header>
-
-<!-- ================= HERO ================= -->
-<section class="pt-48 pb-32 relative overflow-hidden">
-  <!-- SVG Grid Background -->
-  <svg class="absolute inset-0 w-full h-full opacity-[0.04]" viewBox="0 0 100 100" preserveAspectRatio="none">
-    <defs>
-      <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-        <path d="M10 0H0V10" fill="none" stroke="#FF6B35" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="100" height="100" fill="url(#grid)"/>
-  </svg>
-
-  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 relative z-10">
-    <div>
-      <p class="text-orbit text-xs uppercase tracking-[0.3em] font-bold mb-6">
-        Global Logistics Infrastructure
-      </p>
-      <h1 class="text-6xl lg:text-7xl font-black leading-tight mb-8">
-        Moving the World<br>
-        <span class="text-orbit">Without Limits</span>
-      </h1>
-      <p class="text-white/50 max-w-xl mb-12 text-lg">
-        Orbit Express connects businesses to over 220 countries through intelligent logistics,
-        real-time tracking, and enterprise-grade operations.
-      </p>
-
-      <!-- Tracking -->
-      <div id="tracking" class="glass rounded-xl p-2 flex gap-2 max-w-xl">
-        <input
-          class="flex-1 bg-transparent px-5 py-4 text-white font-bold text-sm outline-none"
-          placeholder="Enter Tracking Number"
-        />
-        <button class="bg-orbit px-8 py-4 rounded-lg text-space font-black text-xs uppercase">
-          Track
-        </button>
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-space/80 border-b border-white/5">
+    <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3 font-black text-2xl tracking-tighter">
+        <div class="w-10 h-10 rounded-full orbit-gradient flex items-center justify-center group cursor-pointer">
+            <div class="w-4 h-4 bg-space rounded-full group-hover:scale-125 transition-transform"></div>
+        </div>
+        <span class="hidden sm:inline">ORBIT<span class="text-orbit">EXPRESS</span></span>
       </div>
-    </div>
+      
+      <div class="hidden lg:flex items-center gap-10">
+        <a href="#shipping" class="nav-link">Shipping</a>
+        <a href="#tracking" class="nav-link">Tracking</a>
+        <a href="#sectors" class="nav-link">Sectors</a>
+        <a href="#freight" class="nav-link">Freight</a>
+      </div>
 
-    <!-- Globe SVG -->
-    <div class="hidden lg:flex justify-center items-center">
-      <svg viewBox="0 0 600 600" class="w-full max-w-lg">
-        <circle cx="300" cy="300" r="220" fill="#0B1426" stroke="#FF6B35" stroke-width="2"/>
-        <circle cx="300" cy="80" r="6" fill="#FF6B35"/>
-        <circle cx="450" cy="260" r="6" fill="#FF6B35"/>
-        <circle cx="180" cy="350" r="6" fill="#FF6B35"/>
-        <circle cx="320" cy="480" r="6" fill="#FF6B35"/>
-        <line x1="300" y1="80" x2="450" y2="260" stroke="#FF6B35" opacity="0.6"/>
-        <line x1="450" y1="260" x2="320" y2="480" stroke="#FF6B35" opacity="0.6"/>
-        <line x1="320" y1="480" x2="180" y2="350" stroke="#FF6B35" opacity="0.6"/>
-        <line x1="180" y1="350" x2="300" y2="80" stroke="#FF6B35" opacity="0.6"/>
-        <circle cx="300" cy="300" r="10" fill="#FF6B35"/>
-      </svg>
-    </div>
-  </div>
-</section>
+      <div class="flex items-center gap-6">
+        <a href="#" class="hidden md:block text-[11px] font-bold uppercase tracking-widest text-slate/60 hover:text-orbit transition-colors">Portal Login</a>
+        <a href="#" class="px-7 py-3 rounded-full orbit-gradient text-white font-extrabold text-[11px] uppercase tracking-tighter shadow-2xl shadow-orbit/20 hover:scale-105 transition-all">
+          Ship Now
+        </a>
+      </div>
+    </nav>
+  </header>
 
-<!-- ================= SERVICES ================= -->
-<section id="services" class="py-32 bg-slate text-space">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-5xl font-black mb-20 uppercase tracking-tight">
-      Core Logistics Services
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-12">
-
-      <!-- Service Card -->
-      <div class="bg-white rounded-3xl p-10 text-center shadow-sm hover:shadow-xl transition">
-        <svg viewBox="0 0 64 64" class="w-16 h-16 mx-auto mb-6 fill-orbit">
-          <path d="M2 32l60-8-60-8v6l40 2-40 2z"/>
-        </svg>
-        <h3 class="text-2xl font-black mb-4">Express Shipping</h3>
-        <p class="text-gray-500 text-sm">
-          Time-definite international delivery with end-to-end visibility.
+  <section class="relative pt-40 pb-24 lg:pt-56 lg:pb-32 overflow-hidden">
+    <div class="absolute top-0 right-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=2070')] bg-cover bg-center opacity-[0.05] grayscale"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-space/0 via-space/60 to-space"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center relative z-10">
+      <div>
+        <div class="inline-flex items-center gap-3 mb-8 px-4 py-2 rounded-full glass border-white/10">
+            <span class="flex h-2 w-2 rounded-full bg-orbit animate-pulse"></span>
+            <span class="text-orbit font-bold text-[10px] uppercase tracking-[0.2em]">Live Intelligence Active</span>
+        </div>
+        <h1 class="text-6xl lg:text-8xl font-black leading-[0.9] tracking-tighter text-white mb-8">
+          Global Reach. <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-orbit to-orange-400">Zero Friction.</span>
+        </h1>
+        <p class="text-xl text-slate/40 leading-relaxed max-w-xl mb-12">
+          Harness the power of a hyper-connected logistics network. We deliver precision, speed, and reliability across 220+ territories.
         </p>
+
+        <div id="tracking" class="bg-subspace border border-white/10 p-2 rounded-2xl flex flex-col sm:flex-row gap-2 max-w-xl shadow-2xl focus-within:border-orbit/50 transition-all">
+          <input type="text" placeholder="OB-XXXXXXXX" class="bg-transparent px-6 py-4 flex-1 focus:outline-none font-bold text-white text-sm tracking-widest placeholder:text-white/10">
+          <button class="orbit-gradient text-white font-black px-10 py-4 uppercase text-[11px] tracking-widest hover:brightness-110 rounded-xl transition-all">
+            Track Path
+          </button>
+        </div>
       </div>
 
-      <div class="bg-white rounded-3xl p-10 text-center shadow-sm hover:shadow-xl transition">
-        <svg viewBox="0 0 64 64" class="w-16 h-16 mx-auto mb-6 fill-orbit">
-          <rect x="6" y="28" width="52" height="14" rx="2"/>
-          <path d="M2 42h60l-6 10H8z" opacity="0.7"/>
-        </svg>
-        <h3 class="text-2xl font-black mb-4">Global Freight</h3>
-        <p class="text-gray-500 text-sm">
-          Air and ocean freight solutions across major trade corridors.
-        </p>
+      <div class="hidden lg:block relative">
+        <div class="absolute -inset-10 orbit-gradient blur-[120px] opacity-10 rounded-full"></div>
+        <div class="relative rounded-[2.5rem] border border-white/10 p-4 glass overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1000" class="rounded-[2rem] grayscale-[0.5] hover:grayscale-0 transition-all duration-700">
+            <div class="absolute bottom-8 left-8 right-8 p-6 glass rounded-2xl border-white/10 flex justify-between items-center">
+                <div>
+                    <p class="text-[10px] uppercase text-orbit font-black mb-1">Current Transit</p>
+                    <p class="text-lg font-bold text-white tracking-tight">London → Lagos</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] uppercase text-slate/40 font-black mb-1">Status</p>
+                    <p class="text-sm font-bold text-green-400">In Air</p>
+                </div>
+            </div>
+        </div>
       </div>
-
-      <div class="bg-white rounded-3xl p-10 text-center shadow-sm hover:shadow-xl transition">
-        <svg viewBox="0 0 64 64" class="w-16 h-16 mx-auto mb-6 fill-orbit">
-          <rect x="8" y="24" width="48" height="28" rx="2"/>
-          <rect x="16" y="32" width="8" height="8" fill="#050A14"/>
-          <rect x="28" y="32" width="8" height="8" fill="#050A14"/>
-          <rect x="40" y="32" width="8" height="8" fill="#050A14"/>
-        </svg>
-        <h3 class="text-2xl font-black mb-4">Supply Chain</h3>
-        <p class="text-gray-500 text-sm">
-          Warehousing, fulfillment, and inventory optimization at scale.
-        </p>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ================= CTA ================= -->
-<section class="py-32 bg-orbit text-space text-center">
-  <h2 class="text-5xl font-black mb-8 uppercase">
-    Build Without Borders
-  </h2>
-  <p class="max-w-2xl mx-auto mb-12 font-bold">
-    Join thousands of businesses moving globally with Orbit Express.
-  </p>
-  <div class="flex justify-center gap-6">
-    <button class="bg-space text-white px-10 py-5 rounded-xl font-black uppercase text-xs">
-      Open Business Account
-    </button>
-    <button class="border-2 border-space px-10 py-5 rounded-xl font-black uppercase text-xs">
-      Speak to Sales
-    </button>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="bg-space py-20 border-t border-white/5">
-  <div class="max-w-7xl mx-auto px-6 text-white/40 text-xs uppercase tracking-widest flex flex-col md:flex-row justify-between gap-6">
-    <p>© 2026 Orbit Express Global</p>
-    <div class="flex gap-8">
-      <a href="#" class="hover:text-white">Privacy</a>
-      <a href="#" class="hover:text-white">Terms</a>
-      <a href="#" class="hover:text-white">Security</a>
+  <section class="py-12 border-y border-white/5 overflow-hidden">
+    <div class="flex whitespace-nowrap animate-marquee">
+        <div class="flex gap-20 items-center px-10 text-[11px] font-black uppercase tracking-[0.3em] text-slate/20">
+            <span>220+ Countries</span> <span class="text-orbit">●</span>
+            <span>4.2M Parcels Daily</span> <span class="text-orbit">●</span>
+            <span>99.9% On-Time Rate</span> <span class="text-orbit">●</span>
+            <span>AI-Driven Routing</span> <span class="text-orbit">●</span>
+            <span>24/7 Global Support</span> <span class="text-orbit">●</span>
+        </div>
+        <div class="flex gap-20 items-center px-10 text-[11px] font-black uppercase tracking-[0.3em] text-slate/20">
+            <span>220+ Countries</span> <span class="text-orbit">●</span>
+            <span>4.2M Parcels Daily</span> <span class="text-orbit">●</span>
+            <span>99.9% On-Time Rate</span> <span class="text-orbit">●</span>
+            <span>AI-Driven Routing</span> <span class="text-orbit">●</span>
+            <span>24/7 Global Support</span> <span class="text-orbit">●</span>
+        </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <section id="sectors" class="py-32 bg-space relative">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div class="order-2 lg:order-1">
+                <h2 class="text-4xl lg:text-5xl font-black tracking-tighter uppercase text-white mb-8">Specialized for <br><span class="text-orbit">Your Industry.</span></h2>
+                <div class="space-y-4">
+                    <div class="p-6 rounded-2xl glass border-white/5 hover:border-orbit/30 transition-all group cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-lg text-white group-hover:text-orbit transition-colors">Life Sciences & Pharma</h4>
+                            <span class="text-xs text-slate/40 font-bold uppercase tracking-widest">Cold Chain</span>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-2xl glass border-white/5 hover:border-orbit/30 transition-all group cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-lg text-white group-hover:text-orbit transition-colors">Automotive & Manufacturing</h4>
+                            <span class="text-xs text-slate/40 font-bold uppercase tracking-widest">Just-In-Time</span>
+                        </div>
+                    </div>
+                    <div class="p-6 rounded-2xl glass border-white/5 hover:border-orbit/30 transition-all group cursor-pointer">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-lg text-white group-hover:text-orbit transition-colors">High-Tech & Electronics</h4>
+                            <span class="text-xs text-slate/40 font-bold uppercase tracking-widest">Secure Handling</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 lg:order-2">
+                <img src="https://images.unsplash.com/photo-1516591101565-5903b75b4144?auto=format&fit=crop&q=80&w=800" class="rounded-[2.5rem] border border-white/10 opacity-60">
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-orbit text-space">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+        <h2 class="text-5xl lg:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">The Future of Trade <br>Starts Today.</h2>
+        <p class="text-lg font-bold mb-10 opacity-80 max-w-2xl mx-auto">Open a corporate account to access volume discounts, custom APIs, and a dedicated logistics officer.</p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <button class="bg-space text-white px-10 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:scale-105 transition-all">Register Business Account</button>
+            <button class="bg-white/20 border border-space/10 px-10 py-5 rounded-2xl font-black uppercase text-[11px] tracking-widest hover:bg-white transition-all">Request a Callback</button>
+        </div>
+    </div>
+  </section>
+
+  <footer class="bg-space pt-32 pb-12 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-16 mb-24">
+        <div>
+          <div class="flex items-center gap-3 font-black text-2xl mb-8">
+            <span class="text-orbit">●</span> ORBIT
+          </div>
+          <p class="text-slate/30 text-[13px] leading-relaxed">
+            Engineering the global logistics infrastructure for the 2026 digital economy.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-black text-[11px] uppercase tracking-[0.2em] mb-10">Solutions</h4>
+          <ul class="text-[12px] space-y-5 text-slate/40 font-bold uppercase tracking-widest">
+            <li><a href="#" class="hover:text-orbit transition-colors">Express International</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Freight Forwarding</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Supply Chain AI</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-black text-[11px] uppercase tracking-[0.2em] mb-10">Company</h4>
+          <ul class="text-[12px] space-y-5 text-slate/40 font-bold uppercase tracking-widest">
+            <li><a href="#" class="hover:text-orbit transition-colors">Network Map</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Sustainability</a></li>
+            <li><a href="#" class="hover:text-orbit transition-colors">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+            <h4 class="text-white font-black text-[11px] uppercase tracking-[0.2em] mb-10">Global Access</h4>
+            <div class="p-1.5 bg-subspace border border-white/10 rounded-xl focus-within:border-orbit transition-colors flex">
+                <input type="email" placeholder="Email" class="bg-transparent px-4 py-2 text-xs flex-1 focus:outline-none text-white">
+                <button class="bg-orbit px-6 py-2 rounded-lg text-space font-black text-[10px]">GO</button>
+            </div>
+        </div>
+      </div>
+
+      <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase tracking-[0.2em] font-black text-slate/20">
+        <p>&copy; 2026 Orbit Express Global. All Rights Reserved.</p>
+        <div class="flex gap-10">
+          <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-white transition-colors">Compliance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
