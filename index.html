@@ -1,188 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Orbit Express — Global Logistics Infrastructure</title>
-
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-<!-- Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<style>
-  body { font-family: 'Inter', system-ui, sans-serif; }
-
-  .hero-bg {
-    background:
-      linear-gradient(180deg, rgba(11,29,51,.88), rgba(11,29,51,.92)),
-      url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000");
-    background-size: cover;
-    background-position: center;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Express — Tracking Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tracking-gradient { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+    </style>
 </head>
+<body class="bg-slate-50 antialiased">
 
-<body class="bg-slate-50 text-slate-900 antialiased">
-
-<!-- ================= NAVBAR ================= -->
-<nav class="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-slate-200">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="h-20 flex items-center justify-between">
-
-      <!-- Brand -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
-          <i data-lucide="orbit" class="text-white"></i>
+<nav class="bg-white border-b border-slate-200 h-20 flex items-center px-6">
+    <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                <i data-lucide="orbit" class="text-white w-4"></i>
+            </div>
+            <span class="font-bold text-xl tracking-tight">ORBIT<span class="text-blue-600">EXPRESS</span></span>
         </div>
-        <span class="text-xl font-extrabold tracking-tight">
-          ORBIT<span class="text-blue-600">EXPRESS</span>
-        </span>
-      </div>
-
-      <!-- Links -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
-        <a href="#" class="hover:text-blue-600">Services</a>
-        <a href="#" class="hover:text-blue-600">Industries</a>
-        <a href="#" class="hover:text-blue-600">Compliance</a>
-        <a href="#" class="hover:text-blue-600">Sustainability</a>
-      </div>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-4">
-        <button class="text-sm font-semibold hover:text-blue-600">
-          Client Login
-        </button>
-        <button class="bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-blue-700 transition">
-          Get a Quote
-        </button>
-      </div>
-
+        <a href="#" class="text-sm font-semibold text-slate-600">Back to Home</a>
     </div>
-  </div>
 </nav>
 
-<!-- ================= HERO ================= -->
-<section class="hero-bg min-h-[640px] flex items-center px-6 text-white">
-  <div class="max-w-4xl mx-auto text-center">
+<main class="max-w-3xl mx-auto px-6 py-12">
+    <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+        <div class="tracking-gradient p-8 text-white">
+            <h1 class="text-2xl font-bold mb-2">Track Your Shipment</h1>
+            <p class="text-blue-100 text-sm">Enter your Global ID to see real-time status and destination.</p>
+        </div>
 
-    <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-      Global Logistics,<br class="hidden sm:block"> Built for Scale.
-    </h1>
+        <div class="p-8">
+            <div class="flex flex-col gap-4">
+                <div class="relative">
+                    <input id="trackingInput" type="text" placeholder="GID-0001" 
+                           class="w-full px-5 py-4 rounded-xl border border-slate-300 focus:ring-4 focus:ring-blue-100 focus:border-blue-600 outline-none transition text-lg font-semibold uppercase">
+                </div>
+                <button id="trackBtn" class="bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                    <i data-lucide="search" class="w-5"></i> Locate Shipment
+                </button>
+            </div>
 
-    <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-12">
-      Enterprise-grade freight forwarding, customs clearance, and
-      real-time shipment visibility across 220+ countries.
-    </p>
+            <div id="resultCard" class="hidden mt-8 border-t border-slate-100 pt-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Current Status</p>
+                        <p id="resStatus" class="text-xl font-bold text-blue-600 mt-1">--</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Final Destination</p>
+                        <p id="resDest" class="text-xl font-bold text-slate-900 mt-1">--</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Last Updated</p>
+                        <p id="resDate" class="text-sm font-medium text-slate-600 mt-1">--</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Weight (KG)</p>
+                        <p id="resWeight" class="text-sm font-medium text-slate-600 mt-1">--</p>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Tracking Card -->
-    <div class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl max-w-2xl mx-auto text-slate-900">
-
-      <div class="px-6 py-4 border-b border-slate-200 font-bold text-blue-600">
-        Track & Trace
-      </div>
-
-      <div class="p-6 flex flex-col gap-4">
-        <input
-          id="trackingInput"
-          type="text"
-          inputmode="text"
-          placeholder="Enter Tracking ID (e.g. GID-0001)"
-          class="px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none"
-        />
-
-        <button
-          id="trackBtn"
-          class="bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition disabled:opacity-60"
-        >
-          Track Shipment
-        </button>
-
-        <p class="text-xs text-slate-500 text-left">
-          Real-time updates from Orbit Express global operations network.
-        </p>
-      </div>
+            <div id="errorMsg" class="hidden mt-6 p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm font-medium flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4"></i> <span id="errorText"></span>
+            </div>
+        </div>
     </div>
+</main>
 
-  </div>
-</section>
-
-<!-- ================= SERVICES ================= -->
-<section class="py-20 max-w-7xl mx-auto px-6">
-  <div class="text-center mb-16">
-    <h2 class="text-3xl font-bold mb-4">Core Freight Solutions</h2>
-    <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-  </div>
-
-  <div class="grid md:grid-cols-4 gap-8">
-
-    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
-      <i data-lucide="plane" class="w-12 h-12 text-blue-600 mb-6"></i>
-      <h3 class="font-bold text-xl mb-2">Air Freight</h3>
-      <p class="text-sm text-slate-600">
-        Time-critical international air cargo with priority routing.
-      </p>
-    </div>
-
-    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
-      <i data-lucide="ship" class="w-12 h-12 text-blue-600 mb-6"></i>
-      <h3 class="font-bold text-xl mb-2">Ocean Freight</h3>
-      <p class="text-sm text-slate-600">
-        Cost-efficient FCL & LCL maritime shipping solutions.
-      </p>
-    </div>
-
-    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
-      <i data-lucide="truck" class="w-12 h-12 text-blue-600 mb-6"></i>
-      <h3 class="font-bold text-xl mb-2">Land Transport</h3>
-      <p class="text-sm text-slate-600">
-        Secure cross-border trucking and last-mile delivery.
-      </p>
-    </div>
-
-    <div class="bg-white p-8 rounded-xl border border-slate-200 hover:shadow-xl transition">
-      <i data-lucide="warehouse" class="w-12 h-12 text-blue-600 mb-6"></i>
-      <h3 class="font-bold text-xl mb-2">Warehousing</h3>
-      <p class="text-sm text-slate-600">
-        Smart inventory management with real-time synchronization.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="bg-slate-900 text-slate-400 py-12">
-  <div class="text-center text-xs">
-    © 2026 Orbit Express International. All rights reserved.
-  </div>
-</footer>
-
-<!-- ================= SCRIPTS ================= -->
 <script>
-  lucide.createIcons();
+    lucide.createIcons();
 
-  const btn = document.getElementById("trackBtn");
-  const input = document.getElementById("trackingInput");
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHH7C98ldseUsyeqgRBR5o67lyPPTYtHrEsmZR9OLMnVY23PPcGcZYxyEU_YMDY8VU/exec"; // PASTE YOUR DEPLOYMENT URL HERE
 
-  function goTrack() {
-    const id = input.value.trim();
-    if (!id) {
-      input.classList.add("ring-2", "ring-red-500");
-      return;
+    const btn = document.getElementById("trackBtn");
+    const input = document.getElementById("trackingInput");
+    const resultCard = document.getElementById("resultCard");
+    const errorMsg = document.getElementById("errorMsg");
+
+    async function handleTrack() {
+        const id = input.value.trim();
+        if (!id) return;
+
+        // Reset States
+        errorMsg.classList.add("hidden");
+        resultCard.classList.add("hidden");
+        btn.disabled = true;
+        btn.innerHTML = `<span class="animate-spin mr-2">◌</span> Searching...`;
+
+        try {
+            // Using fetch to call your Apps Script (no callback needed for modern fetch)
+            const response = await fetch(`${SCRIPT_URL}?tracking=${encodeURIComponent(id)}`);
+            const data = await response.json();
+
+            if (data.error) {
+                showError(data.error);
+            } else {
+                showResult(data);
+            }
+        } catch (err) {
+            showError("System connection timeout. Please try again.");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<i data-lucide="search" class="w-5"></i> Locate Shipment`;
+            lucide.createIcons();
+        }
     }
-    window.location.href = `track.html?id=${encodeURIComponent(id)}`;
-  }
 
-  btn.addEventListener("click", goTrack);
+    function showResult(data) {
+        document.getElementById("resStatus").innerText = data.status;
+        document.getElementById("resDest").innerText = data.destination;
+        document.getElementById("resDate").innerText = data.lastUpdated;
+        document.getElementById("resWeight").innerText = data.weight || "N/A";
+        
+        resultCard.classList.remove("hidden");
+    }
 
-  input.addEventListener("keydown", e => {
-    if (e.key === "Enter") goTrack();
-  });
+    function showError(msg) {
+        document.getElementById("errorText").innerText = msg;
+        errorMsg.classList.remove("hidden");
+    }
+
+    btn.addEventListener("click", handleTrack);
+    input.addEventListener("keydown", e => { if (e.key === "Enter") handleTrack(); });
 </script>
 
 </body>
