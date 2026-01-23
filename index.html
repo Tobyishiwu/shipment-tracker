@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- =========================
-    ORBIT EXPRESS — PRODUCTION LANDING PAGE
-    Senior Front-End / UI Systems Build
-    Theme: Deep Space Modern
-  ========================== -->
+  <!-- =====================================================
+  ORBIT EXPRESS – GLOBAL LOGISTICS PLATFORM
+  Senior Front-End / UI Architecture
+  ====================================================== -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Orbit Express — Frictionless Global Trade</title>
+  <meta name="description" content="Orbit Express is a global logistics infrastructure platform enabling frictionless international trade across 220+ countries." />
 
-  <!-- Google Font (swap for performance) -->
+  <!-- Google Font (Performance-Optimized) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CDN (lightweight, no heavy JS frameworks) -->
+  <!-- Tailwind CDN (acceptable for marketing sites / landing pages) -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Theme Extension -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            space: "#08111F",
-            orbit: "#FF6B35",
-            slate: "#F8FAFC"
+            space: '#08111F',
+            orbit: '#FF6B35',
+            slate: '#F8FAFC'
           },
           fontFamily: {
-            sans: ["Inter", "system-ui", "sans-serif"]
+            sans: ['Inter', 'system-ui', 'sans-serif']
           }
         }
       }
@@ -37,257 +40,227 @@
 
 <body class="bg-space text-slate font-sans antialiased">
 
-<!-- =====================================================
+  <!-- =====================================================
   GLASSMORPHIC NAVIGATION
-===================================================== -->
-<header class="fixed top-0 inset-x-0 z-50">
-  <nav class="backdrop-blur-xl bg-space/70 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <!-- Orbit Logo (Inline SVG) -->
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M2 12c3-5 15-5 20 0"/>
-          <path d="M2 12c3 5 15 5 20 0"/>
-        </svg>
-        <span class="font-bold tracking-wide text-lg">Orbit Express</span>
+  ====================================================== -->
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur bg-white/5 border-b border-white/10">
+    <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2 font-extrabold tracking-wide">
+        <span class="text-orbit">●</span>
+        <span>Orbit Express</span>
       </div>
-
       <div class="hidden md:flex items-center gap-8 text-sm text-slate/80">
-        <a href="#" class="hover:text-white transition">Ship</a>
-        <a href="#" class="hover:text-white transition">Track</a>
-        <a href="#" class="hover:text-white transition">Solutions</a>
-        <a href="#" class="hover:text-white transition">Network</a>
+        <a href="#" class="hover:text-white">Ship</a>
+        <a href="#" class="hover:text-white">Track</a>
+        <a href="#" class="hover:text-white">Solutions</a>
+        <a href="#" class="hover:text-white">Network</a>
       </div>
-
-      <a href="#"
-         class="px-5 py-2 rounded-full bg-orbit text-space font-semibold text-sm hover:bg-orange-400 transition">
+      <a href="#" class="px-4 py-2 rounded-lg bg-orbit text-space font-semibold text-sm hover:opacity-90">
         Client Portal
       </a>
+    </nav>
+  </header>
+
+  <!-- Spacer for fixed nav -->
+  <div class="h-16"></div>
+
+  <!-- =====================================================
+  HERO SECTION
+  ====================================================== -->
+  <section class="relative overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7"
+         alt="Global Logistics"
+         class="absolute inset-0 w-full h-full object-cover opacity-20">
+
+    <div class="relative max-w-7xl mx-auto px-6 py-28 grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
+          Frictionless<br>
+          <span class="text-orbit">Global Trade</span>
+        </h1>
+        <p class="mt-6 text-lg text-slate/80 max-w-xl">
+          Orbit Express powers modern supply chains with real-time visibility,
+          automated compliance, and enterprise-grade logistics infrastructure.
+        </p>
+
+        <!-- Tracking Input -->
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <input type="text"
+                 placeholder="Enter Tracking ID"
+                 class="w-full sm:flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 placeholder:text-slate/50 focus:outline-none focus:ring-2 focus:ring-orbit">
+          <button class="px-6 py-3 rounded-lg bg-orbit text-space font-semibold hover:opacity-90">
+            Track Shipment
+          </button>
+        </div>
+      </div>
+
+      <div class="hidden lg:block">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d"
+             alt="Smart Warehouse"
+             class="rounded-2xl shadow-2xl">
+      </div>
     </div>
-  </nav>
-</header>
+  </section>
 
-<main class="pt-28">
+  <!-- =====================================================
+  TRUST BAR
+  ====================================================== -->
+  <section class="bg-white py-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center opacity-60">
+        <span class="text-center font-bold">MAERSK</span>
+        <span class="text-center font-bold">AMAZON</span>
+        <span class="text-center font-bold">FEDEX</span>
+        <span class="text-center font-bold">UPS</span>
+        <span class="text-center font-bold">DHL</span>
+      </div>
+    </div>
+  </section>
 
-<!-- =====================================================
-  HERO — DYNAMIC VALUE PROPOSITION
-===================================================== -->
-<section class="relative overflow-hidden">
-  <div class="absolute inset-0">
-    <img
-      src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d"
-      alt="Global logistics network"
-      class="w-full h-full object-cover opacity-25"
-    />
-  </div>
-
-  <div class="relative max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-16 items-center">
-    <div>
-      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-        Frictionless<br/>
-        <span class="text-orbit">Global Trade</span><br/>
-        at Orbit Speed
-      </h1>
-      <p class="mt-6 text-slate/80 max-w-xl">
-        Orbit Express is a next-generation logistics infrastructure powering real-time tracking,
-        automated customs, and seamless cross-border movement for global enterprises.
+  <!-- =====================================================
+  NETWORK MESH / GLOBAL COVERAGE
+  ====================================================== -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold">A Borderless Logistics Network</h2>
+      <p class="mt-4 text-slate/70 max-w-2xl mx-auto">
+        Orbit Express operates a digitally unified logistics mesh
+        spanning air, sea, and land corridors worldwide.
       </p>
 
-      <!-- Real-Time Tracking Input -->
-      <div class="mt-8 flex gap-3 max-w-lg">
-        <input
-          type="text"
-          placeholder="Enter Tracking ID"
-          class="flex-1 px-5 py-3 rounded-xl bg-white/90 text-space placeholder-gray-500 focus:outline-none"
-        />
-        <button class="px-6 py-3 rounded-xl bg-orbit text-space font-semibold hover:bg-orange-400 transition">
-          Track
-        </button>
+      <div class="mt-16 grid md:grid-cols-3 gap-12">
+        <div>
+          <div class="text-5xl font-extrabold text-orbit">220+</div>
+          <p class="mt-2 text-slate/70">Countries Covered</p>
+        </div>
+        <div>
+          <div class="text-5xl font-extrabold text-orbit">99.98%</div>
+          <p class="mt-2 text-slate/70">On-Time Delivery</p>
+        </div>
+        <div>
+          <div class="text-5xl font-extrabold text-orbit">24/7</div>
+          <p class="mt-2 text-slate/70">Global Monitoring</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Visual Card -->
-    <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-      <img
-        src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"
-        alt="High-tech warehouse"
-        class="rounded-2xl"
-      />
-    </div>
-  </div>
-</section>
+  <!-- =====================================================
+  ORBIT PROTOCOL – PROCESS FLOW
+  ====================================================== -->
+  <section class="bg-white py-24 text-space">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">The Orbit Protocol</h2>
 
-<!-- =====================================================
-  TRUST BAR — FORTUNE 500
-===================================================== -->
-<section class="bg-white py-16">
-  <div class="max-w-7xl mx-auto px-6">
-    <p class="text-center text-gray-500 text-sm mb-8">
-      Trusted by global operators and Fortune 500 supply chains
-    </p>
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-60">
-      <img src="https://dummyimage.com/160x60/ccc/000&text=Partner+1" alt="">
-      <img src="https://dummyimage.com/160x60/ccc/000&text=Partner+2" alt="">
-      <img src="https://dummyimage.com/160x60/ccc/000&text=Partner+3" alt="">
-      <img src="https://dummyimage.com/160x60/ccc/000&text=Partner+4" alt="">
-      <img src="https://dummyimage.com/160x60/ccc/000&text=Partner+5" alt="">
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================
-  NETWORK MESH — GLOBAL COVERAGE
-===================================================== -->
-<section class="py-24">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-3xl font-bold">A Living Global Network</h2>
-    <p class="mt-4 text-slate/70 max-w-2xl mx-auto">
-      Orbit Express connects enterprises to a digitally synchronized logistics mesh spanning air,
-      sea, land, and customs authorities worldwide.
-    </p>
-
-    <div class="mt-16 grid md:grid-cols-3 gap-10">
-      <div>
-        <p class="text-4xl font-extrabold text-orbit">220+</p>
-        <p class="mt-2 text-slate/70">Countries & Territories</p>
-      </div>
-      <div>
-        <p class="text-4xl font-extrabold text-orbit">12M+</p>
-        <p class="mt-2 text-slate/70">Shipments Annually</p>
-      </div>
-      <div>
-        <p class="text-4xl font-extrabold text-orbit">99.97%</p>
-        <p class="mt-2 text-slate/70">On-Time Delivery</p>
+      <div class="mt-16 grid md:grid-cols-4 gap-10">
+        <div>
+          <h3 class="font-bold">Smart Intake</h3>
+          <p class="mt-2 text-sm text-gray-600">AI-powered shipment classification and routing.</p>
+        </div>
+        <div>
+          <h3 class="font-bold">Global Transit</h3>
+          <p class="mt-2 text-sm text-gray-600">Optimized multi-modal transport networks.</p>
+        </div>
+        <div>
+          <h3 class="font-bold">Automated Customs</h3>
+          <p class="mt-2 text-sm text-gray-600">Pre-cleared documentation and compliance.</p>
+        </div>
+        <div>
+          <h3 class="font-bold">Final Mile</h3>
+          <p class="mt-2 text-sm text-gray-600">Local delivery partners with real-time updates.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- =====================================================
-  ORBIT PROTOCOL — PROCESS TIMELINE
-===================================================== -->
-<section class="bg-white py-24 text-space">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center">The Orbit Protocol</h2>
-
-    <div class="mt-16 grid md:grid-cols-4 gap-10 text-center">
-      <div>
-        <h3 class="font-semibold">Smart Intake</h3>
-        <p class="mt-2 text-gray-600 text-sm">AI-validated shipment data</p>
-      </div>
-      <div>
-        <h3 class="font-semibold">Global Transit</h3>
-        <p class="mt-2 text-gray-600 text-sm">Optimized multimodal routing</p>
-      </div>
-      <div>
-        <h3 class="font-semibold">Automated Customs</h3>
-        <p class="mt-2 text-gray-600 text-sm">Pre-cleared documentation</p>
-      </div>
-      <div>
-        <h3 class="font-semibold">Final Mile</h3>
-        <p class="mt-2 text-gray-600 text-sm">Precision last-mile delivery</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =====================================================
+  <!-- =====================================================
   CASE STUDIES
-===================================================== -->
-<section class="py-24">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center">Enterprise Impact</h2>
+  ====================================================== -->
+  <section class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Proven at Scale</h2>
 
-    <div class="mt-16 grid md:grid-cols-2 gap-10">
-      <div class="bg-white/10 border border-white/10 rounded-2xl p-8">
-        <h3 class="font-semibold text-lg">Global Retailer</h3>
-        <p class="mt-4 text-sm text-slate/70">
-          Reduced operational overhead by <span class="text-orbit font-bold">22%</span>
-          while increasing delivery speed across 14 regions.
-        </p>
-      </div>
-
-      <div class="bg-white/10 border border-white/10 rounded-2xl p-8">
-        <h3 class="font-semibold text-lg">Manufacturing Giant</h3>
-        <p class="mt-4 text-sm text-slate/70">
-          Cut customs clearance delays by <span class="text-orbit font-bold">41%</span>
-          through automated compliance workflows.
-        </p>
+      <div class="mt-16 grid md:grid-cols-2 gap-10">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-8">
+          <h3 class="font-bold text-xl">Global Electronics Manufacturer</h3>
+          <p class="mt-4 text-slate/70">
+            Reduced logistics overhead by <strong class="text-orbit">22%</strong>
+            while increasing delivery speed across 3 continents.
+          </p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-8">
+          <h3 class="font-bold text-xl">Enterprise Retail Chain</h3>
+          <p class="mt-4 text-slate/70">
+            Achieved <strong class="text-orbit">41%</strong> faster customs clearance
+            through automated compliance workflows.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- =====================================================
-  FAQ — ACCESSIBLE <details>
-===================================================== -->
-<section class="bg-white py-24 text-space">
-  <div class="max-w-4xl mx-auto px-6">
-    <h2 class="text-3xl font-bold text-center">Performance FAQ</h2>
+  <!-- =====================================================
+  FAQ (DETAILS / SUMMARY)
+  ====================================================== -->
+  <section class="bg-white py-24 text-space">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Performance FAQ</h2>
 
-    <div class="mt-12 space-y-4">
-      <details class="border rounded-xl p-4">
-        <summary class="font-semibold cursor-pointer">How real-time is Orbit tracking?</summary>
-        <p class="mt-2 text-gray-600 text-sm">
-          Tracking updates are streamed from carrier, port, and customs systems in near real time.
-        </p>
-      </details>
-
-      <details class="border rounded-xl p-4">
-        <summary class="font-semibold cursor-pointer">Do you support enterprise APIs?</summary>
-        <p class="mt-2 text-gray-600 text-sm">
-          Yes. Orbit Express offers secure REST and webhook integrations for enterprise systems.
-        </p>
-      </details>
+      <div class="mt-12 space-y-4">
+        <details class="border rounded-lg p-4">
+          <summary class="font-semibold cursor-pointer">Is Orbit Express enterprise-ready?</summary>
+          <p class="mt-2 text-gray-600">Yes — our infrastructure is built for high-volume global trade.</p>
+        </details>
+        <details class="border rounded-lg p-4">
+          <summary class="font-semibold cursor-pointer">Do you support API integrations?</summary>
+          <p class="mt-2 text-gray-600">We provide REST and webhook-based integrations.</p>
+        </details>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- =====================================================
+  <!-- =====================================================
   FINAL CTA
-===================================================== -->
-<section class="py-24 text-center">
-  <h2 class="text-4xl font-extrabold">Move Faster. Trade Smarter.</h2>
-  <p class="mt-4 text-slate/70">Join the logistics infrastructure powering global commerce.</p>
-  <a href="#" class="inline-block mt-8 px-10 py-4 rounded-full bg-orbit text-space font-semibold hover:bg-orange-400 transition">
-    Get a Quote
-  </a>
-</section>
+  ====================================================== -->
+  <section class="py-24 text-center">
+    <h2 class="text-4xl font-extrabold">Move Faster. Ship Smarter.</h2>
+    <p class="mt-4 text-slate/70">Request a customized logistics quote today.</p>
+    <a href="#" class="inline-block mt-8 px-8 py-4 bg-orbit text-space font-semibold rounded-xl">
+      Get a Quote
+    </a>
+  </section>
 
-</main>
-
-<!-- =====================================================
+  <!-- =====================================================
   FOOTER
-===================================================== -->
-<footer class="bg-space border-t border-white/10">
-  <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10 text-sm text-slate/70">
-    <div>
-      <h4 class="font-semibold text-white mb-4">Orbit Express</h4>
-      <p>Global logistics infrastructure for enterprise trade.</p>
+  ====================================================== -->
+  <footer class="bg-black py-16 text-sm text-slate/60">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+      <div>
+        <h4 class="font-bold text-white">Orbit Express</h4>
+        <p class="mt-2">Global logistics infrastructure for modern trade.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-white">Solutions</h4>
+        <ul class="mt-2 space-y-1">
+          <li>International Shipping</li>
+          <li>Enterprise Logistics</li>
+          <li>Tracking API</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white">Company</h4>
+        <ul class="mt-2 space-y-1">
+          <li>About</li>
+          <li>Careers</li>
+          <li>Compliance</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold text-white">Contact</h4>
+        <p class="mt-2">support@orbitexpress.com</p>
+      </div>
     </div>
-    <div>
-      <h4 class="font-semibold text-white mb-4">Solutions</h4>
-      <ul class="space-y-2">
-        <li>International Shipping</li>
-        <li>Customs Automation</li>
-        <li>Enterprise APIs</li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="font-semibold text-white mb-4">Company</h4>
-      <ul class="space-y-2">
-        <li>About</li>
-        <li>Careers</li>
-        <li>Security</li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="font-semibold text-white mb-4">Contact</h4>
-      <p>support@orbitexpress.com</p>
-    </div>
-  </div>
-</footer>
+  </footer>
 
 </body>
 </html>
