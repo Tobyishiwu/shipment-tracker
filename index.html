@@ -2,318 +2,226 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Speedie Logistics | The Future of Digital Logistics</title>
+  <title>Orbit Express | The World is Your Neighborhood</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --gigl-red: #B40203;
-      --gigl-dark: #0A0E1A;
-      --gigl-gray: #64748B;
-      --gigl-light: #F8FAFC;
-      --white: #FFFFFF;
-      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { color: var(--gigl-dark); background: var(--white); line-height: 1.5; overflow-x: hidden; }
-    
-    /* ANIMATIONS */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-    @keyframes pulse-red {
-      0% { box-shadow: 0 0 0 0 rgba(180, 2, 3, 0.4); }
-      70% { box-shadow: 0 0 0 15px rgba(180, 2, 3, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(180, 2, 3, 0); }
-    }
-
-    .animate { animation: fadeInUp 0.8s ease forwards; }
-
-    /* HEADER */
-    header {
-      background: rgba(255, 255, 255, 0.98);
-      height: 85px;
-      display: flex;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #edf2f7;
-    }
-
-    .container { max-width: 1280px; margin: auto; padding: 0 24px; }
-    .nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-    .logo { font-weight: 800; font-size: 1.6rem; color: var(--gigl-dark); text-decoration: none; }
-    .logo span { color: var(--gigl-red); }
-
-    .nav-links { display: flex; gap: 30px; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--gigl-dark); font-weight: 600; font-size: 0.9rem; transition: var(--transition); }
-    .nav-links a:hover { color: var(--gigl-red); }
-
-    .btn { padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; transition: var(--transition); border: none; }
-    .btn-red { background: var(--gigl-red); color: white; }
-    .btn-red:hover { background: #900203; transform: scale(1.05); }
-
-    /* HERO & WIDGET */
-    .hero {
-      background: radial-gradient(circle at top right, #1a2235, #0A0E1A);
-      color: white;
-      padding: 120px 0;
-      position: relative;
-    }
-
-    .hero-grid { display: grid; grid-template-columns: 1fr 450px; gap: 60px; align-items: center; }
-    .hero-text h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; }
-    
-    .action-widget {
-      background: white;
-      border-radius: 16px;
-      padding: 35px;
-      color: var(--gigl-dark);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-      transform: rotate(-1deg);
-      transition: var(--transition);
-    }
-    .action-widget:hover { transform: rotate(0deg) translateY(-5px); }
-
-    .widget-tabs { display: flex; gap: 25px; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; }
-    .tab { padding-bottom: 12px; cursor: pointer; font-weight: 800; font-size: 0.85rem; color: var(--gigl-gray); position: relative; }
-    .tab.active { color: var(--gigl-red); }
-    .tab.active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: var(--gigl-red); }
-
-    .input-group input { width: 100%; padding: 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; transition: 0.3s; }
-    .input-group input:focus { border-color: var(--gigl-red); outline: none; }
-
-    /* SERVICES */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 60px 0; }
-    .service-card {
-      padding: 45px;
-      border-radius: 20px;
-      background: var(--white);
-      border: 1px solid #f1f5f9;
-      transition: var(--transition);
-      cursor: pointer;
-    }
-    .service-card:hover {
-      border-color: var(--gigl-red);
-      box-shadow: 0 20px 40px rgba(180, 2, 3, 0.08);
-      transform: translateY(-10px);
-    }
-    .service-card .icon-circle {
-      width: 65px;
-      height: 65px;
-      background: #fff5f5;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      margin-bottom: 25px;
-    }
-
-    /* THE GIGGO APP SECTION */
-    .app-section { background: var(--gigl-light); padding: 100px 0; border-radius: 50px 50px 0 0; }
-    .app-content { display: flex; align-items: center; gap: 80px; }
-    .app-image { flex: 1; position: relative; }
-    .app-image img { width: 100%; max-width: 450px; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.1)); }
-    
-    .check-item { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; font-weight: 600; }
-    .check-icon { color: #10b981; font-size: 1.2rem; }
-
-    /* SHIPMENT RESULT (HIDDEN BY DEFAULT) */
-    #tracking-result { display: none; margin-top: 20px; padding: 15px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #22c55e; font-size: 0.9rem; }
-
-    /* MERCHANT BANNER */
-    .merchant-banner {
-      background: linear-gradient(135deg, #0A0E1A 0%, #1a2235 100%);
-      padding: 80px;
-      border-radius: 30px;
-      color: white;
-      text-align: center;
-      margin-bottom: 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    .merchant-banner::before {
-      content: ''; position: absolute; top: -50%; left: -10%; width: 300px; height: 300px; 
-      background: var(--gigl-red); filter: blur(150px); opacity: 0.2;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="container nav">
-      <a href="#" class="logo">Speedie<span>Logistics</span></a>
-      <ul class="nav-links">
-        <li><a href="#services">Our Services</a></li>
-        <li><a href="#app">GIGGo App</a></li>
-        <li><a href="#">Overseas</a></li>
-        <li><a href="#">Drop Centres</a></li>
-      </ul>
-      <a href="#" class="btn btn-red" style="animation: pulse-red 2s infinite;">Ship Now</a>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-text animate">
-          <span style="color: var(--gigl-red); font-weight: 800; letter-spacing: 2px; text-transform: uppercase;">Next-Gen Logistics</span>
-          <h1>Your Package, Our Priority.</h1>
-          <p>We leverage cutting-edge technology to provide seamless delivery solutions across Africa and beyond. Fast, secure, and always on time.</p>
-          <div style="display: flex; gap: 15px;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" height="45" alt="Play Store">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" height="45" alt="App Store">
-          </div>
-        </div>
-
-        <div class="action-widget animate">
-          <div class="widget-tabs">
-            <div class="tab active" onclick="switchTab(this)">Track</div>
-            <div class="tab" onclick="switchTab(this)">Estimate</div>
-          </div>
-          <div id="track-view">
-            <div class="input-group">
-              <label style="font-weight: 700; font-size: 0.75rem; color: var(--gigl-gray); display: block; margin-bottom: 8px;">ENTER WAYBILL NUMBER</label>
-              <input type="text" id="waybillInput" placeholder="e.g. GIG-102938475">
-            </div>
-            <button class="btn btn-red" style="width: 100%; margin-top: 10px;" onclick="simulateTrack()">Track Now</button>
-            <div id="tracking-result">
-              <strong>Status:</strong> In Transit <br>
-              <strong>Location:</strong> Lagos Central Hub
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="container" id="services">
-    <div class="services-grid">
-      <div class="service-card animate">
-        <div class="icon-circle">🚚</div>
-        <h3>Domestic Delivery</h3>
-        <p>Reliable intra-state and inter-state logistics with real-time tracking at every stage.</p>
-      </div>
-      <div class="service-card animate" style="animation-delay: 0.2s;">
-        <div class="icon-circle">✈️</div>
-        <h3>International</h3>
-        <p>Global shipping routes covering USA, UK, and China. We handle the customs for you.</p>
-      </div>
-      <div class="service-card animate" style="animation-delay: 0.4s;">
-        <div class="icon-circle">🛡️</div>
-        <h3>GIGL Premium</h3>
-        <p>High-value item handling with specialized security and priority delivery timelines.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="app-section" id="app">
-    <div class="container app-content">
-      <div class="app-image">
-        <div style="background: #e2e8f0; width: 300px; height: 600px; border-radius: 40px; border: 8px solid #0A0E1A; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #94a3b8;">
-          LIVE APP INTERFACE
-        </div>
-      </div>
-      <div class="app-text">
-        <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 20px;">The GIGGo App</h2>
-        <p style="font-size: 1.1rem; color: var(--gigl-gray); margin-bottom: 30px;">Download the most advanced logistics app in Africa. Send items, track packages, and manage your deliveries from your pocket.</p>
-        
-        <div class="check-item"><span class="check-icon">✔</span> Request pickups from your home</div>
-        <div class="check-item"><span class="check-icon">✔</span> Instant price estimation</div>
-        <div class="check-item"><span class="check-icon">✔</span> Secure wallet payments</div>
-        <div class="check-item"><span class="check-icon">✔</span> 24/7 Customer support access</div>
-        
-        <a href="#" class="btn btn-red" style="margin-top: 30px;">Download Now</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="container" style="padding: 100px 0;">
-    <div class="merchant-banner animate">
-      <h2 style="font-size: 3rem; margin-bottom: 20px;">Scale Your Business</h2>
-      <p style="max-width: 600px; margin: 0 auto 40px; opacity: 0.8;">Join over 50,000 merchants using Speedie Logistics to deliver happiness to their customers worldwide.</p>
-      <a href="#" class="btn btn-red" style="padding: 20px 50px; font-size: 1.2rem;">Register as a Merchant</a>
-    </div>
-  </section>
-
-  <footer style="background: var(--gigl-dark); color: white; padding: 80px 0 40px;">
-    <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 60px;">
-        <div>
-          <a href="#" class="logo" style="color: white;">Speedie<span>Logistics</span></a>
-          <p style="margin-top: 20px; color: #94a3b8;">Providing the most reliable digital logistics network for Africa and the world.</p>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 20px;">Resources</h4>
-          <ul style="list-style: none; color: #94a3b8;">
-            <li style="margin-bottom: 10px;">Find a Centre</li>
-            <li style="margin-bottom: 10px;">Prohibited Items</li>
-            <li style="margin-bottom: 10px;">Shipping Rates</li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 20px;">Legal</h4>
-          <ul style="list-style: none; color: #94a3b8;">
-            <li style="margin-bottom: 10px;">Privacy Policy</li>
-            <li style="margin-bottom: 10px;">Terms of Service</li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 20px;">Contact</h4>
-          <p style="color: #94a3b8;">support@speedie.com</p>
-          <p style="color: #94a3b8;">0810 000 0000</p>
-        </div>
-      </div>
-      <div style="text-align: center; border-top: 1px solid #1a2235; padding-top: 30px; color: #475569;">
-        &copy; 2026 Speedie Logistics International.
-      </div>
-    </div>
-  </footer>
-
+  <!-- Tailwind Custom Theme -->
   <script>
-    function simulateTrack() {
-      const input = document.getElementById('waybillInput').value;
-      const result = document.getElementById('tracking-result');
-      const btn = event.target;
-
-      if (!input) {
-        alert("Please enter a waybill number");
-        return;
-      }
-
-      btn.innerText = "Searching...";
-      btn.style.opacity = "0.7";
-
-      setTimeout(() => {
-        btn.innerText = "Track Now";
-        btn.style.opacity = "1";
-        result.style.display = "block";
-        result.style.animation = "fadeInUp 0.5s ease";
-      }, 1500);
-    }
-
-    function switchTab(el) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-    }
-
-    // Simple scroll reveal
-    window.addEventListener('scroll', () => {
-      document.querySelectorAll('.animate').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if(rect.top < window.innerHeight - 100) {
-          el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            space: '#0B1D33',
+            orbit: '#FF6B35',
+            slate: '#64748b'
+          }
         }
-      });
-    });
+      }
+    }
   </script>
+</head>
+
+<body class="bg-white text-space">
+
+<!-- ================= NAVBAR ================= -->
+<header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+    <div class="text-2xl font-bold tracking-wide">
+      <span class="text-orbit">Orbit</span> Express
+    </div>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex items-center gap-8 font-medium">
+      <a href="#" class="hover:text-orbit">Ship</a>
+      <a href="#" class="hover:text-orbit">Track</a>
+      <a href="#" class="hover:text-orbit">Solutions</a>
+      <button class="bg-orbit text-white px-5 py-2 rounded-lg shadow hover:opacity-90">
+        Global Dashboard
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button id="menuBtn" class="md:hidden text-2xl">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</header>
+
+<!-- ================= MOBILE SIDEBAR ================= -->
+<div id="mobileMenu" class="fixed inset-0 bg-space text-white hidden z-50">
+  <div class="flex justify-between items-center p-6">
+    <span class="text-xl font-bold">Orbit Express</span>
+    <button id="closeMenu" class="text-2xl">&times;</button>
+  </div>
+  <nav class="flex flex-col gap-6 p-6 text-lg">
+    <a href="#">Ship</a>
+    <a href="#">Track</a>
+    <a href="#">Solutions</a>
+    <button class="bg-orbit py-3 rounded-lg">Global Dashboard</button>
+  </nav>
+</div>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="relative min-h-screen flex items-center justify-center text-center text-white bg-space pt-32">
+
+  <!-- Background Map Placeholder -->
+  <div class="absolute inset-0 opacity-20 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')] bg-cover bg-center"></div>
+
+  <div class="relative z-10 max-w-4xl px-6">
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+      The World is Your Neighborhood
+    </h1>
+    <p class="mt-6 text-lg text-slate-300">
+      Aerospace-grade logistics infrastructure connecting 220+ countries with speed and precision.
+    </p>
+
+    <!-- TRACKING INPUT -->
+    <div class="mt-10 bg-white rounded-xl shadow-lg p-4 flex flex-col md:flex-row gap-3">
+      <input
+        id="trackingInput"
+        type="text"
+        placeholder="Enter Orbit Tracking Number"
+        class="flex-1 px-4 py-3 border rounded-lg text-space focus:outline-none"
+      />
+      <button onclick="trackShipment()" class="bg-orbit text-white px-6 py-3 rounded-lg">
+        Track
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHIPPING RATE CALCULATOR ================= -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold mb-10 text-center">Instant Shipping Estimates</h2>
+
+    <div class="grid md:grid-cols-4 gap-6 bg-white p-8 rounded-xl shadow">
+      <input placeholder="Origin" class="border px-4 py-3 rounded-lg">
+      <input placeholder="Destination" class="border px-4 py-3 rounded-lg">
+      <input placeholder="Weight (kg)" class="border px-4 py-3 rounded-lg">
+      <button class="bg-orbit text-white rounded-lg">Calculate</button>
+    </div>
+
+    <!-- Backend note -->
+    <p class="text-sm text-slate-500 mt-4 text-center">
+      <!-- BACKEND HOOK -->
+      Rates API will be connected here (distance, weight, service level).
+    </p>
+  </div>
+</section>
+
+<!-- ================= GLOBAL MAP ================= -->
+<section class="py-24 bg-space text-white text-center">
+  <h2 class="text-3xl font-bold mb-6">Global Reach Infrastructure</h2>
+  <p class="text-slate-300 mb-10">Shipping lanes across 220+ countries and territories</p>
+
+  <div class="max-w-6xl mx-auto h-96 bg-slate-800 rounded-xl flex items-center justify-center">
+    <!-- MAP PLACEHOLDER -->
+    <span class="text-slate-400">
+      Interactive Map (Mapbox / Google Maps API plugs here)
+    </span>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-16">Logistics Verticals</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      <!-- CARD -->
+      <div class="p-8 rounded-xl shadow hover:shadow-lg transition">
+        <i class="fas fa-rocket text-orbit text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-3">Aerospace Freight</h3>
+        <p class="text-slate-600">
+          Mission-critical transport for satellites, avionics, and aerospace components.
+        </p>
+      </div>
+
+      <div class="p-8 rounded-xl shadow hover:shadow-lg transition">
+        <i class="fas fa-ship text-orbit text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-3">Ocean Cargo</h3>
+        <p class="text-slate-600">
+          High-volume, optimized sea freight with end-to-end container tracking.
+        </p>
+      </div>
+
+      <div class="p-8 rounded-xl shadow hover:shadow-lg transition">
+        <i class="fas fa-truck-fast text-orbit text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-3">Last-Mile Fulfillment</h3>
+        <p class="text-slate-600">
+          Precision delivery networks for cities, suburbs, and remote regions.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRACKING MODAL ================= -->
+<div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-xl p-8 max-w-md w-full">
+    <h3 class="text-xl font-bold mb-4">Shipment Timeline</h3>
+    <ul class="space-y-3 text-slate-700">
+      <li>📦 Picked up — London</li>
+      <li>✈️ Arrived — Dubai</li>
+      <li>🚚 Out for Delivery</li>
+    </ul>
+    <button onclick="closeModal()" class="mt-6 w-full bg-orbit text-white py-3 rounded-lg">
+      Close
+    </button>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-space text-slate-300 py-10 text-center">
+  <p>© 2026 Orbit Express. Global Logistics Infrastructure.</p>
+</footer>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+  /* ================= NAVBAR SCROLL EFFECT ================= */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('bg-space', window.scrollY > 50);
+  });
+
+  /* ================= MOBILE MENU ================= */
+  const menuBtn = document.getElementById('menuBtn');
+  const closeMenu = document.getElementById('closeMenu');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  menuBtn.onclick = () => mobileMenu.classList.remove('hidden');
+  closeMenu.onclick = () => mobileMenu.classList.add('hidden');
+
+  /* ================= TRACKING LOGIC ================= */
+  function trackShipment() {
+    const input = document.getElementById('trackingInput').value;
+    if (!input) return alert('Enter a tracking number');
+
+    // SIMULATED LOADING (replace with API call later)
+    setTimeout(() => {
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    }, 1000);
+
+    /*
+      BACKEND HOOK:
+      fetch(`/api/track?code=${input}`)
+        .then(res => res.json())
+        .then(data => renderTimeline(data))
+    */
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+  }
+</script>
+
 </body>
 </html>
