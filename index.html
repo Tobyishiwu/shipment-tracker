@@ -3,197 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>GID Logistics | Africa's Leading Express Delivery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>GID Logistics | Mobile Ready</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --red: #e31e24; --navy: #0f172a; --dark: #020617; 
-            --gray: #64748b; --light: #f8fafc; --white: #ffffff;
-        }
+        :root { --red: #e31e24; --navy: #0f172a; --bg: #ffffff; --soft: #f1f5f9; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--white); color: var(--navy); }
-
-        /* TOP BAR & NAV */
-        .top-nav { background: var(--dark); color: #fff; padding: 10px 0; font-size: 12px; }
-        .container { max-width: 1200px; margin: auto; padding: 0 20px; }
-        .flex-between { display: flex; justify-content: space-between; align-items: center; }
         
-        header { background: #fff; padding: 20px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
-        .logo { font-size: 24px; font-weight: 800; color: var(--navy); text-decoration: none; }
+        /* MOBILE NAV */
+        header { background: #fff; padding: 15px 20px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 800; text-decoration: none; color: var(--navy); }
         .logo span { color: var(--red); }
-        nav a { text-decoration: none; color: var(--navy); font-weight: 600; margin-left: 30px; font-size: 14px; transition: 0.3s; }
-        nav a:hover { color: var(--red); }
+        .menu-btn { font-size: 24px; cursor: pointer; display: block; }
 
-        /* HERO SECTION - GIG STYLE */
-        .hero { position: relative; height: 80vh; display: flex; align-items: center; color: #fff; overflow: hidden; background: #000; }
-        .hero-video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-        .hero-content { position: relative; z-index: 2; max-width: 700px; }
-        .hero h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-        .hero p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        /* HERO - ADJUSTED FOR MOBILE */
+        .hero { 
+            position: relative; height: 70vh; min-height: 500px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; text-align: center; background: var(--navy);
+            padding: 20px;
+        }
+        .hero-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+        .hero-content { position: relative; z-index: 2; width: 100%; }
+        .hero h1 { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 15px; }
+        .hero p { font-size: 16px; margin-bottom: 25px; opacity: 0.9; }
 
-        /* FLOATING ACTION HUB */
-        .action-hub { background: #fff; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); margin-top: -80px; position: relative; z-index: 10; padding: 40px; }
-        .hub-tabs { display: flex; border-bottom: 1px solid #eee; margin-bottom: 30px; }
-        .tab { padding: 15px 30px; cursor: pointer; font-weight: 800; color: var(--gray); border-bottom: 3px solid transparent; }
+        /* ACTION HUB - MOBILE FIX */
+        .container { width: 100%; padding: 0 15px; margin: auto; }
+        .hub-box { 
+            background: #fff; border-radius: 16px; padding: 20px;
+            margin-top: -60px; position: relative; z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .hub-tabs { display: flex; gap: 5px; margin-bottom: 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+        .tab { 
+            padding: 10px 20px; font-size: 13px; font-weight: 800; 
+            color: #94a3b8; border-bottom: 2px solid transparent; flex-shrink: 0;
+        }
         .tab.active { color: var(--red); border-bottom-color: var(--red); }
 
-        /* SERVICE GRID */
-        .services { padding: 100px 0; background: var(--light); }
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 36px; font-weight: 800; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .s-card { background: #fff; padding: 40px; border-radius: 20px; transition: 0.4s; border: 1px solid #eee; }
-        .s-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--red); }
-        .s-card i { font-size: 40px; color: var(--red); margin-bottom: 20px; display: block; }
+        /* FORMS */
+        .input-stack { display: flex; flex-direction: column; gap: 10px; }
+        input { 
+            width: 100%; padding: 15px; border: 1.5px solid #e2e8f0; 
+            border-radius: 10px; font-size: 16px; outline: none; 
+        }
+        .btn-red { 
+            background: var(--red); color: #fff; border: none; 
+            padding: 16px; border-radius: 10px; font-weight: 800; 
+            font-size: 16px; cursor: pointer; width: 100%;
+        }
 
-        /* STATS COUNTER */
-        .stats { background: var(--red); color: #fff; padding: 60px 0; text-align: center; }
-        .stat-item h3 { font-size: 48px; font-weight: 800; }
+        /* SERVICES GRID */
+        section { padding: 60px 0; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media(min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        
+        .card { background: var(--soft); padding: 30px; border-radius: 15px; text-align: center; }
+        .card i { font-size: 30px; color: var(--red); display: block; margin-bottom: 10px; }
 
-        /* INPUTS */
-        .input-group { display: flex; gap: 10px; }
-        input { flex: 1; padding: 18px; border: 2px solid #eee; border-radius: 12px; outline: none; font-size: 16px; }
-        .btn-red { background: var(--red); color: #fff; border: none; padding: 18px 40px; border-radius: 12px; font-weight: 800; cursor: pointer; }
-
-        /* FOOTER */
-        footer { background: var(--dark); color: #fff; padding: 80px 0 30px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 50px; }
-        .footer-col h4 { margin-bottom: 20px; color: var(--red); }
-        .footer-col li { list-style: none; margin-bottom: 10px; opacity: 0.7; font-size: 14px; cursor: pointer; }
-        .footer-col li:hover { opacity: 1; color: var(--red); }
+        .hidden { display: none; }
+        .wa-float {
+            position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
+            background: #25d366; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
-<div class="top-nav">
-    <div class="container flex-between">
-        <div>Customer Support: +234 706 695 8826</div>
-        <div>Experience Centres | Track | Contact</div>
-    </div>
-</div>
-
 <header>
-    <div class="container flex-between">
+    <div class="nav-flex">
         <a href="#" class="logo">GID<span>LOGISTICS</span></a>
-        <nav>
-            <a href="#services">Domestic</a>
-            <a href="#">International</a>
-            <a href="#">E-commerce</a>
-            <a href="#">Haulage</a>
-            <a href="admin.html" style="color: var(--red)">Admin Portal</a>
-        </nav>
+        <div class="menu-btn">☰</div>
     </div>
 </header>
 
 <section class="hero">
-    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000" class="hero-video">
-    <div class="container hero-content">
-        <h1>Smart Logistics <br> For Your Business.</h1>
-        <p>Seamlessly shipping items across Nigeria, the UK, USA, and the world with real-time visibility.</p>
-        <button class="btn-red" onclick="window.scrollTo({top: 600, behavior: 'smooth'})">Get Started Now</button>
+    <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&q=80&w=1000" class="hero-img">
+    <div class="hero-content">
+        <h1>Fast & Secure <br> Deliveries</h1>
+        <p>Your local and international <br> logistics partner.</p>
     </div>
 </section>
 
 <div class="container">
-    <div class="action-hub">
+    <div class="hub-box">
         <div class="hub-tabs">
-            <div class="tab active" onclick="switchTab('track')">Track Shipment</div>
-            <div class="tab" onclick="switchTab('quote')">Quick Quote</div>
-            <div class="tab" onclick="switchTab('centres')">Experience Centres</div>
+            <div class="tab active" onclick="setTab('track', this)">Track</div>
+            <div class="tab" onclick="setTab('quote', this)">Estimate</div>
+            <div class="tab" onclick="setTab('loc', this)">Centres</div>
         </div>
-        
-        <div id="track-panel" class="input-group">
-            <input type="text" id="trackInput" placeholder="Enter Waybill Number (e.g. GID-105)">
-            <button class="btn-red" onclick="runTrack()">Track Now</button>
+
+        <div id="t-panel" class="input-stack">
+            <input type="text" id="trackId" placeholder="Waybill No. (e.g. GID-105)">
+            <button class="btn-red" onclick="track()">Track Package</button>
         </div>
-        
-        <div id="quote-panel" class="hidden" style="display:none">
-            <div class="input-group">
-                <input type="text" placeholder="Origin (City)">
-                <input type="text" placeholder="Destination (City)">
-                <input type="number" placeholder="Weight (KG)">
-                <button class="btn-red">Calculate</button>
-            </div>
+
+        <div id="q-panel" class="input-stack hidden">
+            <input type="text" placeholder="Pickup City">
+            <input type="text" placeholder="Destination">
+            <input type="number" placeholder="Weight (KG)">
+            <button class="btn-red">Get Price</button>
         </div>
     </div>
 </div>
 
-<section id="services" class="services">
-    <div class="container">
-        <div class="section-title">
-            <h2>Our Core Delivery Solutions</h2>
-            <p>Tailored logistics powered by advanced data technology.</p>
-        </div>
-        <div class="grid">
-            <div class="s-card"><i>📍</i><h4>Last-Mile Delivery</h4><p>Doorstep delivery within your city in record time.</p></div>
-            <div class="s-card"><i>✈️</i><h4>GoFaster</h4><p>Enjoy the speed of 24-48 hours interstate shipping.</p></div>
-            <div class="s-card"><i>📦</i><h4>E-commerce</h4><p>Specialized logistics for social sellers and merchants.</p></div>
-            <div class="s-card"><i>🚛</i><h4>Haulage</h4><p>Movement of heavy, high-volume goods across borders.</p></div>
-        </div>
+<section class="container">
+    <h2 style="margin-bottom:30px; text-align:center">Our Services</h2>
+    <div class="grid">
+        <div class="card"><i>📦</i><h4>Domestic</h4><p>Delivery within Nigeria</p></div>
+        <div class="card"><i>🌎</i><h4>Overseas</h4><p>Ship to UK, USA & China</p></div>
+        <div class="card"><i>🚛</i><h4>Haulage</h4><p>Bulk items & Trucking</p></div>
     </div>
 </section>
 
-<section class="stats">
-    <div class="container grid">
-        <div class="stat-item"><h3>230+</h3><p>Global Locations</p></div>
-        <div class="stat-item"><h3>150+</h3><p>Experience Centres</p></div>
-        <div class="stat-item"><h3>5M+</h3><p>Annual Deliveries</p></div>
-        <div class="stat-item"><h3>600+</h3><p>Active Fleet</p></div>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <a href="#" class="logo" style="color:#fff">GID<span>LOGISTICS</span></a>
-                <p style="margin-top:20px; font-size:14px; opacity:0.6">Redefining logistics through technology and innovation across Africa.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Company</h4>
-                <li>About Us</li>
-                <li>Careers</li>
-                <li>Partnership</li>
-                <li>Media</li>
-            </div>
-            <div class="footer-col">
-                <h4>Support</h4>
-                <li>Contact Us</li>
-                <li>FAQs</li>
-                <li>Shipping Policy</li>
-                <li>Terms of Service</li>
-            </div>
-            <div class="footer-col">
-                <h4>Get the App</h4>
-                <button class="btn-red" style="padding:10px 20px; font-size:12px">Download GIDGo</button>
-            </div>
-        </div>
-        <hr style="border:0; border-top:1px solid #334155; margin-bottom:20px">
-        <p style="text-align:center; font-size:12px; opacity:0.5">© 2026 GID Logistics Technologies. All Rights Reserved.</p>
-    </div>
-</footer>
+<a href="https://wa.me/2347066958826" class="wa-float">
+    <svg width="30" height="30" fill="white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.319 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.735-.981z"/></svg>
+</a>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWO6fvhJ7mmrOsXc3MWRY040RJM4IxbVXH9d_y7dTI0HyxT-FlCmxHhX2n1lx3prbO/exec";
+const API = "https://script.google.com/macros/s/AKfycbzWO6fvhJ7mmrOsXc3MWRY040RJM4IxbVXH9d_y7dTI0HyxT-FlCmxHhX2n1lx3prbO/exec";
 
-function switchTab(t) {
-    document.getElementById('track-panel').style.display = (t === 'track') ? 'flex' : 'none';
-    document.getElementById('quote-panel').style.display = (t === 'quote') ? 'block' : 'none';
-    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+function setTab(t, el) {
+    document.getElementById('t-panel').classList.toggle('hidden', t !== 'track');
+    document.getElementById('q-panel').classList.toggle('hidden', t !== 'quote');
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    el.classList.add('active');
 }
 
-function runTrack() {
-    const id = document.getElementById('trackInput').value;
-    if(!id) return alert("Please enter a waybill number");
-    
-    const cb = 'cb_' + Math.floor(Math.random()*10e6);
-    window[cb] = (r) => {
-        if(r.error) alert(r.error);
-        else alert(`Status: ${r.status}\nLocation: ${r.destination}\nUpdated: ${r.updated}`);
-    };
+function track() {
+    const id = document.getElementById('trackId').value;
+    if(!id) return;
+    const cb = 'cb'+Date.now();
+    window[cb] = (r) => { alert(r.error || `Status: ${r.status}\nLoc: ${r.destination}`); };
     const s = document.createElement('script');
-    s.src = `${SCRIPT_URL}?tracking=${encodeURIComponent(id)}&callback=${cb}`;
+    s.src = `${API}?tracking=${id}&callback=${cb}`;
     document.body.appendChild(s);
 }
 </script>
