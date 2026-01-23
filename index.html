@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GID Logistics | Africa's Premier Courier Network</title>
+<title>GID Logistics | Smart Courier Services</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -21,45 +21,62 @@
 body{background:#fff;color:var(--navy);line-height:1.6; overflow-x: hidden;}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
-/* NAVIGATION */
+/* --- CUSTOM GID LOGO CSS --- */
+.gid-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -1px;
+    color: var(--navy);
+}
+.gid-logo .letter-d {
+    color: var(--red);
+    position: relative;
+    display: inline-block;
+}
+.gid-logo .sub-text {
+    font-size: 10px;
+    display: block;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-top: -8px;
+    color: var(--gray);
+}
+
+/* HEADER */
 header{
   background: #fff;
   border-bottom: 1px solid #f1f5f9;
   position: sticky; top:0; z-index: 1000;
 }
 .header-inner{
-  display:flex; justify-content:space-between; align-items:center; padding:18px 0;
+  display:flex; justify-content:space-between; align-items:center; padding:15px 0;
 }
-.logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo-text { font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: -1.5px; }
-.logo-text span { color: var(--red); }
-
 nav a{ margin-left:26px; font-size:14px; font-weight:700; color:var(--navy); text-decoration:none; transition: 0.3s; }
 nav a:hover{ color: var(--red); }
 
-/* HERO - THE "WHITE BLEED" DESIGN */
+/* HERO - WHITE BLEED */
 .hero {
   position: relative;
   background: #fff;
   padding: 40px 0 120px;
-  display: flex;
-  align-items: center;
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
 }
 .hero-text h1 {
-  font-size: clamp(42px, 6vw, 68px);
+  font-size: clamp(40px, 6vw, 68px);
   font-weight: 800;
   line-height: 1;
   margin-bottom: 24px;
   letter-spacing: -3px;
-  color: var(--dark);
 }
-.hero-text p { font-size: 20px; color: var(--gray); margin-bottom: 40px; max-width: 500px; }
+.hero-text p { font-size: 20px; color: var(--gray); margin-bottom: 40px; max-width: 480px; }
 
 /* REFINED BLEED IMAGE */
 .hero-visual {
@@ -67,76 +84,64 @@ nav a:hover{ color: var(--red); }
   z-index: 1;
 }
 .hero-visual img {
-  width: 130%; /* Bleeds off the right edge */
-  max-width: 900px;
+  width: 135%; /* Bleeds off the screen */
+  max-width: 850px;
   height: auto;
   display: block;
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.12));
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
 }
 
-/* FLOATING ACTION STRIP (GIGL STYLE) */
+/* FLOATING ACTION STRIP */
 .action-strip {
   position: relative;
-  margin-top: -70px; /* Pulls it up halfway into the hero area */
+  margin-top: -70px;
   z-index: 100;
 }
 .strip-box {
   background: #fff;
-  border-radius: 24px;
+  border-radius: 20px;
   box-shadow: var(--shadow);
-  padding: 40px;
+  padding: 35px;
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 0.6fr;
-  gap: 25px;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 20px;
   align-items: end;
   border: 1px solid #f1f5f9;
 }
 .strip-group label { 
   display: block;
   font-size: 11px; font-weight: 800; text-transform: uppercase; 
-  color: var(--red); letter-spacing: 1.5px; margin-bottom: 12px;
+  color: var(--red); letter-spacing: 1.5px; margin-bottom: 10px;
 }
 .strip-group input {
   border: 1px solid #e2e8f0;
   background: var(--light);
-  padding: 18px 22px;
-  border-radius: 14px;
+  padding: 18px;
+  border-radius: 12px;
   width: 100%;
-  font-size: 16px;
+  font-size: 15px;
   outline: none;
-  transition: 0.3s;
 }
-.strip-group input:focus { border-color: var(--red); background: #fff; box-shadow: 0 0 0 4px rgba(227,30,36,0.05); }
-
 .btn-red {
   background: var(--red);
   color: #fff;
   border: none;
-  padding: 19px 40px;
-  border-radius: 14px;
+  padding: 18px 45px;
+  border-radius: 12px;
   font-weight: 800;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 15px;
 }
-.btn-red:hover { background: #b31419; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(227,30,36,0.25); }
+.btn-red:hover { background: #b31419; transform: translateY(-2px); }
 
-/* SERVICES */
-.services-section { padding: 120px 0; background: #fff; }
-.service-card {
-    border-left: 4px solid var(--red);
-    padding-left: 30px;
-    margin-bottom: 40px;
-}
-.service-card h3 { font-size: 24px; margin-bottom: 10px; }
-.service-card p { color: var(--gray); font-size: 16px; }
+/* FOOTER */
+footer { background: var(--dark); color: #fff; padding: 80px 0 40px; }
 
 @media(max-width: 992px) {
   .hero-grid { grid-template-columns: 1fr; text-align: center; }
-  .hero-visual { order: -1; margin-bottom: 60px; }
+  .hero-visual { order: -1; margin-bottom: 40px; }
   .hero-visual img { width: 100%; }
-  .strip-box { grid-template-columns: 1fr; margin-top: -100px; }
-  .hero-text p { margin: 0 auto 40px; }
+  .strip-box { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -145,14 +150,14 @@ nav a:hover{ color: var(--red); }
 
 <header>
   <div class="container header-inner">
-    <a href="#" class="logo-box">
-        <div class="logo-text">GI<span>D</span> LOGISTICS</div>
-    </a>
+    <div class="gid-logo">
+        <div>GI<span class="letter-d">D</span> <span class="sub-text">LOGISTICS</span></div>
+    </div>
     <nav>
       <a href="#">Ship Now</a>
       <a href="#">Track</a>
       <a href="#">Locations</a>
-      <a href="#" style="background:var(--red); color:#fff; padding:10px 22px; border-radius:10px;">Login</a>
+      <a href="#" style="background:var(--red); color:#fff; padding:10px 20px; border-radius:8px;">Login</a>
     </nav>
   </div>
 </header>
@@ -160,12 +165,12 @@ nav a:hover{ color: var(--red); }
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-text">
-      <h1>Delivery<br>Simplified.</h1>
-      <p>Your trusted partner for seamless domestic and international shipping. Moving your world with GID precision.</p>
+      <h1>Logistics<br>Reimagined.</h1>
+      <p>Your trusted partner for moving items across Nigeria and the world. Experience GID speed.</p>
     </div>
 
     <div class="hero-visual">
-      <img src="https://raw.githubusercontent.com/ai-logistics-assets/main/gid-hero-final.png" alt="GID Logistics Fleet" onerror="this.src='https://i.ibb.co/L5hY5M7/Logistics-Fleet-Bleed.png'">
+      <img src="https://images.unsplash.com/photo-1580674271209-40b46a116575?auto=format&fit=crop&q=80&w=1000" alt="GID Logistics Fleet">
     </div>
   </div>
 </section>
@@ -174,44 +179,31 @@ nav a:hover{ color: var(--red); }
   <div class="container">
     <div class="strip-box">
       <div class="strip-group">
-        <label>Track Your Parcel</label>
-        <input type="text" placeholder="Enter Waybill Number">
+        <label>Track Shipment</label>
+        <input type="text" placeholder="Waybill Number">
       </div>
       <div class="strip-group">
-          <label>Estimated Shipping Fee</label>
-          <input type="text" placeholder="Where are you shipping to?">
+          <label>Get Quote</label>
+          <input type="text" placeholder="Destination">
       </div>
       <button class="btn-red">Get Started</button>
     </div>
   </div>
 </section>
 
-<section class="services-section">
-  <div class="container">
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:60px;">
-        <div class="service-card">
-            <h3>Domestic Express</h3>
-            <p>Reliable logistics coverage across Nigeria, ensuring your packages arrive on time, every time.</p>
-        </div>
-        <div class="service-card">
-            <h3>Global Gateway</h3>
-            <p>Export and import services to over 200 countries with simplified customs processing.</p>
-        </div>
-        <div class="service-card">
-            <h3>E-commerce Tech</h3>
-            <p>Empowering African vendors with the tools to manage inventory and fulfillment at scale.</p>
-        </div>
+<section style="padding: 100px 0; text-align: center;">
+    <div class="container">
+        <h2 style="font-size: 32px; font-weight: 800;">Nationwide Coverage</h2>
+        <p style="color: var(--gray); margin-top: 10px;">Over 230 Experience Centres across Nigeria.</p>
     </div>
-  </div>
 </section>
 
-<footer style="background: var(--dark); color: #fff; padding: 100px 0 40px;">
+<footer>
   <div class="container" style="text-align: center;">
-    <div class="logo-text" style="color:#fff; font-size: 34px;">GI<span>D</span> LOGISTICS</div>
-    <p style="margin-top: 20px; opacity: 0.5; max-width: 600px; margin: 20px auto 40px;">Technology-led logistics bridging the gap between commerce and community across the globe.</p>
-    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; font-size: 13px; opacity: 0.4;">
-        © 2026 GID Logistics Technologies. All Rights Reserved.
+    <div class="gid-logo" style="color:#fff; justify-content: center;">
+        <div>GI<span class="letter-d">D</span> <span class="sub-text" style="color:rgba(255,255,255,0.5)">LOGISTICS</span></div>
     </div>
+    <p style="margin-top: 20px; opacity: 0.5;">© 2026 GID Logistics Technologies. All Rights Reserved.</p>
   </div>
 </footer>
 
