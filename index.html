@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GID Logistics | Delivery. Simplified.</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <script>
@@ -17,7 +15,8 @@
         extend: {
           colors: {
             gidRed: '#E31B23',
-            gidDark: '#0A0C10'
+            gidDark: '#0A0C10',
+            gidGraphite: '#14171C'
           }
         }
       }
@@ -25,186 +24,177 @@
   </script>
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    .glass-effect { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
   </style>
 </head>
 
 <body class="bg-gidDark text-white overflow-x-hidden">
 
-<!-- ================= NAV ================= -->
-<nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur border-b border-white/10">
+<nav class="fixed top-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/5">
   <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-    <div class="text-2xl font-extrabold tracking-tight">
+    <div class="text-2xl font-extrabold tracking-tighter">
       GID<span class="text-gidRed">LOGISTICS</span>
     </div>
 
-    <div class="hidden md:flex items-center gap-10 text-xs uppercase tracking-widest font-semibold">
+    <div class="hidden md:flex items-center gap-10 text-[10px] uppercase tracking-[0.25em] font-bold">
       <a href="#" class="hover:text-gidRed transition">Home</a>
       <a href="#" class="hover:text-gidRed transition">Tracking</a>
       <a href="#" class="hover:text-gidRed transition">Services</a>
       <a href="#" class="hover:text-gidRed transition">About</a>
-      <a href="#" class="bg-gidRed px-6 py-2 rounded hover:bg-red-700 transition">Contact</a>
+      <a href="#" class="bg-gidRed text-white px-8 py-2.5 rounded-sm hover:bg-red-700 transition shadow-lg shadow-gidRed/20">Contact</a>
     </div>
   </div>
 </nav>
 
-<!-- ================= HERO ================= -->
-<section class="relative min-h-screen flex items-center pt-28 overflow-hidden">
-
-  <!-- Background -->
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
   <div class="absolute inset-0 z-0">
-    <img
-      src="./assets/Gemini_Generated_Image_xvmcf5xvmcf5xvmc.png"
-      alt="GID Logistics Global Fleet"
-      class="w-full h-full object-cover object-right brightness-110 contrast-105"
-    />
-
-    <!-- Balanced overlays -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/10"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-black opacity-90"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(227,27,35,0.05),transparent_60%)]"></div>
+    <img 
+      src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000" 
+      alt="Logistics Fleet" 
+      class="w-full h-full object-cover scale-105 opacity-60"
+    >
   </div>
 
-  <!-- Content -->
   <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
-    <div class="max-w-3xl">
-
-      <p class="text-xs uppercase tracking-[0.35em] text-gray-300 mb-6">
+    <div class="max-w-4xl">
+      <p class="uppercase tracking-[0.4em] text-[10px] text-gray-400 mb-6 font-semibold">
         Africa → Global Logistics Network
       </p>
 
-      <h1 class="text-5xl md:text-7xl xl:text-8xl font-extrabold tracking-tight leading-[0.95] mb-6">
+      <h1 class="text-6xl md:text-8xl font-extrabold mb-8 tracking-tight leading-[0.92]">
         Delivery.<br>
         <span class="text-gidRed">Simplified.</span>
       </h1>
 
-      <p class="text-lg md:text-xl text-gray-200 max-w-xl leading-relaxed mb-12">
-        Enterprise-grade logistics solutions connecting Africa to global trade
+      <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl leading-relaxed">
+        Enterprise-grade logistics solutions connecting Africa to global trade 
         corridors with speed, security, and total visibility.
       </p>
 
-      <!-- Tracking -->
-      <div class="bg-black/40 backdrop-blur border border-white/15 rounded-lg p-2 max-w-2xl shadow-2xl">
+      <div class="glass-effect p-2 rounded-lg max-w-3xl shadow-2xl">
         <div class="flex flex-col md:flex-row">
-          <input
-            type="text"
-            placeholder="Enter Waybill or Container ID"
-            class="bg-transparent flex-grow px-6 py-4 text-white placeholder-gray-400
-                   focus:outline-none border-b md:border-b-0 md:border-r
-                   border-white/20 focus:border-gidRed transition"
+          <input 
+            type="text" 
+            placeholder="Enter Waybill or Container ID" 
+            class="bg-transparent flex-grow px-8 py-5 text-white placeholder-gray-500 focus:outline-none border-b md:border-b-0 md:border-r border-white/10 focus:border-gidRed transition"
           />
-          <button
-            class="bg-gidRed hover:bg-red-700 px-10 py-4 font-bold uppercase tracking-widest transition">
+          <button 
+            class="bg-gidRed hover:bg-red-700 px-12 py-5 font-bold transition uppercase tracking-widest text-sm">
             Track Shipment
           </button>
         </div>
       </div>
 
-      <p class="mt-8 text-xs uppercase tracking-widest text-gray-400">
-        Trusted by businesses • Air • Sea • Road • Real-time tracking
+      <p class="mt-8 text-[10px] uppercase tracking-[0.3em] text-gray-500 font-medium">
+        Trusted by 500+ Enterprises • Secure Handling • Real-time GPS
       </p>
-
     </div>
   </div>
 </section>
 
-<!-- ================= SERVICES ================= -->
-<section class="py-28 bg-gidDark">
+<section class="py-32 bg-gidDark relative">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-4xl font-extrabold mb-16 border-l-4 border-gidRed pl-6">
-      Core Capabilities
-    </h2>
+    <div class="flex items-end justify-between mb-20">
+      <div>
+        <p class="text-gidRed uppercase tracking-widest text-xs font-bold mb-4">What we do</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Core Capabilities</h2>
+      </div>
+      <a href="#" class="hidden md:block text-xs uppercase tracking-widest border-b border-gidRed pb-1 hover:text-gidRed transition">View All Services</a>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-      <div class="bg-black/40 backdrop-blur border border-white/10 p-10 rounded-xl
-                  hover:-translate-y-2 hover:border-gidRed transition duration-500">
-        <h3 class="text-xl font-bold mb-3">Express Delivery</h3>
-        <p class="text-gray-400 leading-relaxed">
-          Time-critical door-to-door solutions for documents and parcels worldwide.
-        </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="group bg-gidGraphite border border-white/5 p-12 rounded-sm hover:border-gidRed/50 transition-all duration-500">
+        <div class="mb-8 group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-10 h-10 text-gidRed" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Express Delivery</h3>
+        <p class="text-gray-400 leading-relaxed mb-8">Time-critical door-to-door solutions for high-priority parcels across the continent.</p>
+        <a href="#" class="text-xs font-bold uppercase tracking-widest group-hover:text-gidRed transition">Learn More +</a>
       </div>
 
-      <div class="bg-black/40 backdrop-blur border border-white/10 p-10 rounded-xl
-                  hover:-translate-y-2 hover:border-gidRed transition duration-500">
-        <h3 class="text-xl font-bold mb-3">Freight & Cargo</h3>
-        <p class="text-gray-400 leading-relaxed">
-          Heavy-lift air, sea, and land transport designed for industrial-scale operations.
-        </p>
+      <div class="group bg-gidGraphite border border-white/5 p-12 rounded-sm hover:border-gidRed/50 transition-all duration-500">
+        <div class="mb-8 group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-10 h-10 text-gidRed" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12H3M3 12l4-4m-4 4l4 4"/></svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Freight & Cargo</h3>
+        <p class="text-gray-400 leading-relaxed mb-8">Heavy-lift air and sea transport optimized for large-scale industrial supply chains.</p>
+        <a href="#" class="text-xs font-bold uppercase tracking-widest group-hover:text-gidRed transition">Learn More +</a>
       </div>
 
-      <div class="bg-black/40 backdrop-blur border border-white/10 p-10 rounded-xl
-                  hover:-translate-y-2 hover:border-gidRed transition duration-500">
-        <h3 class="text-xl font-bold mb-3">E-commerce Logistics</h3>
-        <p class="text-gray-400 leading-relaxed">
-          End-to-end fulfillment, warehousing, and last-mile delivery for digital brands.
-        </p>
+      <div class="group bg-gidGraphite border border-white/5 p-12 rounded-sm hover:border-gidRed/50 transition-all duration-500">
+        <div class="mb-8 group-hover:scale-110 transition-transform duration-500">
+          <svg class="w-10 h-10 text-gidRed" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">E-commerce</h3>
+        <p class="text-gray-400 leading-relaxed mb-8">Fulfillment centers and smart warehousing designed for the modern digital merchant.</p>
+        <a href="#" class="text-xs font-bold uppercase tracking-widest group-hover:text-gidRed transition">Learn More +</a>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ================= STATS ================= -->
-<section class="bg-black border-y border-white/10 py-20">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-
+<section class="bg-black border-y border-white/5 py-24">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-16 text-center">
     <div>
-      <div class="text-5xl font-extrabold text-gidRed mb-2">99.9%</div>
-      <div class="text-xs uppercase tracking-widest text-gray-500">On-Time Delivery</div>
+      <div class="text-5xl font-extrabold text-gidRed mb-3 tracking-tighter">99.9%</div>
+      <div class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold">On-Time Rate</div>
     </div>
-
     <div>
-      <div class="text-5xl font-extrabold text-gidRed mb-2">200+</div>
-      <div class="text-xs uppercase tracking-widest text-gray-500">Global Hubs</div>
+      <div class="text-5xl font-extrabold text-gidRed mb-3 tracking-tighter">200+</div>
+      <div class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold">Global Hubs</div>
     </div>
-
     <div>
-      <div class="text-5xl font-extrabold text-gidRed mb-2">24/7</div>
-      <div class="text-xs uppercase tracking-widest text-gray-500">Live Monitoring</div>
+      <div class="text-5xl font-extrabold text-gidRed mb-3 tracking-tighter">24/7</div>
+      <div class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold">Live Support</div>
     </div>
-
     <div>
-      <div class="text-5xl font-extrabold text-gidRed mb-2">5M+</div>
-      <div class="text-xs uppercase tracking-widest text-gray-500">Shipments / Year</div>
+      <div class="text-5xl font-extrabold text-gidRed mb-3 tracking-tighter">5M+</div>
+      <div class="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-bold">Annual Parcels</div>
     </div>
-
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-<footer class="bg-black py-20">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16">
-
-    <div>
-      <div class="text-2xl font-extrabold mb-4">
+<footer class="bg-gidDark pt-24 pb-12 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
+    <div class="col-span-1 md:col-span-2">
+      <div class="text-3xl font-extrabold tracking-tighter mb-8">
         GID<span class="text-gidRed">LOGISTICS</span>
       </div>
-      <p class="text-gray-500 leading-relaxed max-w-sm">
-        Delivering precision logistics solutions that connect African businesses
-        to global markets with confidence.
+      <p class="text-gray-500 leading-relaxed max-w-sm mb-8">
+        The preferred logistics partner for global enterprises expanding into African markets. Precision, speed, and reliability in every mile.
       </p>
     </div>
-
-    <div class="text-xs uppercase tracking-widest text-gray-400 space-y-4">
-      <a href="#" class="block hover:text-white">Careers</a>
-      <a href="#" class="block hover:text-white">Compliance</a>
-      <a href="#" class="block hover:text-white">Privacy Policy</a>
+    
+    <div>
+      <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-8">Services</h4>
+      <ul class="text-gray-500 text-sm space-y-4">
+        <li><a href="#" class="hover:text-gidRed transition">Air Freight</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Ocean Cargo</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Last Mile</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Warehousing</a></li>
+      </ul>
     </div>
 
-    <div class="text-xs uppercase tracking-widest text-gray-400 space-y-4">
-      <a href="#" class="block hover:text-white">Air Freight</a>
-      <a href="#" class="block hover:text-white">Sea Freight</a>
-      <a href="#" class="block hover:text-white">Warehousing</a>
+    <div>
+      <h4 class="text-white text-xs uppercase tracking-widest font-bold mb-8">Support</h4>
+      <ul class="text-gray-500 text-sm space-y-4">
+        <li><a href="#" class="hover:text-gidRed transition">Help Center</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Claims</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">API Docs</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Contact</a></li>
+      </ul>
     </div>
-
   </div>
 
-  <div class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-white/10
-              flex flex-col md:flex-row justify-between text-xs text-gray-600">
-    <p>© 2026 GID LOGISTICS. ALL RIGHTS RESERVED.</p>
-    <div class="flex gap-6 uppercase tracking-widest">
-      <span class="hover:text-white cursor-pointer">LinkedIn</span>
-      <span class="hover:text-white cursor-pointer">Twitter</span>
+  <div class="max-w-7xl mx-auto px-6 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-600 tracking-[0.2em] uppercase font-medium">
+    <p>© 2026 GID LOGISTICS GROUP. WORLDWIDE OPERATIONS.</p>
+    <div class="flex gap-8 mt-4 md:mt-0">
+      <a href="#" class="hover:text-white transition">LinkedIn</a>
+      <a href="#" class="hover:text-white transition">Twitter</a>
+      <a href="#" class="hover:text-white transition">Instagram</a>
     </div>
   </div>
 </footer>
