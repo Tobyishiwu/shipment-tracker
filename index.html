@@ -1,6 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GID Logistics | Delivery. Simplified.</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        gidRed: '#E31B23',
+        gidDark: '#111827'
+      }
+    }
+  }
+}
+</script>
+
+<style>
+body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+</style>
+</head>
+
+<body class="bg-white text-gray-900">
+
+<!-- ================= NAV ================= -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur border-b">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="text-2xl font-extrabold">GID<span class="text-gidRed">LOGISTICS</span></div>
+    <div class="hidden md:flex gap-8 text-sm font-semibold">
+      <a href="#">Home</a>
+      <a href="#track">Track</a>
+      <a href="#services">Services</a>
+      <a href="#quote">Quote</a>
+      <a href="#contact" class="bg-gidRed text-white px-5 py-2 rounded">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="pt-36 pb-24 bg-gray-50">
+<div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+
+<div>
+<h1 class="text-5xl md:text-7xl font-extrabold mb-6">
+Fast & Reliable<br><span class="text-gidRed">Logistics Solutions</span>
+</h1>
+<p class="text-gray-600 max-w-xl mb-10">
+Domestic & international shipping with real-time tracking and enterprise-grade reliability.
+</p>
+
+<!-- TRACK INPUT -->
+<div id="track" class="bg-white border p-2 rounded-xl max-w-lg shadow flex gap-2">
+<input id="trackingInput" type="text" placeholder="Enter Tracking Number"
+class="flex-grow px-4 py-3 focus:outline-none" />
+<button onclick="trackShipment()" class="bg-gidRed text-white px-6 py-3 rounded font-bold">
+Track
+</button>
+</div>
+</div>
+
+<div class="h-[420px] md:h-[520px] rounded-2xl overflow-hidden shadow-xl">
+<img src="./assets/Gemini_Generated_Image_xvmcf5xvmcf5xvmc.png"
+class="w-full h-full object-cover" alt="GID Fleet">
+</div>
+
+</div>
+</section>
+
+<!-- ================= TRACKING RESULT ================= -->
+<section id="trackingResult" class="hidden py-24 bg-gray-50">
+<div class="max-w-4xl mx-auto px-6">
+<div class="bg-white rounded-2xl shadow-xl p-10">
+
+<h2 class="text-3xl font-extrabold mb-6">Shipment Status</h2>
+
+<p class="text-sm text-gray-500">Tracking Number</p>
+<p id="resultId" class="text-xl font-bold text-gidRed mb-8"></p>
+
+<div class="space-y-6">
+
+<div class="flex items-center gap-4">
+<div id="s1" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold">1</div>
+<div><b>Processing</b><p class="text-sm text-gray-500">Shipment registered</p></div>
+</div>
+
+<div class="flex items-center gap-4">
+<div id="s2" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold">2</div>
+<div><b>In Transit</b><p class="text-sm text-gray-500">On the move</p></div>
+</div>
+
+<div class="flex items-center gap-4">
+<div id="s3" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold">3</div>
+<div><b>Out for Delivery</b><p class="text-sm text-gray-500">Courier assigned</p></div>
+</div>
+
+<div class="flex items-center gap-4">
+<div id="s4" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold">4</div>
+<div><b>Delivered</b><p class="text-sm text-gray-500">Completed</p></div>
+</div>
+
+<p id="lastUpdate" class="mt-6 text-sm text-gray-500"></p>
+
+</div>
+</div>
+</div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="py-24">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+<div class="border p-8 rounded-xl hover:shadow-xl transition">
+<h3 class="font-bold mb-2">Domestic Delivery</h3>
+<p class="text-gray-600">Nationwide express logistics.</p>
+</div>
+<div class="border p-8 rounded-xl hover:shadow-xl transition">
+<h3 class="font-bold mb-2">International Shipping</h3>
+<p class="text-gray-600">Global air & sea freight.</p>
+</div>
+<div class="border p-8 rounded-xl hover:shadow-xl transition">
+<h3 class="font-bold mb-2">E-commerce Logistics</h3>
+<p class="text-gray-600">Warehousing & fulfillment.</p>
+</div>
+</div>
+</section>
+
+<!-- ================= QUOTE ================= -->
+<section id="quote" class="py-24 bg-gray-50">
+<div class="max-w-xl mx-auto px-6">
+<h2 class="text-3xl font-extrabold mb-6">Get a Quote</h2>
+
+<div class="bg-white p-6 rounded-xl shadow space-y-4">
+<input id="qName" placeholder="Your Name" class="w-full border px-4 py-3 rounded">
+<input id="qDest" placeholder="Destination" class="w-full border px-4 py-3 rounded">
+<input id="qWeight" placeholder="Weight (kg)" class="w-full border px-4 py-3 rounded">
+
+<button onclick="getQuote()" class="bg-gidRed text-white px-6 py-3 rounded font-bold w-full">
+Calculate Quote
+</button>
+
+<p id="quoteResult" class="text-center font-bold text-gidRed"></p>
+</div>
+</div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact" class="bg-gidDark text-gray-400 py-20">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<p class="text-white font-bold text-xl">GID Logistics</p>
+<p>hello@gidlogistics.com | +234 800 123 4567</p>
+<p class="mt-6 text-sm">© 2026 GID Logistics</p>
+</div>
+</footer>
+
+<!-- ================= JS (REAL API) ================= -->
+<script>
+const API = "https://script.google.com/macros/s/AKfycbyNChbD56t-88iqESIJ6NeZgCe8V-jBj2O5aoOY9m46uy2GceZaQHraFxViPAqX8HL0/exec";
+
+function trackShipment() {
+  const id = document.getElementById("trackingInput").value.trim();
+  if (!id) return alert("Enter tracking number");
+
+  const script = document.createElement("script");
+  script.src = API + "?tracking=" + encodeURIComponent(id) + "&callback=handleTracking";
+  document.body.appendChild(script);
+}
+
+function handleTracking(data) {
+  document.getElementById("trackingResult").classList.remove("hidden");
+  document.getElementById("trackingResult").scrollIntoView({ behavior: "smooth" });
+
+  if (data.error) {
+    document.getElementById("resultId").textContent = data.error;
+    return;
+  }
+
+  document.getElementById("resultId").textContent = data.id;
+  document.getElementById("lastUpdate").textContent = "Last updated: " + data.updated;
+
+  const map = {
+    "Processing": 1,
+    "Picked Up": 1,
+    "In Transit": 2,
+    "Out for Delivery": 3,
+    "Delivered": 4
+  };
+
+  for (let i = 1; i <= 4; i++) {
+    document.getElementById("s" + i).className =
+      "w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold";
+  }
+
+  for (let i = 1; i <= (map[data.status] || 1); i++) {
+    document.getElementById("s" + i).className =
+      "w-10 h-10 rounded-full bg-gidRed text-white flex items-center justify-center font-bold";
+  }
+}
+
+function getQuote() {
+  const name = qName.value;
+  const dest = qDest.value;
+  const weight = qWeight.value;
+
+  const script = document.createElement("script");
+  script.src = API +
+    "?action=savequote" +
+    "&name=" + encodeURIComponent(name) +
+    "&destination=" + encodeURIComponent(dest) +
+    "&weight=" + encodeURIComponent(weight) +
+    "&callback=handleQuote";
+
+  document.body.appendChild(script);
+}
+
+function handleQuote(data) {
+  document.getElementById("quoteResult").textContent =
+    data.cost ? "Estimated Cost: " + data.cost : "Unable to calculate";
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GID Logistics | Delivery. Simplified.</title>
