@@ -13,7 +13,8 @@
       theme: {
         extend: {
           colors: {
-            gidRed: '#E31B23'
+            gidRed: '#E31B23',
+            gidDark: '#111827'
           }
         }
       }
@@ -21,152 +22,212 @@
   </script>
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    .card-hover:hover { transform: translateY(-5px); }
   </style>
 </head>
 
 <body class="bg-white text-gray-900">
 
-<!-- NAV -->
-<nav class="fixed top-0 w-full z-50 bg-white border-b">
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="text-2xl font-extrabold">
+    <div class="text-2xl font-extrabold tracking-tight">
       GID<span class="text-gidRed">LOGISTICS</span>
     </div>
-    <div class="hidden md:flex gap-8 text-sm font-semibold">
-      <a href="#">Home</a>
-      <a href="#">Track</a>
-      <a href="#">Services</a>
-      <a href="#">About</a>
-      <a href="#" class="bg-gidRed text-white px-5 py-2 rounded">Contact</a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-700">
+      <a href="#" class="hover:text-gidRed transition">Home</a>
+      <a href="#track" class="hover:text-gidRed transition">Track</a>
+      <a href="#services" class="hover:text-gidRed transition">Services</a>
+      <a href="#about" class="hover:text-gidRed transition">About</a>
+      <a href="#" class="bg-gidRed text-white px-6 py-2.5 rounded-full hover:bg-red-700 transition shadow-lg shadow-red-200">Contact</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="pt-32 pb-24 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+<section class="pt-40 pb-24 bg-gradient-to-b from-gray-50 to-white">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
 
-    <!-- TEXT -->
-    <div>
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+    <div class="order-2 lg:order-1">
+      <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-gidRed uppercase bg-red-50 rounded-full">
+        Reliable Logistics Partner
+      </span>
+      <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6">
         Fast & Reliable<br>
         <span class="text-gidRed">Logistics Solutions</span>
       </h1>
-      <p class="text-gray-600 max-w-xl mb-8">
+      <p class="text-lg text-gray-600 max-w-xl mb-10 leading-relaxed">
         GID Logistics provides seamless domestic and international delivery,
-        connecting businesses and individuals across Africa and beyond.
+        connecting businesses and individuals across Africa and beyond with speed and precision.
       </p>
 
-      <!-- TRACK -->
-      <div class="bg-white border rounded-lg p-2 max-w-lg shadow">
-        <div class="flex flex-col sm:flex-row">
-          <input
-            type="text"
-            placeholder="Enter tracking number"
-            class="flex-grow px-4 py-3 border-b sm:border-b-0 sm:border-r focus:outline-none"
-          />
-          <button class="bg-gidRed text-white px-6 py-3 font-semibold">
-            Track
-          </button>
+      <div id="track" class="bg-white border p-1.5 rounded-2xl max-w-lg shadow-xl shadow-gray-100 flex flex-col sm:flex-row gap-2">
+        <input
+          type="text"
+          placeholder="Enter tracking number"
+          class="flex-grow px-6 py-4 rounded-xl focus:outline-none bg-gray-50 focus:bg-white transition text-gray-700"
+        />
+        <button class="bg-gidRed text-white px-8 py-4 rounded-xl font-bold hover:bg-red-700 transition shadow-md">
+          Track Now
+        </button>
+      </div>
+    </div>
+
+    <div class="order-1 lg:order-2 relative">
+      <div class="absolute -top-4 -right-4 w-24 h-24 bg-red-100 rounded-full blur-3xl opacity-60"></div>
+      <div class="relative h-[400px] md:h-[550px] overflow-hidden rounded-3xl shadow-2xl">
+        <img
+          src="./assets/Gemini_Generated_Image_xvmcf5xvmcf5xvmc.png"
+          alt="GID Logistics Fleet"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="services" class="py-24">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl font-extrabold mb-4">Our Services</h2>
+        <p class="text-gray-500 text-lg">Comprehensive shipping solutions tailored to your business needs.</p>
+      </div>
+      <a href="#" class="text-gidRed font-bold border-b-2 border-gidRed pb-1 hover:text-red-700 transition">View All Services</a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="group border p-10 rounded-2xl hover:border-gidRed transition-all duration-300 bg-white card-hover shadow-sm">
+        <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6 text-gidRed group-hover:bg-gidRed group-hover:text-white transition">
+           🚚
         </div>
+        <h3 class="text-xl font-bold mb-4">Domestic Delivery</h3>
+        <p class="text-gray-600 leading-relaxed">Fast nationwide pickup and doorstep delivery services with 100% coverage.</p>
+      </div>
+
+      <div class="group border p-10 rounded-2xl hover:border-gidRed transition-all duration-300 bg-white card-hover shadow-sm">
+        <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6 text-gidRed group-hover:bg-gidRed group-hover:text-white transition">
+           ✈️
+        </div>
+        <h3 class="text-xl font-bold mb-4">International Shipping</h3>
+        <p class="text-gray-600 leading-relaxed">Export and import services across major global regions with simplified customs.</p>
+      </div>
+
+      <div class="group border p-10 rounded-2xl hover:border-gidRed transition-all duration-300 bg-white card-hover shadow-sm">
+        <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-6 text-gidRed group-hover:bg-gidRed group-hover:text-white transition">
+           📦
+        </div>
+        <h3 class="text-xl font-bold mb-4">E-commerce Logistics</h3>
+        <p class="text-gray-600 leading-relaxed">End-to-end fulfillment and last-mile delivery specifically for online businesses.</p>
       </div>
     </div>
-
-    <!-- IMAGE -->
-    <div class="h-[420px] md:h-[520px]">
-      <img
-        src="./assets/Gemini_Generated_Image_xvmcf5xvmcf5xvmc.png"
-        alt="GID Logistics"
-        class="w-full h-full object-cover rounded-xl"
-      />
-    </div>
-
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="py-24">
+<section class="bg-gidDark text-white py-24">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-12">Our Services</h2>
+    <div class="text-center mb-20">
+      <h2 class="text-4xl font-extrabold mb-4">How It Works</h2>
+      <p class="text-gray-400">Shipping made simple in three easy steps.</p>
+    </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="border p-8 rounded-lg hover:shadow-xl transition">
-        <h3 class="font-bold mb-3">Domestic Delivery</h3>
-        <p class="text-gray-600">Fast nationwide pickup and delivery services.</p>
+    <div class="grid md:grid-cols-3 gap-16 relative">
+      <div class="text-center relative z-10">
+        <div class="text-6xl font-black text-white/10 absolute -top-10 left-1/2 -translate-x-1/2">01</div>
+        <h3 class="text-xl font-bold mb-4">Book Shipment</h3>
+        <p class="text-gray-400">Schedule pickup or drop-off via our website or mobile app in seconds.</p>
       </div>
-      <div class="border p-8 rounded-lg hover:shadow-xl transition">
-        <h3 class="font-bold mb-3">International Shipping</h3>
-        <p class="text-gray-600">Export and import services across major regions.</p>
+      
+      <div class="text-center relative z-10">
+        <div class="text-6xl font-black text-white/10 absolute -top-10 left-1/2 -translate-x-1/2">02</div>
+        <h3 class="text-xl font-bold mb-4">Track in Real-Time</h3>
+        <p class="text-gray-400">Monitor your shipment every step of the way with GPS-enabled tracking.</p>
       </div>
-      <div class="border p-8 rounded-lg hover:shadow-xl transition">
-        <h3 class="font-bold mb-3">E-commerce Logistics</h3>
-        <p class="text-gray-600">Fulfillment and last-mile delivery for online sellers.</p>
+
+      <div class="text-center relative z-10">
+        <div class="text-6xl font-black text-white/10 absolute -top-10 left-1/2 -translate-x-1/2">03</div>
+        <h3 class="text-xl font-bold mb-4">Delivered Safely</h3>
+        <p class="text-gray-400">Receive your items at your doorstep, fast and secure delivery guaranteed.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="bg-gray-50 py-24">
-  <div class="max-w-7xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-12">How It Works</h2>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      <div>
-        <h3 class="font-bold mb-2">1. Book Shipment</h3>
-        <p class="text-gray-600">Schedule pickup or drop-off easily.</p>
-      </div>
-      <div>
-        <h3 class="font-bold mb-2">2. Track in Real-Time</h3>
-        <p class="text-gray-600">Monitor your shipment every step of the way.</p>
-      </div>
-      <div>
-        <h3 class="font-bold mb-2">3. Delivered Safely</h3>
-        <p class="text-gray-600">Fast and secure delivery to destination.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="py-20 bg-black text-white">
-  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 text-center gap-8">
-    <div><span class="text-gidRed text-4xl font-bold">99%</span><p>On-time</p></div>
-    <div><span class="text-gidRed text-4xl font-bold">200+</span><p>Locations</p></div>
-    <div><span class="text-gidRed text-4xl font-bold">24/7</span><p>Support</p></div>
-    <div><span class="text-gidRed text-4xl font-bold">5M+</span><p>Shipments</p></div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="py-24 text-center">
-  <h2 class="text-3xl font-bold mb-6">Ready to Ship?</h2>
-  <p class="text-gray-600 mb-8">Start shipping smarter with GID Logistics.</p>
-  <button class="bg-gidRed text-white px-10 py-4 rounded font-semibold">
-    Get Started
-  </button>
-</section>
-
-<!-- FOOTER -->
-<footer class="bg-gray-900 text-gray-400 py-16">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
+<section class="py-20 bg-gidRed text-white">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 text-center gap-12">
     <div>
-      <h3 class="text-white font-bold mb-4">GID Logistics</h3>
-      <p>Reliable logistics solutions for Africa and beyond.</p>
+      <span class="text-5xl font-extrabold block mb-2">99%</span>
+      <p class="text-red-100 font-medium">On-time Delivery</p>
     </div>
     <div>
-      <p class="mb-2">Services</p>
-      <p>Tracking</p>
-      <p>Support</p>
+      <span class="text-5xl font-extrabold block mb-2">200+</span>
+      <p class="text-red-100 font-medium">Global Locations</p>
     </div>
     <div>
-      <p class="mb-2">Company</p>
-      <p>About</p>
-      <p>Careers</p>
+      <span class="text-5xl font-extrabold block mb-2">24/7</span>
+      <p class="text-red-100 font-medium">Customer Support</p>
+    </div>
+    <div>
+      <span class="text-5xl font-extrabold block mb-2">5M+</span>
+      <p class="text-red-100 font-medium">Shipments Handled</p>
     </div>
   </div>
-  <p class="text-center text-sm mt-12">© 2026 GID Logistics</p>
+</section>
+
+<section class="py-28 text-center bg-gray-50">
+  <div class="max-w-3xl mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-6">Ready to Ship?</h2>
+    <p class="text-xl text-gray-600 mb-10">Join thousands of businesses that trust GID Logistics for their daily operations.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <button class="bg-gidDark text-white px-10 py-4 rounded-xl font-bold hover:bg-black transition">
+        Get Started
+      </button>
+      <button class="bg-white border-2 border-gray-200 text-gray-900 px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition">
+        Get a Quote
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gidDark text-gray-400 py-20 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+    <div class="col-span-1 md:col-span-1">
+      <h3 class="text-white text-2xl font-bold mb-6 italic">GID LOGISTICS</h3>
+      <p class="leading-relaxed">Leading the way in African logistics. Providing global reach with local expertise since 2018.</p>
+    </div>
+    <div>
+      <h4 class="text-white font-bold mb-6">Quick Links</h4>
+      <ul class="space-y-4">
+        <li><a href="#" class="hover:text-gidRed transition">Domestic Shipping</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">International Air</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Ocean Freight</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Warehousing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white font-bold mb-6">Support</h4>
+      <ul class="space-y-4">
+        <li><a href="#" class="hover:text-gidRed transition">Tracking Help</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Report an Issue</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-gidRed transition">Terms of Service</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white font-bold mb-6">Contact Us</h4>
+      <p class="mb-4 italic">hello@gidlogistics.com</p>
+      <p>+234 (0) 800 123 4567</p>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 border-t border-white/5 mt-16 pt-8 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
+    <p>© 2026 GID Logistics. All rights reserved.</p>
+    <div class="flex gap-6">
+      <a href="#" class="hover:text-white">FB</a>
+      <a href="#" class="hover:text-white">TW</a>
+      <a href="#" class="hover:text-white">IG</a>
+      <a href="#" class="hover:text-white">LI</a>
+    </div>
+  </div>
 </footer>
 
 </body>
