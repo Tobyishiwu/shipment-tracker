@@ -38,77 +38,72 @@ nav a:hover{ color: var(--red); }
 /* HERO - THE BLEED DESIGN */
 .hero {
   position: relative;
-  background: #fff; /* Pure white background for the bleed effect */
-  padding: 60px 0 100px;
-  overflow: hidden;
+  background: #fff;
+  padding: 80px 0 120px;
+  display: flex;
+  align-items: center;
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr; /* Text on left, Image on right */
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
 }
 .hero-text h1 {
-  font-size: clamp(40px, 5.5vw, 62px);
+  font-size: clamp(40px, 5.5vw, 64px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1;
   margin-bottom: 24px;
-  letter-spacing: -2px;
+  letter-spacing: -3px;
   color: var(--dark);
 }
-.hero-text p { font-size: 19px; color: var(--gray); margin-bottom: 40px; max-width: 500px; }
+.hero-text p { font-size: 20px; color: var(--gray); margin-bottom: 40px; max-width: 480px; }
 
-/* The "Bleeding" Image Area */
+/* REFINED BLEED IMAGE */
 .hero-visual {
   position: relative;
-  display: flex;
-  justify-content: flex-end;
+  z-index: 1;
 }
 .hero-visual img {
-  width: 120%; /* Large enough to "bleed" out of the grid */
+  width: 140%; /* Makes it bleed off the right edge */
+  max-width: 850px;
   height: auto;
-  max-width: 900px;
-  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.1)); /* Soft shadow for depth */
+  display: block;
+  /* This filter adds the premium 'GIGL' clean look */
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
 }
 
-/* FLOATING TRACKING STRIP (GIG STYLE) */
+/* FLOATING ACTION STRIP */
 .action-strip {
   position: relative;
-  margin-top: -50px; /* Pulls it up halfway into the hero */
+  margin-top: -60px; /* Overlaps hero and next section */
   z-index: 100;
 }
 .strip-box {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: var(--shadow);
-  padding: 35px;
-  display: flex;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
   gap: 20px;
-  align-items: center;
+  align-items: end;
   border: 1px solid #f1f5f9;
 }
-.strip-box h4 { 
-  font-size: 13px; font-weight: 800; text-transform: uppercase; 
-  color: var(--red); letter-spacing: 1px; margin-bottom: 5px;
+.strip-group label { 
+  display: block;
+  font-size: 12px; font-weight: 800; text-transform: uppercase; 
+  color: var(--red); letter-spacing: 1px; margin-bottom: 10px;
 }
-
-.input-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.input-container input {
+.strip-group input {
   border: 1px solid #e2e8f0;
   background: var(--light);
-  padding: 18px 20px;
+  padding: 18px;
   border-radius: 12px;
   width: 100%;
-  font-size: 16px;
+  font-size: 15px;
   outline: none;
-  transition: 0.3s;
 }
-.input-container input:focus { border-color: var(--red); background: #fff; }
-
 .btn-red {
   background: var(--red);
   color: #fff;
@@ -118,21 +113,20 @@ nav a:hover{ color: var(--red); }
   font-weight: 800;
   cursor: pointer;
   transition: 0.3s;
-  margin-top: 20px;
 }
 .btn-red:hover { background: #b31419; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(227,30,36,0.2); }
 
-/* STATS */
-.stats { padding: 100px 0; background: var(--light); }
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-.stats-item h3 { font-size: 42px; font-weight: 800; color: var(--navy); }
-.stats-item p { color: var(--gray); font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+/* CONTENT SECTION */
+.why-gid { padding: 120px 0 80px; background: #fff; }
+.section-title { margin-bottom: 60px; }
+.section-title h2 { font-size: 36px; font-weight: 800; letter-spacing: -1.5px; }
 
 @media(max-width: 992px) {
   .hero-grid { grid-template-columns: 1fr; text-align: center; }
-  .hero-visual { display: none; }
-  .strip-box { flex-direction: column; align-items: stretch; margin-top: -80px; }
-  .btn-red { margin-top: 0; }
+  .hero-visual { order: -1; margin-bottom: 40px; }
+  .hero-visual img { width: 100%; }
+  .strip-box { grid-template-columns: 1fr; }
+  .hero-text p { margin: 0 auto 40px; }
 }
 </style>
 </head>
@@ -144,9 +138,9 @@ nav a:hover{ color: var(--red); }
     <a href="#" class="logo">GID<span>LOGISTICS</span></a>
     <nav>
       <a href="#">Services</a>
+      <a href="#">Tracking</a>
       <a href="#">Centres</a>
-      <a href="#">International</a>
-      <a href="#" style="color:var(--red)">Ship Now</a>
+      <a href="#" style="background:var(--red); color:#fff; padding:10px 20px; border-radius:8px;">Get App</a>
     </nav>
   </div>
 </header>
@@ -154,12 +148,12 @@ nav a:hover{ color: var(--red); }
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-text">
-      <h1>Moving Assets.<br>Connecting Lives.</h1>
-      <p>Providing the technology and the fleet to move your items across Nigeria and the world with absolute precision.</p>
+      <h1>Logistics Built<br>For You.</h1>
+      <p>Seamlessly moving your items from pickup to delivery with speed and absolute transparency.</p>
     </div>
 
     <div class="hero-visual">
-      <img src=""C:\Users\USER\Downloads\image1-14-scaled.webp"">
+      <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&q=80&w=1000" alt="GID Logistics Fleet">
     </div>
   </div>
 </section>
@@ -167,54 +161,51 @@ nav a:hover{ color: var(--red); }
 <section class="action-strip">
   <div class="container">
     <div class="strip-box">
-      <div class="input-container">
-        <h4>Track Your Package</h4>
+      <div class="strip-group">
+        <label>Track Shipment</label>
         <input type="text" placeholder="Enter Waybill Number">
       </div>
-      <div class="input-container">
-          <h4>Get a Quote</h4>
-          <input type="text" placeholder="Destination City">
+      <div class="strip-group">
+          <label>Check Shipping Fee</label>
+          <input type="text" placeholder="Where are you sending to?">
       </div>
       <button class="btn-red">Get Started</button>
     </div>
   </div>
 </section>
 
-<section class="stats">
+<section class="why-gid">
   <div class="container">
-    <div class="stats-grid">
-      <div class="stats-item"><h3>230+</h3><p>Stations</p></div>
-      <div class="stats-item"><h3>150+</h3><p>Fleets</p></div>
-      <div class="stats-item"><h3>5M+</h3><p>Delivered</p></div>
-      <div class="stats-item"><h3>100%</h3><p>Reliable</p></div>
+    <div class="section-title">
+        <h2>Our Global Network</h2>
+        <p style="color:var(--gray); margin-top: 10px;">Inspired by industry leaders, delivering with local expertise.</p>
     </div>
-  </div>
-</section>
-
-<section style="padding:100px 0;">
-  <div class="container">
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:40px;">
-        <div style="border-bottom: 4px solid var(--red); padding: 20px 0;">
-            <h3 style="font-size:24px; margin-bottom:10px;">Domestic Delivery</h3>
-            <p style="color:var(--gray)">Nationwide coverage across every state in Nigeria.</p>
+    
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:30px;">
+        <div style="background:var(--light); padding:40px; border-radius:24px;">
+            <h3 style="margin-bottom:15px; font-size: 22px;">230+ Centres</h3>
+            <p style="color:var(--gray)">Physical drop-off and pickup locations across all 36 states.</p>
         </div>
-        <div style="border-bottom: 4px solid var(--red); padding: 20px 0;">
-            <h3 style="font-size:24px; margin-bottom:10px;">International Shipping</h3>
-            <p style="color:var(--gray)">Global reach to over 200 countries via our air network.</p>
+        <div style="background:var(--light); padding:40px; border-radius:24px;">
+            <h3 style="margin-bottom:15px; font-size: 22px;">Real-Time Tracking</h3>
+            <p style="color:var(--gray)">Know exactly where your parcel is at every second of the journey.</p>
         </div>
-        <div style="border-bottom: 4px solid var(--red); padding: 20px 0;">
-            <h3 style="font-size:24px; margin-bottom:10px;">Corporate Logistics</h3>
-            <p style="color:var(--gray)">Enterprise-grade shipping for banks, retail, and more.</p>
+        <div style="background:var(--light); padding:40px; border-radius:24px;">
+            <h3 style="margin-bottom:15px; font-size: 22px;">Global Shipping</h3>
+            <p style="color:var(--gray)">Door-to-door delivery to over 200 countries worldwide.</p>
         </div>
     </div>
   </div>
 </section>
 
-<footer style="background: var(--dark); color: #fff; padding: 80px 0 40px; text-align: center;">
-    <div class="container">
-        <div class="logo" style="color:#fff; font-size: 32px;">GID<span>LOGISTICS</span></div>
-        <p style="margin-top: 20px; opacity: 0.5; font-size: 14px;">© 2026 GID Logistics Technologies. Africa's Premier Logistics Gateway.</p>
+<footer style="background: var(--dark); color: #fff; padding: 100px 0 40px;">
+  <div class="container" style="text-align: center;">
+    <div class="logo" style="color:#fff; font-size: 32px;">GID<span>LOGISTICS</span></div>
+    <p style="margin-top: 20px; opacity: 0.5; max-width: 600px; margin-left: auto; margin-right: auto;">Providing world-class logistics technology to bridge the gap between businesses and their customers across Africa.</p>
+    <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; opacity: 0.4;">
+        © 2026 GID Logistics Technologies. All Rights Reserved.
     </div>
+  </div>
 </footer>
 
 </body>
