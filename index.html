@@ -11,135 +11,208 @@
 :root{
   --red:#e31e24;
   --navy:#0f172a;
-  --gray:#64748b;
-  --light:#f8fafc;
+  --gray:#94a3b8;
   --dark:#020617;
-  --shadow: 0 20px 50px rgba(0,0,0,0.1);
+  --light:#f8fafc;
+  --shadow:0 30px 80px rgba(0,0,0,0.4);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
-body{background:#fff;color:var(--navy);line-height:1.6; overflow-x: hidden;}
+body{background:#fff;color:var(--navy);overflow-x:hidden}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
-/* --- BRANDED GID LOGO --- */
-.gid-brand {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 28px;
-    letter-spacing: -1.5px;
-    color: var(--navy);
-}
-.gid-brand .accent { color: var(--red); }
-.gid-brand i { 
-    font-style: normal; 
-    font-size: 10px; 
-    letter-spacing: 3px; 
-    margin-left: 10px; 
-    color: var(--gray); 
-    text-transform: uppercase;
-}
-
-/* NAVIGATION */
+/* ================= HEADER ================= */
 header{
-  background: #fff;
-  border-bottom: 1px solid #f1f5f9;
-  position: sticky; top:0; z-index: 1000;
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(2,6,23,0.75);
+  backdrop-filter:blur(10px);
 }
 .header-inner{
-  display:flex; justify-content:space-between; align-items:center; padding:18px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
 }
-nav a{ margin-left:26px; font-size:14px; font-weight:700; color:var(--navy); text-decoration:none; transition: 0.3s; }
-nav a:hover{ color: var(--red); }
-
-/* HERO SECTION */
-.hero {
-  position: relative;
-  background: #fff;
-  padding: 60px 0 100px;
+.gid-brand{
+  font-size:26px;
+  font-weight:800;
+  text-decoration:none;
+  color:#fff;
+  letter-spacing:-1px;
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  align-items: center;
-  gap: 40px;
+.gid-brand span{color:var(--red)}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:26px;
+  font-size:13px;
+  font-weight:700;
 }
-.hero-text h1 {
-  font-size: clamp(40px, 6vw, 72px);
-  font-weight: 800;
-  line-height: 0.95;
-  margin-bottom: 24px;
-  letter-spacing: -4px;
-}
-.hero-text p { font-size: 20px; color: var(--gray); margin-bottom: 40px; max-width: 450px; }
-
-/* THE BLEED IMAGE AREA */
-.hero-visual {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-}
-.hero-visual img {
-  width: 135%; /* Creates the bleed effect */
-  height: auto;
-  max-width: 950px;
-  /* Soft shadow to match the generated image depth */
-  filter: drop-shadow(0 40px 60px rgba(0,0,0,0.15));
-  border-radius: 0 0 0 40px;
+.nav-cta{
+  background:var(--red);
+  padding:12px 26px;
+  border-radius:999px;
 }
 
-/* ACTION STRIP */
-.action-strip {
-  position: relative;
-  margin-top: -80px;
-  z-index: 100;
+/* ================= HERO ================= */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  background:#000;
 }
-.strip-box {
-  background: #fff;
-  border-radius: 24px;
-  box-shadow: var(--shadow);
-  padding: 40px;
-  display: grid;
-  grid-template-columns: 1.2fr 1.2fr 0.6fr;
-  gap: 25px;
-  align-items: end;
-  border: 1px solid #f1f5f9;
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    90deg,
+    rgba(2,6,23,0.95) 30%,
+    rgba(2,6,23,0.6) 55%,
+    rgba(2,6,23,0.1) 100%
+  );
+  z-index:1;
 }
-.strip-group label { 
-  display: block;
-  font-size: 11px; font-weight: 800; text-transform: uppercase; 
-  color: var(--red); letter-spacing: 1.5px; margin-bottom: 12px;
+.hero-image{
+  position:absolute;
+  inset:0;
+  background:url('/mnt/data/Gemini_Generated_Image_xvmcf5xvmcf5xvmc.png') no-repeat center right;
+  background-size:cover;
+  z-index:0;
 }
-.strip-group input {
-  border: 1px solid #e2e8f0;
-  background: var(--light);
-  padding: 20px;
-  border-radius: 14px;
-  width: 100%;
-  font-size: 16px;
-  outline: none;
-}
-.btn-red {
-  background: var(--red);
-  color: #fff;
-  border: none;
-  padding: 20px 40px;
-  border-radius: 14px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.btn-red:hover { background: #b31419; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(227,30,36,0.3); }
 
-/* FOOTER */
-footer { background: var(--dark); color: #fff; padding: 100px 0 40px; text-align: center; }
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:620px;
+  color:#fff;
+  padding-top:120px;
+}
+.hero-content h1{
+  font-size:clamp(42px,6vw,72px);
+  font-weight:800;
+  line-height:0.95;
+  letter-spacing:-3px;
+  margin-bottom:24px;
+}
+.hero-content p{
+  font-size:20px;
+  color:var(--gray);
+  margin-bottom:48px;
+  max-width:480px;
+}
 
-@media(max-width: 992px) {
-  .hero-grid { grid-template-columns: 1fr; text-align: center; }
-  .hero-visual { display: none; } /* Better UX for mobile */
-  .strip-box { grid-template-columns: 1fr; margin-top: -120px; }
-  .hero-text h1 { letter-spacing: -2px; }
+/* ================= ACTION STRIP ================= */
+.action-strip{
+  margin-top:-90px;
+  position:relative;
+  z-index:10;
+}
+.strip-box{
+  background:#fff;
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  padding:40px;
+  display:grid;
+  grid-template-columns:1.3fr 1.3fr 0.6fr;
+  gap:24px;
+}
+.strip-group label{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  color:var(--red);
+  text-transform:uppercase;
+  margin-bottom:10px;
+  display:block;
+}
+.strip-group input{
+  width:100%;
+  padding:20px;
+  border-radius:14px;
+  border:1px solid #e5e7eb;
+  font-size:16px;
+  background:#f8fafc;
+}
+.strip-group small{
+  display:block;
+  margin-top:8px;
+  font-size:12px;
+  color:#94a3b8;
+}
+.btn-red{
+  background:var(--red);
+  border:none;
+  color:#fff;
+  font-weight:800;
+  border-radius:14px;
+  padding:20px;
+  cursor:pointer;
+  transition:.3s;
+}
+.btn-red:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(227,30,36,.45);
+}
+
+/* ================= SERVICES ================= */
+.services{
+  padding:140px 0 100px;
+  background:#f8fafc;
+}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:40px;
+}
+.service-card{
+  background:#fff;
+  padding:42px;
+  border-radius:28px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.06);
+}
+.service-card h3{
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+.service-card p{
+  color:#64748b;
+}
+
+/* ================= TRUST ================= */
+.trust{
+  padding:90px 0;
+  text-align:center;
+}
+.trust p{
+  font-weight:700;
+  color:#475569;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:var(--dark);
+  color:#fff;
+  padding:90px 0 40px;
+  text-align:center;
+}
+footer p{
+  opacity:.5;
+  margin-top:16px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:960px){
+  .strip-box{grid-template-columns:1fr}
+  .service-grid{grid-template-columns:1fr}
+  .hero::before{
+    background:rgba(2,6,23,0.85);
+  }
 }
 </style>
 </head>
@@ -148,30 +221,25 @@ footer { background: var(--dark); color: #fff; padding: 100px 0 40px; text-align
 
 <header>
   <div class="container header-inner">
-    <a href="#" class="gid-brand">
-        GI<span class="accent">D</span> <i>Logistics</i>
-    </a>
+    <a href="#" class="gid-brand">GI<span>D</span> Logistics</a>
     <nav>
-      <a href="#">Ship Now</a>
-      <a href="#">Tracking</a>
+      <a href="#">Ship</a>
+      <a href="#">Track</a>
       <a href="#">Centres</a>
-      <a href="#" style="background:var(--red); color:#fff; padding:12px 24px; border-radius:12px;">Login</a>
+      <a href="#" class="nav-cta">Login</a>
     </nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-text">
-      <h1>Delivery<br>Simplified.</h1>
-      <p>Seamlessly moving your items across Nigeria and the world with the new GID precision fleet.</p>
-    </div>
+  <div class="hero-image"></div>
 
-    <div class="hero-visual">
-      <img src="https://i.ibb.co/L5hY5M7/Logistics-Fleet-Bleed.png" 
-           alt="GID Logistics Fleet" 
-           id="heroImage">
-    </div>
+  <div class="container hero-content">
+    <h1>Delivery.<br>Simplified.</h1>
+    <p>
+      Enterprise-grade logistics solutions across Nigeria and global trade
+      corridors — powered by precision, speed, and visibility.
+    </p>
   </div>
 </section>
 
@@ -180,30 +248,52 @@ footer { background: var(--dark); color: #fff; padding: 100px 0 40px; text-align
     <div class="strip-box">
       <div class="strip-group">
         <label>Track Shipment</label>
-        <input type="text" placeholder="Enter Waybill Number">
+        <input type="text" placeholder="GID-WBL-000234">
+        <small>Real-time tracking updates</small>
       </div>
+
       <div class="strip-group">
-          <label>Shipping Quote</label>
-          <input type="text" placeholder="Destination City">
+        <label>Get a Quote</label>
+        <input type="text" placeholder="Destination city">
+        <small>Instant delivery estimate</small>
       </div>
-      <button class="btn-red">Get Started</button>
+
+      <button class="btn-red">Track & Ship</button>
     </div>
   </div>
 </section>
 
-<section style="padding: 120px 0; text-align: center;">
-    <div class="container">
-        <h2 style="font-size: 38px; font-weight: 800; letter-spacing: -1.5px;">Beyond Boundaries</h2>
-        <p style="color: var(--gray); margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">With our specialized fleet of trucks, vans, and planes, GID Logistics ensures your cargo is handled with enterprise-grade care.</p>
+<section class="services">
+  <div class="container">
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>Express Delivery</h3>
+        <p>Fast, time-critical parcel delivery across cities and borders.</p>
+      </div>
+      <div class="service-card">
+        <h3>Freight & Cargo</h3>
+        <p>Heavy shipments handled with secure trucking and air cargo.</p>
+      </div>
+      <div class="service-card">
+        <h3>E-commerce Logistics</h3>
+        <p>Complete fulfillment solutions for online businesses.</p>
+      </div>
     </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container">
+    <p>Trusted by businesses • Secure handling • Real-time visibility</p>
+  </div>
 </section>
 
 <footer>
   <div class="container">
-    <div class="gid-brand" style="color:#fff; justify-content: center; font-size: 34px;">
-        GI<span class="accent">D</span> <i>Logistics</i>
+    <div class="gid-brand" style="justify-content:center;color:#fff;">
+      GI<span>D</span> Logistics
     </div>
-    <p style="margin-top: 20px; opacity: 0.5;">© 2026 GID Logistics Technologies. All Rights Reserved.</p>
+    <p>© 2026 GID Logistics Technologies. All rights reserved.</p>
   </div>
 </footer>
 
