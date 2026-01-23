@@ -11,28 +11,33 @@
         body{font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--navy); line-height:1.6; overflow-x:hidden}
         .container{max-width:1200px; margin:auto; padding:0 25px}
 
-        /* NAVIGATION */
-        header{background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); padding:15px 0; position:sticky; top:0; z-index:1000}
+        /* NAVIGATION RESTORED */
+        header{background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); padding:20px 0; position:sticky; top:0; z-index:1000}
         .nav-flex{display:flex; justify-content:space-between; align-items:center}
-        .logo{font-size:26px; font-weight:900; letter-spacing:-1.2px}
+        .logo{font-size:26px; font-weight:900; letter-spacing:-1.2px; text-decoration:none; color:var(--navy)}
         .logo span{color:var(--red)}
+        .nav-links{display:none; gap:25px}
+        @media(min-width: 992px){.nav-links{display:flex; font-size:14px; font-weight:700}}
+        .nav-links a{text-decoration:none; color:var(--navy); transition:0.3s}
+        .nav-links a:hover{color:var(--red)}
 
-        /* HERO */
-        .hero{position:relative; background:var(--navy); color:#fff; padding:120px 0 180px; text-align:center; overflow:hidden}
-        .hero-bg{position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.3; animation:zoom 20s infinite alternate}
+        /* HERO RESTORED */
+        .hero{position:relative; background:var(--navy); color:#fff; padding:150px 0 200px; text-align:center; overflow:hidden}
+        .hero-bg{position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0.4; animation:zoom 25s infinite alternate}
         @keyframes zoom { from{transform:scale(1)} to{transform:scale(1.15)} }
         .hero-content{position:relative; z-index:2}
         .hero h1{font-size:clamp(40px, 7vw, 64px); font-weight:800; line-height:1.1; margin-bottom:20px}
+        .hero p{font-size:18px; opacity:0.9; max-width:600px; margin:auto}
 
-        /* HUB BOX */
+        /* SEARCH HUB */
         .hub-box{max-width:1000px; margin:-100px auto 80px; background:#fff; border-radius:24px; box-shadow:0 50px 100px rgba(0,0,0,0.15); padding:10px; position:relative; z-index:10}
         .hub-tabs{display:flex; gap:5px; padding:10px; background:var(--soft-bg); border-radius:18px; margin-bottom:10px}
-        .hub-tab{flex:1; padding:15px; border:none; border-radius:12px; font-weight:800; cursor:pointer; color:var(--muted)}
+        .hub-tab{flex:1; padding:18px; border:none; border-radius:12px; font-weight:800; cursor:pointer; color:var(--muted); transition:0.3s}
         .hub-tab.active{background:var(--red); color:#fff}
 
-        /* TRACKING MAP */
+        /* MAP MOCKUP */
         .map-container{width:100%; height:250px; background:#e5e7eb; border-radius:15px; margin-top:20px; position:relative; overflow:hidden; border:1px solid var(--border)}
-        .map-mockup{width:100%; height:100%; background: url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/0,0,1/1000x250?access_token=mock') center/cover; opacity:0.6}
+        .map-mockup{width:100%; height:100%; background: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=1000') center/cover; opacity:0.4}
         .map-pin{position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:20px; height:20px; background:var(--red); border-radius:50%; border:4px solid #fff; box-shadow:0 0 15px rgba(227,30,36,0.5); animation: pulse 2s infinite}
         @keyframes pulse { 0%{transform:translate(-50%,-50%) scale(1); opacity:1} 100%{transform:translate(-50%,-50%) scale(2.5); opacity:0} }
 
@@ -40,25 +45,22 @@
         section{padding:100px 0}
         .section-h2{text-align:center; font-size:36px; font-weight:800; margin-bottom:60px}
         .why-grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:30px}
-        .why-card{padding:40px; background:var(--soft-bg); border-radius:24px; transition:0.3s}
+        .why-card{padding:40px; background:var(--soft-bg); border-radius:24px; transition:0.3s; border:1px solid transparent}
+        .why-card:hover{border-color:var(--red); transform:translateY(-5px)}
         .why-card i{font-size:32px; color:var(--red); margin-bottom:20px; display:block; font-style:normal}
 
-        /* FIXED ACTIONS (WA & TOP) */
+        /* FIXED ACTIONS (FAB) */
         .fab-container{position:fixed; bottom:30px; right:30px; display:flex; flex-direction:column; gap:15px; z-index:9999}
-        
-        /* WHATSAPP FIXED */
         .wa-btn{width:60px; height:60px; background:#25d366; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px rgba(37,211,102,0.4); text-decoration:none}
         .wa-btn svg{width:30px; height:30px; fill:#fff; display:block}
-        
-        /* BACK TO TOP FIXED */
-        #backToTop{width:60px; height:60px; background:var(--navy); color:#fff; border-radius:50%; display:none; align-items:center; justify-content:center; cursor:pointer; border:none; box-shadow:0 5px 15px rgba(0,0,0,0.2); font-size:24px; font-weight:bold}
+        #backToTop{width:60px; height:60px; background:var(--navy); color:#fff; border-radius:50%; display:none; align-items:center; justify-content:center; cursor:pointer; border:none; box-shadow:0 5px 15px rgba(0,0,0,0.2); font-size:24px}
 
-        /* UTILS */
-        .btn-main{background:var(--red); color:#fff; border:none; padding:18px; border-radius:12px; font-weight:800; cursor:pointer; width:100%}
-        .input-main{width:100%; padding:18px; border:2px solid var(--border); border-radius:12px; margin-bottom:15px; outline:none}
+        /* BUTTONS & INPUTS */
+        .btn-main{background:var(--red); color:#fff; border:none; padding:18px; border-radius:12px; font-weight:800; cursor:pointer; width:100%; transition:0.3s}
+        .input-main{width:100%; padding:18px; border:2px solid var(--border); border-radius:12px; margin-bottom:15px; outline:none; font-size:16px}
         .hidden{display:none}
         .status-box{margin-top:20px; padding:20px; background:var(--soft-bg); border-radius:12px; border-left:5px solid var(--red)}
-        footer{background:#0a0f1c; color:#fff; padding:80px 0}
+        footer{background:#0a0f1c; color:#fff; padding:80px 0; text-align:center}
     </style>
 </head>
 <body>
@@ -72,16 +74,21 @@
 
 <header>
     <div class="container nav-flex">
-        <div class="logo">GID<span>LOGISTICS</span></div>
-        <div style="font-weight:800; font-size:12px; color:var(--muted)">RC: 1234567</div>
+        <a href="#" class="logo">GID<span>LOGISTICS</span></a>
+        <nav class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#why-choose-us">Why Us</a>
+            <a href="#support">Support</a>
+        </nav>
+        <div style="font-weight:800; font-size:12px; background:var(--soft-bg); padding:8px 15px; border-radius:20px">RC: 1234567</div>
     </div>
 </header>
 
 <section class="hero">
-    <img src="https://images.unsplash.com/photo-1566633806327-68e152abc212?auto=format&fit=crop&q=80&w=2000" class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=2000" class="hero-bg">
     <div class="container hero-content">
         <h1>Global Logistics. <br> Seamless Movement.</h1>
-        <p>Reliable freight solutions powered by real-time technology.</p>
+        <p>Providing the most reliable freight and shipping solutions between Nigeria and the rest of the world.</p>
     </div>
 </section>
 
@@ -93,12 +100,12 @@
         </div>
         <div style="padding:30px">
             <div id="h-track">
-                <input id="tid" class="input-main" placeholder="Waybill ID (e.g. GID-101)">
+                <input id="tid" class="input-main" placeholder="Enter Waybill ID (e.g. GID-101)">
                 <button class="btn-main" id="btn-track" onclick="runTrack()">Track Parcel</button>
                 <div id="track-res" class="hidden">
                     <div class="status-box">
-                        <h3 id="r-status"></h3>
-                        <p>Location: <span id="r-dest" style="font-weight:700"></span></p>
+                        <h3 id="r-status" style="color:var(--red)"></h3>
+                        <p>Current Location: <span id="r-dest" style="font-weight:700"></span></p>
                     </div>
                     <div class="map-container">
                         <div class="map-mockup"></div>
@@ -109,32 +116,33 @@
             
             <div id="h-quote" class="hidden">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px">
-                    <input id="qN" class="input-main" placeholder="Name">
+                    <input id="qN" class="input-main" placeholder="Full Name">
                     <input id="qW" class="input-main" type="number" placeholder="Weight (KG)">
                 </div>
-                <input id="qT" class="input-main" placeholder="Destination City">
-                <button class="btn-main" id="btn-quote" onclick="runQuote()">Get Estimate</button>
+                <input id="qT" class="input-main" placeholder="Destination City/Country">
+                <button class="btn-main" id="btn-quote" onclick="runQuote()">Get Instant Estimate</button>
                 <div id="quote-res" class="hidden status-box" style="text-align:center">
-                    <h2 id="r-cost" style="color:var(--green)"></h2>
+                    <p>Estimated Shipping Cost:</p>
+                    <h2 id="r-cost" style="color:var(--green); font-size:32px"></h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <section>
+    <section id="why-choose-us">
         <h2 class="section-h2">Why Partners Choose GID</h2>
         <div class="why-grid">
-            <div class="why-card"><i>🚀</i><h4>Fast Delivery</h4><p>We optimize routes using AI to ensure speed.</p></div>
-            <div class="why-card"><i>🛡️</i><h4>Full Protection</h4><p>Insurance covers every shipment we handle.</p></div>
-            <div class="why-card"><i>💰</i><h4>Fair Pricing</h4><p>No hidden fees. Inclusive and transparent quotes.</p></div>
+            <div class="why-card"><i>🚀</i><h4>Fast Delivery</h4><p>AI-optimized routing ensures your goods arrive ahead of schedule.</p></div>
+            <div class="why-card"><i>🛡️</i><h4>Secure Handling</h4><p>Every shipment is insured and handled with enterprise-grade care.</p></div>
+            <div class="why-card"><i>💰</i><h4>Fair Pricing</h4><p>Completely transparent quotes with zero hidden surcharges.</p></div>
         </div>
     </section>
 </div>
 
-<footer>
-    <div class="container" style="text-align:center">
+<footer id="support">
+    <div class="container">
         <div class="logo" style="color:#fff; margin-bottom:20px">GID<span>LOGISTICS</span></div>
-        <p style="color:#94a3b8">© 2026 GID Logistics Services. All rights reserved.</p>
+        <p style="color:#94a3b8; font-size:14px">© 2026 GID Logistics Services. Built for the future of global trade.</p>
     </div>
 </footer>
 
