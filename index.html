@@ -15,27 +15,15 @@
   --gray:#64748b;
   --light:#f8fafc;
   --dark:#020617;
+  --success:#16a34a;
+  --warning:#f59e0b;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
 body{background:#fff;color:var(--navy);line-height:1.6}
 .container{max-width:1200px;margin:auto;padding:0 20px}
 
-/* TOP BAR */
-.topbar{
-  background:var(--dark);
-  color:#fff;
-  font-size:12px;
-  padding:10px 0;
-}
-.topbar .row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-@media(max-width:600px){.topbar{display:none}}
-
-/* HEADER + NAV */
+/* HEADER */
 header{
   background:#fff;
   border-bottom:1px solid #eee;
@@ -49,44 +37,13 @@ header{
   align-items:center;
   padding:18px 0;
 }
-.logo{
-  font-size:22px;
-  font-weight:800;
-}
+.logo{font-size:22px;font-weight:800}
 .logo span{color:var(--red)}
+nav{display:flex;gap:26px}
+nav a{text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
+.menu-btn{display:none;font-size:26px;cursor:pointer}
 
-/* Desktop nav */
-nav{
-  display:flex;
-  gap:26px;
-}
-nav a{
-  font-size:14px;
-  font-weight:600;
-  color:var(--navy);
-  text-decoration:none;
-  position:relative;
-}
-nav a::after{
-  content:'';
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:2px;
-  background:var(--red);
-  transition:.3s;
-}
-nav a:hover::after{width:100%}
-
-/* Mobile menu button */
-.menu-btn{
-  display:none;
-  font-size:26px;
-  cursor:pointer;
-}
-
-/* Mobile nav */
+/* MOBILE NAV */
 .mobile-nav{
   display:none;
   flex-direction:column;
@@ -103,10 +60,15 @@ nav a:hover::after{width:100%}
 
 /* HERO */
 .hero{
-  background:linear-gradient(180deg,var(--red-soft),#ffffff 75%);
-  padding:100px 0 90px;
+  background:linear-gradient(180deg,var(--red-soft),#ffffff 70%);
+  padding:90px 0;
 }
-.hero-inner{max-width:820px}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:50px;
+  align-items:center;
+}
 .hero h1{
   font-size:clamp(36px,5vw,56px);
   font-weight:800;
@@ -115,329 +77,211 @@ nav a:hover::after{width:100%}
 .hero p{
   font-size:18px;
   color:var(--gray);
-  margin-bottom:34px;
+  margin-bottom:28px;
 }
 
-/* TRACK BOX */
-.track-box{
+/* HERO IMAGE */
+.hero-img{
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+.hero-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* TRACK + QUOTE CARD */
+.action-card{
   background:#fff;
-  padding:14px;
-  border-radius:18px;
+  padding:20px;
+  border-radius:22px;
+  box-shadow:0 25px 50px rgba(0,0,0,.08);
+  max-width:520px;
+}
+.tabs{
   display:flex;
-  gap:12px;
-  box-shadow:0 30px 60px rgba(0,0,0,.08);
-  max-width:560px;
+  gap:18px;
+  margin-bottom:20px;
 }
-.track-box input{
-  border:none;
-  padding:16px;
-  font-size:15px;
+.tab{
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer;
+  color:var(--gray);
+}
+.tab.active{color:var(--red)}
+
+.input-row{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+.input-row input{
   flex:1;
+  padding:14px;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  font-size:14px;
 }
-.track-box input:focus{outline:none}
 .btn{
   background:var(--red);
   color:#fff;
   border:none;
-  padding:16px 30px;
-  border-radius:14px;
+  padding:14px 22px;
+  border-radius:12px;
   font-weight:700;
   cursor:pointer;
-  transition:.25s;
-}
-.btn:hover{background:#c4161c}
-
-/* TRUST BADGE */
-.trust-badge{
-  margin-top:22px;
-  display:inline-flex;
-  gap:10px;
-  background:#fff;
-  padding:14px 20px;
-  border-radius:16px;
-  box-shadow:0 14px 28px rgba(0,0,0,.06);
-  font-size:13px;
 }
 
-/* SECTIONS */
-section{padding:90px 0}
-.section-title{
-  max-width:720px;
-  margin-bottom:60px;
+/* TRACK RESULT */
+.track-result{
+  display:none;
+  margin-top:20px;
 }
-.section-title h2{
-  font-size:32px;
-  font-weight:800;
-  margin-bottom:10px;
-}
-.section-title p{color:var(--gray)}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:32px;
-}
-.card{
-  background:#fff;
-  border-radius:24px;
-  padding:36px;
-  box-shadow:0 20px 40px rgba(0,0,0,.06);
-  transition:.3s;
-}
-.card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 30px 60px rgba(0,0,0,.1);
-}
-.icon{
-  width:50px;
-  height:50px;
-  background:var(--red-soft);
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  margin-bottom:18px;
-}
-
-/* HOW IT WORKS */
-.step{
-  background:#fff;
-  border-radius:24px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 18px 36px rgba(0,0,0,.06);
-}
-.step span{
+.status{
   display:inline-block;
-  background:var(--red);
-  color:#fff;
-  font-size:13px;
-  padding:6px 16px;
+  padding:6px 14px;
   border-radius:20px;
-  margin-bottom:14px;
-}
-
-/* STATS */
-.stats{
-  background:linear-gradient(135deg,#e31e24,#c4161c);
+  font-size:12px;
+  font-weight:700;
   color:#fff;
 }
-.stats-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:26px;
-  text-align:center;
+.status.transit{background:var(--warning)}
+.status.delivered{background:var(--success)}
+
+.progress{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
 }
-@media(min-width:768px){
-  .stats-grid{grid-template-columns:repeat(4,1fr)}
+.step{
+  flex:1;
+  height:6px;
+  background:#e5e7eb;
+  border-radius:10px;
 }
-.stats-grid h3{
-  font-size:42px;
-  font-weight:800;
+.step.active{background:var(--red)}
+
+/* QUOTE RESULT */
+.quote-result{
+  margin-top:14px;
+  font-weight:700;
+  color:var(--success);
 }
 
-/* CTA */
-.cta{
-  background:var(--navy);
-  color:#fff;
-  text-align:center;
-}
-.cta h2{
-  font-size:36px;
-  font-weight:800;
-  margin-bottom:14px;
-}
-.cta p{
-  opacity:.85;
-  margin-bottom:26px;
-}
-
-/* FOOTER */
-footer{
-  background:var(--dark);
-  color:#fff;
-  padding:70px 0 30px;
-}
-.footer-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:48px;
-}
-footer h4{color:var(--red);margin-bottom:16px}
-footer li{
-  list-style:none;
-  font-size:14px;
-  opacity:.7;
-  margin-bottom:10px;
-}
-
-/* RESPONSIVE NAV */
+/* RESPONSIVE */
 @media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
   nav{display:none}
   .menu-btn{display:block}
   .mobile-nav{display:flex}
-}
-@media(max-width:768px){
-  .footer-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="container row">
-    <div>Support: +234 706 695 8826</div>
-    <div>Track | Centres | Contact</div>
-  </div>
-</div>
-
-<!-- HEADER -->
 <header>
   <div class="container header">
     <div class="logo">GID<span>LOGISTICS</span></div>
     <nav>
-      <a href="#services">Services</a>
-      <a href="#how">How It Works</a>
-      <a href="#coverage">Coverage</a>
-      <a href="#contact">Contact</a>
+      <a href="#">Services</a>
+      <a href="#">Track</a>
+      <a href="#">Quote</a>
+      <a href="#">Contact</a>
     </nav>
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
   </div>
 
-  <!-- MOBILE NAV -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="#services" onclick="toggleMenu()">Services</a>
-    <a href="#how" onclick="toggleMenu()">How It Works</a>
-    <a href="#coverage" onclick="toggleMenu()">Coverage</a>
-    <a href="#contact" onclick="toggleMenu()">Contact</a>
+    <a href="#">Services</a>
+    <a href="#">Track</a>
+    <a href="#">Quote</a>
+    <a href="#">Contact</a>
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="container hero-inner">
-    <h1>Send, track and deliver<br>with confidence</h1>
-    <p>
-      GID Logistics is a technology-driven courier company helping
-      individuals and businesses move packages safely and on time.
-    </p>
+  <div class="container hero-grid">
 
-    <div class="track-box">
-      <input placeholder="Enter tracking number">
-      <button class="btn">Track</button>
-    </div>
-
-    <div class="trust-badge">
-      ⭐ Trusted by thousands of customers nationwide
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <div class="section-title">
-      <h2>Our courier services</h2>
-      <p>Flexible delivery solutions designed around your needs</p>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <div class="icon">📍</div>
-        <h4>Domestic Delivery</h4>
-        <p>Fast deliveries across Nigerian cities.</p>
-      </div>
-      <div class="card">
-        <div class="icon">✈️</div>
-        <h4>International Shipping</h4>
-        <p>Reliable global courier services.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🛒</div>
-        <h4>E-commerce Logistics</h4>
-        <p>Perfect for online sellers and SMEs.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🚚</div>
-        <h4>Corporate & Bulk</h4>
-        <p>Structured logistics for enterprises.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section id="how" style="background:var(--light)">
-  <div class="container">
-    <div class="section-title">
-      <h2>How it works</h2>
-      <p>A simple and transparent delivery process</p>
-    </div>
-
-    <div class="grid">
-      <div class="step"><span>1</span><h4>Book shipment</h4><p>Create a delivery request.</p></div>
-      <div class="step"><span>2</span><h4>Pickup</h4><p>We collect your package.</p></div>
-      <div class="step"><span>3</span><h4>Track</h4><p>Follow progress in real time.</p></div>
-      <div class="step"><span>4</span><h4>Deliver</h4><p>Delivered safely and on time.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats">
-  <div class="container stats-grid">
-    <div><h3>230+</h3><p>Locations</p></div>
-    <div><h3>150+</h3><p>Centres</p></div>
-    <div><h3>5M+</h3><p>Deliveries</p></div>
-    <div><h3>600+</h3><p>Fleet</p></div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
-  <div class="container">
-    <h2>Ready to ship with us?</h2>
-    <p>We make delivery simple, secure, and reliable.</p>
-    <button class="btn">Get Started</button>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer id="contact">
-  <div class="container footer-grid">
     <div>
-      <div class="logo">GID<span>LOGISTICS</span></div>
-      <p style="opacity:.6;margin-top:12px">
-        Smart courier solutions for everyday and business needs.
+      <h1>Fast, reliable courier<br>services you can trust</h1>
+      <p>
+        Ship, track, and get instant delivery estimates with GID Logistics.
+        Built for individuals and businesses across Nigeria.
       </p>
-    </div>
-    <div>
-      <h4>Company</h4>
-      <li>About Us</li>
-      <li>Careers</li>
-      <li>Partners</li>
-    </div>
-    <div>
-      <h4>Support</h4>
-      <li>Contact</li>
-      <li>FAQs</li>
-      <li>Privacy Policy</li>
-    </div>
-  </div>
 
-  <div style="text-align:center;font-size:12px;opacity:.4;margin-top:40px">
-    © 2026 GID Logistics Technologies
+      <div class="action-card">
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab('track',this)">Track</div>
+          <div class="tab" onclick="switchTab('quote',this)">Quick Quote</div>
+        </div>
+
+        <!-- TRACK -->
+        <div id="trackTab">
+          <div class="input-row">
+            <input id="trackInput" placeholder="Enter tracking number">
+            <button class="btn" onclick="runTrack()">Track</button>
+          </div>
+
+          <div class="track-result" id="trackResult">
+            <div class="status transit" id="statusText">In Transit</div>
+            <div class="progress">
+              <div class="step active"></div>
+              <div class="step active"></div>
+              <div class="step"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUOTE -->
+        <div id="quoteTab" style="display:none">
+          <div class="input-row">
+            <input id="origin" placeholder="Origin">
+            <input id="destination" placeholder="Destination">
+          </div>
+          <div class="input-row">
+            <input id="weight" type="number" placeholder="Weight (kg)">
+            <button class="btn" onclick="calcQuote()">Calculate</button>
+          </div>
+          <div class="quote-result" id="quoteResult"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HERO IMAGE -->
+    <div class="hero-img">
+      <img src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg" alt="Courier delivery">
+    </div>
+
   </div>
-</footer>
+</section>
 
 <script>
 function toggleMenu(){
   const nav=document.getElementById("mobileNav");
-  nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+  nav.style.display = nav.style.display==="flex" ? "none" : "flex";
+}
+
+function switchTab(tab,el){
+  document.getElementById("trackTab").style.display = tab==="track"?"block":"none";
+  document.getElementById("quoteTab").style.display = tab==="quote"?"block":"none";
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  el.classList.add("active");
+}
+
+function runTrack(){
+  document.getElementById("trackResult").style.display="block";
+}
+
+function calcQuote(){
+  const w=document.getElementById("weight").value;
+  if(!w) return;
+  const price = 2500 + (w * 800);
+  document.getElementById("quoteResult").innerText = "Estimated cost: ₦" + price.toLocaleString();
 }
 </script>
 
